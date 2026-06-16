@@ -238,11 +238,20 @@ function succeed(d) {
   s.hidden = false;
   var fb = document.getElementById("mailto-fallback");
   if (fb) {
-    fb.innerHTML = "If your email app didn't open, " +
-      '<a href="mailto:' + CONFIG.businessEmail +
-      "?subject=" + encodeURIComponent("Website enquiry — " + d.reg) +
-      "&body=" + encodeURIComponent(buildSummary(d)) +
-      '">click here to send it</a>.';
+    var usingService = CONFIG.web3formsKey || CONFIG.formEndpoint;
+    if (usingService) {
+      // Sent automatically — no mailto line needed.
+      fb.hidden = true;
+      fb.innerHTML = "";
+    } else {
+      // Demo fallback only (no key set): offer the manual email link.
+      fb.hidden = false;
+      fb.innerHTML = "If your email app didn't open, " +
+        '<a href="mailto:' + CONFIG.businessEmail +
+        "?subject=" + encodeURIComponent("Website enquiry — " + d.reg) +
+        "&body=" + encodeURIComponent(buildSummary(d)) +
+        '">click here to send it</a>.';
+    }
   }
   s.scrollIntoView({ behavior: "smooth", block: "center" });
 }
