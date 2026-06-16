@@ -11,7 +11,7 @@ const CONFIG = {
   businessEmail: "maxtristec@googlemail.com",
   // Free, no account needed: go to https://web3forms.com, enter the email above,
   // they email you an Access Key. Paste it here and submissions arrive automatically.
-  web3formsKey: "",
+  web3formsKey: "8f3d8e31-3005-4a6a-b438-b7343c9c0ca5",
   // (Optional) alternative custom endpoint, e.g. Formspree. Leave "" if using Web3Forms.
   formEndpoint: ""
 };
