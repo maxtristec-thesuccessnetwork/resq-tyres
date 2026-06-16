@@ -1,0 +1,12 @@
+# OS
+.DS_Store
+Thumbs.db
+# Dependencies / build (future)
+node_modules/
+dist/
+.cache/
+# Deploy / env
+.vercel
+.netlify
+.env
+.env.*

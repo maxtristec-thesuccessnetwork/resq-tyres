@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ResQ Tyres &amp; Recovery — 24/7 Mobile Tyre Fitting, Leeds &amp; West Yorkshire</title>
+  <meta name="description" content="24/7 emergency mobile tyre fitting and recovery across Leeds and West Yorkshire. Call now or get a quick tyre estimate online.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- DEMO banner: remove before going live -->
+  <div class="demo-flag">DEMO BUILD — Plan 2. Prices are sample rates (edit js/rates.js). Logo &amp; reviews are placeholders.</div>
+
+  <!-- ===== Header ===== -->
+  <header class="site-header">
+    <div class="wrap bar">
+      <a href="#top" class="logo" aria-label="ResQ Tyres and Recovery home">
+        <span class="logo-mark" aria-hidden="true">🛞</span>
+        <span class="logo-text">ResQ Tyres<small>&amp; RECOVERY · 24/7</small></span>
+      </a>
+      <div class="header-right">
+        <span class="rating-badge"><span class="stars">★</span> 4.9 on Google</span>
+        <a class="btn-call" href="tel:07438562633">📞 07438 562633</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ===== Hero ===== -->
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">Stranded? We come to you — day or night</p>
+        <h1>24/7 mobile tyres &amp;<br><span>emergency recovery</span></h1>
+        <p class="hero-sub">Flat, blowout or breakdown anywhere in Leeds &amp; West Yorkshire? One call and we're on the way — fast, fully equipped, any hour.</p>
+        <div class="cta-row">
+          <a class="cta-primary pulse" href="tel:07438562633">📞 Call now — 07438 562633</a>
+          <a class="cta-secondary" href="#estimate">Get a tyre estimate →</a>
+        </div>
+        <ul class="trust-row">
+          <li><span class="stars">★★★★★</span> <b>4.9</b> Google rating</li>
+          <li>⏱ <b>Rapid</b> 24/7 response</li>
+          <li>📍 <b>Leeds</b> &amp; West Yorkshire</li>
+          <li>💳 Pay on completion</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== Estimate tool ===== -->
+    <section class="estimate" id="estimate">
+      <div class="wrap">
+        <div class="card">
+          <h2>Get a quick tyre estimate</h2>
+          <p class="hint">Enter your tyre size (it's on the sidewall, e.g. 205 / 55 R16), plus your reg and postcode. We'll show an estimate, then you send it to us to confirm.</p>
+
+          <form id="estimate-form" novalidate>
+            <div class="grid-3">
+              <div class="field">
+                <label for="width">Width</label>
+                <select id="width" name="width" required></select>
+              </div>
+              <div class="field">
+                <label for="profile">Profile</label>
+                <select id="profile" name="profile" required></select>
+              </div>
+              <div class="field">
+                <label for="rim">Rim</label>
+                <select id="rim" name="rim" required></select>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="field">
+                <label for="reg">Registration <span class="req">*</span></label>
+                <div class="regplate">
+                  <span class="gb">GB</span>
+                  <input type="text" id="reg" name="reg" placeholder="YOUR REG" maxlength="8" autocomplete="off" required>
+                </div>
+              </div>
+              <div class="field">
+                <label for="postcode">Postcode <span class="req">*</span></label>
+                <input type="text" id="postcode" name="postcode" placeholder="e.g. LS1 4DY" maxlength="8" autocomplete="postal-code" required>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-go">Show my estimate</button>
+            <p class="form-error" id="estimate-error" hidden></p>
+          </form>
+
+          <!-- Results injected by JS -->
+          <div class="results" id="estimate-results" hidden>
+            <p class="results-head">Estimated prices for <b id="size-label">—</b> · fitted at your location</p>
+            <div class="options" id="options"></div>
+            <button type="button" class="btn-approve" id="to-enquiry">Send this to ResQ for approval →</button>
+            <p class="micro">An estimate only — we'll confirm the exact price by phone or email before any work.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Enquiry / approval form ===== -->
+    <section class="enquiry" id="enquiry">
+      <div class="wrap">
+        <h2>Request a callback / send for approval</h2>
+        <p class="section-sub">Send us your details and we'll confirm your price and sort a time — by phone or email.</p>
+
+        <form id="enquiry-form" class="card" novalidate>
+          <div class="grid-2">
+            <div class="field">
+              <label for="name">Your name <span class="req">*</span></label>
+              <input type="text" id="name" name="name" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="phone">Phone <span class="req">*</span></label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" required>
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <div class="field">
+              <label for="reg2">Registration <span class="req">*</span></label>
+              <input type="text" id="reg2" name="reg2" placeholder="YOUR REG" maxlength="8" autocomplete="off" required>
+            </div>
+            <div class="field">
+              <label for="tyresize2">Tyre size <span class="req">*</span></label>
+              <input type="text" id="tyresize2" name="tyresize2" placeholder="e.g. 205/55 R16" required>
+            </div>
+            <div class="field">
+              <label for="postcode2">Postcode <span class="req">*</span></label>
+              <input type="text" id="postcode2" name="postcode2" placeholder="e.g. LS1 4DY" maxlength="8" autocomplete="postal-code" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="email">Email (optional)</label>
+            <input type="email" id="email" name="email" autocomplete="email">
+          </div>
+
+          <div class="field">
+            <label for="message">Anything else? (optional)</label>
+            <textarea id="message" name="message" rows="3" placeholder="Estimate from the tool, what's happened, where you are…"></textarea>
+          </div>
+
+          <button type="submit" class="btn-go">Send to ResQ</button>
+          <p class="form-error" id="enquiry-error" hidden></p>
+        </form>
+
+        <!-- Success panel -->
+        <div class="success" id="success" hidden>
+          <h3>✅ Thanks — your request is on its way to ResQ.</h3>
+          <p>We'll be in touch by phone or email to confirm your price and a time. For an emergency right now, call <a href="tel:07438562633">07438 562633</a>.</p>
+          <p class="micro" id="mailto-fallback"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== How it works ===== -->
+    <section class="block">
+      <div class="wrap">
+        <h2>How it works</h2>
+        <p class="section-sub">Emergency? Just call. Otherwise, three simple steps.</p>
+        <div class="steps">
+          <div class="step"><span class="n">1</span><b>Tell us your tyre &amp; location</b><p>Reg, tyre size and postcode.</p></div>
+          <div class="step"><span class="n">2</span><b>See your estimate &amp; send it</b><p>We confirm the exact price by phone/email.</p></div>
+          <div class="step"><span class="n">3</span><b>We come &amp; fit it</b><p>At your home, work or roadside. Pay on completion.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Reviews ===== -->
+    <section class="block alt">
+      <div class="wrap">
+        <h2>Trusted across West Yorkshire</h2>
+        <p class="section-sub"><span class="stars">★★★★★</span> 4.9 average on Google</p>
+        <div class="reviews">
+          <blockquote class="review"><span class="stars">★★★★★</span><p>"Punctured on the M62 at 11pm — with me in 25 minutes and back on the road fast. Lifesavers."</p><cite>— Sample review</cite></blockquote>
+          <blockquote class="review"><span class="stars">★★★★★</span><p>"Came to my work and changed two tyres while I was in a meeting. Easier than a garage."</p><cite>— Sample review</cite></blockquote>
+          <blockquote class="review"><span class="stars">★★★★★</span><p>"Friendly, fair price, sorted my blowout same day. Won't use anyone else now."</p><cite>— Sample review</cite></blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Areas ===== -->
+    <section class="block">
+      <div class="wrap">
+        <h2>Areas we cover</h2>
+        <p class="section-sub">Mobile across Leeds &amp; West Yorkshire</p>
+        <ul class="chips">
+          <li>Leeds</li><li>Bradford</li><li>Wakefield</li><li>Dewsbury</li>
+          <li>Pudsey</li><li>Morley</li><li>Castleford</li><li>Garforth</li><li>+ surrounding</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <p><b>ResQ Tyres &amp; Recovery</b> · 24/7 mobile tyre fitting &amp; recovery · Leeds &amp; West Yorkshire</p>
+      <p>📞 <a href="tel:07438562633">07438 562633</a> · <a href="mailto:hello@resqtyres.co.uk">hello@resqtyres.co.uk</a></p>
+      <p class="micro">© <span id="year"></span> ResQ Tyres &amp; Recovery. Demo build for review.</p>
+    </div>
+  </footer>
+
+  <!-- Sticky mobile call bar -->
+  <a class="sticky-call" href="tel:07438562633">📞 Call ResQ now — 24/7</a>
+
+  <script src="js/rates.js"></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>
