@@ -186,7 +186,7 @@ function sendViaWeb3Forms(data, form, err) {
     "Registration": data.reg,
     "Tyre size": data.tyresize,
     "Postcode": data.postcode,
-    "Message": data.message || "None"
+    "Message": data.message || "No extra notes — please call to confirm."
   };
   fetch("https://api.web3forms.com/submit", {
     method: "POST",
