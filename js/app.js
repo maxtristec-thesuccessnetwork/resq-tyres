@@ -173,15 +173,20 @@ function wireEnquiryForm() {
 }
 
 function sendViaWeb3Forms(data, form, err) {
+  // Clean, single set of labelled fields (no duplication). Order = how it
+  // appears in the email. 'replyto' sets the reply address (not shown twice).
   var payload = {
     access_key: CONFIG.web3formsKey,
-    subject: "Website enquiry — " + data.reg + " (" + data.postcode + ")",
-    from_name: data.name,
-    email: data.email || CONFIG.businessEmail,
-    // human-readable body + individual fields
-    message: buildSummary(data),
-    name: data.name, phone: data.phone, registration: data.reg,
-    tyre_size: data.tyresize, postcode: data.postcode
+    subject: "New enquiry — " + data.name + " (" + data.reg + ")",
+    from_name: "ResQ Tyres Website",
+    replyto: data.email || CONFIG.businessEmail,
+    "Name": data.name,
+    "Phone": data.phone,
+    "Email": data.email || "Not provided",
+    "Registration": data.reg,
+    "Tyre size": data.tyresize,
+    "Postcode": data.postcode,
+    "Message": data.message || "None"
   };
   fetch("https://api.web3forms.com/submit", {
     method: "POST",
