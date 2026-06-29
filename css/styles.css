@@ -330,6 +330,61 @@ textarea{resize:vertical}
 .rl-divider{display:flex;align-items:center;gap:12px;margin-top:16px;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:1px}
 .rl-divider::before,.rl-divider::after{content:"";flex:1;height:1px;background:var(--line-2)}
 
+/* ===== Find-your-tyre-size guide ===== */
+.size-help{margin:6px 0 16px;border:1px solid var(--line);border-radius:12px;background:var(--bg-soft);overflow:hidden}
+.size-help summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:9px;font-weight:700;font-size:14px;padding:13px 16px;color:var(--ink)}
+.size-help summary::-webkit-details-marker{display:none}
+.size-help summary .icon{width:17px;height:17px;stroke:var(--red)}
+.sh-chev{margin-left:auto;display:inline-flex;transition:transform .25s ease}
+.sh-chev .icon{width:18px;height:18px;stroke:var(--muted)}
+.size-help[open] .sh-chev{transform:rotate(180deg)}
+.sh-body{padding:4px 16px 18px}
+.sh-text{font-size:14px;color:var(--ink-2);margin-bottom:6px}
+.tyre-guide{width:100%;max-width:420px;height:auto;margin:6px auto 4px;display:block}
+
+.tg-side{fill:#5a6470;font-size:11px;font-weight:700;letter-spacing:2px;font-family:var(--font)}
+.tg-code{fill:#e7ecf1;font-size:34px;font-weight:800;font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;letter-spacing:1px;text-anchor:middle}
+.tg-code.tg-dim{fill:#8b96a2}
+.tg-code.tg-small{font-size:18px}
+.tg-hl{opacity:0}
+.tg-hl1{fill:rgba(228,0,43,.32)}
+.tg-hl2{fill:rgba(255,171,0,.32)}
+.tg-hl3{fill:rgba(24,95,165,.34)}
+.tg-tap{transform:translate(135px,68px)}
+.tg-dot{fill:#fff;stroke:var(--red);stroke-width:2}
+.tg-arrow{stroke:var(--red);stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.tg-ripple{fill:none;stroke:var(--red);stroke-width:2;opacity:0}
+
+.tg-legend{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.tg-chip{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;transition:border-color .2s,box-shadow .2s}
+.tg-chip b{font-size:20px;font-weight:800;font-family:ui-monospace,monospace}
+.tg-chip span{display:flex;flex-direction:column;font-size:13px;font-weight:700;color:var(--ink)}
+.tg-chip small{font-weight:500;font-size:11px;color:var(--muted)}
+.tg-c1 b{color:var(--red)} .tg-c2 b{color:#bb7d00} .tg-c3 b{color:#185fa5}
+
+/* animation timeline: 6s loop, three phases */
+.tg-hl1{animation:tgHl 6s infinite 0s}
+.tg-hl2{animation:tgHl 6s infinite 2s}
+.tg-hl3{animation:tgHl 6s infinite 4s}
+@keyframes tgHl{0%{opacity:0}4%{opacity:1}30%{opacity:1}34%{opacity:0}100%{opacity:0}}
+.tg-tap{animation:tgMove 6s infinite}
+@keyframes tgMove{
+  0%,30%{transform:translate(135px,68px)}
+  34%,63%{transform:translate(230px,68px)}
+  67%,96%{transform:translate(326px,68px)}
+  100%{transform:translate(135px,68px)}
+}
+.tg-ripple{animation:tgRipple 1.5s ease-out infinite}
+@keyframes tgRipple{0%{r:6;opacity:.7}100%{r:20;opacity:0}}
+.tg-c1{animation:tgChip 6s infinite 0s} .tg-c2{animation:tgChip 6s infinite 2s} .tg-c3{animation:tgChip 6s infinite 4s}
+@keyframes tgChip{0%{border-color:var(--line)}4%,30%{border-color:var(--red);box-shadow:0 4px 14px rgba(20,24,29,.10)}34%,100%{border-color:var(--line);box-shadow:none}}
+.tg-c2{} /* keep border red accent generic; colour cue carried by number */
+
+@media(prefers-reduced-motion:reduce){
+  .tg-hl{opacity:.5} .tg-tap{display:none}
+  .tg-hl1,.tg-hl2,.tg-hl3,.tg-c1,.tg-c2,.tg-c3,.tg-ripple,.tg-tap{animation:none}
+}
+
 /* hero image scale-on-scroll */
 .hero-photo .frame img{transform-origin:center;will-change:transform}
 
