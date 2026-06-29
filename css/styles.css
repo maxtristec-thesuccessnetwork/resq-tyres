@@ -342,15 +342,20 @@ textarea{resize:vertical}
 .sh-text{font-size:14px;color:var(--ink-2);margin-bottom:6px}
 .tyre-guide{width:100%;max-width:420px;height:auto;margin:6px auto 4px;display:block}
 
-.tg-side{fill:#5a6470;font-size:11px;font-weight:700;letter-spacing:2px;font-family:var(--font)}
-.tg-code{fill:#e7ecf1;font-size:34px;font-weight:800;font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;letter-spacing:1px;text-anchor:middle}
+.tg-side{fill:#7a8590;font-size:11px;font-weight:700;letter-spacing:2px;font-family:var(--font)}
+.tg-code{fill:#e7ecf1;font-size:30px;font-weight:800;font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;letter-spacing:1px;text-anchor:middle}
 .tg-code.tg-dim{fill:#8b96a2}
-.tg-code.tg-small{font-size:18px}
+.tg-code.tg-small{font-size:16px}
+.tg-sidetext{fill:#aeb6c0;font-size:12px;font-weight:700;letter-spacing:1.5px;font-family:ui-monospace,monospace;text-anchor:middle;opacity:.6}
+.tg-loc-ring{fill:none;stroke:var(--red);stroke-width:2;animation:tgLoc 1.6s ease-out infinite}
+@keyframes tgLoc{0%{r:5;opacity:.9}100%{r:16;opacity:0}}
+.tg-callout{fill:none;stroke:var(--red);stroke-width:2;stroke-dasharray:4 5;opacity:.85;animation:tgDash 1s linear infinite}
+@keyframes tgDash{to{stroke-dashoffset:-18}}
 .tg-hl{opacity:0}
 .tg-hl1{fill:rgba(228,0,43,.32)}
 .tg-hl2{fill:rgba(255,171,0,.32)}
 .tg-hl3{fill:rgba(24,95,165,.34)}
-.tg-tap{transform:translate(135px,68px)}
+.tg-tap{transform:translate(300px,78px)}
 .tg-dot{fill:#fff;stroke:var(--red);stroke-width:2}
 .tg-arrow{stroke:var(--red);stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .tg-ripple{fill:none;stroke:var(--red);stroke-width:2;opacity:0}
@@ -369,10 +374,10 @@ textarea{resize:vertical}
 @keyframes tgHl{0%{opacity:0}4%{opacity:1}30%{opacity:1}34%{opacity:0}100%{opacity:0}}
 .tg-tap{animation:tgMove 6s infinite}
 @keyframes tgMove{
-  0%,30%{transform:translate(135px,68px)}
-  34%,63%{transform:translate(230px,68px)}
-  67%,96%{transform:translate(326px,68px)}
-  100%{transform:translate(135px,68px)}
+  0%,30%{transform:translate(300px,78px)}
+  34%,63%{transform:translate(372px,78px)}
+  67%,96%{transform:translate(440px,78px)}
+  100%{transform:translate(300px,78px)}
 }
 .tg-ripple{animation:tgRipple 1.5s ease-out infinite}
 @keyframes tgRipple{0%{r:6;opacity:.7}100%{r:20;opacity:0}}
@@ -381,8 +386,8 @@ textarea{resize:vertical}
 .tg-c2{} /* keep border red accent generic; colour cue carried by number */
 
 @media(prefers-reduced-motion:reduce){
-  .tg-hl{opacity:.5} .tg-tap{display:none}
-  .tg-hl1,.tg-hl2,.tg-hl3,.tg-c1,.tg-c2,.tg-c3,.tg-ripple,.tg-tap{animation:none}
+  .tg-hl{opacity:.5} .tg-tap{display:none} .tg-loc-ring{opacity:.6}
+  .tg-hl1,.tg-hl2,.tg-hl3,.tg-c1,.tg-c2,.tg-c3,.tg-ripple,.tg-tap,.tg-loc-ring,.tg-callout{animation:none}
 }
 
 /* hero image scale-on-scroll */
