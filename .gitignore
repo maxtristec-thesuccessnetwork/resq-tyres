@@ -10,3 +10,6 @@ dist/
 .netlify
 .env
 .env.*
+# Unused source originals (kept out of the build)
+assets/work*.jpg
+assets/logo-header.jpg
