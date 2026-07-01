@@ -104,11 +104,11 @@
         <span class="logo-text">ResQ Tyres<small>&amp; RECOVERY · EST 2023</small></span>
       </a>
       <nav class="nav" aria-label="Primary">
-        <a href="#estimate">Tyre estimate</a>
+        <a href="#help">Emergency or planned</a>
+        <a href="#estimate">Price guide</a>
         <a href="#services">Services</a>
-        <a href="#how">How it works</a>
-        <a href="#reviews">Reviews</a>
         <a href="#areas">Areas</a>
+        <a href="#enquiry">Home fitting</a>
       </nav>
       <div class="header-right">
         <a class="btn-call" href="tel:07438562633"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> 07438 562633</a>
@@ -125,11 +125,11 @@
             <span class="live-badge"><span class="dot" aria-hidden="true"></span> Typically with you in 15–30 minutes</span>
             <h1>Flat tyre? We come to you.</h1>
             <div class="rotator" id="rotator" aria-hidden="true">At home.</div>
-            <p class="hero-sub">24/7 mobile tyre fitting &amp; emergency recovery across Leeds &amp; West Yorkshire. One call and we're on the way — fully equipped, any hour.</p>
+            <p class="hero-sub">24/7 emergency call-outs <b>and</b> planned home tyre fitting across Leeds &amp; West Yorkshire — the same tyres you'd get in a shop, fitted on your driveway. One call and we're on the way.</p>
             <div class="cta-row">
-              <a class="cta-primary pulse" href="tel:07438562633"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call now</a>
+              <a class="cta-primary pulse" href="tel:07438562633"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Emergency — call now</a>
               <a class="cta-whatsapp" href="https://wa.me/447438562633" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp</a>
-              <a class="cta-secondary" href="#estimate">Get a tyre estimate <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              <a class="cta-secondary" href="#enquiry">Plan a home fitting <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             </div>
             <div class="scroll-cue" aria-hidden="true"><span class="mouse"></span>Scroll</div>
           </div>
@@ -171,26 +171,53 @@
       </div>
     </div>
 
-    <!-- ===== Estimate tool ===== -->
-    <section class="section estimate" id="estimate">
+    <!-- ===== Two ways we help ===== -->
+    <section class="section" id="help">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Two ways we help</span>
+          <h2>Emergency now, or plan a home fitting</h2>
+          <p>Stuck at the roadside? Just call — it's faster. Planning ahead? Send your details and we'll come to your home or work.</p>
+        </div>
+        <div class="paths stagger">
+          <article class="path path-emergency">
+            <div class="path-top"><span class="path-badge"><span class="dotpulse" aria-hidden="true"></span> 24/7 · Any hour</span><svg class="path-ico" aria-hidden="true"><use href="#i-phone"/></svg></div>
+            <h3>Emergency call-out</h3>
+            <p>Flat, blowout or breakdown and need someone now? Don't fill in a form — call or WhatsApp and we're on our way, typically within 15–30 minutes.</p>
+            <ul class="path-list">
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Fastest response — straight to the phone</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Roadside, home or work, day or night</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Pay on completion — no deposit</li>
+            </ul>
+            <div class="path-cta">
+              <a class="cta-primary pulse" href="tel:07438562633"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call 07438 562633</a>
+              <a class="cta-whatsapp" href="https://wa.me/447438562633" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp</a>
+            </div>
+          </article>
+          <article class="path path-planned">
+            <div class="path-top"><span class="path-badge alt"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg> Mon–Fri · Booked in</span><svg class="path-ico" aria-hidden="true"><use href="#i-home"/></svg></div>
+            <h3>Planned home tyre fitting</h3>
+            <p>Not urgent? We'll fit your tyres at home or work at a time that suits you — <b>the same price you'd pay in the shop</b>, without the trip. Send your details and we'll confirm by phone.</p>
+            <ul class="path-list">
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Same tyres, same price as in-store</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> We come to your driveway — no waiting room</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> No deposit — pay when it's done</li>
+            </ul>
+            <div class="path-cta">
+              <a class="cta-secondary solid" href="#enquiry">Plan a home fitting <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              <a class="cta-secondary" href="#estimate">Check price range</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Price guide ===== -->
+    <section class="section soft estimate" id="estimate">
       <div class="wrap reveal">
         <div class="card">
-          <h2><svg class="icon" aria-hidden="true"><use href="#i-wheel"/></svg> Get a quick tyre estimate</h2>
-          <p class="hint">Pop in your reg and we'll find your tyre size automatically — or enter it yourself. Then add your postcode for an instant estimate.</p>
-
-          <!-- Reg → tyre size lookup -->
-          <div class="reg-lookup">
-            <p class="rl-label"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg> Know your reg? We'll find your tyre size</p>
-            <div class="rl-row">
-              <div class="regplate">
-                <span class="gb">GB</span>
-                <input type="text" id="vrm-lookup" placeholder="YOUR REG" maxlength="8" autocomplete="off" aria-label="Vehicle registration for tyre lookup">
-              </div>
-              <button type="button" class="btn-find" id="vrm-btn"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg> <span>Find my size</span></button>
-            </div>
-            <p class="rl-status" id="vrm-status" role="status" hidden></p>
-            <div class="rl-divider"><span>or enter it manually</span></div>
-          </div>
+          <h2><svg class="icon" aria-hidden="true"><use href="#i-wheel"/></svg> Tyre price guide</h2>
+          <p class="hint">Pick your tyre size for a rough fitted price range. It's a guide only — we confirm the exact price by phone before any work. Not sure of your size? Open the guide below.</p>
 
           <form id="estimate-form" novalidate>
             <div class="grid-3">
@@ -269,32 +296,37 @@
               </div>
             </details>
 
-            <div class="grid-2">
-              <div class="field">
-                <label for="reg">Registration <span class="req">*</span></label>
-                <div class="regplate"><span class="gb">GB</span><input type="text" id="reg" name="reg" placeholder="YOUR REG" maxlength="8" autocomplete="off" required></div>
+            <fieldset class="lock-q">
+              <legend>Do you have your locking wheel-nut key?</legend>
+              <div class="select-wrap">
+                <select id="lockingnut" name="lockingnut" aria-label="Locking wheel-nut key">
+                  <option value="yes" selected>Yes — I have the key</option>
+                  <option value="no">No / not sure</option>
+                </select>
               </div>
-              <div class="field">
-                <label for="postcode">Postcode <span class="req">*</span></label>
-                <input type="text" id="postcode" name="postcode" placeholder="e.g. LS1 4DY" maxlength="8" autocomplete="postal-code" required>
-              </div>
-            </div>
-            <button type="submit" class="btn-go"><svg class="icon" aria-hidden="true"><use href="#i-wheel"/></svg> Show my estimate</button>
+              <p class="lock-hint"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg> Locked wheel nuts stop most fitters — we carry the specialist tools to remove them safely.</p>
+            </fieldset>
+
+            <button type="submit" class="btn-go"><svg class="icon" aria-hidden="true"><use href="#i-wheel"/></svg> Show price range</button>
             <p class="form-error" id="estimate-error" hidden></p>
           </form>
 
           <div class="results" id="estimate-results" hidden>
-            <p class="results-head">Estimated prices for <b id="size-label">—</b> · fitted at your location</p>
-            <div class="options" id="options"></div>
-            <button type="button" class="btn-approve" id="to-enquiry"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Send this to ResQ for approval</button>
-            <p class="micro">An estimate only — we'll confirm the exact price by phone or email before any work.</p>
+            <p class="results-head">Typical fitted price for <b id="size-label">—</b></p>
+            <div class="range-box"><span class="range-num" id="range-out">—</span></div>
+            <p class="addon-note" id="addon-note" hidden></p>
+            <div class="results-cta">
+              <a class="cta-primary" href="tel:07438562633"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call to confirm</a>
+              <button type="button" class="btn-approve" id="to-enquiry"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg> Plan a home fitting</button>
+            </div>
+            <p class="micro">A guide only — the final price is confirmed by phone. Prices are per tyre, mobile fitting included.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ===== Services ===== -->
-    <section class="section soft" id="services">
+    <section class="section" id="services">
       <div class="wrap">
         <div class="section-head reveal">
           <span class="eyebrow">What we do</span>
@@ -331,7 +363,7 @@
     </section>
 
     <!-- ===== How it works ===== -->
-    <section class="section" id="how">
+    <section class="section soft" id="how">
       <div class="wrap">
         <div class="section-head reveal">
           <span class="eyebrow">Simple &amp; fast</span>
@@ -339,9 +371,9 @@
           <p>Emergency? Just call. Otherwise, three simple steps.</p>
         </div>
         <div class="steps stagger">
-          <div class="step"><span class="n">1</span><b>Tell us your tyre &amp; location</b><p>Your reg, tyre size and postcode — by phone, WhatsApp or the estimate tool.</p></div>
-          <div class="step"><span class="n">2</span><b>See your estimate &amp; send it</b><p>We confirm the exact price by phone or email — no surprises.</p></div>
-          <div class="step"><span class="n">3</span><b>We come &amp; fit it</b><p>At your home, work or roadside. Pay on completion by card or cash.</p></div>
+          <div class="step"><span class="n">1</span><b>Get in touch</b><p>Emergency? Just call or WhatsApp. Planning ahead? Send the home-fitting form with your tyre size, postcode and when suits you.</p></div>
+          <div class="step"><span class="n">2</span><b>We confirm price &amp; time</b><p>A quick call to confirm the exact price and a slot that works. No deposit, no online payment.</p></div>
+          <div class="step"><span class="n">3</span><b>We come &amp; fit it</b><p>At your home, work or the roadside. Pay on completion by card or cash — only once the job's done.</p></div>
         </div>
       </div>
     </section>
@@ -373,11 +405,11 @@
         <div class="ot">
           <div class="badge30">30%<small>OFF</small></div>
           <div>
-            <h3>Get all 4 tyres changed — 30% off</h3>
-            <p>Book a full set online and save. Subject to availability — ask us for details.</p>
+            <h3>Changing all 4 tyres? 30% off the set</h3>
+            <p>Ask us about a full set when you enquire or call. Subject to availability — we'll confirm the price with you.</p>
           </div>
         </div>
-        <a class="btn-book" href="https://calendly.com/resqtyres" target="_blank" rel="noopener">Book online <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn-book" href="#enquiry">Enquire about this offer <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
     </section>
 
@@ -416,19 +448,60 @@
         <div class="section-head reveal">
           <span class="eyebrow">Where we cover</span>
           <h2>Mobile across Leeds &amp; West Yorkshire</h2>
+          <p>We come to you right across West Yorkshire. Not sure if you're in range? Pop your postcode in below.</p>
         </div>
-        <ul class="chips stagger">
-          <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Leeds</li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Bradford</li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Wakefield</li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Dewsbury</li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Pudsey</li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Morley</li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Castleford</li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Garforth</li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Pontefract</li>
-          <li>+ surrounding areas</li>
-        </ul>
+
+        <div class="areas-grid reveal">
+          <div class="area-map">
+            <svg viewBox="0 0 460 360" role="img" aria-label="Map of ResQ Tyres coverage across West Yorkshire, including Leeds, Bradford, Wakefield, Dewsbury, Pudsey, Morley, Castleford, Garforth and Pontefract." class="cov-map">
+              <defs>
+                <radialGradient id="cov-fill" cx="48%" cy="42%" r="62%">
+                  <stop offset="0" stop-color="rgba(228,0,43,.16)"/>
+                  <stop offset="1" stop-color="rgba(228,0,43,.05)"/>
+                </radialGradient>
+              </defs>
+              <!-- coverage blob -->
+              <path class="cov-area" d="M92,120 C120,86 180,72 240,80 C300,88 350,96 388,132 C414,158 410,210 384,246 C356,286 300,300 240,296 C176,292 120,286 92,250 C66,216 66,152 92,120 Z" fill="url(#cov-fill)"/>
+              <path class="cov-border" d="M92,120 C120,86 180,72 240,80 C300,88 350,96 388,132 C414,158 410,210 384,246 C356,286 300,300 240,296 C176,292 120,286 92,250 C66,216 66,152 92,120 Z"/>
+              <!-- pins -->
+              <g class="cov-pins">
+                <g class="pin" transform="translate(112,158)"><circle class="pdot" r="5"/><text x="0" y="-11">Bradford</text></g>
+                <g class="pin" transform="translate(168,140)"><circle class="pdot" r="5"/><text x="0" y="-11">Pudsey</text></g>
+                <g class="pin hub" transform="translate(222,132)"><circle class="pulse" r="9"/><circle class="pdot big" r="7"/><text x="0" y="-13">Leeds</text></g>
+                <g class="pin" transform="translate(292,146)"><circle class="pdot" r="5"/><text x="0" y="-11">Garforth</text></g>
+                <g class="pin" transform="translate(188,196)"><circle class="pdot" r="5"/><text x="0" y="-11">Morley</text></g>
+                <g class="pin" transform="translate(158,236)"><circle class="pdot" r="5"/><text x="0" y="-11">Dewsbury</text></g>
+                <g class="pin" transform="translate(236,246)"><circle class="pdot" r="5"/><text x="0" y="18">Wakefield</text></g>
+                <g class="pin" transform="translate(312,210)"><circle class="pdot" r="5"/><text x="0" y="-11">Castleford</text></g>
+                <g class="pin" transform="translate(340,250)"><circle class="pdot" r="5"/><text x="0" y="18">Pontefract</text></g>
+              </g>
+            </svg>
+          </div>
+
+          <div class="area-side">
+            <div class="pc-checker">
+              <label for="pc-check">Check your postcode</label>
+              <div class="pc-row">
+                <input id="pc-check" type="text" placeholder="e.g. LS9 8TX" maxlength="8" autocomplete="postal-code" aria-label="Your postcode">
+                <button type="button" id="pc-btn" class="btn-find"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Check</button>
+              </div>
+              <p class="pc-result" id="pc-result" hidden></p>
+              <p class="micro">Covered districts include LS, BD &amp; WF. Just outside? Call us — we may still be able to reach you.</p>
+            </div>
+            <ul class="chips stagger">
+              <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Leeds</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Bradford</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Wakefield</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Dewsbury</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Pudsey</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Morley</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Castleford</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Garforth</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>Pontefract</li>
+              <li>+ surrounding areas</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -436,9 +509,9 @@
     <section class="section soft enquiry" id="enquiry">
       <div class="wrap">
         <div class="section-head reveal">
-          <span class="eyebrow">Not an emergency?</span>
-          <h2>Request a callback / send for approval</h2>
-          <p>Send your details and we'll confirm your price and sort a time — by phone or email.</p>
+          <span class="eyebrow">Planned home fitting · Mon–Fri</span>
+          <h2>Plan a home tyre fitting</h2>
+          <p>The same tyres and price you'd get in the shop — fitted at your home or work. Send your details and we'll call to confirm the price and a time. No deposit, no online payment.</p>
         </div>
 
         <form id="enquiry-form" class="card reveal" novalidate>
@@ -446,13 +519,33 @@
             <div class="field"><label for="name">Your name <span class="req">*</span></label><input type="text" id="name" name="name" autocomplete="name" required></div>
             <div class="field"><label for="phone">Phone <span class="req">*</span></label><input type="tel" id="phone" name="phone" autocomplete="tel" required></div>
           </div>
-          <div class="grid-3">
-            <div class="field"><label for="reg2">Registration <span class="req">*</span></label><input type="text" id="reg2" name="reg2" placeholder="YOUR REG" maxlength="8" autocomplete="off" required></div>
-            <div class="field"><label for="tyresize2">Tyre size <span class="req">*</span></label><input type="text" id="tyresize2" name="tyresize2" placeholder="e.g. 205/55 R16" required></div>
+          <div class="grid-2">
             <div class="field"><label for="postcode2">Postcode <span class="req">*</span></label><input type="text" id="postcode2" name="postcode2" placeholder="e.g. LS1 4DY" maxlength="8" autocomplete="postal-code" required></div>
+            <div class="field"><label for="vehicle">Your vehicle — make &amp; model <span class="req">*</span></label><input type="text" id="vehicle" name="vehicle" placeholder="e.g. VW Golf, 2018" required></div>
           </div>
+          <div class="grid-2">
+            <div class="field">
+              <label for="tyresize2">Tyre size <span class="req">*</span></label>
+              <input type="text" id="tyresize2" name="tyresize2" placeholder="e.g. 205/55 R16" required>
+              <p class="tyresize-caution" id="tyresize-caution"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg> Please double-check this matches the size on your tyre's sidewall. Not sure? Open the price guide above — it shows you where to find it.</p>
+            </div>
+            <div class="field">
+              <label for="tyrecount">How many tyres <span class="req">*</span></label>
+              <div class="select-wrap">
+                <select id="tyrecount" name="tyrecount" required>
+                  <option value="" disabled selected>Select…</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4 (full set)</option>
+                  <option value="5+">5 or more</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="field"><label for="availability">When suits you? <span class="req">*</span></label><input type="text" id="availability" name="availability" placeholder="e.g. weekday mornings, or Tue 3rd after 2pm" required></div>
           <div class="field"><label for="email">Email (optional)</label><input type="email" id="email" name="email" autocomplete="email"></div>
-          <div class="field"><label for="message">Anything else? (optional)</label><textarea id="message" name="message" rows="3" placeholder="Estimate from the tool, what's happened, where you are…"></textarea></div>
+          <div class="field"><label for="message">Anything else? (optional)</label><textarea id="message" name="message" rows="3" placeholder="Anything else we should know…"></textarea></div>
           <button type="submit" class="btn-go"><svg class="icon" aria-hidden="true"><use href="#i-send"/></svg> Send to ResQ</button>
           <p class="form-error" id="enquiry-error" hidden></p>
         </form>
@@ -510,8 +603,8 @@
         <div>
           <h4>Quick links</h4>
           <ul class="foot-links">
-            <li><a href="https://calendly.com/resqtyres" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg> Book online</a></li>
-            <li><a href="#estimate"><svg class="icon" aria-hidden="true"><use href="#i-wheel"/></svg> Tyre estimate</a></li>
+            <li><a href="#enquiry"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg> Plan a home fitting</a></li>
+            <li><a href="#estimate"><svg class="icon" aria-hidden="true"><use href="#i-wheel"/></svg> Price guide</a></li>
             <li><a href="#services"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg> Our services</a></li>
             <li><a href="https://www.facebook.com/profile.php?id=61551057443516" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg> Facebook</a></li>
           </ul>
@@ -535,7 +628,6 @@
 
   <script src="js/rates.js"></script>
   <script src="js/app.js" defer></script>
-  <script src="js/tyre.js" defer></script>
   <script src="js/ui.js" defer></script>
 </body>
 </html>
