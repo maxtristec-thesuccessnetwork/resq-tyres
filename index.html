@@ -21,6 +21,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <link rel="stylesheet" href="css/styles.css">
 
   <script type="application/ld+json">
@@ -54,7 +55,7 @@
       "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
       "opens": "00:00", "closes": "23:59"
     },
-    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "120" }
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "215" }
   }
   </script>
 </head>
@@ -80,6 +81,8 @@
     <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></symbol>
     <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></symbol>
     <symbol id="i-truck" viewBox="0 0 24 24"><path d="M1 6h13v10H1z"/><path d="M14 9h4l3 3v4h-7z"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></symbol>
+    <symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M16.5 3c.31 2.02 1.63 3.54 3.5 3.8v2.43c-1.28 0-2.48-.4-3.5-1.08v5.9a5.6 5.6 0 1 1-5.6-5.6c.31 0 .61.03.9.08v2.5a3.05 3.05 0 1 0 2.15 2.92V3h2.55z"/></symbol>
+    <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M15 3h-2.5a4 4 0 0 0-4 4v2.5H6v4h2.5V21h4v-7.5H15l.7-4h-3.2V7.2c0-.7.3-1.2 1.2-1.2H15z"/></symbol>
   </defs></svg>
 
   <!-- scroll progress -->
@@ -92,6 +95,10 @@
       <span class="tb-right">
         <a href="tel:07438562633"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> 07438 562633</a>
         <a href="https://wa.me/447438562633" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp</a>
+        <span class="tb-socials">
+          <a class="tb-social" href="https://www.tiktok.com/@resqtyres" target="_blank" rel="noopener" aria-label="ResQ Tyres on TikTok"><svg class="icon solid" aria-hidden="true"><use href="#i-tiktok"/></svg></a>
+          <a class="tb-social" href="https://www.facebook.com/profile.php?id=61551057443516" target="_blank" rel="noopener" aria-label="ResQ Tyres on Facebook"><svg class="icon solid" aria-hidden="true"><use href="#i-facebook"/></svg></a>
+        </span>
       </span>
     </div>
   </div>
@@ -136,10 +143,10 @@
 
           <div class="hero-photo reveal from-right">
             <div class="frame">
-              <img src="assets/fitting.jpg" alt="Mobile technician changing a tyre at the roadside" loading="eager" id="heroImg" data-hero>
+              <img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAF0MtiJ791cTp8EVHVb6O3kHLzyfPt34NiRENvaQOOeunjUAWH8xdnNPhCTANne4NYth2Sa44Cyy5YEo1oGcvuAH42yWGiD6eWIVSj_XhNw6Ppi5DUb3E6YW2W2jUlXru0ddQD5N-WRL1k=w1200-h1600-k-no" alt="ResQ Tyres &amp; Recovery van on a job — fitting a new tyre to a car at the roadside" loading="eager" id="heroImg" data-hero>
               <div class="tag"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><div><b>Pay on completion</b><span>No upfront payment</span></div></div>
             </div>
-            <div class="floatcard"><b><span data-count="4.9" data-dec="1">4.9</span>★</b><span>120+ Google reviews</span></div>
+            <div class="floatcard"><b><span data-count="5.0" data-dec="1">5.0</span>★</b><span>215+ Google reviews</span></div>
           </div>
         </div>
       </div>
@@ -148,7 +155,7 @@
       <div class="stats">
         <div class="wrap stagger">
           <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><div><b>15–30 min</b><span>Typical response</span></div></div>
-          <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg><div><b><span data-count="4.9" data-dec="1">4.9</span> / 5</b><span>Google rating</span></div></div>
+          <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg><div><b><span data-count="5.0" data-dec="1">5.0</span> / 5</b><span>Google rating</span></div></div>
           <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><div><b>West Yorkshire</b><span>Leeds &amp; surrounding</span></div></div>
           <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-card"/></svg><div><b>Pay on completion</b><span>Card or cash</span></div></div>
         </div>
@@ -419,25 +426,29 @@
         <div class="rev-head reveal">
           <span class="eyebrow">Trusted across West Yorkshire</span>
           <span class="stars" style="font-size:22px">★★★★★</span>
-          <span class="big"><span data-count="4.9" data-dec="1">4.9</span> on Google</span>
-          <span class="micro">From <span data-count="120" data-suffix="+">120+</span> verified customer reviews</span>
+          <span class="big"><span data-count="5.0" data-dec="1">5.0</span> on Google</span>
+          <span class="micro">From <span data-count="215" data-suffix="+">215+</span> verified Google reviews</span>
         </div>
         <div class="reviews stagger">
           <blockquote class="review">
             <span class="stars">★★★★★</span>
-            <p>"Such a quick response time &amp; good value! I was back on the road within the hour — will definitely use this service again. Highly recommended!"</p>
-            <span class="who"><span class="gicon">G</span> Verified Google review</span>
+            <p>"Fantastic service. We had my brother's tyre replaced in less than an hour from me calling — which I didn't think was possible on a Sunday. Super value for money. Very reliable. Highly recommend."</p>
+            <span class="who"><span class="gicon">G</span> <b>Jenny McManus</b> · Google review</span>
           </blockquote>
           <blockquote class="review">
             <span class="stars">★★★★★</span>
-            <p>"I managed to get back on the road just under an hour from the very first call. Really impressed by the overall service — I'll definitely use these guys again."</p>
-            <span class="who"><span class="gicon">G</span> Verified Google review</span>
+            <p>"Car tyre blew out in the middle of the motorway and in less than 40 minutes I was back on the road with a brand-new tyre for a great price. Despite it being a busy Saturday afternoon, the guys were nothing but helpful and lovely. Would recommend to anyone."</p>
+            <span class="who"><span class="gicon">G</span> <b>Honor Blackburn</b> · Google review</span>
           </blockquote>
           <blockquote class="review">
             <span class="stars">★★★★★</span>
-            <p>"Amazing customer service. Reached me within 30 minutes of calling. Affordable price. Highly recommend."</p>
-            <span class="who"><span class="gicon">G</span> Verified Google review</span>
+            <p>"Double blowout thanks to the great condition of West Yorkshire roads! These guys were a life saver — fast, professional and easy to talk to. Arrived in under 60 minutes and did two tyre changes in under 30. If I'm ever in that spot again, they'll be the first I call."</p>
+            <span class="who"><span class="gicon">G</span> <b>Joshua Broadley</b> · Google review</span>
           </blockquote>
+        </div>
+        <div class="reviews-cta reveal">
+          <a class="rev-google" href="https://maps.app.goo.gl/LyEpPCfZw5TquB427" target="_blank" rel="noopener"><span class="gicon">G</span> Read all 215 reviews</a>
+          <a class="rev-tiktok" href="https://www.tiktok.com/@resqtyres" target="_blank" rel="noopener"><svg class="icon solid" aria-hidden="true"><use href="#i-tiktok"/></svg> Follow us on TikTok</a>
         </div>
       </div>
     </section>
@@ -453,29 +464,7 @@
 
         <div class="areas-grid reveal">
           <div class="area-map">
-            <svg viewBox="0 0 460 360" role="img" aria-label="Map of ResQ Tyres coverage across West Yorkshire, including Leeds, Bradford, Wakefield, Dewsbury, Pudsey, Morley, Castleford, Garforth and Pontefract." class="cov-map">
-              <defs>
-                <radialGradient id="cov-fill" cx="48%" cy="42%" r="62%">
-                  <stop offset="0" stop-color="rgba(228,0,43,.16)"/>
-                  <stop offset="1" stop-color="rgba(228,0,43,.05)"/>
-                </radialGradient>
-              </defs>
-              <!-- coverage blob -->
-              <path class="cov-area" d="M92,120 C120,86 180,72 240,80 C300,88 350,96 388,132 C414,158 410,210 384,246 C356,286 300,300 240,296 C176,292 120,286 92,250 C66,216 66,152 92,120 Z" fill="url(#cov-fill)"/>
-              <path class="cov-border" d="M92,120 C120,86 180,72 240,80 C300,88 350,96 388,132 C414,158 410,210 384,246 C356,286 300,300 240,296 C176,292 120,286 92,250 C66,216 66,152 92,120 Z"/>
-              <!-- pins -->
-              <g class="cov-pins">
-                <g class="pin" transform="translate(112,158)"><circle class="pdot" r="5"/><text x="0" y="-11">Bradford</text></g>
-                <g class="pin" transform="translate(168,140)"><circle class="pdot" r="5"/><text x="0" y="-11">Pudsey</text></g>
-                <g class="pin hub" transform="translate(222,132)"><circle class="pulse" r="9"/><circle class="pdot big" r="7"/><text x="0" y="-13">Leeds</text></g>
-                <g class="pin" transform="translate(292,146)"><circle class="pdot" r="5"/><text x="0" y="-11">Garforth</text></g>
-                <g class="pin" transform="translate(188,196)"><circle class="pdot" r="5"/><text x="0" y="-11">Morley</text></g>
-                <g class="pin" transform="translate(158,236)"><circle class="pdot" r="5"/><text x="0" y="-11">Dewsbury</text></g>
-                <g class="pin" transform="translate(236,246)"><circle class="pdot" r="5"/><text x="0" y="18">Wakefield</text></g>
-                <g class="pin" transform="translate(312,210)"><circle class="pdot" r="5"/><text x="0" y="-11">Castleford</text></g>
-                <g class="pin" transform="translate(340,250)"><circle class="pdot" r="5"/><text x="0" y="18">Pontefract</text></g>
-              </g>
-            </svg>
+            <div id="cov-leaflet" class="cov-map" role="img" aria-label="Interactive map of ResQ Tyres coverage across West Yorkshire — Leeds, Bradford, Wakefield, Dewsbury, Pudsey, Morley, Castleford, Garforth and Pontefract."></div>
           </div>
 
           <div class="area-side">
@@ -606,7 +595,8 @@
             <li><a href="#enquiry"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg> Plan a home fitting</a></li>
             <li><a href="#estimate"><svg class="icon" aria-hidden="true"><use href="#i-wheel"/></svg> Price guide</a></li>
             <li><a href="#services"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg> Our services</a></li>
-            <li><a href="https://www.facebook.com/profile.php?id=61551057443516" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg> Facebook</a></li>
+            <li><a href="https://www.facebook.com/profile.php?id=61551057443516" target="_blank" rel="noopener"><svg class="icon solid" aria-hidden="true"><use href="#i-facebook"/></svg> Facebook</a></li>
+            <li><a href="https://www.tiktok.com/@resqtyres" target="_blank" rel="noopener"><svg class="icon solid" aria-hidden="true"><use href="#i-tiktok"/></svg> TikTok</a></li>
           </ul>
         </div>
       </div>
@@ -626,6 +616,7 @@
     <a class="s-wa" href="https://wa.me/447438562633" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp</a>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <script src="js/rates.js"></script>
   <script src="js/app.js" defer></script>
   <script src="js/ui.js" defer></script>

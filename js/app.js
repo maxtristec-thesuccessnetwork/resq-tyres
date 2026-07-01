@@ -26,7 +26,57 @@ document.addEventListener("DOMContentLoaded", function () {
   wireEnquiryForm();
   wirePostcodeChecker();
   wireTyreSizeCaution();
+  initCoverageMap();
 });
+
+/* ---------- Coverage map (Leaflet + Carto tiles) ---------- */
+function initCoverageMap() {
+  var el = document.getElementById("cov-leaflet");
+  if (!el || typeof L === "undefined") return;
+
+  var map = L.map(el, { scrollWheelZoom: false, zoomControl: true, attributionControl: true });
+
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+  }).addTo(map);
+
+  // [lat, lng, name, isHub]
+  var towns = [
+    [53.8008, -1.5491, "Leeds", true],
+    [53.7938, -1.7524, "Bradford", false],
+    [53.6830, -1.4977, "Wakefield", false],
+    [53.6912, -1.6290, "Dewsbury", false],
+    [53.7967, -1.6631, "Pudsey", false],
+    [53.7491, -1.6010, "Morley", false],
+    [53.7256, -1.3560, "Castleford", false],
+    [53.7928, -1.3872, "Garforth", false],
+    [53.6919, -1.3128, "Pontefract", false]
+  ];
+
+  towns.forEach(function (t) {
+    L.circleMarker([t[0], t[1]], {
+      radius: t[3] ? 9 : 6,
+      color: "#fff", weight: 2,
+      fillColor: "#e4002b", fillOpacity: 1
+    }).addTo(map).bindTooltip(t[2], {
+      permanent: true, direction: "top", offset: [0, -4],
+      className: "cov-tip" + (t[3] ? " hub" : "")
+    });
+  });
+
+  // Soft red coverage zone centred on the patch
+  var circle = L.circle([53.750, -1.545], {
+    radius: 18000, color: "#e4002b", weight: 2, dashArray: "6 6",
+    opacity: 0.6, fillColor: "#e4002b", fillOpacity: 0.10
+  }).addTo(map);
+
+  map.fitBounds(circle.getBounds(), { padding: [24, 24] });
+
+  // Re-measure once fonts/layout settle (map lives inside an animated section)
+  setTimeout(function () { map.invalidateSize(); }, 250);
+  window.addEventListener("load", function () { map.invalidateSize(); });
+}
 
 /* ---------- Price-range guide ---------- */
 function populateSelects() {
