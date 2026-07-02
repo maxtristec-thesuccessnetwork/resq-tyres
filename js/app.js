@@ -29,16 +29,35 @@ document.addEventListener("DOMContentLoaded", function () {
   initCoverageMap();
 });
 
-/* ---------- Coverage map (Leaflet + Carto tiles) ---------- */
+/* ---------- Coverage map (Leaflet + Carto dark tiles) ---------- */
 function initCoverageMap() {
   var el = document.getElementById("cov-leaflet");
   if (!el || typeof L === "undefined") return;
 
-  var map = L.map(el, { scrollWheelZoom: false, zoomControl: true, attributionControl: true });
+  var CENTER = [53.752, -1.545];
 
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+  // NB: set an initial view BEFORE adding any layers, and disable zoom
+  // animation — adding permanent tooltips then animating fitBounds throws
+  // Leaflet's "layerPointToLatLng" error and leaves the map blank.
+  var map = L.map(el, {
+    scrollWheelZoom: false,
+    zoomControl: true,
+    attributionControl: true,
+    zoomAnimation: false,
+    markerZoomAnimation: false
+  }).setView(CENTER, 11);
+
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
     maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+  }).addTo(map);
+
+  // Glowing coverage zone
+  var circle = L.circle(CENTER, {
+    radius: 17000,
+    className: "cov-zone",
+    color: "#ff2d55", weight: 2, opacity: 0.9,
+    fillColor: "#e4002b", fillOpacity: 0.12
   }).addTo(map);
 
   // [lat, lng, name, isHub]
@@ -55,26 +74,28 @@ function initCoverageMap() {
   ];
 
   towns.forEach(function (t) {
-    L.circleMarker([t[0], t[1]], {
-      radius: t[3] ? 9 : 6,
-      color: "#fff", weight: 2,
-      fillColor: "#e4002b", fillOpacity: 1
-    }).addTo(map).bindTooltip(t[2], {
-      permanent: true, direction: "top", offset: [0, -4],
-      className: "cov-tip" + (t[3] ? " hub" : "")
+    var hub = t[3];
+    var icon = L.divIcon({
+      className: "cov-marker" + (hub ? " hub" : ""),
+      html: '<span class="cov-pulse"></span><span class="cov-dot"></span>',
+      iconSize: hub ? [22, 22] : [16, 16],
+      iconAnchor: hub ? [11, 11] : [8, 8]
     });
+    L.marker([t[0], t[1]], { icon: icon, keyboard: false })
+      .addTo(map)
+      .bindTooltip(t[2], {
+        permanent: true, direction: "top", offset: [0, hub ? -10 : -8],
+        className: "cov-tip" + (hub ? " hub" : "")
+      });
   });
 
-  // Soft red coverage zone centred on the patch
-  var circle = L.circle([53.750, -1.545], {
-    radius: 18000, color: "#e4002b", weight: 2, dashArray: "6 6",
-    opacity: 0.6, fillColor: "#e4002b", fillOpacity: 0.10
-  }).addTo(map);
+  map.fitBounds(circle.getBounds(), { padding: [34, 34], animate: false });
 
-  map.fitBounds(circle.getBounds(), { padding: [24, 24] });
-
-  // Re-measure once fonts/layout settle (map lives inside an animated section)
-  setTimeout(function () { map.invalidateSize(); }, 250);
+  // Re-measure once layout settles (map sits inside an animated section)
+  setTimeout(function () {
+    map.invalidateSize();
+    map.fitBounds(circle.getBounds(), { padding: [34, 34], animate: false });
+  }, 300);
   window.addEventListener("load", function () { map.invalidateSize(); });
 }
 
