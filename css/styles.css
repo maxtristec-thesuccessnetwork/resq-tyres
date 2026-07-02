@@ -223,9 +223,9 @@ textarea{resize:vertical}
 .services{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(16px,2vw,24px)}
 .svc{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);transition:.18s}
 .svc:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-.svc .ph{height:248px;overflow:hidden}
-.svc .ph img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
-.svc:hover .ph img{transform:scale(1.06)}
+.svc .ph{aspect-ratio:1/1;overflow:hidden;background:var(--bg-soft);display:grid;place-items:center}
+.svc .ph img{width:100%;height:100%;object-fit:contain;transition:transform .4s ease}
+.svc:hover .ph img{transform:scale(1.03)}
 .svc .body{padding:20px}
 .svc h3{font-size:19px;font-weight:800;margin-bottom:6px}
 .svc p{color:var(--muted);font-size:14px}
