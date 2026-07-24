@@ -140,6 +140,7 @@ function wireEstimateForm() {
 
     ResQState.size = sizeLabel;
     ResQState.lockingNut = lockingNut;
+    ResQState.range = range;
 
     renderRange(sizeLabel, range, lockingNut);
 
@@ -262,6 +263,12 @@ function wireEnquiryForm() {
     }
     hide(err);
 
+    // carry the on-screen estimate into the enquiry (only if they used the tool)
+    var est = estimateLines(data.tyrecount);
+    data.estRange = est.range;
+    data.estLocking = est.locking;
+    data.estTotal = est.total;
+
     if (CONFIG.web3formsKey) {
       sendViaWeb3Forms(data, form, err);
     } else if (CONFIG.formEndpoint) {
@@ -287,6 +294,9 @@ function sendViaWeb3Forms(data, form, err) {
     "Tyre size": data.tyresize,
     "Tyres needed": data.tyrecount,
     "Availability": data.availability,
+    "Estimated price": data.estRange || "-",
+    "Locking nut removal needed": data.estLocking || "-",
+    "Estimated total": data.estTotal || "-",
     "Notes": data.message || "None"
   };
   fetch("https://api.web3forms.com/submit", {
@@ -310,6 +320,28 @@ function sendToEndpoint(endpoint, data, form, err) {
   }).catch(function () { openMailto(data); succeed(data); });
 }
 
+// Turn the on-screen estimate (if the customer used the tool) into email lines.
+function estimateLines(countStr) {
+  var r = ResQState.range;
+  if (!r) return { range: "Not calculated (customer didn't use the estimate tool)", locking: "Not asked", total: "" };
+  var rangeTxt = "£" + r.low + "–£" + r.high + " per tyre, fitted";
+  var needsRemoval = ResQState.lockingNut === "no";
+  var a = RESQ_RATES.lockingNutRemoval || { low: 0, high: 0 };
+  var lockingTxt = needsRemoval
+    ? "Yes — no key (" + (a.high > 0 ? "£" + a.low + "–£" + a.high : "no extra charge") + ")"
+    : "No";
+  var count = parseInt(String(countStr).replace(/[^0-9]/g, ""), 10);
+  var total = "";
+  if (count && count > 0) {
+    var lo = r.low * count, hi = r.high * count;
+    if (needsRemoval) { lo += a.low; hi += a.high; }
+    var plus = /\+/.test(String(countStr)) ? "+" : "";
+    total = "£" + lo + "–£" + hi + " (" + count + plus + " tyre" + (count > 1 ? "s" : "") +
+            (needsRemoval ? " + locking nut removal" : "") + ")";
+  }
+  return { range: rangeTxt, locking: lockingTxt, total: total };
+}
+
 function buildSummary(d) {
   return (
     "New home tyre fitting enquiry — ResQ Tyres\n\n" +
@@ -321,6 +353,9 @@ function buildSummary(d) {
     "Tyre size: " + d.tyresize + "\n" +
     "Tyres needed: " + d.tyrecount + "\n" +
     "Availability: " + d.availability + "\n" +
+    "Estimated price: " + (d.estRange || "-") + "\n" +
+    "Locking nut removal needed: " + (d.estLocking || "-") + "\n" +
+    "Estimated total: " + (d.estTotal || "-") + "\n" +
     "Notes: " + (d.message || "-") + "\n"
   );
 }
