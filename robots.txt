@@ -1,0 +1,7 @@
+# ResQ Tyres & Recovery — robots.txt
+# 24/7 mobile tyre fitting & recovery, Leeds & West Yorkshire
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.resqtyres.co.uk/sitemap.xml

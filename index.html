@@ -18,11 +18,19 @@
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="assets/logo.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <!-- Manrope is self-hosted (css/fonts.css + /fonts) — no render-blocking Google Fonts request. -->
+  <link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/styles.css">
+  <!-- LCP hero: fetched early so it paints without waiting on the parser. -->
+  <link rel="preload" as="image" href="assets/hero-resq-600.webp"
+        imagesrcset="assets/hero-resq-600.webp 600w, assets/hero-resq-900.webp 900w"
+        imagesizes="(max-width:900px) 92vw, 560px" fetchpriority="high">
+  <!-- Leaflet CSS loaded non-blocking: the map sits well below the fold. -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
+        media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"></noscript>
 
   <script type="application/ld+json">
   {
@@ -58,6 +66,31 @@
     "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "215" }
   }
   </script>
+
+  <!-- ===== Search Console verification =====
+       Paste the content value from Search Console > Add property > URL prefix > HTML tag,
+       then uncomment. Verification survives redeploys because it lives in the repo. -->
+  <!-- <meta name="google-site-verification" content="PASTE_TOKEN_HERE"> -->
+
+  <!-- ===== Google Analytics 4 =====
+       Replace G-XXXXXXXXXX with the Measurement ID from GA4 > Admin > Data streams,
+       then uncomment the block. Until then the site sends no analytics. -->
+  <!--
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+    // Emergency trade = phone-driven. Track taps on the number and WhatsApp as conversions.
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="tel:"], a[href*="wa.me"]');
+      if (!a) return;
+      gtag('event', a.href.indexOf('tel:') === 0 ? 'call_click' : 'whatsapp_click',
+           { link_url: a.href, link_text: (a.textContent || '').trim().slice(0, 60) });
+    }, true);
+  </script>
+  -->
 </head>
 <body id="top">
 
@@ -107,7 +140,7 @@
   <header class="site-header">
     <div class="wrap bar">
       <a href="#top" class="logo" aria-label="ResQ Tyres and Recovery — home">
-        <img src="assets/logo.png" alt="ResQ Tyres &amp; Recovery logo" width="54" height="54">
+        <img src="assets/logo-128.webp" alt="ResQ Tyres &amp; Recovery logo" width="54" height="54" decoding="async">
         <span class="logo-text">ResQ Tyres<small>&amp; RECOVERY · EST 2023</small></span>
       </a>
       <nav class="nav" aria-label="Primary">
@@ -143,7 +176,12 @@
 
           <div class="hero-photo reveal from-right">
             <div class="frame">
-              <img src="assets/hero-resq.jpg" alt="ResQ Tyres &amp; Recovery van on a job — new tyre being fitted to a blue Audi at the roadside" loading="eager" id="heroImg" data-hero>
+              <img src="assets/hero-resq-600.webp"
+                 srcset="assets/hero-resq-600.webp 600w, assets/hero-resq-900.webp 900w"
+                 sizes="(max-width:900px) 92vw, 560px"
+                 width="1000" height="1050"
+                 alt="ResQ Tyres &amp; Recovery van on a job — new tyre being fitted to a blue Audi at the roadside"
+                 loading="eager" fetchpriority="high" decoding="async" id="heroImg" data-hero>
               <div class="tag"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><div><b>Pay on completion</b><span>No upfront payment</span></div></div>
             </div>
             <div class="floatcard"><b><span data-count="5.0" data-dec="1">5.0</span>★</b><span>215+ Google reviews</span></div>
@@ -342,7 +380,11 @@
         </div>
         <div class="services stagger">
           <article class="svc">
-            <div class="ph"><img src="assets/roadside-fit.jpg" alt="Car raised on a jack with the front wheel removed during a ResQ Tyres mobile tyre change in Leeds"></div>
+            <div class="ph"><img src="assets/roadside-fit-420.webp"
+                 srcset="assets/roadside-fit-420.webp 420w, assets/roadside-fit-760.webp 760w"
+                 sizes="(max-width:760px) 92vw, 360px" width="760" height="760"
+                 alt="Car raised on a jack with the front wheel removed during a ResQ Tyres mobile tyre change in Leeds"
+                 loading="lazy" decoding="async"></div>
             <div class="body">
               <span class="tagline"><svg class="icon" aria-hidden="true"><use href="#i-wheel"/></svg> Flat · Blowout · Puncture</span>
               <h3>Mobile tyre fitting</h3>
@@ -350,7 +392,11 @@
             </div>
           </article>
           <article class="svc">
-            <div class="ph"><img src="assets/wheelchange.jpg" alt="ResQ Tyres attending a car at the roadside for an emergency tyre change"></div>
+            <div class="ph"><img src="assets/wheelchange-420.webp"
+                 srcset="assets/wheelchange-420.webp 420w, assets/wheelchange-760.webp 760w"
+                 sizes="(max-width:760px) 92vw, 360px" width="760" height="760"
+                 alt="ResQ Tyres attending a car at the roadside for an emergency tyre change"
+                 loading="lazy" decoding="async"></div>
             <div class="body">
               <span class="tagline"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg> Home · Work · Roadside</span>
               <h3>Emergency call-out</h3>
@@ -358,7 +404,10 @@
             </div>
           </article>
           <article class="svc">
-            <div class="ph"><img src="assets/van.jpg" alt="ResQ Tyres branded recovery van"></div>
+            <div class="ph"><img src="assets/van-420.webp"
+                 srcset="assets/van-420.webp 420w, assets/van-760.webp 760w"
+                 sizes="(max-width:760px) 92vw, 360px" width="760" height="950"
+                 alt="ResQ Tyres branded recovery van" loading="lazy" decoding="async"></div>
             <div class="body">
               <span class="tagline"><svg class="icon" aria-hidden="true"><use href="#i-truck"/></svg> Can't drive it?</span>
               <h3>Vehicle recovery</h3>
@@ -401,7 +450,11 @@
             </ul>
             <a class="cta-primary" href="tel:07438562633"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call 07438 562633</a>
           </div>
-          <div class="van-img reveal from-right"><img src="assets/van.jpg" alt="ResQ Tyres &amp; Recovery branded Mercedes Sprinter van" data-parallax="0.08"></div>
+          <div class="van-img reveal from-right"><img src="assets/van-760.webp"
+                 srcset="assets/van-760.webp 760w, assets/van-1100.webp 1100w"
+                 sizes="(max-width:900px) 100vw, 560px" width="1100" height="1375"
+                 alt="ResQ Tyres &amp; Recovery branded Mercedes Sprinter van"
+                 loading="lazy" decoding="async" data-parallax="0.08"></div>
         </div>
       </div>
     </section>
@@ -424,6 +477,7 @@
     <section class="section soft" id="reviews">
       <div class="wrap">
         <div class="rev-head reveal">
+          <h2 class="sr-only">Customer reviews — rated 5.0 on Google from 215+ verified reviews</h2>
           <span class="eyebrow">Trusted across West Yorkshire</span>
           <span class="stars" style="font-size:22px">★★★★★</span>
           <span class="big"><span data-count="5.0" data-dec="1">5.0</span> on Google</span>
@@ -577,11 +631,11 @@
     <div class="wrap">
       <div class="foot-grid">
         <div>
-          <div class="foot-brand"><img src="assets/logo.png" alt="ResQ Tyres &amp; Recovery logo" width="52" height="52"><b>ResQ Tyres &amp; Recovery</b></div>
+          <div class="foot-brand"><img src="assets/logo-128.webp" alt="ResQ Tyres &amp; Recovery logo" width="52" height="52" loading="lazy" decoding="async"><b>ResQ Tyres &amp; Recovery</b></div>
           <p>24/7 mobile tyre fitting &amp; emergency recovery across Leeds &amp; West Yorkshire. Established 2023.</p>
         </div>
         <div>
-          <h4>Contact</h4>
+          <h3>Contact</h3>
           <ul class="foot-links">
             <li><a href="tel:07438562633"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> 07438 562633</a></li>
             <li><a href="https://wa.me/447438562633" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp us</a></li>
@@ -590,7 +644,7 @@
           </ul>
         </div>
         <div>
-          <h4>Quick links</h4>
+          <h3>Quick links</h3>
           <ul class="foot-links">
             <li><a href="#enquiry"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg> Plan a home fitting</a></li>
             <li><a href="#estimate"><svg class="icon" aria-hidden="true"><use href="#i-wheel"/></svg> Price guide</a></li>

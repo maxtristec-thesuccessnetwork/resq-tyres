@@ -20,7 +20,7 @@
   --red-soft:#fff0f2;
   --amber:#ffab00;
   --green:#1aa64b;
-  --whatsapp:#25d366;
+  --whatsapp:#0f7a6c;   /* darkened from #25d366 — white text now passes WCAG AA (5.2:1) */
   --dark:#0f1318;
   --dark-2:#171c23;
   --radius:14px;
@@ -304,7 +304,7 @@ textarea{resize:vertical}
 .foot-brand{display:flex;align-items:center;gap:12px;margin-bottom:14px}
 .foot-brand img{width:52px;height:52px;border-radius:50%}
 .foot-brand b{color:#fff;font-size:18px}
-.site-footer h4{color:#fff;font-size:14px;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
+.site-footer h3,.site-footer h4{color:#fff;font-size:14px;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
 .site-footer a{color:#aeb6c0;text-decoration:none}
 .site-footer a:hover{color:#fff}
 .foot-links{list-style:none;display:flex;flex-direction:column;gap:9px}
@@ -513,4 +513,19 @@ textarea{resize:vertical}
   .opt{display:flex;align-items:center;justify-content:space-between;text-align:left;padding:14px}
   .opt .price{margin:0}
   .opt.sel::after{left:auto;right:14px;transform:none}
+}
+
+
+/* ===== Utilities ===== */
+/* Visually hidden but readable by screen readers and search engines.
+   Used for the Reviews section heading so the section has a real <h2>
+   without changing the visual design. */
+.sr-only{
+  position:absolute !important;
+  width:1px;height:1px;
+  padding:0;margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
 }
