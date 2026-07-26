@@ -22,6 +22,9 @@
   <link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/fonts.css">
   <link rel="stylesheet" href="/css/styles.css">
+  <link rel="preload" as="image" href="/assets/van-420.webp"
+        imagesrcset="/assets/van-420.webp 420w, /assets/van-760.webp 760w, /assets/van-1100.webp 1100w"
+        imagesizes="(max-width:900px) 92vw, 520px" fetchpriority="high">
 
   <script type="application/ld+json">
   {
@@ -74,7 +77,7 @@
       }
     },
     { "@type": "FAQPage", "mainEntity": [
-        { "@type": "Question", "name": "Do you always recover, or will you try to fix the vehicle first?", "acceptedAnswer": { "@type": "Answer", "text": "We try to fix it first, every time. Roadside repair or a tyre fitted on the spot is quicker and cheaper for you, so that is where we start. Recovery is what we fall back on when the vehicle genuinely cannot be made safe to drive where it is standing." } },
+        { "@type": "Question", "name": "Do you always recover, or will you try to fix the vehicle first?", "acceptedAnswer": { "@type": "Answer", "text": "We try to get you moving first, every time. A new tyre fitted on the spot is quicker and cheaper for you than a recovery, so that is where we start. Recovery is what we fall back on when the vehicle genuinely cannot be made safe to drive where it is standing." } },
         { "@type": "Question", "name": "How quickly can you get to me?", "acceptedAnswer": { "@type": "Answer", "text": "We are typically with a customer in 15 to 30 minutes across our coverage area. Distance, time of day and traffic all play a part, so we will give you a realistic idea when you call rather than an optimistic one. We operate 24 hours a day, 365 days a year." } },
         { "@type": "Question", "name": "Where will you take my vehicle?", "acceptedAnswer": { "@type": "Answer", "text": "Wherever you need it. Home, your usual garage, a dealership, or a tyre supplier for the morning. We do not have a preferred workshop and we will not push you towards one. If you are not sure what is best, mention it on the phone and we will talk through the options." } },
         { "@type": "Question", "name": "Do I need to pay anything before you come out?", "acceptedAnswer": { "@type": "Answer", "text": "No deposit is required to get us on the road to you. You pay on completion, once the job is finished. We will be clear with you on the phone about what is involved before we set off, so nothing about the job comes as a surprise when we arrive." } },
@@ -147,7 +150,7 @@
     </div>
   </header>
 
-  <main>
+  <main class="svc-page">
     <nav class="crumbs" aria-label="Breadcrumb">
       <div class="wrap">
         <a href="/">Home</a>
@@ -164,7 +167,7 @@
           <div class="svc-hero-copy reveal from-left">
             <span class="live-badge"><span class="dotpulse" aria-hidden="true"></span> Open now · 24/7 across West Yorkshire</span>
             <h1>Vehicle Recovery in Leeds and West Yorkshire</h1>
-            <p class="lede">Sometimes a repair at the roadside isn&#x27;t possible. When a tyre is beyond fixing, a wheel is damaged or a vehicle simply won&#x27;t run, ResQ Tyres &amp; Recovery will get it loaded, secured and taken wherever you need it. We cover Leeds, Bradford, Wakefield and the surrounding areas, 24 hours a day, 365 days a year.</p>
+            <p class="lede">Sometimes a fix at the roadside isn&#x27;t possible. When a tyre is beyond fixing, a wheel is damaged or a vehicle simply won&#x27;t run, ResQ Tyres &amp; Recovery will get it loaded, secured and taken wherever you need it. We cover Leeds, Bradford, Wakefield and the surrounding areas, 24 hours a day, 365 days a year.</p>
             <div class="svc-cta">
               <a class="cta-primary" href="tel:07438562633"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call 07438 562633</a>
               <a class="cta-ghost" href="https://wa.me/447438562633" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp us</a>
@@ -217,7 +220,7 @@
       <div class="wrap prose-wrap">
         <h2 class="reveal">We will always try to get you moving first</h2>
         <div class="prose reveal">
-            <p>Recovery is our second option, and we would rather say that plainly than pretend otherwise. Fixing you where you are is faster for you and cheaper for you, so it is the first thing we look at every time. A repairable puncture, a replacement tyre fitted on the spot, a spare fitted and torqued properly — if any of those will get you home safely, that is what we will do.</p>
+            <p>Recovery is our second option, and we would rather say that plainly than pretend otherwise. Fixing you where you are is faster for you and cheaper for you, so it is the first thing we look at every time. A replacement tyre fitted on the spot, or a spare fitted and torqued properly — if any of those will get you home safely, that is what we will do.</p>
             <p>We would rather fit a tyre than load a car that did not need loading. You will be told which way the job is going, and why, before anything is committed to.</p>
         </div>
       </div>
@@ -297,7 +300,7 @@
 
             <details class="faq-item">
               <summary><span>Do you always recover, or will you try to fix the vehicle first?</span><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
-              <div class="faq-a"><p>We try to fix it first, every time. Roadside repair or a tyre fitted on the spot is quicker and cheaper for you, so that is where we start. Recovery is what we fall back on when the vehicle genuinely cannot be made safe to drive where it is standing.</p></div>
+              <div class="faq-a"><p>We try to get you moving first, every time. A new tyre fitted on the spot is quicker and cheaper for you than a recovery, so that is where we start. Recovery is what we fall back on when the vehicle genuinely cannot be made safe to drive where it is standing.</p></div>
             </details>
 
             <details class="faq-item">
@@ -346,12 +349,12 @@
                 <span>Stranded day or night? Typically with you in 15–30 minutes.</span>
               </div>
             </a>
-            <a class="rcard" href="/services/puncture-repair">
-              <div class="rph"><img src="/assets/tyretread-420.webp" srcset="/assets/tyretread-420.webp 420w, /assets/tyretread-760.webp 760w" sizes="(max-width:760px) 92vw, 300px" alt="" loading="lazy" decoding="async"></div>
+            <a class="rcard" href="/services/wheel-balancing">
+              <div class="rph"><img src="/assets/wheelchange-420.webp" srcset="/assets/wheelchange-420.webp 420w, /assets/wheelchange-760.webp 760w" sizes="(max-width:760px) 92vw, 300px" alt="" loading="lazy" decoding="async"></div>
               <div class="rbody">
-                <svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>
-                <b>Puncture repair</b>
-                <span>Repaired safely on site where the tyre allows, replaced where it doesn't.</span>
+                <svg class="icon" aria-hidden="true"><use href="#i-wheel"/></svg>
+                <b>Wheel balancing</b>
+                <span>On-board balancing equipment — standalone, or part of every tyre fit.</span>
               </div>
             </a>
         </div>

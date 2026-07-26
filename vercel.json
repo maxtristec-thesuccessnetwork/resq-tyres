@@ -77,6 +77,16 @@
       "source": "/service",
       "destination": "/services",
       "permanent": true
+    },
+    {
+      "source": "/services/puncture-repair",
+      "destination": "/services/mobile-tyre-fitting",
+      "permanent": true
+    },
+    {
+      "source": "/services/van-commercial-tyres",
+      "destination": "/services/mobile-tyre-fitting",
+      "permanent": true
     }
   ],
   "headers": [

@@ -22,6 +22,9 @@
   <link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/fonts.css">
   <link rel="stylesheet" href="/css/styles.css">
+  <link rel="preload" as="image" href="/assets/hero-resq-600.webp"
+        imagesrcset="/assets/hero-resq-600.webp 600w, /assets/hero-resq-900.webp 900w"
+        imagesizes="(max-width:900px) 92vw, 520px" fetchpriority="high">
 
   <script type="application/ld+json">
   {
@@ -147,7 +150,7 @@
     </div>
   </header>
 
-  <main>
+  <main class="svc-page">
     <nav class="crumbs" aria-label="Breadcrumb">
       <div class="wrap">
         <a href="/">Home</a>
@@ -290,8 +293,8 @@
       <div class="wrap prose-wrap">
         <h2 class="reveal">If it cannot be fixed where you are</h2>
         <div class="prose reveal">
-            <p>Sometimes a roadside repair is not the right answer. The wheel itself may be damaged, there may be more than one tyre gone, or the location may be too exposed to work in safely.</p>
-            <p>In that case we recover the vehicle instead. You are not left choosing between an unsafe repair and a long wait for a second company to be arranged. The same phone call covers both outcomes, and we will tell you honestly which one you are looking at before we start.</p>
+            <p>Sometimes a roadside fix is not the right answer. The wheel itself may be damaged, there may be more than one tyre gone, or the location may be too exposed to work in safely.</p>
+            <p>In that case we recover the vehicle instead. You are not left choosing between an unsafe bodge and a long wait for a second company to be arranged. The same phone call covers both outcomes, and we will tell you honestly which one you are looking at before we start.</p>
         </div>
       </div>
     </section>
@@ -367,20 +370,20 @@
                 <span>New tyres brought to you and fitted on the spot — home, work or roadside.</span>
               </div>
             </a>
-            <a class="rcard" href="/services/puncture-repair">
-              <div class="rph"><img src="/assets/tyretread-420.webp" srcset="/assets/tyretread-420.webp 420w, /assets/tyretread-760.webp 760w" sizes="(max-width:760px) 92vw, 300px" alt="" loading="lazy" decoding="async"></div>
-              <div class="rbody">
-                <svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>
-                <b>Puncture repair</b>
-                <span>Repaired safely on site where the tyre allows, replaced where it doesn't.</span>
-              </div>
-            </a>
             <a class="rcard" href="/services/vehicle-recovery">
               <div class="rph"><img src="/assets/van-420.webp" srcset="/assets/van-420.webp 420w, /assets/van-760.webp 760w, /assets/van-1100.webp 1100w" sizes="(max-width:760px) 92vw, 300px" alt="" loading="lazy" decoding="async"></div>
               <div class="rbody">
                 <svg class="icon" aria-hidden="true"><use href="#i-truck"/></svg>
                 <b>Vehicle recovery</b>
                 <span>If it can't be fixed at the roadside, we'll recover it wherever you need.</span>
+              </div>
+            </a>
+            <a class="rcard" href="/services/wheel-balancing">
+              <div class="rph"><img src="/assets/wheelchange-420.webp" srcset="/assets/wheelchange-420.webp 420w, /assets/wheelchange-760.webp 760w" sizes="(max-width:760px) 92vw, 300px" alt="" loading="lazy" decoding="async"></div>
+              <div class="rbody">
+                <svg class="icon" aria-hidden="true"><use href="#i-wheel"/></svg>
+                <b>Wheel balancing</b>
+                <span>On-board balancing equipment — standalone, or part of every tyre fit.</span>
               </div>
             </a>
         </div>

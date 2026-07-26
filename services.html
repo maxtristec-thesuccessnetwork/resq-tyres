@@ -22,6 +22,9 @@
   <link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/fonts.css">
   <link rel="stylesheet" href="/css/styles.css">
+  <link rel="preload" as="image" href="/assets/hero-resq-600.webp"
+        imagesrcset="/assets/hero-resq-600.webp 600w, /assets/hero-resq-900.webp 900w"
+        imagesizes="(max-width:900px) 92vw, 520px" fetchpriority="high">
 
   <script type="application/ld+json">
   {
@@ -59,11 +62,9 @@
     { "@type": "ItemList", "name": "ResQ Tyres & Recovery services", "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Mobile tyre fitting", "url": "https://www.resqtyres.co.uk/services/mobile-tyre-fitting" },
         { "@type": "ListItem", "position": 2, "name": "24/7 emergency call-out", "url": "https://www.resqtyres.co.uk/services/emergency-tyre-callout" },
-        { "@type": "ListItem", "position": 3, "name": "Puncture repair", "url": "https://www.resqtyres.co.uk/services/puncture-repair" },
-        { "@type": "ListItem", "position": 4, "name": "Vehicle recovery", "url": "https://www.resqtyres.co.uk/services/vehicle-recovery" },
-        { "@type": "ListItem", "position": 5, "name": "Wheel balancing", "url": "https://www.resqtyres.co.uk/services/wheel-balancing" },
-        { "@type": "ListItem", "position": 6, "name": "Locking wheel nut removal", "url": "https://www.resqtyres.co.uk/services/locking-wheel-nut-removal" },
-        { "@type": "ListItem", "position": 7, "name": "Van & commercial tyres", "url": "https://www.resqtyres.co.uk/services/van-commercial-tyres" }
+        { "@type": "ListItem", "position": 3, "name": "Vehicle recovery", "url": "https://www.resqtyres.co.uk/services/vehicle-recovery" },
+        { "@type": "ListItem", "position": 4, "name": "Wheel balancing", "url": "https://www.resqtyres.co.uk/services/wheel-balancing" },
+        { "@type": "ListItem", "position": 5, "name": "Locking wheel nut removal", "url": "https://www.resqtyres.co.uk/services/locking-wheel-nut-removal" }
       ] },
     { "@type": "BreadcrumbList", "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.resqtyres.co.uk/" },
@@ -131,7 +132,7 @@
     </div>
   </header>
 
-  <main>
+  <main class="svc-page">
     <nav class="crumbs" aria-label="Breadcrumb">
       <div class="wrap">
         <a href="/">Home</a>
@@ -199,15 +200,6 @@
                 <em>Read more <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></em>
               </div>
             </a>
-            <a class="rcard" href="/services/puncture-repair">
-              <div class="rph"><img src="/assets/tyretread-420.webp" srcset="/assets/tyretread-420.webp 420w, /assets/tyretread-760.webp 760w" sizes="(max-width:760px) 92vw, 340px" alt="" loading="lazy" decoding="async"></div>
-              <div class="rbody">
-                <svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg>
-                <b>Puncture repair</b>
-                <span>Repaired safely on site where the tyre allows, replaced where it doesn't.</span>
-                <em>Read more <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></em>
-              </div>
-            </a>
             <a class="rcard" href="/services/vehicle-recovery">
               <div class="rph"><img src="/assets/van-420.webp" srcset="/assets/van-420.webp 420w, /assets/van-760.webp 760w, /assets/van-1100.webp 1100w" sizes="(max-width:760px) 92vw, 340px" alt="" loading="lazy" decoding="async"></div>
               <div class="rbody">
@@ -232,15 +224,6 @@
                 <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
                 <b>Locking wheel nut removal</b>
                 <span>Lost, broken or rounded-off key? A missing key doesn't stop the job.</span>
-                <em>Read more <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></em>
-              </div>
-            </a>
-            <a class="rcard" href="/services/van-commercial-tyres">
-              <div class="rph"><img src="/assets/van-420.webp" srcset="/assets/van-420.webp 420w, /assets/van-760.webp 760w, /assets/van-1100.webp 1100w" sizes="(max-width:760px) 92vw, 340px" alt="" loading="lazy" decoding="async"></div>
-              <div class="rbody">
-                <svg class="icon" aria-hidden="true"><use href="#i-truck"/></svg>
-                <b>Van &amp; commercial tyres</b>
-                <span>Vans, fleets, couriers and taxis — fitted out of hours to kill downtime.</span>
                 <em>Read more <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></em>
               </div>
             </a>
