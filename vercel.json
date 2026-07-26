@@ -87,6 +87,16 @@
       "source": "/services/van-commercial-tyres",
       "destination": "/services/mobile-tyre-fitting",
       "permanent": true
+    },
+    {
+      "source": "/services/vehicle-recovery",
+      "destination": "/services/emergency-tyre-callout",
+      "permanent": true
+    },
+    {
+      "source": "/services/wheel-balancing",
+      "destination": "/services/mobile-tyre-fitting",
+      "permanent": true
     }
   ],
   "headers": [
