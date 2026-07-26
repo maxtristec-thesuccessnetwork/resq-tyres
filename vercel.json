@@ -3,51 +3,129 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/contact-us", "destination": "/#enquiry", "permanent": true },
-    { "source": "/contact", "destination": "/#enquiry", "permanent": true },
-    { "source": "/about", "destination": "/#about", "permanent": true },
-    { "source": "/about-us", "destination": "/#about", "permanent": true },
-    { "source": "/services", "destination": "/#services", "permanent": true },
-    { "source": "/our-services", "destination": "/#services", "permanent": true },
-    { "source": "/book-online", "destination": "/#enquiry", "permanent": true },
-    { "source": "/booking", "destination": "/#enquiry", "permanent": true },
-    { "source": "/bookings", "destination": "/#enquiry", "permanent": true },
-    { "source": "/areas-we-cover", "destination": "/#areas", "permanent": true },
-    { "source": "/areas", "destination": "/#areas", "permanent": true },
-    { "source": "/mobile-tyre-fitting", "destination": "/#services", "permanent": true },
-    { "source": "/emergency-call-out", "destination": "/#services", "permanent": true },
-    { "source": "/prices", "destination": "/#estimate", "permanent": true },
-    { "source": "/pricing", "destination": "/#estimate", "permanent": true },
-    { "source": "/blog", "destination": "/", "permanent": true },
-    { "source": "/blog/:path*", "destination": "/", "permanent": true },
-    { "source": "/post/:path*", "destination": "/", "permanent": true }
+    {
+      "source": "/contact-us",
+      "destination": "/#enquiry",
+      "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "/#enquiry",
+      "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/about-us",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/book-online",
+      "destination": "/#enquiry",
+      "permanent": true
+    },
+    {
+      "source": "/booking",
+      "destination": "/#enquiry",
+      "permanent": true
+    },
+    {
+      "source": "/bookings",
+      "destination": "/#enquiry",
+      "permanent": true
+    },
+    {
+      "source": "/areas-we-cover",
+      "destination": "/#areas",
+      "permanent": true
+    },
+    {
+      "source": "/prices",
+      "destination": "/#estimate",
+      "permanent": true
+    },
+    {
+      "source": "/pricing",
+      "destination": "/#estimate",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/post/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/our-services",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/service",
+      "destination": "/services",
+      "permanent": true
+    }
   ],
   "headers": [
     {
       "source": "/assets/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/fonts/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" },
-        { "key": "Access-Control-Allow-Origin", "value": "*" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
       ]
     },
     {
       "source": "/(.*)\\.(css|js)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=604800, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, must-revalidate"
+        }
       ]
     },
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
       ]
     }
   ]
