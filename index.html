@@ -69,14 +69,29 @@
   </script>
 
   <!-- ===== Search Console verification =====
-       URL-prefix property https://www.resqtyres.co.uk/ verified by HTML tag.
-       Do not remove - verification is re-checked periodically. -->
-  <meta name="google-site-verification" content="AzR8QPG5N2F7wxsMGfz7zcRObHtjaszAAsQgL5Y2scY">
+       Paste the content value from Search Console > Add property > URL prefix > HTML tag,
+       then uncomment. Verification survives redeploys because it lives in the repo. -->
+  <!-- <meta name="google-site-verification" content="PASTE_TOKEN_HERE"> -->
 
   <!-- ===== Google Analytics 4 =====
-       Measurement ID and event logic live in /js/analytics.js - change it there, once. -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GVBR7Z973Z"></script>
-  <script src="/js/analytics.js" defer></script>
+       Replace G-XXXXXXXXXX with the Measurement ID from GA4 > Admin > Data streams,
+       then uncomment the block. Until then the site sends no analytics. -->
+  <!--
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+    // Emergency trade = phone-driven. Track taps on the number and WhatsApp as conversions.
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="tel:"], a[href*="wa.me"]');
+      if (!a) return;
+      gtag('event', a.href.indexOf('tel:') === 0 ? 'call_click' : 'whatsapp_click',
+           { link_url: a.href, link_text: (a.textContent || '').trim().slice(0, 60) });
+    }, true);
+  </script>
+  -->
 </head>
 <body id="top">
 
@@ -132,7 +147,7 @@
       <nav class="nav" aria-label="Primary">
         <a href="#help">Emergency or planned</a>
         <a href="#estimate">Price guide</a>
-        <a href="/services">Services</a>
+        <a href="#services">Services</a>
         <a href="#areas">Areas</a>
         <a href="#enquiry">Home fitting</a>
       </nav>
@@ -215,7 +230,6 @@
             <div class="path-top"><span class="path-badge"><span class="dotpulse" aria-hidden="true"></span> 24/7 · Any hour</span><svg class="path-ico" aria-hidden="true"><use href="#i-phone"/></svg></div>
             <h3>Emergency call-out</h3>
             <p>Flat, blowout or breakdown and need someone now? Don't fill in a form — call or WhatsApp and we're on our way, typically within 15–30 minutes.</p>
-              <a class="svc-more" href="/services/emergency-tyre-callout">More on emergency call-out <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             <ul class="path-list">
               <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Fastest response — straight to the phone</li>
               <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Roadside, home or work, day or night</li>
@@ -228,7 +242,6 @@
           </article>
           <article class="path path-planned">
             <div class="path-top"><span class="path-badge alt"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg> Mon–Fri · Booked in</span><svg class="path-ico" aria-hidden="true"><use href="#i-home"/></svg></div>
-        <p class="all-services"><a href="/services">See all our services <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
             <h3>Planned home tyre fitting</h3>
             <p>Not urgent? We'll fit your tyres at home or work at a time that suits you — <b>the same price you'd pay in the shop</b>, without the trip. Send your details and we'll confirm by phone.</p>
             <ul class="path-list">
@@ -377,7 +390,6 @@
               <span class="tagline"><svg class="icon" aria-hidden="true"><use href="#i-wheel"/></svg> Flat · Blowout · Puncture</span>
               <h3>Mobile tyre fitting</h3>
               <p>New tyres brought to you and fitted on-site in minutes — home, work or roadside. No garage visit needed.</p>
-              <a class="svc-more" href="/services/mobile-tyre-fitting">More on mobile tyre fitting <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             </div>
           </article>
           <article class="svc">

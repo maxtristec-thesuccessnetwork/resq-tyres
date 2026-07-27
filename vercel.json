@@ -70,32 +70,22 @@
     },
     {
       "source": "/our-services",
-      "destination": "/services",
+      "destination": "/#services",
       "permanent": true
     },
     {
       "source": "/service",
-      "destination": "/services",
+      "destination": "/#services",
       "permanent": true
     },
     {
-      "source": "/services/puncture-repair",
-      "destination": "/services/mobile-tyre-fitting",
+      "source": "/services",
+      "destination": "/#services",
       "permanent": true
     },
     {
-      "source": "/services/van-commercial-tyres",
-      "destination": "/services/mobile-tyre-fitting",
-      "permanent": true
-    },
-    {
-      "source": "/services/vehicle-recovery",
-      "destination": "/services/emergency-tyre-callout",
-      "permanent": true
-    },
-    {
-      "source": "/services/wheel-balancing",
-      "destination": "/services/mobile-tyre-fitting",
+      "source": "/services/:path*",
+      "destination": "/#services",
       "permanent": true
     }
   ],
@@ -127,7 +117,7 @@
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=604800, must-revalidate"
+          "value": "public, max-age=0, must-revalidate"
         }
       ]
     },
