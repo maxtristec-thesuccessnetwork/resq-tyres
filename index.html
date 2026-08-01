@@ -69,29 +69,15 @@
   </script>
 
   <!-- ===== Search Console verification =====
-       Paste the content value from Search Console > Add property > URL prefix > HTML tag,
-       then uncomment. Verification survives redeploys because it lives in the repo. -->
-  <!-- <meta name="google-site-verification" content="PASTE_TOKEN_HERE"> -->
+       URL-prefix property https://www.resqtyres.co.uk/ verified by HTML tag.
+       Do not remove - verification is re-checked periodically. -->
+  <meta name="google-site-verification" content="AzR8QPG5N2F7wxsMGfz7zcRObHtjaszAAsQgL5Y2scY">
 
   <!-- ===== Google Analytics 4 =====
-       Replace G-XXXXXXXXXX with the Measurement ID from GA4 > Admin > Data streams,
-       then uncomment the block. Until then the site sends no analytics. -->
-  <!--
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-    // Emergency trade = phone-driven. Track taps on the number and WhatsApp as conversions.
-    document.addEventListener('click', function (e) {
-      var a = e.target.closest && e.target.closest('a[href^="tel:"], a[href*="wa.me"]');
-      if (!a) return;
-      gtag('event', a.href.indexOf('tel:') === 0 ? 'call_click' : 'whatsapp_click',
-           { link_url: a.href, link_text: (a.textContent || '').trim().slice(0, 60) });
-    }, true);
-  </script>
-  -->
+       Measurement ID lives in js/analytics.js only — never paste it here.
+       analytics.js also fires call_click and whatsapp_click on tel: and wa.me taps. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GVBR7Z973Z"></script>
+  <script src="/js/analytics.js" defer></script>
 </head>
 <body id="top">
 
