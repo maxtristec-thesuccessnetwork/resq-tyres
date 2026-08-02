@@ -79,6 +79,21 @@
       "permanent": true
     },
     {
+      "source": "/gallery",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/gallery/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/service-page/:path*",
+      "destination": "/#services",
+      "permanent": true
+    },
+    {
       "source": "/services",
       "destination": "/#services",
       "permanent": true
