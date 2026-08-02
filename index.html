@@ -37,12 +37,16 @@
   {
     "@context": "https://schema.org",
     "@type": "AutoRepair",
+    "@id": "https://www.resqtyres.co.uk/#business",
     "name": "ResQ Tyres & Recovery",
     "image": "https://www.resqtyres.co.uk/assets/van.jpg",
+    "logo": "https://www.resqtyres.co.uk/assets/logo-128.webp",
     "url": "https://www.resqtyres.co.uk/",
     "telephone": "+447438562633",
     "email": "resqtyresrecovery@gmail.com",
     "priceRange": "££",
+    "currenciesAccepted": "GBP",
+    "paymentAccepted": "Cash, Card",
     "foundingDate": "2023",
     "description": "24/7 emergency mobile tyre fitting and vehicle recovery across Leeds and West Yorkshire. Typically arriving within 15–30 minutes.",
     "address": {
@@ -53,18 +57,96 @@
       "addressCountry": "GB"
     },
     "areaServed": [
-      { "@type": "City", "name": "Leeds" },
-      { "@type": "City", "name": "Bradford" },
-      { "@type": "City", "name": "Wakefield" },
-      { "@type": "City", "name": "Dewsbury" },
-      { "@type": "AdministrativeArea", "name": "West Yorkshire" }
+      {
+        "@type": "City",
+        "name": "Leeds"
+      },
+      {
+        "@type": "City",
+        "name": "Bradford"
+      },
+      {
+        "@type": "City",
+        "name": "Wakefield"
+      },
+      {
+        "@type": "City",
+        "name": "Dewsbury"
+      },
+      {
+        "@type": "City",
+        "name": "Pudsey"
+      },
+      {
+        "@type": "City",
+        "name": "Morley"
+      },
+      {
+        "@type": "City",
+        "name": "Castleford"
+      },
+      {
+        "@type": "City",
+        "name": "Garforth"
+      },
+      {
+        "@type": "City",
+        "name": "Pontefract"
+      },
+      {
+        "@type": "AdministrativeArea",
+        "name": "West Yorkshire"
+      }
     ],
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-      "opens": "00:00", "closes": "23:59"
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "00:00",
+      "closes": "23:59"
     },
-    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "215" }
+    "sameAs": [
+      "https://www.google.com/maps?cid=11412519892778241080",
+      "https://www.facebook.com/people/ResQ-Tyres-Recovery/61551057443516/",
+      "https://www.tiktok.com/@resqtyres"
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Mobile tyre and recovery services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "24/7 emergency tyre callout & recovery",
+            "serviceType": "Emergency mobile tyre fitting and vehicle recovery",
+            "description": "Emergency mobile tyre fitting and vehicle recovery at the roadside, at home or at work, any hour of the day or night.",
+            "provider": {
+              "@id": "https://www.resqtyres.co.uk/#business"
+            }
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Planned tyre replacement at home",
+            "serviceType": "Mobile tyre fitting",
+            "description": "Booked mobile tyre replacement at your home or workplace, at the same price as in-store.",
+            "provider": {
+              "@id": "https://www.resqtyres.co.uk/#business"
+            }
+          }
+        }
+      ]
+    }
   }
   </script>
 
