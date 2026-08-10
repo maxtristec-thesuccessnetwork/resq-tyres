@@ -24,6 +24,7 @@ Derivatives are re-cut from the graded master and encoded to land at or
 under the byte size they already had, so nothing regresses on LCP.
 """
 
+import glob
 import os
 import sys
 import numpy as np
@@ -44,6 +45,11 @@ HIGH_TINT = np.array([1.012, 1.000, 0.984])     # a touch of warmth up top
 FINAL_SAT = 0.965                 # slight restraint, shared
 
 LUMA = np.array([0.2126, 0.7152, 0.0722])
+
+# /assets is served `immutable, max-age=1 year`, so a re-grade written under the
+# same filename would never reach anyone who has already loaded the site. Bump
+# this when the grade changes, and update src/srcset in index.html to match.
+VERSION = "-v2"
 
 # master -> (derivative widths, jpeg max bytes, webp max bytes per width)
 # fitting.* and tyretread.* are not referenced anywhere in index.html or the
@@ -188,15 +194,18 @@ def main():
 
         stem = master.rsplit(".", 1)[0]
         for w in widths:
-            dpath = os.path.join(ASSETS, f"{stem}-{w}.webp")
-            if not os.path.exists(dpath):
+            # read whatever version is on disk, write the current one
+            existing = sorted(glob.glob(os.path.join(ASSETS, f"{stem}-{w}*.webp")))
+            if not existing:
                 continue
-            dbudget = os.path.getsize(dpath)
-            dims = Image.open(dpath).size          # keep exactly what the HTML expects
+            src = existing[-1]
+            dpath = os.path.join(ASSETS, f"{stem}-{w}{VERSION}.webp")
+            dbudget = os.path.getsize(src)
+            dims = Image.open(src).size             # keep exactly what the HTML expects
             resized = graded.resize(dims, Image.LANCZOS)
             q, size = encode_under(resized, dpath, "WEBP", dbudget)
             report.append(
-                f"  {stem}-{w}.webp {dims[0]}x{dims[1]} q{q} {size//1024}KB/{dbudget//1024}KB"
+                f"  {stem}-{w}{VERSION}.webp {dims[0]}x{dims[1]} q{q} {size//1024}KB/{dbudget//1024}KB"
                 + ("  OVER" if size > dbudget else "")
             )
 
