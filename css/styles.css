@@ -23,6 +23,11 @@
   --whatsapp:#0f7a6c;   /* darkened from #25d366 — white text now passes WCAG AA (5.2:1) */
   --dark:#0f1318;
   --dark-2:#171c23;
+  /* Radius scale — three tiers, no one-offs.
+     --radius-lg  large surfaces: photos, cards, panels
+     --radius     controls and inner panels: buttons, notes, badges
+     --radius-sm  form fields and anything that sits flush against one */
+  --radius-sm:10px;
   --radius:14px;
   --radius-lg:20px;
   --maxw:1880px;
@@ -38,6 +43,10 @@
 html{scroll-behavior:smooth}
 body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
 img,svg{max-width:100%;display:block}
+/* The browser's own [hidden]{display:none} loses to any class that sets
+   display (.addon-note and .pc-result are both flex), which left empty
+   bordered boxes on screen. Make hidden mean hidden. */
+[hidden]{display:none!important}
 a{color:inherit}
 h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 
@@ -140,7 +149,9 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 .live-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:livePulse 1.8s infinite}
 .hero h1{font-size:clamp(34px,5.2vw,58px);font-weight:800;margin-bottom:8px}
 .hero h1 .rot{color:var(--red);display:inline-block;min-height:1.1em}
-.hero .rotator{font-size:clamp(20px,3vw,28px);font-weight:800;color:var(--red);height:1.3em;margin-bottom:14px}
+/* Three separate beats: headline, rotating line, paragraph. The fixed height
+   holds the line box steady while the text swaps, so nothing shifts. */
+.hero .rotator{font-size:clamp(20px,3vw,28px);font-weight:800;color:var(--red);line-height:1.4;height:1.5em;margin-top:20px;margin-bottom:24px}
 .hero-sub{color:var(--ink-2);font-size:18px;max-width:520px;margin-bottom:26px}
 .cta-row{display:flex;gap:12px;flex-wrap:wrap}
 .cta-primary{background:var(--red);color:#fff;font-size:19px;font-weight:800;padding:16px 26px;border-radius:var(--radius);text-decoration:none;display:inline-flex;gap:10px;align-items:center;box-shadow:var(--shadow-red);transition:transform .15s}
@@ -156,12 +167,15 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 .hero-photo{position:relative}
 .hero-photo .frame{position:relative;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line)}
 .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center 40%;aspect-ratio:4/4.2}
-.hero-photo .tag{position:absolute;left:14px;bottom:14px;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);border-radius:12px;padding:10px 13px;box-shadow:var(--shadow-sm)}
+.hero-photo .tag{position:absolute;left:14px;bottom:14px;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);border-radius:var(--radius);padding:10px 13px;box-shadow:var(--shadow-sm)}
 .hero-photo .tag .icon{width:20px;height:20px;stroke:var(--red)}
 .hero-photo .tag b{display:block;font-size:14px}
 .hero-photo .tag span{color:var(--muted);font-size:12px}
-.hero-photo .floatcard{position:absolute;top:16px;right:-6px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;box-shadow:var(--shadow);text-align:center}
-.hero-photo .floatcard b{font-size:20px;color:var(--red);display:block;line-height:1}
+.hero-photo .floatcard{position:absolute;top:16px;right:-6px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:10px 14px;box-shadow:var(--shadow);text-align:center}
+.hero-photo .floatcard b{font-size:22px;color:var(--red);display:block;line-height:1}
+/* same trap as the stats strip: .floatcard span is the caption rule */
+.hero-photo .floatcard b span{font-size:inherit;color:inherit;font-weight:inherit}
+.hero-photo .floatcard b .star{font-size:13px;color:var(--amber);margin-left:2px;vertical-align:2px}
 .hero-photo .floatcard span{font-size:11px;color:var(--muted);font-weight:600}
 
 /* Hero stats strip */
@@ -169,27 +183,43 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 .stats .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:8px;padding:clamp(16px,2.4vw,24px)}
 .stat{display:flex;align-items:center;gap:12px;justify-content:center;padding:6px 4px}
 .stat .icon{width:24px;height:24px;stroke:var(--red)}
-.stat b{font-size:18px;display:block;line-height:1.1}
+/* One figure size across all four stats; the unit or denominator that
+   follows it is the supporting label, not a second figure.
+   .stat span below is the caption rule — it was also catching the count-up
+   <span> holding "5.0", which is why the rating read smaller than its own
+   "/ 5". Spans inside the figure inherit the figure. */
+.stat b{font-size:20px;display:block;line-height:1.1}
+.stat b span{font-size:inherit;color:inherit;font-weight:inherit}
+.stat b .of{font-size:12px;font-weight:700;color:#aeb6c0;letter-spacing:.02em}
 .stat span{color:#aeb6c0;font-size:12px}
 
 /* ===== Section scaffolding ===== */
 .section{padding:var(--section-y) 0}
 .section.soft{background:var(--bg-soft)}
 .section-head{max-width:640px;margin:0 auto 38px;text-align:center}
+/* The h2 is inline-block so the red underline can be measured against the
+   text rather than the column. That means an inline eyebrow will sit on the
+   same line as any heading short enough to fit beside it ("How it works").
+   Making the eyebrow a block keeps it above the heading on every section. */
+.section-head .eyebrow{display:block;margin-bottom:6px}
 .section-head h2{font-size:clamp(26px,3.6vw,36px);font-weight:800;margin:8px 0 10px}
 .section-head p{color:var(--muted);font-size:17px}
 
 /* ===== Estimate tool ===== */
 .estimate .card{max-width:800px;margin:0 auto}
 .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:28px;box-shadow:var(--shadow-sm)}
-.estimate h2,.enquiry h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:10px}
-.estimate h2 .icon,.enquiry h2 .icon{width:24px;height:24px;stroke:var(--red)}
-.hint{color:var(--muted);font-size:14px;margin-bottom:20px}
+/* Scoped to the price-guide card. It used to catch .enquiry h2 as well, and
+   display:flex overrode the centred .section-head h2 — which is why "Plan a
+   home tyre fitting" was the one left-aligned section heading on the page.
+   The enquiry heading now inherits .section-head h2 like every other one. */
+.estimate .card h2{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:center;justify-content:center;gap:10px}
+.estimate .card h2 .icon{width:24px;height:24px;stroke:var(--red)}
+.hint{color:var(--muted);font-size:14px;margin-bottom:20px;text-align:center}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
 .field{margin-bottom:14px}
 .field label{display:block;font-size:11px;color:var(--ink-2);margin-bottom:7px;text-transform:uppercase;letter-spacing:.6px;font-weight:700}
-select,input,textarea{width:100%;background:#fff;border:1px solid var(--line-2);color:var(--ink);padding:13px;border-radius:10px;font-size:16px;font-family:inherit;appearance:none;transition:.15s}
+select,input,textarea{width:100%;background:#fff;border:1px solid var(--line-2);color:var(--ink);padding:13px;border-radius:var(--radius-sm);font-size:16px;font-family:inherit;appearance:none;transition:.15s}
 select:focus,input:focus,textarea:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(228,0,43,.14)}
 textarea{resize:vertical}
 .select-wrap{position:relative}
@@ -199,7 +229,7 @@ textarea{resize:vertical}
 .regplate input{background:#ffd400;border:none;color:#111;font-weight:800;font-size:18px;letter-spacing:2px;text-transform:uppercase;border-radius:0}
 .regplate input:focus{box-shadow:none}
 .regplate input::placeholder{color:#8a7700}
-.btn-go{width:100%;background:var(--red);color:#fff;border:none;font-weight:800;padding:15px;border-radius:11px;font-size:16px;cursor:pointer;margin-top:4px;display:inline-flex;align-items:center;justify-content:center;gap:9px;transition:.15s}
+.btn-go{width:100%;background:var(--red);color:#fff;border:none;font-weight:800;padding:15px;border-radius:var(--radius);font-size:16px;cursor:pointer;margin-top:4px;display:inline-flex;align-items:center;justify-content:center;gap:9px;transition:.15s}
 .btn-go .icon{width:18px;height:18px}
 .btn-go:hover{background:var(--red-dark)}
 .form-error{color:var(--red-dark);font-size:14px;margin-top:12px}
@@ -207,7 +237,7 @@ textarea{resize:vertical}
 .results-head{font-size:14px;color:var(--muted);margin-bottom:14px}
 .results-head b{color:var(--ink)}
 .options{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:13px}
-.opt{position:relative;background:#fff;border:1px solid var(--line-2);border-radius:12px;padding:18px 16px;text-align:center;cursor:pointer;transition:.15s}
+.opt{position:relative;background:#fff;border:1px solid var(--line-2);border-radius:var(--radius);padding:18px 16px;text-align:center;cursor:pointer;transition:.15s}
 .opt:hover{border-color:var(--red);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
 .opt.sel{border-color:var(--red);box-shadow:0 0 0 2px rgba(228,0,43,.35)}
 .opt.sel::after{content:"Popular";position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;font-size:10px;font-weight:800;letter-spacing:.5px;padding:3px 9px;border-radius:999px;text-transform:uppercase}
@@ -215,7 +245,7 @@ textarea{resize:vertical}
 .opt .price{font-size:27px;font-weight:800;margin:6px 0;color:var(--ink)}
 .opt .price small{font-size:13px;color:var(--muted);font-weight:600}
 .opt .note{font-size:12px;color:var(--muted)}
-.btn-approve{width:100%;margin-top:18px;background:var(--green);color:#fff;font-weight:800;border:none;padding:16px;border-radius:12px;font-size:17px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:9px;transition:.15s}
+.btn-approve{width:100%;margin-top:18px;background:var(--green);color:#fff;font-weight:800;border:none;padding:16px;border-radius:var(--radius);font-size:17px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:9px;transition:.15s}
 .btn-approve .icon{width:19px;height:19px}
 .btn-approve:hover{filter:brightness(1.05)}
 
@@ -234,8 +264,8 @@ textarea{resize:vertical}
 
 /* ===== How it works ===== */
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:clamp(14px,1.8vw,20px)}
-.step{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px;box-shadow:var(--shadow-sm)}
-.step .n{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:var(--red);color:#fff;font-weight:800;font-size:18px;margin-bottom:14px;box-shadow:var(--shadow-red)}
+.step{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px 22px;box-shadow:var(--shadow-sm)}
+.step .n{display:grid;place-items:center;width:42px;height:42px;border-radius:var(--radius);background:var(--red);color:#fff;font-weight:800;font-size:18px;margin-bottom:14px;box-shadow:var(--shadow-red)}
 .step b{font-size:17px;display:block;margin-bottom:4px}
 .step p{color:var(--muted)}
 .step:not(:last-child)::after{content:"";position:absolute;top:46px;right:-12px;width:0;height:2px;background:var(--red);opacity:.5;transition:width .55s ease .45s}
@@ -251,25 +281,25 @@ textarea{resize:vertical}
 .van-feats{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:26px}
 .van-feats li{display:flex;align-items:center;gap:11px;color:#e7ebf0;font-weight:600}
 .van-feats .icon{width:20px;height:20px;stroke:var(--red)}
-.van-img{position:relative;min-height:340px}
+.van-img{position:relative;min-height:340px;border-radius:var(--radius-lg);overflow:hidden}
 .van-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 
 /* ===== Offer banner ===== */
 .offer{background:linear-gradient(120deg,var(--red),var(--red-dark));color:#fff}
 .offer .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:30px 20px;flex-wrap:wrap}
 .offer .ot{display:flex;align-items:center;gap:18px}
-.offer .badge30{background:#fff;color:var(--red);font-weight:800;font-size:26px;border-radius:14px;padding:12px 16px;line-height:1;text-align:center}
+.offer .badge30{background:#fff;color:var(--red);font-weight:800;font-size:26px;border-radius:var(--radius);padding:12px 16px;line-height:1;text-align:center}
 .offer .badge30 small{display:block;font-size:11px;letter-spacing:1px;color:var(--ink-2)}
 .offer h3{font-size:24px;font-weight:800}
 .offer p{color:#ffe2e7;font-size:15px}
-.offer .btn-book{background:#fff;color:var(--red);font-weight:800;padding:15px 24px;border-radius:12px;text-decoration:none;display:inline-flex;align-items:center;gap:9px;white-space:nowrap;transition:.15s}
+.offer .btn-book{background:#fff;color:var(--red);font-weight:800;padding:15px 24px;border-radius:var(--radius);text-decoration:none;display:inline-flex;align-items:center;gap:9px;white-space:nowrap;transition:.15s}
 .offer .btn-book:hover{transform:translateY(-2px)}
 
 /* ===== Reviews ===== */
 .rev-head{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:34px}
 .rev-head .big{font-size:40px;font-weight:800}
 .reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(16px,2vw,24px)}
-.review{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm)}
+.review{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-sm)}
 .review .stars{font-size:16px}
 .review p{font-size:15px;color:var(--ink-2);margin:12px 0}
 .review .who{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px;font-weight:700}
@@ -293,7 +323,7 @@ textarea{resize:vertical}
 
 /* ===== Enquiry / success ===== */
 .enquiry .card{max-width:800px;margin:0 auto}
-.success{max-width:800px;margin:18px auto 0;background:#eafaf0;border:1px solid #b6e6c7;border-radius:16px;padding:26px;text-align:center}
+.success{max-width:800px;margin:18px auto 0;background:#eafaf0;border:1px solid #b6e6c7;border-radius:var(--radius-lg);padding:26px;text-align:center}
 .success h3{margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:9px;color:#0f7a3d}
 .success h3 .icon{width:22px;height:22px;stroke:var(--green)}
 .success a{color:var(--red);font-weight:700}
@@ -315,7 +345,7 @@ textarea{resize:vertical}
 
 /* Sticky mobile bar */
 .sticky-bar{position:fixed;left:12px;right:12px;bottom:12px;z-index:60;display:none;gap:10px}
-.sticky-bar a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:800;font-size:16px;padding:15px;border-radius:13px;text-decoration:none;box-shadow:var(--shadow)}
+.sticky-bar a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:800;font-size:16px;padding:15px;min-height:50px;border-radius:var(--radius);text-decoration:none;box-shadow:var(--shadow)}
 .sticky-bar .s-call{background:var(--red);color:#fff}
 .sticky-bar .s-wa{background:var(--whatsapp);color:#fff}
 .sticky-bar .icon{width:19px;height:19px}
@@ -327,7 +357,7 @@ textarea{resize:vertical}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
 /* shared search-button style (used by postcode checker) */
-.btn-find{background:var(--ink);color:#fff;border:none;font-weight:800;padding:0 20px;border-radius:10px;font-size:15px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:9px;white-space:nowrap;transition:.15s}
+.btn-find{background:var(--ink);color:#fff;border:none;font-weight:800;padding:0 20px;border-radius:var(--radius-sm);font-size:15px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:9px;white-space:nowrap;transition:.15s}
 .btn-find .icon{width:17px;height:17px;stroke:#fff}
 .btn-find:hover{background:#000}
 
@@ -354,29 +384,29 @@ textarea{resize:vertical}
 .cta-secondary.solid:hover{background:#000;border-color:#000;color:#fff}
 
 /* ===== Locking wheel-nut question ===== */
-.lock-q{border:1px solid var(--line-2);border-radius:12px;padding:14px 16px 4px;margin:2px 0 18px}
+.lock-q{border:1px solid var(--line-2);border-radius:var(--radius);padding:14px 16px 4px;margin:2px 0 18px}
 .lock-q legend{font-size:11px;color:var(--ink-2);text-transform:uppercase;letter-spacing:.6px;font-weight:700;padding:0 6px}
 .lock-hint{display:flex;align-items:flex-start;gap:8px;color:var(--muted);font-size:12.5px;margin:10px 0 12px}
 .lock-hint .icon{width:15px;height:15px;stroke:var(--red);margin-top:1px;flex:none}
 
 /* ===== Price range output ===== */
-.range-box{background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;border-radius:14px;padding:22px 20px;text-align:center;box-shadow:var(--shadow-red)}
+.range-box{background:linear-gradient(135deg,var(--red),var(--red-dark));color:#fff;border-radius:var(--radius);padding:22px 20px;text-align:center;box-shadow:var(--shadow-red)}
 .range-num{font-size:clamp(30px,6vw,42px);font-weight:800;line-height:1;display:inline-flex;align-items:baseline;gap:2px;flex-wrap:wrap;justify-content:center}
 .range-num .dash{margin:0 6px;font-weight:600;opacity:.85}
 .range-num small{display:block;width:100%;font-size:13px;font-weight:600;opacity:.9;margin-top:8px;letter-spacing:.3px}
-.addon-note{display:flex;align-items:flex-start;gap:9px;background:var(--bg-soft);border:1px solid var(--line);border-radius:12px;padding:13px 15px;margin-top:14px;font-size:13.5px;color:var(--ink-2);line-height:1.5}
+.addon-note{display:flex;align-items:flex-start;gap:9px;background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);padding:13px 15px;margin-top:14px;font-size:13.5px;color:var(--ink-2);line-height:1.5}
 .addon-note .icon{width:18px;height:18px;stroke:var(--red);margin-top:1px;flex:none}
 .addon-note b{color:var(--ink)}
 .results-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
 .results-cta .cta-primary,.results-cta .btn-approve{flex:1;min-width:200px;justify-content:center}
-.btn-approve{background:var(--ink);color:#fff;font-weight:800;border:none;padding:15px;border-radius:12px;font-size:16px;cursor:pointer;display:inline-flex;align-items:center;gap:9px;transition:.15s}
+.btn-approve{background:var(--ink);color:#fff;font-weight:800;border:none;padding:15px;border-radius:var(--radius);font-size:16px;cursor:pointer;display:inline-flex;align-items:center;gap:9px;transition:.15s}
 .btn-approve .icon{width:18px;height:18px}
 .btn-approve:hover{background:#000}
 
 /* ===== Coverage map + postcode checker ===== */
 .areas-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(20px,3vw,40px);align-items:center;max-width:1040px;margin:0 auto}
 .area-map{background:#0b0e13;border:1px solid #1b222b;border-radius:var(--radius-lg);padding:8px;box-shadow:var(--shadow)}
-#cov-leaflet{width:100%;height:clamp(360px,42vw,460px);border-radius:14px;overflow:hidden;z-index:0;background:#0b0e13}
+#cov-leaflet{width:100%;height:clamp(360px,42vw,460px);border-radius:calc(var(--radius-lg) - 8px);overflow:hidden;z-index:0;background:#0b0e13}
 .leaflet-container{font-family:var(--font);background:#0b0e13}
 /* dark tooltips */
 .cov-tip{background:rgba(13,17,23,.92);border:1px solid rgba(255,255,255,.14);box-shadow:0 6px 18px rgba(0,0,0,.5);color:#fff;font-weight:700;font-size:12px;padding:3px 10px;border-radius:999px;white-space:nowrap;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
@@ -399,11 +429,11 @@ textarea{resize:vertical}
 .leaflet-control-attribution a{color:#aeb6c0!important}
 @media(prefers-reduced-motion:reduce){.cov-zone,.cov-marker .cov-pulse{animation:none}}
 .area-side{display:flex;flex-direction:column;gap:18px}
-.pc-checker{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow-sm)}
+.pc-checker{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow-sm)}
 .pc-checker label{display:block;font-size:11px;color:var(--ink-2);margin-bottom:9px;text-transform:uppercase;letter-spacing:.6px;font-weight:700}
 .pc-row{display:flex;gap:10px}
 .pc-row input{flex:1;text-transform:uppercase}
-.pc-result{margin-top:12px;font-size:14px;display:flex;align-items:flex-start;gap:8px;border-radius:10px;padding:11px 13px;line-height:1.45}
+.pc-result{margin-top:12px;font-size:14px;display:flex;align-items:flex-start;gap:8px;border-radius:var(--radius-sm);padding:11px 13px;line-height:1.45}
 .pc-result .icon{width:18px;height:18px;flex:none;margin-top:1px}
 .pc-result a{color:inherit;font-weight:800;text-decoration:underline}
 .pc-result.ok{background:#eafaf0;border:1px solid #b6e6c7;color:#0f7a3d}
@@ -417,7 +447,7 @@ textarea{resize:vertical}
 .tyresize-caution .icon{width:15px;height:15px;stroke:var(--red);margin-top:1px;flex:none}
 
 /* ===== Find-your-tyre-size guide ===== */
-.size-help{margin:6px 0 16px;border:1px solid var(--line);border-radius:12px;background:var(--bg-soft);overflow:hidden}
+.size-help{margin:6px 0 16px;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-soft);overflow:hidden}
 .size-help summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:9px;font-weight:700;font-size:14px;padding:13px 16px;color:var(--ink)}
 .size-help summary::-webkit-details-marker{display:none}
 .size-help summary .icon{width:17px;height:17px;stroke:var(--red)}
@@ -447,7 +477,7 @@ textarea{resize:vertical}
 .tg-ripple{fill:none;stroke:var(--red);stroke-width:2;opacity:0}
 
 .tg-legend{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
-.tg-chip{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;transition:border-color .2s,box-shadow .2s}
+.tg-chip{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);padding:10px 12px;transition:border-color .2s,box-shadow .2s}
 .tg-chip b{font-size:20px;font-weight:800;font-family:ui-monospace,monospace}
 .tg-chip span{display:flex;flex-direction:column;font-size:13px;font-weight:700;color:var(--ink)}
 .tg-chip small{font-weight:500;font-size:11px;color:var(--muted)}
@@ -529,3 +559,11 @@ textarea{resize:vertical}
   white-space:nowrap;
   border:0;
 }
+
+
+/* ---- photo treatment -----------------------------------------------------
+   The unified grade lives in the image files themselves (tools/grade-photos.py),
+   not here. A single CSS filter shifts every photo by the same amount, which
+   cannot reconcile shots taken in three different lights — and a filter on the
+   hero image forces an extra compositing layer on the LCP element. Nothing to
+   apply at runtime: re-run the script if the source photos are ever replaced. */

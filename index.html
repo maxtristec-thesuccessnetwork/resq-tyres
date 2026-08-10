@@ -49,6 +49,7 @@
   --whatsapp:#0f7a6c;   /* darkened from #25d366 — white text now passes WCAG AA (5.2:1) */
   --dark:#0f1318;
   --dark-2:#171c23;
+  --radius-sm:10px;
   --radius:14px;
   --radius-lg:20px;
   --maxw:1880px;
@@ -144,7 +145,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 .live-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:livePulse 1.8s infinite}
 .hero h1{font-size:clamp(34px,5.2vw,58px);font-weight:800;margin-bottom:8px}
 .hero h1 .rot{color:var(--red);display:inline-block;min-height:1.1em}
-.hero .rotator{font-size:clamp(20px,3vw,28px);font-weight:800;color:var(--red);height:1.3em;margin-bottom:14px}
+.hero .rotator{font-size:clamp(20px,3vw,28px);font-weight:800;color:var(--red);line-height:1.4;height:1.5em;margin-top:20px;margin-bottom:24px}
 .hero-sub{color:var(--ink-2);font-size:18px;max-width:520px;margin-bottom:26px}
 .cta-row{display:flex;gap:12px;flex-wrap:wrap}
 .cta-primary{background:var(--red);color:#fff;font-size:19px;font-weight:800;padding:16px 26px;border-radius:var(--radius);text-decoration:none;display:inline-flex;gap:10px;align-items:center;box-shadow:var(--shadow-red);transition:transform .15s}
@@ -160,12 +161,14 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 .hero-photo{position:relative}
 .hero-photo .frame{position:relative;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line)}
 .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center 40%;aspect-ratio:4/4.2}
-.hero-photo .tag{position:absolute;left:14px;bottom:14px;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);border-radius:12px;padding:10px 13px;box-shadow:var(--shadow-sm)}
+.hero-photo .tag{position:absolute;left:14px;bottom:14px;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);border-radius:var(--radius);padding:10px 13px;box-shadow:var(--shadow-sm)}
 .hero-photo .tag .icon{width:20px;height:20px;stroke:var(--red)}
 .hero-photo .tag b{display:block;font-size:14px}
 .hero-photo .tag span{color:var(--muted);font-size:12px}
-.hero-photo .floatcard{position:absolute;top:16px;right:-6px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;box-shadow:var(--shadow);text-align:center}
-.hero-photo .floatcard b{font-size:20px;color:var(--red);display:block;line-height:1}
+.hero-photo .floatcard{position:absolute;top:16px;right:-6px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:10px 14px;box-shadow:var(--shadow);text-align:center}
+.hero-photo .floatcard b{font-size:22px;color:var(--red);display:block;line-height:1}
+.hero-photo .floatcard b span{font-size:inherit;color:inherit;font-weight:inherit}
+.hero-photo .floatcard b .star{font-size:13px;color:var(--amber);margin-left:2px;vertical-align:2px}
 .hero-photo .floatcard span{font-size:11px;color:var(--muted);font-weight:600}
 
 /* Hero stats strip */
@@ -173,13 +176,15 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 .stats .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:8px;padding:clamp(16px,2.4vw,24px)}
 .stat{display:flex;align-items:center;gap:12px;justify-content:center;padding:6px 4px}
 .stat .icon{width:24px;height:24px;stroke:var(--red)}
-.stat b{font-size:18px;display:block;line-height:1.1}
+.stat b{font-size:20px;display:block;line-height:1.1}
+.stat b span{font-size:inherit;color:inherit;font-weight:inherit}
+.stat b .of{font-size:12px;font-weight:700;color:#aeb6c0;letter-spacing:.02em}
 .stat span{color:#aeb6c0;font-size:12px}
 
 /* --- styles.css:316-326 --- */
 /* Sticky mobile bar */
 .sticky-bar{position:fixed;left:12px;right:12px;bottom:12px;z-index:60;display:none;gap:10px}
-.sticky-bar a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:800;font-size:16px;padding:15px;border-radius:13px;text-decoration:none;box-shadow:var(--shadow)}
+.sticky-bar a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:800;font-size:16px;padding:15px;min-height:50px;border-radius:var(--radius);text-decoration:none;box-shadow:var(--shadow)}
 .sticky-bar .s-call{background:var(--red);color:#fff}
 .sticky-bar .s-wa{background:var(--whatsapp);color:#fff}
 .sticky-bar .icon{width:19px;height:19px}
@@ -451,7 +456,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
                  loading="eager" fetchpriority="high" decoding="async" id="heroImg" data-hero>
               <div class="tag"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><div><b>Pay on completion</b><span>No upfront payment</span></div></div>
             </div>
-            <div class="floatcard"><b><span data-count="5.0" data-dec="1">5.0</span>★</b><span>215+ Google reviews</span></div>
+            <div class="floatcard"><b><span data-count="5.0" data-dec="1">5.0</span><span class="star" aria-hidden="true">★</span></b><span>215+ Google reviews</span></div>
           </div>
         </div>
       </div>
@@ -459,8 +464,8 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
       <!-- stats strip -->
       <div class="stats">
         <div class="wrap stagger">
-          <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><div><b>15–30 min</b><span>Typical response</span></div></div>
-          <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg><div><b><span data-count="5.0" data-dec="1">5.0</span> / 5</b><span>Google rating</span></div></div>
+          <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><div><b>15–30<small class="of"> min</small></b><span>Typical response</span></div></div>
+          <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg><div><b><span data-count="5.0" data-dec="1">5.0</span><small class="of"> / 5</small></b><span>Google rating</span></div></div>
           <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><div><b>West Yorkshire</b><span>Leeds &amp; surrounding</span></div></div>
           <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-card"/></svg><div><b>Pay on completion</b><span>Card or cash</span></div></div>
         </div>
