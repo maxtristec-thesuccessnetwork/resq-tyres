@@ -99,33 +99,100 @@ function initCoverageMap() {
   window.addEventListener("load", function () { map.invalidateSize(); });
 }
 
-/* ---------- Price-range guide ---------- */
-function populateSelects() {
-  var o = RESQ_RATES.options;
-  fill("width", o.widths, 205);
-  fill("profile", o.profiles, 55);
-  fill("rim", o.rims, 16);
+/* ---------- Price guide ----------
+   THE RULE: a size shows a price only if ResQ has filled in BOTH price
+   columns for it in the sheet. Every other size still appears in the
+   dropdowns (so the customer can find their tyre) but is answered with
+   "call us". Nothing is estimated, banded or guessed. */
+
+var DEFAULT_SIZE = { w: 205, p: 55, r: "16" };
+
+function sizeKey(w, p, r) { return w + "/" + p + "R" + String(r).toUpperCase(); }
+function allSizes() { return (typeof RESQ_RATES !== "undefined" && RESQ_RATES.sizes) || []; }
+
+function uniq(list) {
+  var seen = {}, out = [];
+  list.forEach(function (v) { if (!seen[v]) { seen[v] = 1; out.push(v); } });
+  return out;
 }
-function fill(id, values, preset) {
+function byNumber(a, b) { return a - b; }
+// "14" < "14C" < "15" — commercial/van sizes sit next to their car equivalent.
+function byRim(a, b) {
+  var na = parseInt(a, 10), nb = parseInt(b, 10);
+  if (na !== nb) return na - nb;
+  return (/C$/.test(a) ? 1 : 0) - (/C$/.test(b) ? 1 : 0);
+}
+
+function widthOptions() {
+  return uniq(allSizes().map(function (s) { return s.w; })).sort(byNumber);
+}
+function profileOptions(w) {
+  return uniq(allSizes().filter(function (s) { return s.w === w; })
+    .map(function (s) { return s.p; })).sort(byNumber);
+}
+function rimOptions(w, p) {
+  return uniq(allSizes().filter(function (s) { return s.w === w && s.p === p; })
+    .map(function (s) { return s.r; })).sort(byRim);
+}
+
+// Rebuild a <select>, keeping the current choice if it's still valid.
+// Returns the value that ended up selected.
+function setOptions(id, values, prefer) {
   var sel = document.getElementById(id);
-  if (!sel) return;
+  if (!sel || !values.length) return null;
+  var strs = values.map(String);
+  var want = (prefer != null && strs.indexOf(String(prefer)) >= 0) ? String(prefer) : strs[0];
+  while (sel.firstChild) sel.removeChild(sel.firstChild);
   values.forEach(function (v) {
     var opt = document.createElement("option");
-    opt.value = v;
-    opt.textContent = v;
-    if (v === preset) opt.selected = true;
+    opt.value = String(v);
+    opt.textContent = String(v);
     sel.appendChild(opt);
+  });
+  sel.value = want;
+  return sel.value;
+}
+
+// Cascade: width narrows the profiles, profile narrows the rims. A customer
+// can only ever assemble a size that genuinely exists.
+function refreshSizeSelects(keep) {
+  if (!document.getElementById("width")) return;
+  var widths = widthOptions();
+  if (!widths.length) return;
+
+  var w = parseInt(setOptions("width", widths, keep && keep.w ? keep.w : DEFAULT_SIZE.w), 10);
+  var p = parseInt(setOptions("profile", profileOptions(w), keep && keep.p ? keep.p : DEFAULT_SIZE.p), 10);
+  setOptions("rim", rimOptions(w, p), keep && keep.r ? keep.r : DEFAULT_SIZE.r);
+}
+
+function currentSize() {
+  return { w: parseInt(val("width"), 10), p: parseInt(val("profile"), 10), r: val("rim") };
+}
+
+function populateSelects() {
+  refreshSizeSelects(null);
+
+  var wSel = document.getElementById("width"), pSel = document.getElementById("profile");
+  if (wSel) wSel.addEventListener("change", function () {
+    var w = parseInt(val("width"), 10);
+    var p = parseInt(setOptions("profile", profileOptions(w), val("profile")), 10);
+    setOptions("rim", rimOptions(w, p), val("rim"));
+  });
+  if (pSel) pSel.addEventListener("change", function () {
+    setOptions("rim", rimOptions(parseInt(val("width"), 10), parseInt(val("profile"), 10)), val("rim"));
   });
 }
 
+// Called by prices-sheet.js once the live sheet lands.
+window.RESQ_onRatesUpdated = function () { refreshSizeSelects(currentSize()); };
+
+// The price range for a size, or null if ResQ hasn't priced it.
 function rangeForSize(width, profile, rim) {
-  var key = width + "/" + profile + "R" + rim;
-  if (RESQ_RATES.exact[key]) return RESQ_RATES.exact[key];
-  var fb = RESQ_RATES.fallbackByRim;
-  return { low: fb.low[rim] || 55, high: fb.high[rim] || 149 };
+  var e = (typeof RESQ_RATES !== "undefined" && RESQ_RATES.exact) || {};
+  return e[sizeKey(width, profile, rim)] || null;
 }
 
-var ResQState = { size: "", lockingNut: "yes" };
+var ResQState = { size: "", lockingNut: "yes", range: null, usedTool: false };
 
 function wireEstimateForm() {
   var form = document.getElementById("estimate-form");
@@ -140,7 +207,8 @@ function wireEstimateForm() {
 
     ResQState.size = sizeLabel;
     ResQState.lockingNut = lockingNut;
-    ResQState.range = range;
+    ResQState.range = range;          // null when ResQ hasn't priced this size
+    ResQState.usedTool = true;
 
     renderRange(sizeLabel, range, lockingNut);
 
@@ -152,9 +220,29 @@ function wireEstimateForm() {
 
 function renderRange(sizeLabel, range, lockingNut) {
   document.getElementById("size-label").textContent = sizeLabel;
-  document.getElementById("range-out").innerHTML =
-    "£" + range.low + "<span class='dash'>–</span>£" + range.high +
-    "<small>per tyre, fitted</small>";
+
+  var lead  = document.getElementById("results-lead");
+  var box   = document.getElementById("range-box");
+  var call  = document.getElementById("quote-call");
+  var micro = document.getElementById("results-micro");
+  var priced = !!range;
+
+  if (box)  box.hidden  = !priced;
+  if (call) call.hidden = priced;
+
+  if (priced) {
+    if (lead) lead.textContent = "Typical fitted price for";
+    document.getElementById("range-out").innerHTML =
+      "£" + range.low + "<span class='dash'>–</span>£" + range.high +
+      "<small>per tyre, fitted</small>";
+    if (micro) micro.textContent =
+      "A guide only — the final price is confirmed by phone. Prices are per tyre, mobile fitting included.";
+  } else {
+    // ResQ hasn't priced this size. We don't guess — we ask them to call.
+    if (lead) lead.textContent = "Your tyre size:";
+    if (micro) micro.textContent =
+      "Mobile fitting included, pay on completion. Leeds, Bradford, Wakefield and across West Yorkshire.";
+  }
 
   // Locking wheel-nut add-on note
   var addon = document.getElementById("addon-note");
@@ -322,14 +410,26 @@ function sendToEndpoint(endpoint, data, form, err) {
 
 // Turn the on-screen estimate (if the customer used the tool) into email lines.
 function estimateLines(countStr) {
-  var r = ResQState.range;
-  if (!r) return { range: "Not calculated (customer didn't use the estimate tool)", locking: "Not asked", total: "" };
-  var rangeTxt = "£" + r.low + "–£" + r.high + " per tyre, fitted";
+  var r = ResQState.range;                       // null = size not priced in the sheet
+  if (!ResQState.usedTool) {
+    return { range: "Not calculated (customer didn't use the price guide)", locking: "Not asked", total: "" };
+  }
   var needsRemoval = ResQState.lockingNut === "no";
   var a = RESQ_RATES.lockingNutRemoval || { low: 0, high: 0 };
   var lockingTxt = needsRemoval
     ? "Yes — no key (" + (a.high > 0 ? "£" + a.low + "–£" + a.high : "no extra charge") + ")"
     : "No";
+
+  // Size has no price in the sheet — flag it so ResQ knows to quote it himself.
+  if (!r) {
+    return {
+      range: "NOT PRICED IN SHEET — customer was shown \"call for a price\". Quote this one manually.",
+      locking: lockingTxt,
+      total: ""
+    };
+  }
+
+  var rangeTxt = "£" + r.low + "–£" + r.high + " per tyre, fitted";
   var count = parseInt(String(countStr).replace(/[^0-9]/g, ""), 10);
   var total = "";
   if (count && count > 0) {

@@ -1,59 +1,171 @@
 /* ===========================================================
-   ResQ Tyres — RATE SHEET  (this is the "spreadsheet" you update)
+   ResQ Tyres — RATE SHEET (bundled fallback)
    -----------------------------------------------------------
-   The website shows customers a PRICE RANGE per tyre (fitted, at
-   their location) — a "from £X to £Y" figure — not fixed tiers.
-   ResQ confirms the exact price by phone before any work.
+   The live prices come from the Google Sheet
+   "ResQ Tyres — Website Prices" (see js/prices-sheet.js).
+   This file is only used if that sheet can't be reached, so the
+   size dropdowns still work and the page never breaks.
 
-   >>> ALL NUMBERS BELOW ARE PLACEHOLDERS <<<
-   Replace them with ResQ's real ranges. For each size, "low" is the
-   cheapest budget tyre and "high" is a premium tyre, mobile fitting
-   included. To change prices site-wide, edit and save — nothing else.
-
-   How a price is worked out:
-   1) EXACT — specific sizes with a set low–high range (most accurate).
-   2) FALLBACK — if a size isn't listed, a range is estimated from the
-      rim diameter so the tool always returns something.
+   ONE RULE, everywhere:
+     A size shows a price ONLY if the sheet has BOTH "From £"
+     and "To £" filled in for it. Anything else tells the
+     customer to call. There is no estimating, no rim band and
+     no guessing — if ResQ hasn't priced it, we don't quote it.
    =========================================================== */
 
 const RESQ_RATES = {
 
-  // 1) EXACT ranges for common sizes. Key = "width/profileRrim".
-  //    { low: cheapest fitted price, high: premium fitted price }
-  exact: {
-    "195/65R15": { low: 49,  high: 95  },
-    "205/55R16": { low: 55,  high: 115 },
-    "225/45R17": { low: 70,  high: 149 },
-    "225/40R18": { low: 85,  high: 179 },
-    "245/40R19": { low: 105, high: 219 }
-  },
+  /* Prices, keyed "width/profileRrim" (rim keeps its C for
+     commercial/van sizes, e.g. "195/65R16C").
+     Empty here on purpose — the sheet is the source of truth. */
+  exact: {},
 
-  // 2) Fallback range by rim size (used when a size isn't in 'exact').
-  fallbackByRim: {
-    low:  { 14: 45, 15: 49, 16: 55, 17: 70,  18: 85,  19: 105, 20: 130 },
-    high: { 14: 79, 15: 89, 16: 115, 17: 149, 18: 179, 19: 219, 20: 265 }
-  },
+  /* Every size ResQ lists, priced or not. Drives the dropdowns,
+     so a customer can always find their size even when we can
+     only answer it with a phone call. */
+  sizes: [
+    { w: 195, p: 55, r: "10C" },
+    { w: 165, p: 80, r: "13C" },
+    { w: 195, p: 50, r: "13C" },
+    { w: 155, p: 65, r: "14" },
+    { w: 165, p: 60, r: "14" },
+    { w: 165, p: 70, r: "14" },
+    { w: 175, p: 65, r: "14" },
+    { w: 185, p: 60, r: "14" },
+    { w: 185, p: 65, r: "14" },
+    { w: 185, p: 70, r: "14" },
+    { w: 175, p: 65, r: "14C" },
+    { w: 165, p: 60, r: "15" },
+    { w: 165, p: 65, r: "15" },
+    { w: 175, p: 60, r: "15" },
+    { w: 175, p: 65, r: "15" },
+    { w: 185, p: 55, r: "15" },
+    { w: 185, p: 60, r: "15" },
+    { w: 185, p: 65, r: "15" },
+    { w: 195, p: 45, r: "15" },
+    { w: 195, p: 50, r: "15" },
+    { w: 195, p: 55, r: "15" },
+    { w: 195, p: 60, r: "15" },
+    { w: 195, p: 65, r: "15" },
+    { w: 205, p: 55, r: "15" },
+    { w: 215, p: 65, r: "15C" },
+    { w: 215, p: 70, r: "15C" },
+    { w: 185, p: 50, r: "16" },
+    { w: 185, p: 55, r: "16" },
+    { w: 185, p: 60, r: "16" },
+    { w: 195, p: 45, r: "16" },
+    { w: 195, p: 50, r: "16" },
+    { w: 195, p: 55, r: "16" },
+    { w: 195, p: 60, r: "16" },
+    { w: 205, p: 45, r: "16" },
+    { w: 205, p: 55, r: "16" },
+    { w: 205, p: 60, r: "16" },
+    { w: 205, p: 65, r: "16" },
+    { w: 215, p: 45, r: "16" },
+    { w: 215, p: 55, r: "16" },
+    { w: 215, p: 60, r: "16" },
+    { w: 215, p: 65, r: "16" },
+    { w: 225, p: 55, r: "16" },
+    { w: 185, p: 75, r: "16C" },
+    { w: 195, p: 60, r: "16C" },
+    { w: 195, p: 65, r: "16C" },
+    { w: 205, p: 65, r: "16C" },
+    { w: 205, p: 75, r: "16C" },
+    { w: 215, p: 65, r: "16C" },
+    { w: 215, p: 75, r: "16C" },
+    { w: 225, p: 65, r: "16C" },
+    { w: 225, p: 75, r: "16C" },
+    { w: 235, p: 65, r: "16C" },
+    { w: 195, p: 40, r: "17" },
+    { w: 205, p: 40, r: "17" },
+    { w: 205, p: 45, r: "17" },
+    { w: 205, p: 50, r: "17" },
+    { w: 205, p: 55, r: "17" },
+    { w: 215, p: 40, r: "17" },
+    { w: 215, p: 45, r: "17" },
+    { w: 215, p: 50, r: "17" },
+    { w: 215, p: 55, r: "17" },
+    { w: 215, p: 60, r: "17" },
+    { w: 215, p: 65, r: "17" },
+    { w: 225, p: 45, r: "17" },
+    { w: 225, p: 50, r: "17" },
+    { w: 225, p: 55, r: "17" },
+    { w: 225, p: 60, r: "17" },
+    { w: 235, p: 45, r: "17" },
+    { w: 235, p: 55, r: "17" },
+    { w: 245, p: 40, r: "17" },
+    { w: 235, p: 60, r: "17C" },
+    { w: 205, p: 40, r: "18" },
+    { w: 215, p: 40, r: "18" },
+    { w: 215, p: 45, r: "18" },
+    { w: 215, p: 50, r: "18" },
+    { w: 215, p: 55, r: "18" },
+    { w: 225, p: 40, r: "18" },
+    { w: 225, p: 45, r: "18" },
+    { w: 225, p: 50, r: "18" },
+    { w: 225, p: 55, r: "18" },
+    { w: 225, p: 60, r: "18" },
+    { w: 235, p: 40, r: "18" },
+    { w: 235, p: 45, r: "18" },
+    { w: 235, p: 50, r: "18" },
+    { w: 235, p: 55, r: "18" },
+    { w: 235, p: 60, r: "18" },
+    { w: 245, p: 35, r: "18" },
+    { w: 245, p: 40, r: "18" },
+    { w: 245, p: 45, r: "18" },
+    { w: 255, p: 35, r: "18" },
+    { w: 255, p: 40, r: "18" },
+    { w: 255, p: 60, r: "18" },
+    { w: 265, p: 60, r: "18" },
+    { w: 205, p: 55, r: "19" },
+    { w: 225, p: 35, r: "19" },
+    { w: 225, p: 40, r: "19" },
+    { w: 225, p: 45, r: "19" },
+    { w: 235, p: 35, r: "19" },
+    { w: 235, p: 40, r: "19" },
+    { w: 235, p: 45, r: "19" },
+    { w: 235, p: 50, r: "19" },
+    { w: 235, p: 55, r: "19" },
+    { w: 245, p: 35, r: "19" },
+    { w: 245, p: 40, r: "19" },
+    { w: 245, p: 45, r: "19" },
+    { w: 255, p: 30, r: "19" },
+    { w: 255, p: 35, r: "19" },
+    { w: 255, p: 55, r: "19" },
+    { w: 265, p: 30, r: "19" },
+    { w: 275, p: 35, r: "19" },
+    { w: 275, p: 40, r: "19" },
+    { w: 295, p: 40, r: "19" },
+    { w: 225, p: 35, r: "20" },
+    { w: 225, p: 40, r: "20" },
+    { w: 235, p: 45, r: "20" },
+    { w: 235, p: 50, r: "20" },
+    { w: 245, p: 35, r: "20" },
+    { w: 245, p: 40, r: "20" },
+    { w: 245, p: 45, r: "20" },
+    { w: 255, p: 40, r: "20" },
+    { w: 255, p: 45, r: "20" },
+    { w: 275, p: 40, r: "20" },
+    { w: 275, p: 45, r: "20" },
+    { w: 305, p: 30, r: "20" },
+    { w: 265, p: 30, r: "21" },
+    { w: 275, p: 45, r: "21" },
+    { w: 285, p: 35, r: "21" },
+    { w: 295, p: 35, r: "21" },
+    { w: 315, p: 30, r: "21" },
+    { w: 285, p: 35, r: "22" },
+    { w: 285, p: 40, r: "22" },
+    { w: 315, p: 30, r: "22" }
+  ],
 
-  // Optional add-on: locking wheel-nut removal, if the customer has
-  // lost/never had the key. ResQ carries the specialist tools (a USP).
-  // PLACEHOLDER — set to ResQ's real add-on price (or 0 to include free).
-  lockingNutRemoval: { low: 15, high: 25 },
-
-  // Dropdown options shown to the customer
-  options: {
-    widths:   [155,165,175,185,195,205,215,225,235,245,255],
-    profiles: [40,45,50,55,60,65,70],
-    rims:     [14,15,16,17,18,19,20]
-  }
+  /* Locking wheel-nut removal add-on. ResQ carries the specialist
+     tools most fitters don't — this is a USP, not just a fee. */
+  lockingNutRemoval: { low: 25, high: 40 }
 };
 
 /* ===========================================================
    COVERAGE — where ResQ will travel to.
    Used by the postcode checker + the coverage map.
-   >>> PLACEHOLDER — confirm the exact accepted postcode districts
-   with ResQ. Currently based on the towns already listed on the site
-   (Leeds = LS, Bradford = BD, Wakefield/Dewsbury/Castleford/Pontefract
-   = WF). Add HD/HX etc. if he covers them.
    =========================================================== */
 const RESQ_COVERAGE = {
   covered: ["LS", "BD", "WF"],          // accepted outward postcode prefixes

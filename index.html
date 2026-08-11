@@ -629,14 +629,26 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
           </form>
 
           <div class="results" id="estimate-results" hidden>
-            <p class="results-head">Typical fitted price for <b id="size-label">—</b></p>
-            <div class="range-box"><span class="range-num" id="range-out">—</span></div>
+            <p class="results-head"><span id="results-lead">Typical fitted price for</span> <b id="size-label">—</b></p>
+
+            <!-- Priced size: ResQ has filled in both price columns for it. -->
+            <div class="range-box" id="range-box"><span class="range-num" id="range-out">—</span></div>
+
+            <!-- Unpriced size: we don't guess a number. Straight to a call. -->
+            <div class="quote-call" id="quote-call" hidden>
+              <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+              <div>
+                <b>We'll price this one for you</b>
+                <span>We fit this size — we just don't list it online. Thirty seconds on the phone and you'll have the exact price, fitted at your door.</span>
+              </div>
+            </div>
+
             <p class="addon-note" id="addon-note" hidden></p>
             <div class="results-cta">
               <a class="cta-primary" href="tel:07438562633"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call to confirm</a>
               <button type="button" class="btn-approve" id="to-enquiry"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg> Plan a home fitting</button>
             </div>
-            <p class="micro">A guide only — the final price is confirmed by phone. Prices are per tyre, mobile fitting included.</p>
+            <p class="micro" id="results-micro">A guide only — the final price is confirmed by phone. Prices are per tyre, mobile fitting included.</p>
           </div>
         </div>
       </div>
