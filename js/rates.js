@@ -168,9 +168,9 @@ const RESQ_RATES = {
    Used by the postcode checker + the coverage map.
    =========================================================== */
 const RESQ_COVERAGE = {
-  covered: ["LS", "BD", "WF"],          // accepted outward postcode prefixes
+  covered: ["LS", "WF"],                // accepted outward postcode prefixes
   towns: [
-    "Leeds", "Bradford", "Wakefield", "Dewsbury", "Pudsey",
+    "Leeds", "Wakefield", "Dewsbury", "Pudsey",
     "Morley", "Castleford", "Garforth", "Pontefract"
   ]
 };

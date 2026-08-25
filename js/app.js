@@ -9,7 +9,7 @@
 /* ---- CONFIG: set these before going live ---- */
 const CONFIG = {
   // Where planned-fitting enquiries go (Web3Forms + mailto fallback).
-  businessEmail: "maxtristec@googlemail.com",
+  businessEmail: "resqtyresrecovery@gmail.com",
   // Free, no account: https://web3forms.com — enter the email above, paste
   // the Access Key here and enquiries arrive automatically.
   web3formsKey: "8f3d8e31-3005-4a6a-b438-b7343c9c0ca5",
@@ -63,7 +63,6 @@ function initCoverageMap() {
   // [lat, lng, name, isHub]
   var towns = [
     [53.8008, -1.5491, "Leeds", true],
-    [53.7938, -1.7524, "Bradford", false],
     [53.6830, -1.4977, "Wakefield", false],
     [53.6912, -1.6290, "Dewsbury", false],
     [53.7967, -1.6631, "Pudsey", false],
@@ -241,7 +240,7 @@ function renderRange(sizeLabel, range, lockingNut) {
     // ResQ hasn't priced this size. We don't guess — we ask them to call.
     if (lead) lead.textContent = "Your tyre size:";
     if (micro) micro.textContent =
-      "Mobile fitting included, pay on completion. Leeds, Bradford, Wakefield and across West Yorkshire.";
+      "Mobile fitting included, pay on completion. Leeds, Wakefield and across West Yorkshire.";
   }
 
   // Locking wheel-nut add-on note
