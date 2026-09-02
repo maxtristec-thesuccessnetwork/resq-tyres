@@ -170,15 +170,18 @@ const RESQ_RATES = {
 /* Coverage. The exact districts Moin confirmed by WhatsApp on 2026-09-01:
    "all LS postcode hg1,hg2,hg3 Wf1,wf2,wf3,wf4,wf5" + "Include them please bro"
    (WF8/WF10/WF12/WF13) + "And ls24 tadcaster". Bradford (BD) is out.
-   Districts, not letter prefixes — WF6, WF7, WF9 and WF11 are NOT covered, and the
-   old prefix check was telling those callers they were in the usual area. */
+   EXTENDED 2026-09-02 evening, Moin by WhatsApp: "Yes mate switch it on in them
+   postcodes it that job was from wf7" — WF6, WF7, WF9 and WF11 added, which makes
+   the WF side a contiguous WF1-WF13. He had taken a job in WF7 that same afternoon,
+   which this file would otherwise have told him we did not cover.
+   Districts, not letter prefixes: WF14+ is still out, and so is Bradford. */
 const RESQ_COVERAGE = {
   districts: [
     "LS1","LS2","LS3","LS4","LS5","LS6","LS7","LS8","LS9","LS10",
     "LS11","LS12","LS13","LS14","LS15","LS16","LS17","LS18","LS19","LS20",
     "LS21","LS22","LS23","LS24","LS25","LS26","LS27","LS28","LS29",
     "HG1","HG2","HG3",
-    "WF1","WF2","WF3","WF4","WF5","WF8","WF10","WF12","WF13"
+    "WF1","WF2","WF3","WF4","WF5","WF6","WF7","WF8","WF9","WF10","WF11","WF12","WF13"
   ],
   towns: [
     "Leeds", "Wakefield", "Dewsbury", "Pudsey",
