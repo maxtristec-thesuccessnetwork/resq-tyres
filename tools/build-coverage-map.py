@@ -10,34 +10,44 @@ stamped "API KEY REQUIRED" — HTTP 200, correct MIME type, watermark baked into
 the image, so no health check could ever have caught it. Card W5, option A:
 drop the third-party tile dependency altogether.
 
-This script regenerates the SVG that replaced it. Geometry is real:
-motorway centrelines come from OpenStreetMap via Overpass, town pins sit at
-their true coordinates, and the coverage ring is a genuine 17 km geodesic
-circle around the same centre the Leaflet map used — so the *claim* the map
-makes is unchanged, only the rendering.
+What the map claims
+-------------------
+Nothing this file invents. The coverage picture is drawn from the postcode
+districts Moin confirmed by WhatsApp on 2026-09-01 (card W1) — all LS, HG1-HG3,
+and WF1-WF5/WF8/WF10/WF12/WF13 — with each district's real centroid from
+postcodes.io. There is deliberately NO hard boundary line: an edge would be a
+claim about places nobody has confirmed, and the old 17 km circle was drawing
+one that wrongly swallowed Bradford. Instead each confirmed district is a dot,
+with a soft unlabelled glow behind the cloud for grouping only. The postcode
+checker beside the map is the exact answer; the map is the shape of the patch.
+
+Motorway centrelines come from OpenStreetMap (ODbL) — attribution is rendered
+bottom-right of the SVG and must stay there.
 
 Usage:  python3 tools/build-coverage-map.py > assets/coverage-map.svg
-            re-fetches from Overpass (mirrors are often busy; it tries three)
+            re-fetches roads from Overpass (mirrors are often busy; it tries three)
         python3 tools/build-coverage-map.py --cached > assets/coverage-map.svg
             uses tools/osm-motorways.json.gz, the trimmed extract committed beside
             this script, so the build is reproducible with no network at all
 
-Road data © OpenStreetMap contributors, ODbL. Attribution is rendered in the
-bottom-right of the SVG and must stay there.
+District centroids live in tools/outcodes.json (postcodes.io, read 2026-09-02).
+To change coverage, change client.yaml and this file together — never one alone.
 """
 import gzip, json, math, os, sys, urllib.parse, urllib.request
 
-W, H = 640, 500
-CENTER = (53.752, -1.545)          # same centre as the old Leaflet map
-RADIUS_KM = 17.0                   # same coverage radius as the old Leaflet map
-PAD_KM = 4.2
-BBOX = "53.55,-1.95,53.98,-1.10"
+W, H = 620, 560
+PAD_KM = 3.5
+BUFFER_KM = 6.5            # soft glow radius around each district centroid
+BBOX = "53.55,-2.05,54.15,-1.15"
 MAJOR = ['M62', 'M1', 'A1(M)', 'M621', 'A58(M)', 'A64(M)']
 ENDPOINTS = ["https://overpass.private.coffee/api/interpreter",
              "https://overpass-api.de/api/interpreter",
              "https://overpass.kumi.systems/api/interpreter"]
+HERE = os.path.dirname(os.path.abspath(__file__))
 
-TOWNS = [   # lat, lng, label, is_hub
+# Named towns get a labelled pin. Coordinates are the ones the site has always
+# used, plus Harrogate and Tadcaster from their district centroids (W1).
+TOWNS = [
     (53.8008, -1.5491, "Leeds", True),
     (53.6830, -1.4977, "Wakefield", False),
     (53.6912, -1.6290, "Dewsbury", False),
@@ -46,21 +56,22 @@ TOWNS = [   # lat, lng, label, is_hub
     (53.7256, -1.3560, "Castleford", False),
     (53.7928, -1.3872, "Garforth", False),
     (53.6919, -1.3128, "Pontefract", False),
+    (53.9928, -1.5418, "Harrogate", False),
+    (53.8845, -1.2620, "Tadcaster", False),
 ]
-# label offset from the pin: dx, dy, text-anchor
-PLACE = {
-    "Leeds": (0, -20, "middle"), "Pudsey": (0, -18, "middle"),
-    "Garforth": (0, -17, "middle"), "Morley": (-14, 5, "end"),
-    "Castleford": (0, -18, "middle"), "Dewsbury": (0, 24, "middle"),
-    "Wakefield": (0, 24, "middle"), "Pontefract": (-12, 5, "end"),
+PLACE = {   # label offset from the pin: dx, dy, text-anchor
+    "Leeds": (0, -19, "middle"),      "Pudsey": (-11, 4, "end"),
+    "Garforth": (0, -16, "middle"),   "Morley": (-11, 4, "end"),
+    "Castleford": (0, -16, "middle"), "Dewsbury": (0, 21, "middle"),
+    "Wakefield": (0, 21, "middle"),   "Pontefract": (0, 21, "middle"),
+    "Harrogate": (0, -16, "middle"),  "Tadcaster": (0, -16, "middle"),
 }
-# motorway badge: nearest point on that road to this anchor, then nudged
-BADGE_ANCHORS = {
-    'M62w': ('M62', (53.7000, -1.8200), 30, -14),
-    'M62e': ('M62', (53.7050, -1.3400), 0, -14),
-    'M1':   ('M1',  (53.6700, -1.4200), 22, 0),
-    'M621': ('M621', (53.7650, -1.5900), -4, -14),
-    'A1M':  ('A1(M)', (53.8600, -1.3400), 26, 0),
+BADGE_ANCHORS = {   # nearest point on that road to this anchor, then nudged
+    'M62w': ('M62', (53.7000, -1.8200), 26, -13),
+    'M62e': ('M62', (53.7050, -1.3400), 0, -13),
+    'M1':   ('M1',  (53.6700, -1.4200), 20, 0),
+    'M621': ('M621', (53.7650, -1.5900), -4, -13),
+    'A1M':  ('A1(M)', (53.9400, -1.3400), 24, 0),
 }
 BADGE_TEXT = {'M62w': 'M62', 'M62e': 'M62', 'M1': 'M1', 'M621': 'M621', 'A1M': 'A1(M)'}
 
@@ -79,17 +90,25 @@ def dest(lat, lng, brg_deg, dist_km):
     return math.degrees(p2), math.degrees(l2)
 
 
-ring_ll = [dest(*CENTER, b, RADIUS_KM) for b in range(0, 360, 5)]
-_outer = [dest(*CENTER, b, RADIUS_KM + PAD_KM) for b in range(0, 360, 5)]
-_xs = [merc(*p)[0] for p in _outer]; _ys = [merc(*p)[1] for p in _outer]
+OUTCODES = json.load(open(os.path.join(HERE, "outcodes.json")))
+
+# --- fit the projection to the confirmed districts, then pad ---
+_pts = []
+for lat, lng in OUTCODES.values():
+    for b in (0, 90, 180, 270):
+        _pts.append(dest(lat, lng, b, PAD_KM + BUFFER_KM))
+_xs = [merc(*p)[0] for p in _pts]; _ys = [merc(*p)[1] for p in _pts]
 _minx, _maxx, _miny, _maxy = min(_xs), max(_xs), min(_ys), max(_ys)
-_s = max(W / (_maxx - _minx), H / (_maxy - _miny))
+_s = min(W / (_maxx - _minx), H / (_maxy - _miny))     # meet: show the whole patch
 _cx, _cy = (_minx + _maxx) / 2, (_miny + _maxy) / 2
 
 
 def px(lat, lng):
     x, y = merc(lat, lng)
     return ((x - _cx) * _s + W / 2, (_cy - y) * _s + H / 2)
+
+
+KM = (px(*dest(53.83, -1.53, 90, 10))[0] - px(53.83, -1.53)[0]) / 10.0   # px per km
 
 
 def simplify(pts, eps):
@@ -112,8 +131,8 @@ def simplify(pts, eps):
     return [pts[0], pts[-1]]
 
 
-def d_of(pts, close=False):
-    return "M" + " L".join(f"{x:.1f},{y:.1f}" for x, y in pts) + ("Z" if close else "")
+def d_of(pts):
+    return "M" + " L".join(f"{x:.1f},{y:.1f}" for x, y in pts)
 
 
 def fetch_motorways():
@@ -124,7 +143,7 @@ def fetch_motorways():
         try:
             with urllib.request.urlopen(urllib.request.Request(url, data=body), timeout=150) as r:
                 return json.loads(r.read())
-        except Exception as e:      # Overpass mirrors are frequently busy
+        except Exception as e:          # Overpass mirrors are frequently busy
             last = e
             print(f"  {url} -> {e}", file=sys.stderr)
     raise SystemExit(f"All Overpass endpoints failed: {last}")
@@ -132,11 +151,11 @@ def fetch_motorways():
 
 def main():
     if "--cached" in sys.argv:
-        cache = os.path.join(os.path.dirname(os.path.abspath(__file__)), "osm-motorways.json.gz")
-        with gzip.open(cache, "rt") as fh:
+        with gzip.open(os.path.join(HERE, "osm-motorways.json.gz"), "rt") as fh:
             data = json.load(fh)
     else:
         data = fetch_motorways()
+
     segs = {}
     for e in data['elements']:
         ref = e.get('tags', {}).get('ref')
@@ -145,7 +164,7 @@ def main():
         pts = [px(g['lat'], g['lon']) for g in e['geometry']]
         if all(x < -60 or x > W + 60 or y < -60 or y > H + 60 for x, y in pts):
             continue
-        pts = simplify(pts, 1.8)
+        pts = simplify(pts, 1.6)
         if len(pts) > 1:
             segs.setdefault(ref, []).append(pts)
 
@@ -155,7 +174,7 @@ def main():
         best, bd = None, 1e18
         for pts in segs.get(ref, []):
             for (x, y) in pts:
-                if not (18 < x < W - 18 and 18 < y < H - 18):
+                if not (20 < x < W - 20 and 20 < y < H - 20):
                     continue
                 dd = (x - ax) ** 2 + (y - ay) ** 2
                 if dd < bd:
@@ -163,54 +182,74 @@ def main():
         if best:
             badges.append((BADGE_TEXT[key], best[0] + ox, best[1] + oy))
 
-    ringd = d_of([px(*p) for p in ring_ll], close=True)
-    kmpx = (px(*dest(*CENTER, 90, 10))[0] - px(*CENTER)[0]) / 10.0
-
     o = []
     a = o.append
     a(f'<svg class="cov-map" viewBox="0 0 {W} {H}" xmlns="http://www.w3.org/2000/svg" role="img" '
       f'aria-labelledby="covmap-t covmap-d" preserveAspectRatio="xMidYMid meet">')
-    a('<title id="covmap-t">ResQ Tyres coverage across Leeds and West Yorkshire</title>')
-    a('<desc id="covmap-d">Map of the ResQ Tyres mobile coverage area centred on Leeds, with pins on '
-      'Leeds, Pudsey, Garforth, Morley, Dewsbury, Wakefield, Castleford and Pontefract, and the M1, '
-      'M62, M621 and A1(M) running through it.</desc>')
+    a('<title id="covmap-t">Where ResQ Tyres covers</title>')
+    a('<desc id="covmap-d">Map of the ResQ Tyres coverage area. Every confirmed postcode district is '
+      'marked: all Leeds LS districts including LS24 Tadcaster, HG1 to HG3 around Harrogate, and WF1 to '
+      'WF5, WF8, WF10, WF12 and WF13 across Wakefield, Castleford, Pontefract and Dewsbury. Leeds, '
+      'Pudsey, Morley, Dewsbury, Wakefield, Castleford, Garforth, Pontefract, Harrogate and Tadcaster '
+      'are named, with the M1, M62, M621 and A1(M) running through.</desc>')
+
     a('<defs>')
-    a('<radialGradient id="covGlow" cx="50%" cy="50%" r="50%">'
-      '<stop offset="0%" stop-color="#ff2d55" stop-opacity=".115"/>'
-      '<stop offset="58%" stop-color="#e4002b" stop-opacity=".07"/>'
-      '<stop offset="100%" stop-color="#e4002b" stop-opacity=".028"/></radialGradient>')
-    a('<radialGradient id="covVig" cx="50%" cy="46%" r="72%">'
-      '<stop offset="62%" stop-color="#0b0e13" stop-opacity="0"/>'
-      '<stop offset="100%" stop-color="#06080c" stop-opacity=".72"/></radialGradient>')
-    a(f'<clipPath id="covClip"><path d="{ringd}"/></clipPath>')
+    a('<radialGradient id="covGlow" cx="50%" cy="46%" r="58%">'
+      '<stop offset="0%" stop-color="#ff2d55" stop-opacity=".155"/>'
+      '<stop offset="70%" stop-color="#e4002b" stop-opacity=".105"/>'
+      '<stop offset="100%" stop-color="#e4002b" stop-opacity=".07"/></radialGradient>')
+    a('<radialGradient id="covVig" cx="50%" cy="46%" r="74%">'
+      '<stop offset="60%" stop-color="#0b0e13" stop-opacity="0"/>'
+      '<stop offset="100%" stop-color="#06080c" stop-opacity=".55"/></radialGradient>')
+    a(f'<filter id="covSoft" filterUnits="userSpaceOnUse" x="-120" y="-120" '
+      f'width="{W + 240}" height="{H + 240}">'
+      f'<feGaussianBlur stdDeviation="{1.15 * KM:.1f}"/></filter>')
+    # union of district buffers, as a mask so overlaps don't stack
+    a('<mask id="covMask" maskUnits="userSpaceOnUse" '
+      f'x="0" y="0" width="{W}" height="{H}"><g filter="url(#covSoft)" fill="#fff">')
+    for lat, lng in OUTCODES.values():
+        x, y = px(lat, lng)
+        a(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{BUFFER_KM * KM:.1f}"/>')
+    a('</g></mask>')
     a('<g id="covRoads">')
     for ref in MAJOR:
         dd = "".join(d_of(p) for p in segs.get(ref, []))
         if dd:
             a(f'<path d="{dd}"/>')
-    a('</g></defs>')
+    a('</g>')
+    a('</defs>')
+
     a(f'<rect width="{W}" height="{H}" fill="#0b0e13"/>')
     a('<g class="cov-grid">')
-    for gx in range(0, W + 1, 64):
+    for gx in range(0, W + 1, 62):
         a(f'<line x1="{gx}" y1="0" x2="{gx}" y2="{H}"/>')
-    for gy in range(0, H + 1, 64):
+    for gy in range(0, H + 1, 62):
         a(f'<line x1="0" y1="{gy}" x2="{W}" y2="{gy}"/>')
     a('</g>')
-    a(f'<path class="cov-fill" d="{ringd}" fill="url(#covGlow)"/>')
+
+    a(f'<rect width="{W}" height="{H}" fill="url(#covGlow)" mask="url(#covMask)"/>')
     a('<use href="#covRoads" class="cov-road-casing"/>')
     a('<use href="#covRoads" class="cov-road"/>')
-    a('<g clip-path="url(#covClip)"><use href="#covRoads" class="cov-road-lit"/></g>')
-    a(f'<path class="cov-zone" d="{ringd}"/>')
+    a(f'<g mask="url(#covMask)"><use href="#covRoads" class="cov-road-lit"/></g>')
+
+    # one dot per confirmed postcode district
+    a('<g class="cov-district">')
+    for code, (lat, lng) in sorted(OUTCODES.items()):
+        x, y = px(lat, lng)
+        a(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="2.3"><title>{code}</title></circle>')
+    a('</g>')
+
     a('<g class="cov-road-label">')
     for txt, x, y in badges:
         w = 12 + len(txt) * 6.6
         a(f'<rect x="{x - w / 2:.1f}" y="{y - 8:.1f}" width="{w:.1f}" height="16" rx="4"/>'
           f'<text x="{x:.1f}" y="{y + 4:.1f}" text-anchor="middle">{txt}</text>')
     a('</g>')
+
     a('<g class="cov-pins">')
     for lat, lng, name, hub in TOWNS:
         x, y = px(lat, lng)
-        r = 6.5 if hub else 4.5
+        r = 6.0 if hub else 4.2
         a(f'<g class="cov-pin{" hub" if hub else ""}">')
         a(f'<circle class="cov-ping" cx="{x:.1f}" cy="{y:.1f}" r="{r}"/>')
         a(f'<circle class="cov-dot" cx="{x:.1f}" cy="{y:.1f}" r="{r}"/>')
@@ -218,13 +257,15 @@ def main():
         a(f'<text class="cov-name" x="{x + dx:.1f}" y="{y + dy:.1f}" text-anchor="{anc}">{name}</text>')
         a('</g>')
     a('</g>')
+
     a(f'<rect width="{W}" height="{H}" fill="url(#covVig)" pointer-events="none"/>')
-    sb = 10 * kmpx
-    a(f'<g class="cov-scale" transform="translate(46,{H - 30})">'
+    sb = 10 * KM
+    a(f'<g class="cov-scale" transform="translate(24,{H - 26})">'
       f'<line x1="0" y1="0" x2="{sb:.1f}" y2="0"/><line x1="0" y1="-4" x2="0" y2="4"/>'
       f'<line x1="{sb:.1f}" y1="-4" x2="{sb:.1f}" y2="4"/>'
       f'<text x="{sb / 2:.1f}" y="-8" text-anchor="middle">10 km</text></g>')
-    a(f'<text class="cov-credit" x="{W - 46}" y="{H - 18}" text-anchor="end">'
+    a(f'<text class="cov-note" x="24" y="26">Each small dot is a postcode district we cover</text>')
+    a(f'<text class="cov-credit" x="{W - 24}" y="{H - 14}" text-anchor="end">'
       f'Roads &#169; OpenStreetMap contributors</text>')
     a('</svg>')
     sys.stdout.write("".join(o))

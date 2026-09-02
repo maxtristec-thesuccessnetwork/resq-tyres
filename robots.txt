@@ -5,3 +5,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://www.resqtyres.co.uk/sitemap.xml
+
+# Plain-text summary of the business for AI assistants.
+# https://www.resqtyres.co.uk/llms.txt

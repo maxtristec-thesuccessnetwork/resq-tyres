@@ -414,7 +414,7 @@ textarea{resize:vertical}
 .area-map{background:#0b0e13;border:1px solid #1b222b;border-radius:var(--radius-lg);padding:8px;box-shadow:var(--shadow)}
 /* --- Static coverage map (self-hosted SVG, inlined in index.html #areas).
        Replaced Leaflet + CARTO tiles 2026-09-02, card W5 option A. --- */
-.cov-map{display:block;width:100%;height:auto;aspect-ratio:64/50;border-radius:calc(var(--radius-lg) - 8px);background:#0b0e13}
+.cov-map{display:block;width:100%;height:auto;aspect-ratio:62/56;border-radius:calc(var(--radius-lg) - 8px);background:#0b0e13}
 .cov-grid line{stroke:#fff;stroke-opacity:.028;stroke-width:1}
 .cov-road-casing{fill:none;stroke:#05070a;stroke-width:5.5;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
 .cov-road{fill:none;stroke:#39455a;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
@@ -432,10 +432,24 @@ textarea{resize:vertical}
 .cov-pin .cov-name{fill:#fff;font:700 12px/1 var(--font);paint-order:stroke;stroke:rgba(5,7,10,.92);stroke-width:4px;stroke-linejoin:round}
 .cov-pin.hub .cov-name{font-size:14px;font-weight:800}
 /* scale bar + OSM attribution (ODbL - must stay) */
+.cov-district circle{fill:#ffe3e8;opacity:.62}
+.cov-note{fill:#8b95a1;font:600 10.5px/1 var(--font)}
 .cov-scale line{stroke:rgba(255,255,255,.35);stroke-width:1.5}
 .cov-scale text{fill:#7d8793;font:600 10px/1 var(--font)}
 .cov-credit{fill:#5d6672;font:400 9px/1 var(--font)}
 @media(prefers-reduced-motion:reduce){.cov-zone,.cov-pin .cov-ping{animation:none}.cov-pin .cov-ping{opacity:.28}}
+/* --- Puncture price line (W1, 2026-09-02) --- */
+.pr-line{display:flex;gap:9px;align-items:flex-start;margin:0 0 18px;padding:11px 13px;border:1px solid var(--line);border-left:3px solid var(--red);border-radius:var(--radius-sm,10px);background:rgba(228,0,43,.04);font-size:13.5px;line-height:1.5;color:var(--ink-2)}
+.pr-line .icon{flex:0 0 auto;width:17px;height:17px;margin-top:1px;color:var(--red)}
+.pr-line b{color:var(--ink)}
+
+/* --- FAQ (W1, 2026-09-02) --- */
+.faq-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,2vw,22px);max-width:1040px;margin:0 auto}
+.faq-item{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:clamp(16px,2vw,22px);box-shadow:var(--shadow-sm)}
+.faq-item h3{margin:0 0 8px;font-size:clamp(15px,1.5vw,17px);line-height:1.35}
+.faq-item p{margin:0;font-size:14.5px;line-height:1.65;color:var(--ink-2)}
+.faq-item a{color:var(--red);font-weight:700}
+@media(max-width:760px){.faq-grid{grid-template-columns:1fr}}
 .area-side{display:flex;flex-direction:column;gap:18px}
 .pc-checker{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow-sm)}
 .pc-checker label{display:block;font-size:11px;color:var(--ink-2);margin-bottom:9px;text-transform:uppercase;letter-spacing:.6px;font-weight:700}

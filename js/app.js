@@ -236,19 +236,27 @@ function wirePostcodeChecker() {
   function check() {
     var raw = (input.value || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
     if (!raw) { showPC(out, "warn", "Enter your postcode to check."); return; }
-    // outward district letters = leading alpha chars (e.g. "LS" from "LS98TX")
-    var m = raw.match(/^[A-Z]{1,2}/);
-    var prefix = m ? m[0] : "";
-    var covered = RESQ_COVERAGE.covered.indexOf(prefix) !== -1;
-    if (covered) {
+    // A UK inward code is always 3 characters, and the shortest full postcode is
+    // 5 (e.g. M1 1AA). Below that, take what they typed as the district itself —
+    // so "LS28" on its own still works.
+    var outward = raw.length >= 5 ? raw.slice(0, -3) : raw;
+    var m = outward.match(/^[A-Z]{1,2}[0-9][0-9A-Z]?$/);
+    if (!m) {
+      showPC(out, "warn",
+        '<svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg> ' +
+        "That doesn't look like a full postcode — try again, or call us on " +
+        '<a href="tel:07438562633">07438&nbsp;562633</a>.');
+      return;
+    }
+    if (RESQ_COVERAGE.districts.indexOf(outward) !== -1) {
       showPC(out, "ok",
         '<svg class="icon" aria-hidden="true"><use href="#i-check-circle"/></svg> ' +
-        "Great news — <b>" + prefix + "</b> is in our usual area. Call us or plan a home fitting below.");
+        "Great news — <b>" + outward + "</b> is in our coverage area. Call us or plan a home fitting below.");
     } else {
       showPC(out, "warn",
         '<svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg> ' +
-        "We may still be able to help just outside our core area — give us a quick call on " +
-        '<a href="tel:07438562633">07438&nbsp;562633</a> to check.');
+        "<b>" + outward + "</b> is outside the districts we cover, but we may still be able to reach you — " +
+        'give us a quick call on <a href="tel:07438562633">07438&nbsp;562633</a> to check.');
     }
   }
   function showPC(el, kind, html) { el.hidden = false; el.className = "pc-result " + kind; el.innerHTML = html; }
