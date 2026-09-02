@@ -244,19 +244,20 @@ function wirePostcodeChecker() {
     if (!m) {
       showPC(out, "warn",
         '<svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg> ' +
-        "That doesn't look like a full postcode — try again, or call us on " +
-        '<a href="tel:07438562633">07438&nbsp;562633</a>.');
+        "<span>That doesn't look like a full postcode — try again, or call us on " +
+        '<a href="tel:07438562633">07438&nbsp;562633</a>.</span>');
       return;
     }
     if (RESQ_COVERAGE.districts.indexOf(outward) !== -1) {
       showPC(out, "ok",
         '<svg class="icon" aria-hidden="true"><use href="#i-check-circle"/></svg> ' +
-        "Great news — <b>" + outward + "</b> is in our coverage area. Call us or plan a home fitting below.");
+        "<span>Great news — <b>" + outward + "</b> is in our coverage area. " +
+        "Call us or plan a home fitting below.</span>");
     } else {
       showPC(out, "warn",
         '<svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg> ' +
-        "<b>" + outward + "</b> is outside the districts we cover, but we may still be able to reach you — " +
-        'give us a quick call on <a href="tel:07438562633">07438&nbsp;562633</a> to check.');
+        "<span><b>" + outward + "</b> is outside the districts we cover, but we may still be able to " +
+        'reach you — give us a quick call on <a href="tel:07438562633">07438&nbsp;562633</a> to check.</span>');
     }
   }
   function showPC(el, kind, html) { el.hidden = false; el.className = "pc-result " + kind; el.innerHTML = html; }

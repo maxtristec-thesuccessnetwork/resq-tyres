@@ -457,6 +457,7 @@ textarea{resize:vertical}
 .pc-row input{flex:1;text-transform:uppercase}
 .pc-result{margin-top:12px;font-size:14px;display:flex;align-items:flex-start;gap:8px;border-radius:var(--radius-sm);padding:11px 13px;line-height:1.45}
 .pc-result .icon{width:18px;height:18px;flex:none;margin-top:1px}
+.pc-result>span{min-width:0}
 .pc-result a{color:inherit;font-weight:800;text-decoration:underline}
 .pc-result.ok{background:#eafaf0;border:1px solid #b6e6c7;color:#0f7a3d}
 .pc-result.ok .icon{stroke:var(--green)}
