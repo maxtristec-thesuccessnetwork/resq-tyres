@@ -412,28 +412,30 @@ textarea{resize:vertical}
 /* ===== Coverage map + postcode checker ===== */
 .areas-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(20px,3vw,40px);align-items:center;max-width:1040px;margin:0 auto}
 .area-map{background:#0b0e13;border:1px solid #1b222b;border-radius:var(--radius-lg);padding:8px;box-shadow:var(--shadow)}
-#cov-leaflet{width:100%;height:clamp(360px,42vw,460px);border-radius:calc(var(--radius-lg) - 8px);overflow:hidden;z-index:0;background:#0b0e13}
-.leaflet-container{font-family:var(--font);background:#0b0e13}
-/* dark tooltips */
-.cov-tip{background:rgba(13,17,23,.92);border:1px solid rgba(255,255,255,.14);box-shadow:0 6px 18px rgba(0,0,0,.5);color:#fff;font-weight:700;font-size:12px;padding:3px 10px;border-radius:999px;white-space:nowrap;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
-.cov-tip::before{display:none}
-.cov-tip.hub{background:var(--red);border-color:var(--red);font-weight:800}
-/* glowing coverage zone */
-.cov-zone{filter:drop-shadow(0 0 10px rgba(228,0,43,.6));stroke-dasharray:5 7;animation:covDash 1.2s linear infinite}
+/* --- Static coverage map (self-hosted SVG, inlined in index.html #areas).
+       Replaced Leaflet + CARTO tiles 2026-09-02, card W5 option A. --- */
+.cov-map{display:block;width:100%;height:auto;aspect-ratio:64/50;border-radius:calc(var(--radius-lg) - 8px);background:#0b0e13}
+.cov-grid line{stroke:#fff;stroke-opacity:.028;stroke-width:1}
+.cov-road-casing{fill:none;stroke:#05070a;stroke-width:5.5;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+.cov-road{fill:none;stroke:#39455a;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.cov-road-lit{fill:none;stroke:#8ea3b8;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.cov-road-label rect{fill:rgba(11,14,19,.85);stroke:rgba(255,255,255,.16)}
+.cov-road-label text{fill:#aeb6c0;font:700 10px/1 var(--font);letter-spacing:.02em}
+/* glowing coverage edge */
+.cov-zone{fill:none;stroke:#ff2d55;stroke-width:1.8;stroke-opacity:.75;filter:drop-shadow(0 0 8px rgba(228,0,43,.45));stroke-dasharray:5 7;animation:covDash 1.2s linear infinite}
 @keyframes covDash{to{stroke-dashoffset:-24}}
-/* pulsing markers */
-.cov-marker{overflow:visible!important}
-.cov-marker .cov-dot{position:absolute;inset:0;margin:auto;width:12px;height:12px;border-radius:50%;background:var(--red);border:2px solid #fff;box-shadow:0 0 8px rgba(228,0,43,.95)}
-.cov-marker.hub .cov-dot{width:16px;height:16px}
-.cov-marker .cov-pulse{position:absolute;inset:0;margin:auto;width:12px;height:12px;border-radius:50%;background:var(--red);opacity:.55;animation:covPing 2.1s cubic-bezier(.2,.7,.3,1) infinite}
-.cov-marker.hub .cov-pulse{width:16px;height:16px}
-@keyframes covPing{0%{transform:scale(1);opacity:.55}80%,100%{transform:scale(3.4);opacity:0}}
-/* dark controls + attribution */
-.leaflet-bar a{background:#161b22;color:#fff;border-bottom-color:#2a313a}
-.leaflet-bar a:hover{background:#222b36}
-.leaflet-control-attribution{font-size:10px;background:rgba(11,14,19,.72)!important;color:#7d8793!important}
-.leaflet-control-attribution a{color:#aeb6c0!important}
-@media(prefers-reduced-motion:reduce){.cov-zone,.cov-marker .cov-pulse{animation:none}}
+/* pulsing town pins */
+.cov-pin .cov-dot{fill:var(--red);stroke:#fff;stroke-width:2;filter:drop-shadow(0 0 5px rgba(228,0,43,.75))}
+.cov-pin.hub .cov-dot{stroke-width:2.5}
+.cov-pin .cov-ping{fill:var(--red);opacity:.42;transform-box:fill-box;transform-origin:center;animation:covPing 2.1s cubic-bezier(.2,.7,.3,1) infinite}
+@keyframes covPing{0%{transform:scale(1);opacity:.42}80%,100%{transform:scale(3.4);opacity:0}}
+.cov-pin .cov-name{fill:#fff;font:700 12px/1 var(--font);paint-order:stroke;stroke:rgba(5,7,10,.92);stroke-width:4px;stroke-linejoin:round}
+.cov-pin.hub .cov-name{font-size:14px;font-weight:800}
+/* scale bar + OSM attribution (ODbL - must stay) */
+.cov-scale line{stroke:rgba(255,255,255,.35);stroke-width:1.5}
+.cov-scale text{fill:#7d8793;font:600 10px/1 var(--font)}
+.cov-credit{fill:#5d6672;font:400 9px/1 var(--font)}
+@media(prefers-reduced-motion:reduce){.cov-zone,.cov-pin .cov-ping{animation:none}.cov-pin .cov-ping{opacity:.28}}
 .area-side{display:flex;flex-direction:column;gap:18px}
 .pc-checker{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow-sm)}
 .pc-checker label{display:block;font-size:11px;color:var(--ink-2);margin-bottom:9px;text-transform:uppercase;letter-spacing:.6px;font-weight:700}

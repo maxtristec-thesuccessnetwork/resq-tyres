@@ -26,77 +26,13 @@ document.addEventListener("DOMContentLoaded", function () {
   wireEnquiryForm();
   wirePostcodeChecker();
   wireTyreSizeCaution();
-  initCoverageMap();
 });
 
-/* ---------- Coverage map (Leaflet + Carto dark tiles) ---------- */
-function initCoverageMap() {
-  var el = document.getElementById("cov-leaflet");
-  if (!el || typeof L === "undefined") return;
-
-  var CENTER = [53.752, -1.545];
-
-  // NB: set an initial view BEFORE adding any layers, and disable zoom
-  // animation — adding permanent tooltips then animating fitBounds throws
-  // Leaflet's "layerPointToLatLng" error and leaves the map blank.
-  var map = L.map(el, {
-    scrollWheelZoom: false,
-    zoomControl: true,
-    attributionControl: true,
-    zoomAnimation: false,
-    markerZoomAnimation: false
-  }).setView(CENTER, 11);
-
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-    maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
-  }).addTo(map);
-
-  // Glowing coverage zone
-  var circle = L.circle(CENTER, {
-    radius: 17000,
-    className: "cov-zone",
-    color: "#ff2d55", weight: 2, opacity: 0.9,
-    fillColor: "#e4002b", fillOpacity: 0.12
-  }).addTo(map);
-
-  // [lat, lng, name, isHub]
-  var towns = [
-    [53.8008, -1.5491, "Leeds", true],
-    [53.6830, -1.4977, "Wakefield", false],
-    [53.6912, -1.6290, "Dewsbury", false],
-    [53.7967, -1.6631, "Pudsey", false],
-    [53.7491, -1.6010, "Morley", false],
-    [53.7256, -1.3560, "Castleford", false],
-    [53.7928, -1.3872, "Garforth", false],
-    [53.6919, -1.3128, "Pontefract", false]
-  ];
-
-  towns.forEach(function (t) {
-    var hub = t[3];
-    var icon = L.divIcon({
-      className: "cov-marker" + (hub ? " hub" : ""),
-      html: '<span class="cov-pulse"></span><span class="cov-dot"></span>',
-      iconSize: hub ? [22, 22] : [16, 16],
-      iconAnchor: hub ? [11, 11] : [8, 8]
-    });
-    L.marker([t[0], t[1]], { icon: icon, keyboard: false })
-      .addTo(map)
-      .bindTooltip(t[2], {
-        permanent: true, direction: "top", offset: [0, hub ? -10 : -8],
-        className: "cov-tip" + (hub ? " hub" : "")
-      });
-  });
-
-  map.fitBounds(circle.getBounds(), { padding: [34, 34], animate: false });
-
-  // Re-measure once layout settles (map sits inside an animated section)
-  setTimeout(function () {
-    map.invalidateSize();
-    map.fitBounds(circle.getBounds(), { padding: [34, 34], animate: false });
-  }, 300);
-  window.addEventListener("load", function () { map.invalidateSize(); });
-}
+/* ---------- Coverage map ----------
+   Now a self-hosted static SVG inlined in index.html (#areas). The old
+   Leaflet + CARTO tile map was removed 2026-09-02 (card W5, option A):
+   CARTO began watermarking unauthenticated tiles "API KEY REQUIRED".
+   Regenerate the SVG with tools/build-coverage-map.py. */
 
 /* ---------- Price guide ----------
    THE RULE: a size shows a price only if ResQ has filled in BOTH price
