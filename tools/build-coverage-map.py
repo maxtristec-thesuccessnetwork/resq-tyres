@@ -24,6 +24,12 @@ checker beside the map is the exact answer; the map is the shape of the patch.
 Motorway centrelines come from OpenStreetMap (ODbL) — attribution is rendered
 bottom-right of the SVG and must stay there.
 
+The SVG is referenced from index.html as <img src="assets/coverage-map.svg" loading="lazy">,
+NOT inlined. Inlining it cost 27 KB in the HTML and measurably delayed the hero:
+Lighthouse mobile, three runs each, identical local serving — inline scored 58 with
+LCP 7.0 s, external+lazy scored 74 with LCP 4.8 s. It therefore carries its own
+<style> block, because an <img> gets none of the page's CSS.
+
 Usage:  python3 tools/build-coverage-map.py > assets/coverage-map.svg
             re-fetches roads from Overpass (mirrors are often busy; it tries three)
         python3 tools/build-coverage-map.py --cached > assets/coverage-map.svg
@@ -192,6 +198,29 @@ def main():
       'WF5, WF8, WF10, WF12 and WF13 across Wakefield, Castleford, Pontefract and Dewsbury. Leeds, '
       'Pudsey, Morley, Dewsbury, Wakefield, Castleford, Garforth, Pontefract, Harrogate and Tadcaster '
       'are named, with the M1, M62, M621 and A1(M) running through.</desc>')
+
+    # The SVG is loaded as <img>, so it gets none of the page's CSS and must
+    # carry its own. Keep these in step with the .cov-map block in css/styles.css.
+    a("""<style>
+.cov-grid line{stroke:#fff;stroke-opacity:.028;stroke-width:1}
+.cov-road-casing{fill:none;stroke:#05070a;stroke-width:5.5;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+.cov-road{fill:none;stroke:#39455a;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.cov-road-lit{fill:none;stroke:#8ea3b8;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.cov-road-label rect{fill:rgba(11,14,19,.85);stroke:rgba(255,255,255,.16)}
+.cov-road-label text{fill:#aeb6c0;font:700 10px/1 system-ui,sans-serif;letter-spacing:.02em}
+.cov-district circle{fill:#ffe3e8;opacity:.62}
+.cov-pin .cov-dot{fill:#e4002b;stroke:#fff;stroke-width:2}
+.cov-pin.hub .cov-dot{stroke-width:2.5}
+.cov-pin .cov-ping{fill:#e4002b;opacity:.42;transform-box:fill-box;transform-origin:center;animation:covPing 2.1s cubic-bezier(.2,.7,.3,1) infinite}
+@keyframes covPing{0%{transform:scale(1);opacity:.42}80%,100%{transform:scale(3.4);opacity:0}}
+.cov-pin .cov-name{fill:#fff;font:700 12px/1 system-ui,sans-serif;paint-order:stroke;stroke:rgba(5,7,10,.92);stroke-width:4px;stroke-linejoin:round}
+.cov-pin.hub .cov-name{font-size:14px;font-weight:800}
+.cov-scale line{stroke:rgba(255,255,255,.35);stroke-width:1.5}
+.cov-scale text{fill:#7d8793;font:600 10px/1 system-ui,sans-serif}
+.cov-note{fill:#8b95a1;font:600 10.5px/1 system-ui,sans-serif}
+.cov-credit{fill:#5d6672;font:400 9px/1 system-ui,sans-serif}
+@media(prefers-reduced-motion:reduce){.cov-pin .cov-ping{animation:none;opacity:.28}}
+</style>""")
 
     a('<defs>')
     a('<radialGradient id="covGlow" cx="50%" cy="46%" r="58%">'
