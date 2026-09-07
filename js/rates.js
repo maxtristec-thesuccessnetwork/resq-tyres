@@ -6,14 +6,27 @@
    This file is only used if that sheet can't be reached, so the
    size dropdowns still work and the page never breaks.
 
-   ONE RULE, everywhere:
-     A size shows a price ONLY if the sheet has BOTH "From £"
-     and "To £" filled in for it. Anything else tells the
-     customer to call. There is no estimating, no rim band and
-     no guessing — if ResQ hasn't priced it, we don't quote it.
+   THE RULE (revised 7 Sept 2026, Moin's own numbers):
+     1. A size with BOTH "From £" and "To £" filled in is quoted exactly.
+     2. Otherwise a car size is quoted from its RIM BAND — the
+        "Backup NN inch" rows, which Moin filled in himself on
+        7 Sept (14–17" £40–£100, 18–20" £80–£150). Van/commercial
+        "C" sizes only use a band if a "Backup NNC inch" row exists.
+     3. No band and no exact price => the customer is asked to call.
+     Prices are PER TYRE. Mobile fitting is charged on top
+     (fittingFrom below, overridable by a "Mobile fitting" sheet row).
    =========================================================== */
 
 const RESQ_RATES = {
+
+  /* Rim bands, keyed by rim ("14", "16C"). Filled from the sheet's
+     "Backup NN inch" rows. Empty here — the sheet is the source of truth. */
+  bands: {},
+
+  /* Mobile fitting, on top of the tyre price. Moin, 7 Sept 2026:
+     "plus 50 quid, depending on where it is". A "Mobile fitting" row
+     in the sheet overrides this. */
+  fittingFrom: 50,
 
   /* Prices, keyed "width/profileRrim" (rim keeps its C for
      commercial/van sizes, e.g. "195/65R16C").

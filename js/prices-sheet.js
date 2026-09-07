@@ -2,14 +2,14 @@
    Reads the "ResQ Tyres — Website Prices" Google Sheet so ResQ can update
    prices himself (no developer, no redeploy).
 
-   THE RULE:
-     A size is quoted ONLY if its row has BOTH "From £" and "To £" filled in.
-     A row with a size but no prices still appears in the dropdowns — the
-     customer just gets "call us for a price" instead of a number.
-     Nothing is ever estimated, banded or guessed.
-
-   Adding a size row makes that size selectable. Filling in its two price
-   columns turns the price on. That's the whole system.
+   THE RULE (revised 7 Sept 2026):
+     1. A size row with BOTH "From £" and "To £" is quoted exactly.
+     2. Otherwise a car size is quoted from its rim band — the "Backup NN inch"
+        rows, which Moin filled with his own numbers on 7 Sept. A van/commercial
+        "C" size only uses a band from a "Backup NNC inch" row.
+     3. No exact price and no band => "call us for a price".
+     A "Mobile fitting" row (From £) sets the fitting-from price shown beside
+     every quote. Prices are per tyre; fitting is on top.
 
    If the sheet can't be reached, the site falls back to the sizes bundled
    in rates.js and quotes nothing. */
@@ -72,7 +72,7 @@
   }
 
   function applyRates(rows) {
-    var exact = {}, sizes = [], seen = {}, addon = null;
+    var exact = {}, sizes = [], seen = {}, addon = null, bands = {}, fitting = null;
     var priced = 0, listed = 0, ignored = 0;
 
     rows.forEach(function (cols) {
@@ -94,10 +94,13 @@
         }
       } else if (/locking/i.test(label)) {
         if (from != null && to != null) addon = { low: Math.min(from, to), high: Math.max(from, to) };
+      } else if (/^backup\s+(\d{2}C?)\s*inch/i.test(label)) {
+        // Rim band: "Backup 16 inch" -> bands["16"], "Backup 16C inch" -> bands["16C"].
+        var b = label.match(/^backup\s+(\d{2}C?)\s*inch/i)[1].toUpperCase();
+        if (from != null && to != null) bands[b] = { low: Math.min(from, to), high: Math.max(from, to) };
+      } else if (/mobile\s*fitting/i.test(label)) {
+        if (from != null) fitting = from;
       } else {
-        // Anything else (the old "Backup NN inch" rim bands) is deliberately
-        // ignored. We no longer estimate a price from rim diameter — those
-        // rows can be deleted from the sheet.
         ignored++;
       }
     });
@@ -107,9 +110,14 @@
       RESQ_RATES.exact = exact;
     }
     if (addon) RESQ_RATES.lockingNutRemoval = addon;
+    RESQ_RATES.bands = bands;
+    if (fitting != null) RESQ_RATES.fittingFrom = fitting;
 
     if (window.console) {
-      console.log("ResQ prices: " + listed + " sizes listed, " + priced + " with a price." +
+      var banded = 0;
+      sizes.forEach(function (sz) { if (!exact[sz.w + "/" + sz.p + "R" + sz.r] && bands[sz.r]) banded++; });
+      console.log("ResQ prices: " + listed + " sizes listed, " + priced + " priced exactly, " + banded +
+        " priced by rim band (" + Object.keys(bands).join(", ") + "), fitting from £" + RESQ_RATES.fittingFrom + "." +
         (ignored ? " " + ignored + " unused row(s) ignored." : ""));
     }
 

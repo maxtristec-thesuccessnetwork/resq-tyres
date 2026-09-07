@@ -35,10 +35,10 @@ document.addEventListener("DOMContentLoaded", function () {
    Regenerate the SVG with tools/build-coverage-map.py. */
 
 /* ---------- Price guide ----------
-   THE RULE: a size shows a price only if ResQ has filled in BOTH price
-   columns for it in the sheet. Every other size still appears in the
-   dropdowns (so the customer can find their tyre) but is answered with
-   "call us". Nothing is estimated, banded or guessed. */
+   THE RULE (7 Sept 2026): exact sheet price first; otherwise the rim band
+   Moin set ("Backup NN inch" rows); otherwise "call us". Every size still
+   appears in the dropdowns so the customer can find their tyre. Prices are
+   per tyre — mobile fitting (RESQ_RATES.fittingFrom) is on top. */
 
 var DEFAULT_SIZE = { w: 205, p: 55, r: "16" };
 
@@ -121,10 +121,18 @@ function populateSelects() {
 // Called by prices-sheet.js once the live sheet lands.
 window.RESQ_onRatesUpdated = function () { refreshSizeSelects(currentSize()); };
 
-// The price range for a size, or null if ResQ hasn't priced it.
+// The price range for a size: exact row, else the rim band, else null.
 function rangeForSize(width, profile, rim) {
-  var e = (typeof RESQ_RATES !== "undefined" && RESQ_RATES.exact) || {};
-  return e[sizeKey(width, profile, rim)] || null;
+  var R = (typeof RESQ_RATES !== "undefined" && RESQ_RATES) || {};
+  var e = R.exact || {}, b = R.bands || {};
+  var key = sizeKey(width, profile, rim);
+  if (e[key]) return e[key];
+  var r = String(rim).toUpperCase();
+  return b[r] || null;   // a "16C" van size never borrows the "16" car band
+}
+function fittingFrom() {
+  var f = (typeof RESQ_RATES !== "undefined" && RESQ_RATES.fittingFrom);
+  return (typeof f === "number" && f > 0) ? f : 50;
 }
 
 var ResQState = { size: "", lockingNut: "yes", range: null, usedTool: false };
@@ -166,17 +174,18 @@ function renderRange(sizeLabel, range, lockingNut) {
   if (call) call.hidden = priced;
 
   if (priced) {
-    if (lead) lead.textContent = "Typical fitted price for";
+    if (lead) lead.textContent = "Typical tyre price for";
     document.getElementById("range-out").innerHTML =
       "£" + range.low + "<span class='dash'>–</span>£" + range.high +
-      "<small>per tyre, fitted</small>";
+      "<small>per tyre + mobile fitting from £" + fittingFrom() + "</small>";
     if (micro) micro.textContent =
-      "A guide only — the final price is confirmed by phone. Prices are per tyre, mobile fitting included.";
+      "A guide only — the final price is confirmed by phone. Prices are per tyre; mobile fitting is from £" +
+      fittingFrom() + " on top, depending on distance.";
   } else {
     // ResQ hasn't priced this size. We don't guess — we ask them to call.
     if (lead) lead.textContent = "Your tyre size:";
     if (micro) micro.textContent =
-      "Mobile fitting included, pay on completion. Leeds, Wakefield and across West Yorkshire.";
+      "Pay on completion. Leeds, Wakefield, Harrogate and across West Yorkshire.";
   }
 
   // Locking wheel-nut add-on note
@@ -373,15 +382,15 @@ function estimateLines(countStr) {
     };
   }
 
-  var rangeTxt = "£" + r.low + "–£" + r.high + " per tyre, fitted";
+  var rangeTxt = "£" + r.low + "–£" + r.high + " per tyre + mobile fitting from £" + fittingFrom();
   var count = parseInt(String(countStr).replace(/[^0-9]/g, ""), 10);
   var total = "";
   if (count && count > 0) {
     var lo = r.low * count, hi = r.high * count;
     if (needsRemoval) { lo += a.low; hi += a.high; }
     var plus = /\+/.test(String(countStr)) ? "+" : "";
-    total = "£" + lo + "–£" + hi + " (" + count + plus + " tyre" + (count > 1 ? "s" : "") +
-            (needsRemoval ? " + locking nut removal" : "") + ")";
+    total = "£" + lo + "–£" + hi + " tyres (" + count + plus + " tyre" + (count > 1 ? "s" : "") +
+            (needsRemoval ? " + locking nut removal" : "") + ") + mobile fitting from £" + fittingFrom();
   }
   return { range: rangeTxt, locking: lockingTxt, total: total };
 }

@@ -29,6 +29,22 @@
     }, 2200);
   }
 
+  /* ---- Honest open/closed status (Moin, 7 Sept 2026: 6am–10pm, 7 days) ---- */
+  (function () {
+    var els = document.querySelectorAll("[data-open-status]");
+    if (!els.length) return;
+    var OPEN = 6, CLOSE = 22, hour;
+    try {
+      hour = parseInt(new Intl.DateTimeFormat("en-GB", { hour: "numeric", hour12: false, timeZone: "Europe/London" }).format(new Date()), 10);
+    } catch (e) { hour = new Date().getHours(); }
+    var open = hour >= OPEN && hour < CLOSE;
+    Array.prototype.forEach.call(els, function (el) {
+      el.textContent = open ? "Open now · 6am–10pm, 7 days" : "Opens 6am · WhatsApp us any time";
+      var dot = el.parentNode && el.parentNode.querySelector(".dotpulse");
+      if (dot && !open) dot.style.opacity = ".35";
+    });
+  })();
+
   /* ---- Scroll progress bar + hero scale + to-top ---- */
   var bar = document.getElementById("progress");
   var heroImg = document.getElementById("heroImg");
