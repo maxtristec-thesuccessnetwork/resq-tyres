@@ -13,3 +13,8 @@ dist/
 # Unused source originals (kept out of the build)
 assets/work*.jpg
 assets/logo-header.jpg
+
+# Vault notes that live beside the site but must never deploy
+ResQ*.md
+note-to-resq.md
+_to_delete/
