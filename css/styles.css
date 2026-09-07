@@ -320,6 +320,8 @@ textarea{resize:vertical}
 .chips{list-style:none;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:760px;margin:0 auto}
 .chips li{background:#fff;border:1px solid var(--line);padding:9px 16px;border-radius:999px;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:7px;box-shadow:var(--shadow-sm)}
 .chips .icon{width:14px;height:14px;stroke:var(--red)}
+.chips li a{color:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:7px}
+.chips li:has(a):hover{border-color:var(--red)}
 
 /* ===== Enquiry / success ===== */
 .enquiry .card{max-width:800px;margin:0 auto}
