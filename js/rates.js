@@ -194,11 +194,12 @@ const RESQ_COVERAGE = {
     "LS11","LS12","LS13","LS14","LS15","LS16","LS17","LS18","LS19","LS20",
     "LS21","LS22","LS23","LS24","LS25","LS26","LS27","LS28","LS29",
     "HG1","HG2","HG3",
-    "WF1","WF2","WF3","WF4","WF5","WF6","WF7","WF8","WF9","WF10","WF11","WF12","WF13"
+    "WF1","WF2","WF3","WF4","WF5","WF6","WF7","WF8","WF9","WF10","WF11","WF12","WF13",
+    "YO1","YO10","YO24","YO8"
   ],
   towns: [
     "Leeds", "Wakefield", "Dewsbury", "Pudsey",
     "Morley", "Castleford", "Garforth", "Pontefract",
-    "Harrogate", "Tadcaster"
+    "Harrogate", "Tadcaster", "York", "Selby"
   ]
 };

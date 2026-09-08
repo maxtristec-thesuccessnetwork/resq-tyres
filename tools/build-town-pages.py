@@ -24,7 +24,7 @@ SITE = "https://www.resqtyres.co.uk"
 PHONE_DISPLAY, PHONE_TEL, PHONE_E164 = "07438 562633", "07438562633", "+447438562633"
 WA = "https://wa.me/447438562633"
 COVERED = set(re.findall(r'"([A-Z]{2}\d{1,2})"', INDEX.split("RESQ_COVERAGE")[0]) or [])  # placeholder
-COVERED = set(re.findall(r'"((?:LS|HG|WF)\d{1,2})"', (ROOT / "js" / "rates.js").read_text()))
+COVERED = set(re.findall(r'"((?:LS|HG|WF|YO)\d{1,2})"', (ROOT / "js" / "rates.js").read_text()))
 
 # ------------------------------------------------------------------ head pieces from index.html
 def slice_between(s: str, start: str, end: str) -> str:
@@ -99,7 +99,7 @@ TOWNS = [
         hero_img=("assets/fitting-420.webp", "assets/fitting-760.webp", "420w", "760w", 760, 1140,
                   "ResQ Tyres fitter changing a tyre at a customer's home — mobile tyre fitting on the driveway"),
         stat_area=("HG1–HG3 · LS24", "Harrogate &amp; Tadcaster"),
-        cover_heading="Harrogate, the villages around it, and Tadcaster",
+        cover_heading="Harrogate, the villages around it, Tadcaster and York",
         cover_intro="We come up the A61 and the A658 from Leeds to cover all three Harrogate districts and the Tadcaster side of LS24. Same van, same tyres, same pay-on-completion — no need to get the car to a garage in town.",
         districts=[
             ("HG1", "Harrogate town centre, Bilton, Starbeck, New Park, High Harrogate"),
@@ -107,8 +107,10 @@ TOWNS = [
             ("HG3", "Killinghall, Ripley, Hampsthwaite, Birstwith, Spofforth, Follifoot, Kirkby Overblow, Beckwithshaw"),
             ("LS24", "Tadcaster, Stutton, Towton, Saxton, Church Fenton, Ulleskelf"),
             ("LS22 · LS23", "Wetherby, Boston Spa, Thorp Arch — on the way between the two"),
+            ("YO1 · YO10 · YO24", "York city centre, Fulford, Heslington, Acomb, Dringhouses"),
+            ("YO8", "Selby"),
         ],
-        edge="Knaresborough (HG5) and Ripon (HG4) are just outside our confirmed patch — call us anyway, we may still be able to reach you.",
+        edge="Knaresborough (HG5), Ripon (HG4) and the rest of York are just outside our confirmed patch — call us anyway, we may still be able to reach you.",
         landmarks="the A61 Leeds Road and Harrogate Road, the A59 through Knaresborough, the A658 past the airport, the Stray, Harrogate station and the Victoria car park, and the A64 and A659 around Tadcaster",
         faq=[
             ("Which parts of Harrogate do you cover?",
@@ -125,7 +127,7 @@ TOWNS = [
              "No. Nothing to pay online and no deposit. You pay on completion, by card or cash, once the job's done."),
         ],
         marquee=["Harrogate", "Bilton", "Starbeck", "Pannal", "Killinghall", "Ripley", "Spofforth", "Tadcaster", "Boston Spa", "Wetherby"],
-        served=[("City", "Harrogate"), ("City", "Tadcaster"), ("City", "Pannal"), ("City", "Killinghall"), ("City", "Wetherby"), ("City", "Boston Spa")],
+        served=[("City", "Harrogate"), ("City", "Tadcaster"), ("City", "York"), ("City", "Selby"), ("City", "Pannal"), ("City", "Wetherby")],
     ),
 ]
 
