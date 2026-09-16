@@ -14,7 +14,7 @@
   /* ---- Hero rotator ---- */
   var rot = document.getElementById("rotator");
   if (rot && !reduce) {
-    var words = window.RESQ_ROTATOR_WORDS || ["At home.", "At work.", "At the roadside.", "Day or night."];
+    var words = window.RESQ_ROTATOR_WORDS || ["At home.", "At work.", "At the roadside.", "6am to 10pm."];
     var i = 0;
     setInterval(function () {
       i = (i + 1) % words.length;
@@ -79,7 +79,8 @@
     var dec = parseInt(el.getAttribute("data-dec") || "0", 10);
     var suffix = el.getAttribute("data-suffix") || "";
     if (isNaN(target)) return;
-    if (reduce) { el.textContent = target.toFixed(dec) + suffix; return; }
+    // Ratings (decimals) show their real value at once: a count-up read "0.2★" on first paint.
+    if (reduce || dec > 0) { el.textContent = target.toFixed(dec) + suffix; return; }
     var start = null, dur = 1300;
     function step(ts) {
       if (!start) start = ts;
