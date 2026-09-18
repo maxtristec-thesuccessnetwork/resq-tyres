@@ -9,6 +9,15 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-GVBR7Z973Z');
 
+// Google Ads (account 414-943-1625) website call tracking, added 18 Sept 2026.
+// For visitors who arrive from an ad, Google swaps 07438 562633 for a forwarding
+// number and counts a call of 30s+ as the "ResQ - Website Call (30s+)" conversion.
+// Everyone else keeps seeing, and dialling, the real number.
+gtag('config', 'AW-18374857509');
+gtag('config', 'AW-18374857509/mR1vCN2bqPwcEKWm6LlE', {
+  'phone_conversion_number': '07438 562633'
+});
+
 // Emergency trade = phone-driven. Taps on the number and on WhatsApp are the
 // only conversions that matter, so they are sent as their own events and
 // marked as key events in GA4 > Admin > Events.
