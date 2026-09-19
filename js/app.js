@@ -316,7 +316,7 @@ function wireEnquiryForm() {
       sendToEndpoint(CONFIG.formEndpoint, data, form, err);
     } else {
       openMailto(data);
-      succeed(data);
+      succeed(data, "mailto");
     }
   });
 }
@@ -345,9 +345,9 @@ function sendViaWeb3Forms(data, form, err) {
     headers: { "Accept": "application/json", "Content-Type": "application/json" },
     body: JSON.stringify(payload)
   }).then(function (r) {
-    if (r.ok) { succeed(data); form.reset(); }
+    if (r.ok) { succeed(data, "web3forms"); form.reset(); }
     else { show(err, "Sorry, something went wrong. Please call us on 07438 562633."); }
-  }).catch(function () { openMailto(data); succeed(data); });
+  }).catch(function () { openMailto(data); succeed(data, "mailto_fallback"); });
 }
 
 function sendToEndpoint(endpoint, data, form, err) {
@@ -356,9 +356,9 @@ function sendToEndpoint(endpoint, data, form, err) {
     headers: { "Accept": "application/json", "Content-Type": "application/json" },
     body: JSON.stringify(data)
   }).then(function (r) {
-    if (r.ok) { succeed(data); form.reset(); }
+    if (r.ok) { succeed(data, "endpoint"); form.reset(); }
     else { show(err, "Sorry, something went wrong. Please call us on 07438 562633."); }
-  }).catch(function () { openMailto(data); succeed(data); });
+  }).catch(function () { openMailto(data); succeed(data, "mailto_fallback"); });
 }
 
 // Turn the on-screen estimate (if the customer used the tool) into email lines.
@@ -421,7 +421,18 @@ function openMailto(d) {
   window.location.href = url;
 }
 
-function succeed(d) {
+function succeed(d, method) {
+  // GA4: count the enquiry as sent. The form stops the browser's own submit, so
+  // GA4's automatic form_submit never fires; generate_lead is the recommended
+  // event name for a lead and can be marked as a key event.
+  if (typeof gtag === "function") {
+    gtag("event", "generate_lead", {
+      form_id: "enquiry-form",
+      method: method || "unknown",
+      tyres_needed: d.tyrecount || "",
+      used_price_guide: ResQState.usedTool ? "yes" : "no"
+    });
+  }
   document.getElementById("enquiry-form").hidden = true;
   var s = document.getElementById("success");
   s.hidden = false;
