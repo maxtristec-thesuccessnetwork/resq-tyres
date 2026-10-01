@@ -168,7 +168,13 @@ function renderRange(sizeLabel, range, lockingNut) {
   var box   = document.getElementById("range-box");
   var call  = document.getElementById("quote-call");
   var micro = document.getElementById("results-micro");
+  var allin = document.getElementById("allin");
   var priced = !!range;
+
+  // WhatsApp with the size already typed, so the customer gets an exact price in one message.
+  var wa = document.getElementById("wa-size");
+  if (wa) wa.href = "https://wa.me/447438562633?text=" + encodeURIComponent(
+    "Hi ResQ, can I get a price for " + sizeLabel + " tyres fitted? My postcode is ");
 
   if (box)  box.hidden  = !priced;
   if (call) call.hidden = priced;
@@ -181,7 +187,12 @@ function renderRange(sizeLabel, range, lockingNut) {
     if (micro) micro.textContent =
       "A guide only — the final price is confirmed by phone. Prices are per tyre; mobile fitting is from £" +
       fittingFrom() + " on top, depending on distance.";
+    if (allin) {
+      allin.hidden = false;
+      allin.textContent = "One tyre fitted at your door: from £" + (range.low + fittingFrom()) + ".";
+    }
   } else {
+    if (allin) { allin.hidden = true; allin.textContent = ""; }
     // ResQ hasn't priced this size. We don't guess — we ask them to call.
     if (lead) lead.textContent = "Your tyre size:";
     if (micro) micro.textContent =
@@ -283,82 +294,82 @@ function wireEnquiryForm() {
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     var err = document.getElementById("enquiry-error");
+    var btn = document.getElementById("enquiry-submit");
 
-    var data = {
-      name: val("name"),
-      phone: val("phone"),
-      email: val("email"),
-      postcode: val("postcode2"),
-      vehicle: val("vehicle"),
-      tyresize: val("tyresize2"),
-      tyrecount: val("tyrecount"),
-      availability: val("availability"),
-      message: val("message")
-    };
+    // Spam trap: a hidden box people never see. Bots tick it; drop quietly.
+    var trap = document.getElementById("botcheck");
+    if (trap && trap.checked) return;
 
-    // mandatory: name, phone, postcode, vehicle, tyre size, count, availability
-    if (!data.name || !data.phone || !data.postcode || !data.vehicle ||
-        !data.tyresize || !data.tyrecount || !data.availability) {
-      show(err, "Please fill in your name, phone, postcode, vehicle, tyre size, how many tyres and your availability.");
+    var data = { name: val("name"), phone: val("phone"), tyresize: val("tyresize2") };
+    if (!data.name || !data.phone || !data.tyresize) {
+      show(err, "Please fill in your name, phone number and tyre size or registration.");
       return;
     }
     hide(err);
 
     // carry the on-screen estimate into the enquiry (only if they used the tool)
-    var est = estimateLines(data.tyrecount);
+    var est = estimateLines("");
     data.estRange = est.range;
     data.estLocking = est.locking;
-    data.estTotal = est.total;
+
+    if (btn) { btn.disabled = true; btn.setAttribute("aria-busy", "true"); }
+    var done = function () { if (btn) { btn.disabled = false; btn.removeAttribute("aria-busy"); } };
 
     if (CONFIG.web3formsKey) {
-      sendViaWeb3Forms(data, form, err);
+      sendViaWeb3Forms(data, form, err, done);
     } else if (CONFIG.formEndpoint) {
-      sendToEndpoint(CONFIG.formEndpoint, data, form, err);
+      sendToEndpoint(CONFIG.formEndpoint, data, form, err, done);
     } else {
-      openMailto(data);
-      succeed(data, "mailto");
+      // No form service configured: hand over to the visitor's email app. Not counted as a lead.
+      openMailto(data); done();
     }
   });
 }
 
-function sendViaWeb3Forms(data, form, err) {
+// Shown when a send fails. Never say "sent" unless the service confirmed it.
+function sendFailed(err, done) {
+  if (err) {
+    err.innerHTML = 'Sorry, that didn’t send. Please <a href="tel:07438562633">call 07438 562633</a> or ' +
+      '<a href="https://wa.me/447438562633" target="_blank" rel="noopener">WhatsApp us</a> and we’ll sort it straight away.';
+    err.hidden = false;
+  }
+  if (done) done();
+}
+
+function sendViaWeb3Forms(data, form, err, done) {
   var payload = {
     access_key: CONFIG.web3formsKey,
-    subject: "Home tyre fitting enquiry — " + data.name + " (" + data.postcode + ")",
+    subject: "Home tyre fitting call-back — " + data.name,
     from_name: "ResQ Tyres Website",
-    replyto: data.email || CONFIG.businessEmail,
+    replyto: CONFIG.businessEmail,
+    botcheck: false,
     "Name": data.name,
     "Phone": data.phone,
-    "Email": data.email || "Not provided",
-    "Postcode": data.postcode,
-    "Vehicle": data.vehicle,
-    "Tyre size": data.tyresize,
-    "Tyres needed": data.tyrecount,
-    "Availability": data.availability,
-    "Estimated price": data.estRange || "-",
-    "Locking nut removal needed": data.estLocking || "-",
-    "Estimated total": data.estTotal || "-",
-    "Notes": data.message || "None"
+    "Tyre size or registration": data.tyresize,
+    "Price guide shown": data.estRange || "-",
+    "Locking nut removal needed": data.estLocking || "-"
   };
   fetch("https://api.web3forms.com/submit", {
     method: "POST",
     headers: { "Accept": "application/json", "Content-Type": "application/json" },
     body: JSON.stringify(payload)
   }).then(function (r) {
-    if (r.ok) { succeed(data, "web3forms"); form.reset(); }
-    else { show(err, "Sorry, something went wrong. Please call us on 07438 562633."); }
-  }).catch(function () { openMailto(data); succeed(data, "mailto_fallback"); });
+    return r.json().catch(function () { return {}; }).then(function (j) {
+      if (r.ok && j.success !== false) { succeed(data, "web3forms"); form.reset(); if (done) done(); }
+      else sendFailed(err, done);
+    });
+  }).catch(function () { sendFailed(err, done); });
 }
 
-function sendToEndpoint(endpoint, data, form, err) {
+function sendToEndpoint(endpoint, data, form, err, done) {
   fetch(endpoint, {
     method: "POST",
     headers: { "Accept": "application/json", "Content-Type": "application/json" },
     body: JSON.stringify(data)
   }).then(function (r) {
-    if (r.ok) { succeed(data, "endpoint"); form.reset(); }
-    else { show(err, "Sorry, something went wrong. Please call us on 07438 562633."); }
-  }).catch(function () { openMailto(data); succeed(data, "mailto_fallback"); });
+    if (r.ok) { succeed(data, "endpoint"); form.reset(); if (done) done(); }
+    else sendFailed(err, done);
+  }).catch(function () { sendFailed(err, done); });
 }
 
 // Turn the on-screen estimate (if the customer used the tool) into email lines.
@@ -397,24 +408,17 @@ function estimateLines(countStr) {
 
 function buildSummary(d) {
   return (
-    "New home tyre fitting enquiry — ResQ Tyres\n\n" +
+    "Home tyre fitting call-back — ResQ Tyres\n\n" +
     "Name: " + d.name + "\n" +
     "Phone: " + d.phone + "\n" +
-    "Email: " + (d.email || "-") + "\n" +
-    "Postcode: " + d.postcode + "\n" +
-    "Vehicle: " + d.vehicle + "\n" +
-    "Tyre size: " + d.tyresize + "\n" +
-    "Tyres needed: " + d.tyrecount + "\n" +
-    "Availability: " + d.availability + "\n" +
-    "Estimated price: " + (d.estRange || "-") + "\n" +
-    "Locking nut removal needed: " + (d.estLocking || "-") + "\n" +
-    "Estimated total: " + (d.estTotal || "-") + "\n" +
-    "Notes: " + (d.message || "-") + "\n"
+    "Tyre size or registration: " + d.tyresize + "\n" +
+    "Price guide shown: " + (d.estRange || "-") + "\n" +
+    "Locking nut removal needed: " + (d.estLocking || "-") + "\n"
   );
 }
 
 function openMailto(d) {
-  var subject = "Home tyre fitting enquiry — " + d.postcode;
+  var subject = "Home tyre fitting call-back — " + d.name;
   var url = "mailto:" + CONFIG.businessEmail +
     "?subject=" + encodeURIComponent(subject) +
     "&body=" + encodeURIComponent(buildSummary(d));
@@ -429,7 +433,6 @@ function succeed(d, method) {
     gtag("event", "generate_lead", {
       form_id: "enquiry-form",
       method: method || "unknown",
-      tyres_needed: d.tyrecount || "",
       used_price_guide: ResQState.usedTool ? "yes" : "no"
     });
   }
@@ -444,7 +447,7 @@ function succeed(d, method) {
       fb.hidden = false;
       fb.innerHTML = "If your email app didn't open, " +
         '<a href="mailto:' + CONFIG.businessEmail +
-        "?subject=" + encodeURIComponent("Home tyre fitting enquiry — " + d.postcode) +
+        "?subject=" + encodeURIComponent("Home tyre fitting call-back — " + d.name) +
         "&body=" + encodeURIComponent(buildSummary(d)) +
         '">click here to send it</a>.';
     }

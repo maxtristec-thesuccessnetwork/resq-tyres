@@ -7,7 +7,7 @@ Design rules (so the pages stay honest and stay on-brand):
   * The <head> critical CSS block is lifted VERBATIM from index.html at build time, so a
     change to the home page's fonts or above-fold CSS flows through on the next build.
   * Hours are Moin's (7 Sept 2026): 6am–10pm, seven days. Never "24/7".
-  * Arrival: "typically 20–40 minutes" (Moin, 7 Sept 2026).
+  * Arrival: none on the site until Moin confirms one in writing (Max, 1 Oct 2026).
   * Prices are per tyre — from £40 (14–17") / from £80 (18–20") — with mobile fitting from £50
     on top. The exact range per size lives on the home page's price guide; these pages link to it.
     Puncture repair £70–£120 and "30% off a set" are repeated as published on the home page.
@@ -49,7 +49,7 @@ TOWNS = [
         description="Mobile tyre fitting and puncture repair in Wakefield, WF1–WF13, 6am–10pm every day. Tyres from £40, we come to your home, work or the roadside. Pay on completion. Call 07438 562633.",
         h1="Flat tyre in Wakefield? We come to you.",
         rotator=["In Wakefield.", "In Ossett.", "In Castleford.", "In Pontefract.", "Day or night."],
-        sub="Mobile tyre fitting across Wakefield and the WF postcodes, 6am to 10pm every day — emergency call-outs <b>and</b> planned home fitting. The same tyres you'd get in a shop, from £40 a tyre, fitted on your driveway in Sandal, Ossett, Horbury or Outwood. One call and we're on the way from Leeds, typically 20–40 minutes.",
+        sub="Mobile tyre fitting across Wakefield and the WF postcodes, 6am to 10pm every day — emergency call-outs <b>and</b> planned home fitting. The same tyres you'd get in a shop, from £40 a tyre, fitted on your driveway in Sandal, Ossett, Horbury or Outwood. One call and we'll give you a price and a time before we set off.",
         hero_img=("assets/hero-resq-600-v2.webp", "assets/hero-resq-900-v2.webp", "600w", "900w", 1000, 1050,
                   "ResQ Tyres mobile tyre fitting van at a roadside job — a new tyre being fitted on site"),
         stat_area=("WF1–WF13", "Every Wakefield district"),
@@ -272,14 +272,14 @@ def build(town) -> str:
                  width="{iw}" height="{ih}" alt="{alt}" loading="eager" fetchpriority="high" decoding="async" id="heroImg" data-hero>
               <div class="tag"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><div><b>Pay on completion</b><span>No upfront payment</span></div></div>
             </div>
-            <div class="floatcard"><b><span data-count="5.0" data-dec="1">5.0</span><span class="star" aria-hidden="true">★</span></b><span>215+ Google reviews</span></div>
+            <div class="floatcard"><b><span data-count="5.0" data-dec="1">5.0</span><span class="star" aria-hidden="true">★</span></b><span>230+ Google reviews</span></div>
           </div>
         </div>
       </div>
 
       <div class="stats">
         <div class="wrap stagger">
-          <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><div><b>20–40<small class="of"> min</small></b><span>Typical response</span></div></div>
+          <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><div><b>6am<small class="of">–10pm</small></b><span>Every day</span></div></div>
           <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg><div><b><span data-count="5.0" data-dec="1">5.0</span><small class="of"> / 5</small></b><span>Google rating</span></div></div>
           <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><div><b>{town['stat_area'][0]}</b><span>{town['stat_area'][1]}</span></div></div>
           <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-card"/></svg><div><b>Pay on completion</b><span>Card or cash</span></div></div>
@@ -312,7 +312,7 @@ def build(town) -> str:
           <article class="path path-emergency">
             <div class="path-top"><span class="path-badge"><span class="dotpulse" aria-hidden="true"></span> 6am–10pm · 7 days</span><svg class="path-ico" aria-hidden="true"><use href="#i-phone"/></svg></div>
             <h3>Emergency call-out</h3>
-            <p>Flat, blowout or breakdown in {name} and need someone now? Don't fill in a form — call or WhatsApp, tell us where you are, and we're on our way, typically within 20–40 minutes.</p>
+            <p>Flat, blowout or breakdown in {name} and need someone now? Don't fill in a form — call or WhatsApp, tell us where you are, and we'll give you a price and a time before we set off.</p>
             <ul class="path-list">
               <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Fastest response — straight to the phone</li>
               <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Roadside, home or work, 6am–10pm every day</li>
@@ -394,7 +394,7 @@ def build(town) -> str:
             <div class="body">
               <span class="tagline"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg> Home · Work · Roadside</span>
               <h3>Emergency call-out, 6am–10pm</h3>
-              <p>Stranded in {name}? We're on the road 6am to 10pm, seven days a week. Tell us where you are and we'll give you a straight answer on when we can be with you — typically 20–40 minutes.</p>
+              <p>Stranded in {name}? We're on the road 6am to 10pm, seven days a week. Tell us where you are and we'll give you a straight answer on when we can be with you.</p>
             </div>
           </article>
         </div>
@@ -442,15 +442,15 @@ def build(town) -> str:
     <section class="section soft" id="reviews">
       <div class="wrap">
         <div class="rev-head reveal">
-          <h2 class="sr-only">Customer reviews — rated 5.0 on Google from 215+ verified reviews</h2>
+          <h2 class="sr-only">Customer reviews — rated 5.0 on Google from more than 230 verified reviews</h2>
           <span class="eyebrow">Trusted across West Yorkshire</span>
           <span class="stars" style="font-size:22px">★★★★★</span>
           <span class="big"><span data-count="5.0" data-dec="1">5.0</span> on Google</span>
-          <span class="micro">From <span data-count="215" data-suffix="+">215+</span> verified Google reviews</span>
+          <span class="micro">From <span data-count="230" data-suffix="+">230+</span> verified Google reviews</span>
         </div>
 {REVIEWS}        </div>
         <div class="reviews-cta reveal">
-          <a class="rev-google" href="https://maps.app.goo.gl/LyEpPCfZw5TquB427" target="_blank" rel="noopener"><span class="gicon">G</span> Read all 215 reviews</a>
+          <a class="rev-google" href="https://maps.app.goo.gl/LyEpPCfZw5TquB427" target="_blank" rel="noopener"><span class="gicon">G</span> Read all our reviews on Google</a>
         </div>
       </div>
     </section>

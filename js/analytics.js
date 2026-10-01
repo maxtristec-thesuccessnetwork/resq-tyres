@@ -14,8 +14,29 @@ gtag('config', 'G-GVBR7Z973Z');
 // number and counts a call of 30s+ as the "ResQ - Website Call (30s+)" conversion.
 // Everyone else keeps seeing, and dialling, the real number.
 gtag('config', 'AW-18374857509');
+// 1 Oct 2026: Google's automatic swap changes the number where it is written out,
+// but the buttons that just say "Call now" may keep dialling the real number, so
+// those calls never reach the tracking (5 of 7 website call taps from 18-30 Sept had
+// no forwarded call behind them). The callback rewrites every tel: link and every
+// written copy of the number whenever Google hands over a forwarding number.
+function resqUseForwardingNumber(formatted, mobile) {
+  if (!formatted) return;
+  var dial = String(mobile || formatted).replace(/[^\d+]/g, '');
+  var links = document.querySelectorAll('a[href^="tel:"]');
+  for (var i = 0; i < links.length; i++) {
+    if (links[i].getAttribute('href').replace(/\D/g, '').slice(-10) === '7438562633') {
+      links[i].setAttribute('href', 'tel:' + dial);
+    }
+  }
+  var re = /07438[\s\u00a0]?562633/g, walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT), n;
+  while ((n = walker.nextNode())) {
+    if (re.test(n.nodeValue)) n.nodeValue = n.nodeValue.replace(re, formatted);
+    re.lastIndex = 0;
+  }
+}
 gtag('config', 'AW-18374857509/mR1vCN2bqPwcEKWm6LlE', {
-  'phone_conversion_number': '07438 562633'
+  'phone_conversion_number': '07438 562633',
+  'phone_conversion_callback': resqUseForwardingNumber
 });
 
 // Emergency trade = phone-driven. Taps on the number and on WhatsApp are the
