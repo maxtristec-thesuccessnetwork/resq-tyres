@@ -562,3 +562,10 @@ textarea{resize:vertical}
    cannot reconcile shots taken in three different lights — and a filter on the
    hero image forces an extra compositing layer on the LCP element. Nothing to
    apply at runtime: re-run the script if the source photos are ever replaced. */
+
+/* 1 Oct 2026: price guide all-in line + WhatsApp-your-size; enquiry form honeypot and send states */
+.allin{margin-top:12px;font-weight:800;font-size:16px;color:var(--ink);text-align:center}
+.results-cta .cta-whatsapp{flex:1;min-width:200px;justify-content:center}
+.hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;opacity:0}
+.btn-go[disabled]{opacity:.65;cursor:progress}
+.form-error a{color:var(--red);font-weight:800}

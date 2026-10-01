@@ -19,7 +19,7 @@
   <meta property="og:site_name" content="ResQ Tyres &amp; Recovery">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="icon" href="assets/logo.png">
+  <link rel="icon" href="assets/logo-128.webp" type="image/webp">
   <link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
   <style>
 @font-face{font-family:'Manrope';font-style:normal;font-weight:500 800;font-display:swap;
@@ -46,11 +46,11 @@ h1,h2{letter-spacing:-.02em;line-height:1.1}
 .wrap{width:100%;max-width:680px;margin:0 auto;padding:0 var(--gutter)}
 .icon{width:1em;height:1em;flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
-.brand{display:flex;align-items:center;gap:10px;padding:16px var(--gutter)}
+.brand{display:flex;align-items:center;gap:10px;padding:16px var(--gutter);text-decoration:none}
 .brand img{width:36px;height:36px;border-radius:50%}
 .brand b{font-size:16px;font-weight:800}
 
-.hero{padding:8px 0 30px;text-align:center;background:linear-gradient(180deg,#fff,var(--bg-soft))}
+.hero{padding:8px var(--gutter) 30px;text-align:center;background:linear-gradient(180deg,#fff,var(--bg-soft))}
 .eyebrow{color:var(--red);font-weight:800;letter-spacing:1.5px;font-size:13px;text-transform:uppercase;margin-bottom:10px}
 .hero h1{font-size:clamp(30px,7vw,44px);font-weight:800;margin-bottom:14px}
 .hero-sub{color:var(--ink-2);font-size:17px;max-width:480px;margin:0 auto 26px}
@@ -67,7 +67,7 @@ h1,h2{letter-spacing:-.02em;line-height:1.1}
 .trust span{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
 .trust .icon{width:16px;height:16px;color:var(--amber)}
 
-.section{padding:34px 0}
+.section{padding:34px var(--gutter)}
 .section h2{font-size:22px;text-align:center;margin-bottom:20px}
 .steps{display:flex;flex-direction:column;gap:14px}
 .step{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:16px 18px}
@@ -80,7 +80,7 @@ h1,h2{letter-spacing:-.02em;line-height:1.1}
 .faqi b{display:block;font-size:15.5px;margin-bottom:6px}
 .faqi p{color:var(--muted);font-size:14.5px}
 
-.foot{background:var(--dark);color:#aeb6c0;padding:30px 0 100px;font-size:14px;text-align:center}
+.foot{background:var(--dark);color:#aeb6c0;padding:30px var(--gutter) 100px;font-size:14px;text-align:center}
 .foot a{color:#fff;text-decoration:none;font-weight:700}
 .foot p{margin-top:10px}
 .foot .home{display:inline-block;margin-top:16px;color:#aeb6c0;font-size:13px;text-decoration:underline}
@@ -91,6 +91,17 @@ h1,h2{letter-spacing:-.02em;line-height:1.1}
 .sticky-bar .s-wa{background:var(--whatsapp);color:#fff}
 .sticky-bar .icon{width:19px;height:19px}
 @media(max-width:680px){.sticky-bar{display:flex}.foot{padding-bottom:110px}}
+.status{display:inline-flex;align-items:center;gap:8px;background:#eafaf0;border:1px solid #b6e6c7;color:#0f7a3d;font-weight:800;font-size:13px;padding:6px 12px;border-radius:999px;margin-bottom:14px}
+.status .sdot{width:8px;height:8px;border-radius:50%;background:#1aa64b}
+.status.closed{background:var(--bg-soft);border-color:var(--line);color:var(--ink-2)}
+.status.closed .sdot{background:var(--muted)}
+.proof{display:flex;flex-direction:column;gap:14px;margin-top:26px}
+.proof img{width:100%;height:auto;max-height:280px;object-fit:cover;border-radius:var(--radius-lg)}
+.quote{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:16px 18px;text-align:left}
+.quote .stars{color:var(--amber);letter-spacing:2px;font-size:15px}
+.quote p{font-size:15px;color:var(--ink-2);margin:6px 0 8px}
+.quote .who{font-size:13.5px;color:var(--muted)}
+
   </style>
 
   <script type="application/ld+json">
@@ -117,12 +128,13 @@ h1,h2{letter-spacing:-.02em;line-height:1.1}
 </head>
 <body>
   <a class="brand" href="/">
-    <img src="assets/logo.png" alt="">
+    <img src="assets/logo-128.webp" width="36" height="36" alt="">
     <b>ResQ Tyres &amp; Recovery</b>
   </a>
 
   <main>
     <section class="hero wrap">
+      <p class="status"><span class="sdot" aria-hidden="true"></span> <span data-open-status>Open 6am&ndash;10pm, 7 days</span></p>
       <div class="eyebrow">Tyre emergency</div>
       <h1>Flat, blowout or breakdown?<br>We come to you.</h1>
       <p class="hero-sub">Mobile tyre fitting across Leeds &amp; West Yorkshire, every day 6am&ndash;10pm. Don&rsquo;t fill in a form &mdash; call or WhatsApp and we&rsquo;ll get you moving again.</p>
@@ -139,9 +151,18 @@ h1,h2{letter-spacing:-.02em;line-height:1.1}
       </div>
 
       <div class="trust">
-        <span><svg class="icon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7L12 17.3 5.7 21l1.7-7-5.4-4.7 7.1-.6z"/></svg> 5.0 rated on Google &middot; 215+ reviews</span>
+        <span><svg class="icon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7L12 17.3 5.7 21l1.7-7-5.4-4.7 7.1-.6z"/></svg> 5.0 rated on Google &middot; 230+ reviews</span>
         <span>Tyres from &pound;40, fitted at the roadside</span>
         <span>Pay on completion &mdash; no online payment</span>
+      </div>
+
+      <div class="proof">
+        <img src="assets/van-760-v2.webp" width="760" height="950" alt="The ResQ Tyres van out on a job" loading="lazy" decoding="async">
+        <blockquote class="quote">
+          <span class="stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <p>&ldquo;Fantastic service. We had my brother&rsquo;s tyre replaced in less than an hour from me calling &mdash; which I didn&rsquo;t think was possible on a Sunday. Super value for money. Very reliable. Highly recommend.&rdquo;</p>
+          <span class="who"><b>Jenny McManus</b> &middot; Google review</span>
+        </blockquote>
       </div>
     </section>
 
@@ -174,6 +195,18 @@ h1,h2{letter-spacing:-.02em;line-height:1.1}
     <a class="s-wa" href="https://wa.me/447438562633?text=Hi%2C%20I%20need%20emergency%20tyre%20help" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24" stroke-width="2"><path d="M3 21l1.65-4.8A8.5 8.5 0 1 1 7.8 19.4L3 21z"/><path d="M8.5 8.5c-.3 1.5 1 3.4 2.2 4.6s3.1 2.5 4.6 2.2c.6-.1 1.2-.8 1.4-1.4.1-.3 0-.6-.3-.8l-1.5-.8c-.3-.1-.6-.1-.8.2l-.4.5c-.7-.3-1.4-.8-2-1.5-.4-.5-.7-.9-.9-1.4l.5-.4c.3-.2.3-.5.2-.8l-.8-1.5c-.2-.3-.5-.4-.8-.3-.6.2-1.3.8-1.4 1.4z"/></svg> WhatsApp</a>
   </div>
 
+
+  <script>
+  /* Open/closed line (Moin, 7 Sept 2026: 6am-10pm, 7 days). */
+  (function () {
+    var h; try { h = parseInt(new Intl.DateTimeFormat("en-GB", { hour: "numeric", hour12: false, timeZone: "Europe/London" }).format(new Date()), 10); } catch (e) { h = new Date().getHours(); }
+    var open = h >= 6 && h < 22;
+    document.querySelectorAll("[data-open-status]").forEach(function (el) {
+      el.textContent = open ? "Open now \u00b7 answering until 10pm" : "Closed now \u00b7 back at 6am. WhatsApp us and we reply first thing";
+      var box = el.closest(".status"); if (box && !open) box.classList.add("closed");
+    });
+  })();
+  </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GVBR7Z973Z"></script>
   <script src="/js/analytics.js" defer></script>
 </body>
