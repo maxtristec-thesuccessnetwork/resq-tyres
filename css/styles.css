@@ -149,6 +149,10 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 .live-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:livePulse 1.8s infinite}
 .hero h1{font-size:clamp(34px,5.2vw,58px);font-weight:800;margin-bottom:8px}
 .hero h1 .rot{color:var(--red);display:inline-block;min-height:1.1em}
+/* Google rating in words under the headline, so it is on the first phone screen
+   (the photo card that also carries it sits below the buttons on phones). */
+.hero-rating{font-size:15px;font-weight:800;color:var(--ink);margin:12px 0 14px}
+.hero-rating .stars{margin-right:4px}
 /* Three separate beats: headline, rotating line, paragraph. The fixed height
    holds the line box steady while the text swaps, so nothing shifts. */
 .hero .rotator{font-size:clamp(20px,3vw,28px);font-weight:800;color:var(--red);line-height:1.4;height:1.5em;margin-top:20px;margin-bottom:24px}
@@ -519,6 +523,12 @@ textarea{resize:vertical}
   /* paid mobile traffic: headline + call button first, no distractions (council, 16 Sept 2026) */
   .hero{padding-top:18px}
   .hero .scroll-cue,.hero .cta-secondary{display:none}
+  /* 5 Oct 2026: the call button, rating and price sit above the bottom bar on every page,
+     not only the home page. The top bar (its number and WhatsApp are in the header and the
+     bottom bar), the rotating line and the badge's extra words make room on phones. */
+  .topbar,.hero .rotator,.live-badge .badge-extra{display:none}
+  .live-badge{margin-bottom:14px}
+  .hero-sub{font-size:17px;margin-bottom:20px}
 }
 @media(max-width:760px){
   .nav,.topbar .tb-left{display:none}

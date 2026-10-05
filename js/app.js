@@ -330,7 +330,9 @@ function wireEnquiryForm() {
 function sendFailed(err, done) {
   if (err) {
     err.innerHTML = 'Sorry, that didn’t send. Please <a href="tel:07438562633">call 07438 562633</a> or ' +
-      '<a href="https://wa.me/447438562633" target="_blank" rel="noopener">WhatsApp us</a> and we’ll sort it straight away.';
+      '<a href="https://wa.me/447438562633?text=' + encodeURIComponent(
+        "Hi ResQ, can I get a price for tyres fitted at home? Tyre size or registration: ") +
+      '" target="_blank" rel="noopener">WhatsApp us</a> and we’ll sort it straight away.';
     err.hidden = false;
   }
   if (done) done();
