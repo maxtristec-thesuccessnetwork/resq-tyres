@@ -6,23 +6,40 @@
 Design rules (so the pages stay honest and stay on-brand):
   * The <head> critical CSS block is lifted VERBATIM from index.html at build time, so a
     change to the home page's fonts or above-fold CSS flows through on the next build.
-  * Hours are Moin's (7 Sept 2026): 6am–10pm, seven days. Never "24/7".
+  * Hours are Moin's (7 Sept 2026): 6am–10pm, seven days. Never "24/7" or "day or night".
   * Arrival: none on the site until Moin confirms one in writing (Max, 1 Oct 2026).
   * Prices are per tyre — from £40 (14–17") / from £80 (18–20") — with mobile fitting from £50
     on top. The exact range per size lives on the home page's price guide; these pages link to it.
+    The hero shows both parts and the total (PRICE_LINE). Never a single all-in price.
     Puncture repair £70–£120 and "30% off a set" are repeated as published on the home page.
   * Every district listed is in js/rates.js RESQ_COVERAGE.districts — the checker on the
     page uses the same list, so the page can never claim more than the checker allows.
+  * First phone screen (5 Oct 2026): the call button, the Google rating and the price line must
+    sit above the bottom bar on a 360px-wide phone showing 640px of page (a 360x740 screen with the
+    browser's own bars on), and the call button must start above 430px. A long headline or `sub`
+    pushes the button down, so the build stops past H1_MAX or SUB_MAX characters. Look at a phone
+    screenshot after adding a town all the same — the limits are a guard, not a measurement.
+  * Every WhatsApp link opens with a message already typed (WA); a bare link stops the build.
 """
 from __future__ import annotations
 import html, json, re
 from pathlib import Path
+from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = (ROOT / "index.html").read_text(encoding="utf-8")
 SITE = "https://www.resqtyres.co.uk"
 PHONE_DISPLAY, PHONE_TEL, PHONE_E164 = "07438 562633", "07438562633", "+447438562633"
-WA = "https://wa.me/447438562633"
+# Same message as the home page, so the top bar, footer and bottom bar lifted from it match.
+# It ends where the customer starts typing.
+WA = "https://wa.me/447438562633?text=" + quote("Hi ResQ, I need a tyre fitted. I'm at: ", safe="")
+# One honest price line for every hero, word for word as on the home page.
+PRICE_LINE = "<b>Tyres from £40, fitting from £50: one tyre fitted from £90.</b> Price agreed on the phone before we set off."
+assert PRICE_LINE in INDEX, "PRICE_LINE no longer matches the home page hero — keep one price line on every page"
+# First phone screen: Harrogate's 52-character headline fills three lines at 360px wide and its
+# 81-character `sub` plus the price line fills five. One line more and the call button starts
+# below 430px.
+H1_MAX, SUB_MAX = 52, 81
 COVERED = set(re.findall(r'"([A-Z]{2}\d{1,2})"', INDEX.split("RESQ_COVERAGE")[0]) or [])  # placeholder
 COVERED = set(re.findall(r'"((?:LS|HG|WF|YO)\d{1,2})"', (ROOT / "js" / "rates.js").read_text()))
 
@@ -48,8 +65,8 @@ TOWNS = [
         title="Mobile Tyre Fitting Wakefield — 6am–10pm, We Come To You | ResQ Tyres",
         description="Mobile tyre fitting and puncture repair in Wakefield, WF1–WF13, 6am–10pm every day. Tyres from £40, we come to your home, work or the roadside. Pay on completion. Call 07438 562633.",
         h1="Flat tyre in Wakefield? We come to you.",
-        rotator=["In Wakefield.", "In Ossett.", "In Castleford.", "In Pontefract.", "Day or night."],
-        sub="Mobile tyre fitting across Wakefield and the WF postcodes, 6am to 10pm every day — emergency call-outs <b>and</b> planned home fitting. The same tyres you'd get in a shop, from £40 a tyre, fitted on your driveway in Sandal, Ossett, Horbury or Outwood. One call and we'll give you a price and a time before we set off.",
+        rotator=["In Wakefield.", "In Ossett.", "In Castleford.", "In Pontefract.", "6am to 10pm."],
+        sub="Mobile tyre fitting across Wakefield and the WF postcodes, 6am to 10pm every day.",
         hero_img=("assets/hero-resq-600-v2.webp", "assets/hero-resq-900-v2.webp", "600w", "900w", 1000, 1050,
                   "ResQ Tyres mobile tyre fitting van at a roadside job — a new tyre being fitted on site"),
         stat_area=("WF1–WF13", "Every Wakefield district"),
@@ -94,8 +111,8 @@ TOWNS = [
         title="Mobile Tyre Fitting Harrogate & Tadcaster — 6am–10pm, We Come To You | ResQ Tyres",
         description="Mobile tyre fitting and puncture repair in Harrogate (HG1–HG3) and Tadcaster (LS24), 6am–10pm every day. Tyres from £40, we come to your home, work or the roadside. Pay on completion. Call 07438 562633.",
         h1="Flat tyre in Harrogate or Tadcaster? We come to you.",
-        rotator=["In Harrogate.", "In Pannal.", "In Tadcaster.", "On the A61.", "Day or night."],
-        sub="Mobile tyre fitting across Harrogate, Pannal, Killinghall and out to Tadcaster, 6am to 10pm every day — emergency call-outs <b>and</b> planned home fitting. The same tyres you'd get in a shop, from £40 a tyre, fitted on your driveway. One call and we're on the way up from Leeds.",
+        rotator=["In Harrogate.", "In Pannal.", "In Tadcaster.", "On the A61.", "6am to 10pm."],
+        sub="Mobile tyre fitting across Harrogate and out to Tadcaster, 6am to 10pm every day.",
         hero_img=("assets/fitting-420.webp", "assets/fitting-760.webp", "420w", "760w", 760, 1140,
                   "ResQ Tyres fitter changing a tyre at a customer's home — mobile tyre fitting on the driveway"),
         stat_area=("HG1–HG3 · LS24", "Harrogate &amp; Tadcaster"),
@@ -137,6 +154,11 @@ def check_districts(town):
         for c in re.split(r"\s*·\s*", code):
             assert c in COVERED, f"{town['slug']}: {c} is not in RESQ_COVERAGE.districts — do not publish a district the checker refuses"
 
+def check_first_screen(town):
+    for key, limit in (("h1", H1_MAX), ("sub", SUB_MAX)):
+        n = len(html.unescape(re.sub("<[^>]+>", "", town[key])))
+        assert n <= limit, f"{town['slug']}: `{key}` is {n} characters (limit {limit}) — on a 360px phone it pushes the call button off the first screen. Shorten it"
+
 def schema(town):
     url = f"{SITE}/mobile-tyre-fitting-{town['slug']}"
     name_plain = html.unescape(town["short"])
@@ -163,6 +185,7 @@ def schema(town):
 
 def build(town) -> str:
     check_districts(town)
+    check_first_screen(town)
     slug, name = town["slug"], town["name"]
     url = f"{SITE}/mobile-tyre-fitting-{slug}"
     src1, src2, w1, w2, iw, ih, alt = town["hero_img"]
@@ -212,6 +235,7 @@ def build(town) -> str:
     .crumbs{{font-size:13px;color:var(--muted);margin-bottom:14px}}
     .crumbs a{{color:inherit;text-decoration:none}} .crumbs a:hover{{text-decoration:underline}}
     .crumbs span{{margin:0 6px;opacity:.6}}
+    @media(max-width:760px){{.crumbs{{display:none}}}} /* phones: the call button comes first */
     .landmarks{{margin-top:14px;padding:14px 16px;border-left:3px solid var(--red);background:#fff;border-radius:0 var(--radius) var(--radius) 0;font-size:15px}}
   </style>
 
@@ -254,10 +278,11 @@ def build(town) -> str:
         <div class="hero-grid">
           <div class="hero-copy">
             <p class="crumbs"><a href="/">ResQ Tyres</a><span>›</span><a href="/#areas">Areas we cover</a><span>›</span>{town['short']}</p>
-            <span class="live-badge"><span class="dot" aria-hidden="true"></span> <span data-open-status>Open 6am–10pm, 7 days</span> · {town['short']}</span>
+            <span class="live-badge"><span class="dot" aria-hidden="true"></span> <span data-open-status>Open 6am–10pm, 7 days</span><span class="badge-extra"> · {town['short']}</span></span>
             <h1>{town['h1']}</h1>
+            <p class="hero-rating"><span class="stars" aria-hidden="true">★</span> 5.0 on Google · 230+ reviews</p>
             <div class="rotator" id="rotator" aria-hidden="true" data-words='{rot_words}'>{town['rotator'][0]}</div>
-            <p class="hero-sub">{town['sub']}</p>
+            <p class="hero-sub">{town['sub']} {PRICE_LINE}</p>
             <div class="cta-row">
               <a class="cta-primary pulse" href="tel:{PHONE_TEL}"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Emergency — call now</a>
               <a class="cta-whatsapp" href="{WA}" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp</a>
@@ -390,7 +415,7 @@ def build(town) -> str:
             </div>
           </article>
           <article class="svc">
-            <div class="ph"><img src="assets/wheelchange-420-v2.webp" srcset="assets/wheelchange-420-v2.webp 420w, assets/wheelchange-760-v2.webp 760w" sizes="(max-width:760px) 92vw, 360px" width="760" height="760" alt="ResQ Tyres attending a roadside emergency tyre change — 24 hour call-out" loading="lazy" decoding="async"></div>
+            <div class="ph"><img src="assets/wheelchange-420-v2.webp" srcset="assets/wheelchange-420-v2.webp 420w, assets/wheelchange-760-v2.webp 760w" sizes="(max-width:760px) 92vw, 360px" width="760" height="760" alt="ResQ Tyres attending a roadside emergency tyre change — call-outs 6am to 10pm" loading="lazy" decoding="async"></div>
             <div class="body">
               <span class="tagline"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg> Home · Work · Roadside</span>
               <h3>Emergency call-out, 6am–10pm</h3>
@@ -506,5 +531,7 @@ def build(town) -> str:
 if __name__ == "__main__":
     for town in TOWNS:
         out = ROOT / f"mobile-tyre-fitting-{town['slug']}.html"
-        out.write_text(build(town), encoding="utf-8")
+        page = build(town)
+        assert 'wa.me/447438562633"' not in page, f"{town['slug']}: a WhatsApp link opens a blank chat — give it a message"
+        out.write_text(page, encoding="utf-8")
         print("wrote", out.name, len(out.read_text()), "bytes")
