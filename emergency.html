@@ -102,6 +102,21 @@ h1,h2{letter-spacing:-.02em;line-height:1.1}
 .quote .stars{color:var(--amber);letter-spacing:2px;font-size:15px}
 .quote p{font-size:15px;color:var(--ink-2);margin:6px 0 8px}
 .quote .who{font-size:13.5px;color:var(--muted)}
+/* 5 Oct 2026: a phone shows about 640px before any scrolling once the browser's own bars are on.
+   Tighter gaps on phones, and the price first under the buttons, so the whole price line and the
+   rating clear the bottom bar on a 360x640 screen. */
+@media(max-width:680px){
+  .brand{padding:10px var(--gutter)}
+  .hero{padding-top:4px}
+  .status{margin-bottom:10px}
+  .eyebrow{margin-bottom:6px}
+  .hero h1{margin-bottom:10px}
+  .hero-sub{line-height:1.45;margin-bottom:16px}
+  .cta-col{gap:10px}
+  .cta-primary{padding:17px 22px}
+  .cta-whatsapp{padding:14px 22px}
+  .trust{margin-top:12px;gap:4px 18px}
+}
 
   </style>
 
@@ -152,8 +167,8 @@ h1,h2{letter-spacing:-.02em;line-height:1.1}
       </div>
 
       <div class="trust">
-        <span><svg class="icon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7L12 17.3 5.7 21l1.7-7-5.4-4.7 7.1-.6z"/></svg> 5.0 rated on Google &middot; 230+ reviews</span>
         <span class="price"><span>Tyres from &pound;40, fitting from &pound;50:</span> <span>one tyre fitted from &pound;90</span></span>
+        <span><svg class="icon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7L12 17.3 5.7 21l1.7-7-5.4-4.7 7.1-.6z"/></svg> 5.0 rated on Google &middot; 230+ reviews</span>
         <span>Pay on completion &mdash; no online payment</span>
       </div>
 

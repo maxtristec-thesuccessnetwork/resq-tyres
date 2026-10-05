@@ -521,14 +521,19 @@ textarea{resize:vertical}
 }
 @media(max-width:760px){
   /* paid mobile traffic: headline + call button first, no distractions (council, 16 Sept 2026) */
-  .hero{padding-top:18px}
+  .hero{padding-top:12px}
   .hero .scroll-cue,.hero .cta-secondary{display:none}
   /* 5 Oct 2026: the call button, rating and price sit above the bottom bar on every page,
      not only the home page. The top bar (its number and WhatsApp are in the header and the
-     bottom bar), the rotating line and the badge's extra words make room on phones. */
+     bottom bar), the rotating line and the badge's extra words make room on phones.
+     A phone shows about 640px before any scrolling once the browser's own bars are on, so the
+     headline is a size smaller and the gaps tighter: at 360 wide the call button starts above
+     430px and both hero buttons clear the bottom bar on a 640px screen. */
   .topbar,.hero .rotator,.live-badge .badge-extra{display:none}
-  .live-badge{margin-bottom:14px}
-  .hero-sub{font-size:17px;margin-bottom:20px}
+  .live-badge{margin-bottom:10px}
+  .hero h1{font-size:clamp(30px,5.2vw,58px)}
+  .hero-rating{margin:8px 0 10px}
+  .hero-sub{font-size:16px;line-height:1.5;margin-bottom:16px}
 }
 @media(max-width:760px){
   .nav,.topbar .tb-left{display:none}

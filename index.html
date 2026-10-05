@@ -218,14 +218,19 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 }
 @media(max-width:760px){
   /* paid mobile traffic: headline + call button first, no distractions (council, 16 Sept 2026) */
-  .hero{padding-top:18px}
+  .hero{padding-top:12px}
   .hero .scroll-cue,.hero .cta-secondary{display:none}
   /* 5 Oct 2026: the call button, rating and price sit above the bottom bar on every page,
      not only the home page. The top bar (its number and WhatsApp are in the header and the
-     bottom bar), the rotating line and the badge's extra words make room on phones. */
+     bottom bar), the rotating line and the badge's extra words make room on phones.
+     A phone shows about 640px before any scrolling once the browser's own bars are on, so the
+     headline is a size smaller and the gaps tighter: at 360 wide the call button starts above
+     430px and both hero buttons clear the bottom bar on a 640px screen. */
   .topbar,.hero .rotator,.live-badge .badge-extra{display:none}
-  .live-badge{margin-bottom:14px}
-  .hero-sub{font-size:17px;margin-bottom:20px}
+  .live-badge{margin-bottom:10px}
+  .hero h1{font-size:clamp(30px,5.2vw,58px)}
+  .hero-rating{margin:8px 0 10px}
+  .hero-sub{font-size:16px;line-height:1.5;margin-bottom:16px}
 }
 @media(max-width:760px){
   .nav,.topbar .tb-left{display:none}
@@ -565,9 +570,9 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
           <div class="hero-copy">
             <span class="live-badge"><span class="dot" aria-hidden="true"></span> <span data-open-status>Open 6am–10pm, 7 days</span></span>
             <h1>Flat tyre in Leeds? We come to you.</h1>
-            <p class="hero-rating"><span class="stars" aria-hidden="true">★★★★★</span> 5.0 on Google · 230+ reviews</p>
+            <p class="hero-rating"><span class="stars" aria-hidden="true">★</span> 5.0 on Google · 230+ reviews</p>
             <div class="rotator" id="rotator" aria-hidden="true">At home.</div>
-            <p class="hero-sub">Mobile tyre fitting across Leeds and West Yorkshire, 6am to 10pm every day. <b>Tyres from £40, fitting from £50: one tyre fitted from £90.</b> Price agreed on the phone before we set off.</p>
+            <p class="hero-sub">Mobile tyre fitting at home, work or the roadside across Leeds and West Yorkshire, 6am to 10pm every day. <b>Tyres from £40, fitting from £50: one tyre fitted from £90.</b> Price agreed on the phone before we set off.</p>
             <div class="cta-row">
               <a class="cta-primary pulse" href="tel:07438562633"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Emergency — call now</a>
               <a class="cta-whatsapp" href="https://wa.me/447438562633?text=Hi%20ResQ%2C%20I%20need%20a%20tyre%20fitted.%20I%27m%20at%3A%20" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp</a>

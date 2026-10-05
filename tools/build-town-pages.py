@@ -10,14 +10,15 @@ Design rules (so the pages stay honest and stay on-brand):
   * Arrival: none on the site until Moin confirms one in writing (Max, 1 Oct 2026).
   * Prices are per tyre — from £40 (14–17") / from £80 (18–20") — with mobile fitting from £50
     on top. The exact range per size lives on the home page's price guide; these pages link to it.
-    The hero shows both parts and the total (PRICE_LINE): the cheapest real job is £90, and Moin
-    does not want fitting rolled into the tyre price (7 Sept 2026).
+    The hero shows both parts and the total (PRICE_LINE). Never a single all-in price.
     Puncture repair £70–£120 and "30% off a set" are repeated as published on the home page.
   * Every district listed is in js/rates.js RESQ_COVERAGE.districts — the checker on the
     page uses the same list, so the page can never claim more than the checker allows.
   * First phone screen (5 Oct 2026): the call button, the Google rating and the price line must
-    sit above the bottom bar on a 360x740 phone. Keep each town's `sub` to one short sentence and
-    look at a phone screenshot after adding a town — a long headline pushes the button down.
+    sit above the bottom bar on a 360px-wide phone showing 640px of page (a 360x740 screen with the
+    browser's own bars on), and the call button must start above 430px. A long headline or `sub`
+    pushes the button down, so the build stops past H1_MAX or SUB_MAX characters. Look at a phone
+    screenshot after adding a town all the same — the limits are a guard, not a measurement.
   * Every WhatsApp link opens with a message already typed (WA); a bare link stops the build.
 """
 from __future__ import annotations
@@ -35,6 +36,10 @@ WA = "https://wa.me/447438562633?text=" + quote("Hi ResQ, I need a tyre fitted. 
 # One honest price line for every hero, word for word as on the home page.
 PRICE_LINE = "<b>Tyres from £40, fitting from £50: one tyre fitted from £90.</b> Price agreed on the phone before we set off."
 assert PRICE_LINE in INDEX, "PRICE_LINE no longer matches the home page hero — keep one price line on every page"
+# First phone screen: Harrogate's 52-character headline fills three lines at 360px wide and its
+# 81-character `sub` plus the price line fills five. One line more and the call button starts
+# below 430px.
+H1_MAX, SUB_MAX = 52, 81
 COVERED = set(re.findall(r'"([A-Z]{2}\d{1,2})"', INDEX.split("RESQ_COVERAGE")[0]) or [])  # placeholder
 COVERED = set(re.findall(r'"((?:LS|HG|WF|YO)\d{1,2})"', (ROOT / "js" / "rates.js").read_text()))
 
@@ -149,6 +154,11 @@ def check_districts(town):
         for c in re.split(r"\s*·\s*", code):
             assert c in COVERED, f"{town['slug']}: {c} is not in RESQ_COVERAGE.districts — do not publish a district the checker refuses"
 
+def check_first_screen(town):
+    for key, limit in (("h1", H1_MAX), ("sub", SUB_MAX)):
+        n = len(html.unescape(re.sub("<[^>]+>", "", town[key])))
+        assert n <= limit, f"{town['slug']}: `{key}` is {n} characters (limit {limit}) — on a 360px phone it pushes the call button off the first screen. Shorten it"
+
 def schema(town):
     url = f"{SITE}/mobile-tyre-fitting-{town['slug']}"
     name_plain = html.unescape(town["short"])
@@ -175,6 +185,7 @@ def schema(town):
 
 def build(town) -> str:
     check_districts(town)
+    check_first_screen(town)
     slug, name = town["slug"], town["name"]
     url = f"{SITE}/mobile-tyre-fitting-{slug}"
     src1, src2, w1, w2, iw, ih, alt = town["hero_img"]
@@ -269,7 +280,7 @@ def build(town) -> str:
             <p class="crumbs"><a href="/">ResQ Tyres</a><span>›</span><a href="/#areas">Areas we cover</a><span>›</span>{town['short']}</p>
             <span class="live-badge"><span class="dot" aria-hidden="true"></span> <span data-open-status>Open 6am–10pm, 7 days</span><span class="badge-extra"> · {town['short']}</span></span>
             <h1>{town['h1']}</h1>
-            <p class="hero-rating"><span class="stars" aria-hidden="true">★★★★★</span> 5.0 on Google · 230+ reviews</p>
+            <p class="hero-rating"><span class="stars" aria-hidden="true">★</span> 5.0 on Google · 230+ reviews</p>
             <div class="rotator" id="rotator" aria-hidden="true" data-words='{rot_words}'>{town['rotator'][0]}</div>
             <p class="hero-sub">{town['sub']} {PRICE_LINE}</p>
             <div class="cta-row">
