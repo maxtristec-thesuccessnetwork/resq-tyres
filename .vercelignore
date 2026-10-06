@@ -5,3 +5,5 @@ tools/
 # Unused files no page or script loads
 api/tyre-lookup.js
 js/tyre.js
+assets/work*.jpg
+assets/logo-header.jpg
