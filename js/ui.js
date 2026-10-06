@@ -79,18 +79,9 @@
     var dec = parseInt(el.getAttribute("data-dec") || "0", 10);
     var suffix = el.getAttribute("data-suffix") || "";
     if (isNaN(target)) return;
-    // Ratings (decimals) show their real value at once: a count-up read "0.2★" on first paint.
-    if (reduce || dec > 0) { el.textContent = target.toFixed(dec) + suffix; return; }
-    var start = null, dur = 1300;
-    function step(ts) {
-      if (!start) start = ts;
-      var p = Math.min((ts - start) / dur, 1);
-      var eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = (target * eased).toFixed(dec) + suffix;
-      if (p < 1) requestAnimationFrame(step);
-      else el.textContent = target.toFixed(dec) + suffix;
-    }
-    requestAnimationFrame(step);
+    // Always shows the real value at once: an animated count-up let Google's own renderer
+    // (and anyone landing mid-animation) read "0+ reviews" before it finished counting up.
+    el.textContent = target.toFixed(dec) + suffix;
   }
 
   /* ---- Reveal / stagger / counters via IntersectionObserver ---- */
