@@ -130,6 +130,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 .bar{display:flex;align-items:center;justify-content:space-between;padding:10px var(--gutter);gap:24px;max-width:calc(1480px + 2*var(--gutter));margin-inline:auto}
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none}
 @media(max-width:560px){.bar{gap:12px}.logo{gap:8px}} /* phones: room for the gutter without wrapping the name */
+@media(min-width:761px) and (max-width:1100px){.bar,.bar .nav{gap:16px}} /* tablets: room for the gutter without wrapping the name */
 @media(max-width:360px){.site-header .bar{padding-inline:12px}.site-header .btn-call{padding-inline:14px}.site-header .logo-text small{letter-spacing:1px}} /* smallest phones: keep the name clear of the call button */
 .logo img{width:54px;height:54px;border-radius:50%}
 .logo-text{display:flex;flex-direction:column;line-height:1.05;font-weight:800;font-size:19px;color:var(--ink)}
