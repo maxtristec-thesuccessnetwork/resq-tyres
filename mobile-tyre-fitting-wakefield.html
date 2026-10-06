@@ -97,6 +97,10 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 .scroll-cue .mouse::before{content:"";width:4px;height:7px;border-radius:2px;background:var(--red);animation:wheelDrop 1.6s infinite}
 @keyframes wheelDrop{0%{opacity:0;transform:translateY(-4px)}30%{opacity:1}70%{opacity:1;transform:translateY(6px)}100%{opacity:0;transform:translateY(10px)}}
 
+/* marquee: clip the long track before styles.css lands, or the page lays out wider than the screen */
+.marquee{overflow:hidden;white-space:nowrap}
+.marquee .track{display:inline-flex}
+
 /* --- styles.css:99-104 --- */
 @media(prefers-reduced-motion:reduce){
   .reveal,.stagger>*{opacity:1!important;transform:none!important;transition:none}
