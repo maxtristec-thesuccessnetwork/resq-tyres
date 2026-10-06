@@ -59,6 +59,8 @@
     var label = btn.lastChild;
     if (label && label.nodeType === 3) label.nodeValue = " WhatsApp us — first call-outs from 6am";
     else btn.appendChild(document.createTextNode(" WhatsApp us — first call-outs from 6am"));
+    /* The hero's own WhatsApp button would now repeat it: leave just the one. */
+    wa.style.display = "none";
   })();
 
   /* ---- Scroll progress bar + hero scale + to-top ---- */
