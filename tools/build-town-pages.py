@@ -398,7 +398,7 @@ def build(town) -> str:
                 <button type="button" id="pc-btn" class="btn-find"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Check</button>
               </div>
               <p class="pc-result" id="pc-result" hidden></p>
-              <p class="micro">Same checker as our <a href="/#areas">main coverage map</a> — every Leeds <b>LS</b> district, <b>HG1&ndash;HG3</b> and <b>WF1&ndash;WF13</b>.</p>
+              <p class="micro">Same checker as our <a href="/#areas">main coverage map</a> — every Leeds <b>LS</b> district, <b>HG1&ndash;HG3</b>, <b>WF1&ndash;WF13</b>, and <b>YO1, YO10, YO24</b> in York plus <b>YO8</b> Selby.</p>
             </div>
             <div class="landmarks"><b>Where we're often called to:</b> {town['landmarks']}.</div>
           </div>

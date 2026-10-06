@@ -197,7 +197,8 @@ def main():
       'marked: all Leeds LS districts including LS24 Tadcaster, HG1 to HG3 around Harrogate, and WF1 to '
       'WF5, WF8, WF10, WF12 and WF13 across Wakefield, Castleford, Pontefract and Dewsbury. Leeds, '
       'Pudsey, Morley, Dewsbury, Wakefield, Castleford, Garforth, Pontefract, Harrogate and Tadcaster '
-      'are named, with the M1, M62, M621 and A1(M) running through.</desc>')
+      'are named, with the M1, M62, M621 and A1(M) running through. York (YO1, YO10 and YO24) '
+      'and Selby (YO8) are covered too but lie east of the area shown.</desc>')
 
     # The SVG is loaded as <img>, so it gets none of the page's CSS and must
     # carry its own. Keep these in step with the .cov-map block in css/styles.css.
