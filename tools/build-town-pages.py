@@ -176,9 +176,10 @@ def schema(town):
         "provider": {"@type": "AutoRepair", "@id": f"{SITE}/#business", "name": "ResQ Tyres & Recovery",
                      "telephone": PHONE_E164, "url": SITE + "/"},
         "areaServed": [{"@type": t, "name": n} for t, n in town["served"]],
-        # prices exactly as the hero and FAQ state them; "from" prices are minPrice, never price
+        # prices exactly as the hero and FAQ state them; "from" prices are minPrice, never price.
+        # The offer covers fitting and puncture repair, so minPrice is the lowest of the two (repair from £70).
         "offers": {"@type": "Offer",
-                   "priceSpecification": {"@type": "PriceSpecification", "minPrice": 90, "priceCurrency": "GBP"},
+                   "priceSpecification": {"@type": "PriceSpecification", "minPrice": 70, "priceCurrency": "GBP"},
                    "description": "Tyres from £40, mobile fitting from £50: one tyre fitted from £90. Puncture repair £70 to £120. Exact price confirmed by phone before any work starts."},
         "availableChannel": {"@type": "ServiceChannel", "servicePhone": {"@type": "ContactPoint", "telephone": PHONE_E164, "contactType": "customer service", "availableLanguage": "en"}},
         "hoursAvailable": {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "06:00", "closes": "22:00"},
