@@ -107,6 +107,41 @@
       "source": "/services/:path*",
       "destination": "/#services",
       "permanent": true
+    },
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/blank",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/mobile-tyre-fitting",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tyres",
+      "destination": "/#services",
+      "permanent": true
+    },
+    {
+      "source": "/emergency-tyre-fitting",
+      "destination": "/#services",
+      "permanent": true
+    },
+    {
+      "source": "/reviews",
+      "destination": "/#reviews",
+      "permanent": true
+    },
+    {
+      "source": "/faq",
+      "destination": "/#faq",
+      "permanent": true
     }
   ],
   "headers": [
