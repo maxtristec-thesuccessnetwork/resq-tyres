@@ -394,7 +394,7 @@ def build(town) -> str:
             <div class="pc-checker">
               <label for="pc-check">Check your postcode</label>
               <div class="pc-row">
-                <input id="pc-check" type="text" placeholder="e.g. {town['districts'][0][0].split(' ')[0]} 1AA" maxlength="8" autocomplete="postal-code" aria-label="Your postcode">
+                <input id="pc-check" type="text" placeholder="e.g. {town['districts'][0][0].split(' ')[0]}" maxlength="8" autocomplete="postal-code" aria-label="Your postcode">
                 <button type="button" id="pc-btn" class="btn-find"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Check</button>
               </div>
               <p class="pc-result" id="pc-result" hidden></p>
