@@ -54,8 +54,10 @@ TOPBAR = slice_between(INDEX, "  <!-- ===== Top utility bar =====", "  <!-- ====
 FOOTER = slice_between(INDEX, "  <!-- ===== Footer =====", "  </footer>\n")
 STICKY = slice_between(INDEX, "  <!-- Back to top -->", '  </div>\n\n  <script src="js/rates.js"></script>').replace('  <script src="js/rates.js"></script>', "")
 REVIEWS = slice_between(INDEX, '        <div class="reviews stagger">', "        </div>\n        <div class=\"reviews-cta reveal\">")
-# footer links are anchors on the home page; make them absolute so they work from a town page
-FOOTER = re.sub(r'href="#(?!top)', 'href="/#', FOOTER)
+# footer links are anchors on the home page; make them absolute so they work from a town page.
+# Icon references (#i-...) stay local: each page carries its own inline sprite, and
+# browsers do not load <use> symbols from another document.
+FOOTER = re.sub(r'href="#(?!top|i-)', 'href="/#', FOOTER)
 FOOTER = FOOTER.replace('href="#top"', 'href="/"')
 
 # ------------------------------------------------------------------ towns
