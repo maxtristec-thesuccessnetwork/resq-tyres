@@ -1,5 +1,5 @@
 # ResQ Tyres & Recovery — robots.txt
-# 24/7 mobile tyre fitting & recovery, Leeds & West Yorkshire
+# Mobile tyre fitting, Leeds & West Yorkshire, 6am-10pm every day
 
 User-agent: *
 Allow: /
