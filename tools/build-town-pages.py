@@ -90,6 +90,7 @@ TOWNS = [
             ("WF13", "Dewsbury Moor, Ravensthorpe, Staincliffe"),
         ],
         edge="Just outside — Barnsley, Huddersfield or WF14 and above? Call us anyway. We can often still reach you.",
+        related='Further north? See <a href="/mobile-tyre-fitting-harrogate">mobile tyre fitting in Harrogate &amp; Tadcaster</a>, or <a href="/">mobile tyre fitting in Leeds</a>.',
         landmarks="the M1 and M62 around junctions 39–41, the A61 into Leeds, Trinity Walk and the Ridings car parks, Pinderfields, and the station car parks at Westgate and Kirkgate",
         faq=[
             ("Do you cover all of Wakefield?",
@@ -130,6 +131,7 @@ TOWNS = [
             ("YO8", "Selby"),
         ],
         edge="Knaresborough (HG5), Ripon (HG4) and the rest of York are just outside our confirmed patch — call us anyway, we may still be able to reach you.",
+        related='Nearer Wakefield? See <a href="/mobile-tyre-fitting-wakefield">mobile tyre fitting in Wakefield</a>, or <a href="/">mobile tyre fitting in Leeds</a>.',
         landmarks="the A61 Leeds Road and Harrogate Road, the A59 through Knaresborough, the A658 past the airport, the Stray, Harrogate station and the Victoria car park, and the A64 and A659 around Tadcaster",
         faq=[
             ("Which parts of Harrogate do you cover?",
@@ -386,6 +388,7 @@ def build(town) -> str:
 {districts}
             </ul>
             <p class="cover-edge">{town['edge']}</p>
+            <p class="cover-edge">{town['related']}</p>
           </div>
           <div class="area-side">
             <div class="pc-checker">
@@ -409,7 +412,7 @@ def build(town) -> str:
         <div class="section-head reveal">
           <span class="eyebrow">What we do</span>
           <h2>Mobile tyre fitting across {town['short']}</h2>
-          <p>Brand-new tyres fitted on the spot, wherever you are in {name}. We bring the garage to you.</p>
+          <p>Brand-new tyres fitted on the spot, wherever you are in {name}. We bring the garage to you. Flat battery instead? See <a href="/jump-start-leeds">jump starts — from &pound;50</a>, across the same area.</p>
         </div>
         <div class="services stagger">
           <article class="svc">
