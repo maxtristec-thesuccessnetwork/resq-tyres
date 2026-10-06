@@ -13,8 +13,8 @@ drop the third-party tile dependency altogether.
 What the map claims
 -------------------
 Nothing this file invents. The coverage picture is drawn from the postcode
-districts the business covers — all LS, HG1-HG3,
-and WF1-WF5/WF8/WF10/WF12/WF13 — with each district's real centroid from
+districts the business covers — all LS, HG1-HG3
+and WF1-WF13 — with each district's real centroid from
 postcodes.io. There is deliberately NO hard boundary line: an edge would be a
 claim about places nobody has confirmed, and the old 17 km circle was drawing
 one that wrongly swallowed Bradford. Instead each confirmed district is a dot,
@@ -195,7 +195,7 @@ def main():
     a('<title id="covmap-t">Where ResQ Tyres covers</title>')
     a('<desc id="covmap-d">Map of the ResQ Tyres coverage area. Every confirmed postcode district is '
       'marked: all Leeds LS districts including LS24 Tadcaster, HG1 to HG3 around Harrogate, and WF1 to '
-      'WF5, WF8, WF10, WF12 and WF13 across Wakefield, Castleford, Pontefract and Dewsbury. Leeds, '
+      'WF13 across Wakefield, Castleford, Pontefract and Dewsbury. Leeds, '
       'Pudsey, Morley, Dewsbury, Wakefield, Castleford, Garforth, Pontefract, Harrogate and Tadcaster '
       'are named, with the M1, M62, M621 and A1(M) running through. York (YO1, YO10 and YO24) '
       'and Selby (YO8) are covered too but lie east of the area shown.</desc>')
