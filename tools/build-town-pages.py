@@ -64,8 +64,8 @@ FOOTER = FOOTER.replace('href="#top"', 'href="/"')
 TOWNS = [
     dict(
         slug="wakefield", name="Wakefield", short="Wakefield",
-        title="Mobile Tyre Fitting Wakefield — 6am–10pm, We Come To You | ResQ Tyres",
-        description="Mobile tyre fitting and puncture repair in Wakefield, WF1–WF13, 6am–10pm every day. Tyres from £40, we come to your home, work or the roadside. Pay on completion. Call 07438 562633.",
+        title="Mobile Tyre Fitting Wakefield | 6am–10pm | ResQ Tyres",
+        description="Mobile tyre fitting and puncture repair in Wakefield (WF1–WF13), 6am–10pm daily. Tyres from £40, pay on completion. Call 07438 562633.",
         h1="Flat tyre in Wakefield? We come to you.",
         rotator=["In Wakefield.", "In Ossett.", "In Castleford.", "In Pontefract.", "6am to 10pm."],
         sub="Mobile tyre fitting across Wakefield and the WF postcodes, 6am to 10pm every day.",
@@ -110,8 +110,8 @@ TOWNS = [
     ),
     dict(
         slug="harrogate", name="Harrogate", short="Harrogate &amp; Tadcaster",
-        title="Mobile Tyre Fitting Harrogate & Tadcaster — 6am–10pm, We Come To You | ResQ Tyres",
-        description="Mobile tyre fitting and puncture repair in Harrogate (HG1–HG3) and Tadcaster (LS24), 6am–10pm every day. Tyres from £40, we come to your home, work or the roadside. Pay on completion. Call 07438 562633.",
+        title="Mobile Tyre Fitting Harrogate & Tadcaster | ResQ Tyres",
+        description="Mobile tyre fitting and puncture repair in Harrogate (HG1–HG3) and Tadcaster, 6am–10pm daily. Tyres from £40. Call 07438 562633.",
         h1="Flat tyre in Harrogate or Tadcaster? We come to you.",
         rotator=["In Harrogate.", "In Pannal.", "In Tadcaster.", "On the A61.", "6am to 10pm."],
         sub="Mobile tyre fitting across Harrogate and out to Tadcaster, 6am to 10pm every day.",
@@ -206,13 +206,13 @@ def build(town) -> str:
   <meta charset="UTF-8">
   <script>document.documentElement.className+=" js";</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{town['title']}</title>
+  <title>{html.escape(town['title'], quote=False)}</title>
   <meta name="description" content="{html.escape(town['description'], quote=True)}">
   <meta name="theme-color" content="#e4002b">
   <link rel="canonical" href="{url}">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Mobile tyre fitting in {town['short']} — 6am–10pm, we come to you">
+  <meta property="og:title" content="{html.escape(town['title'], quote=True)}">
   <meta property="og:description" content="{html.escape(town['description'], quote=True)}">
   <meta property="og:url" content="{url}">
   <meta property="og:image" content="{SITE}/assets/van.jpg">
