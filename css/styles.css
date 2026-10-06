@@ -421,6 +421,18 @@ textarea{resize:vertical}
 /* --- Static coverage map (self-hosted SVG, inlined in index.html #areas).
        Replaced Leaflet + CARTO tiles 2026-09-02. --- */
 .cov-map{display:block;width:100%;height:auto;aspect-ratio:62/56;border-radius:calc(var(--radius-lg) - 8px);background:#0b0e13}
+/* --- Puncture price line --- */
+.pr-line{display:flex;gap:9px;align-items:flex-start;margin:0 0 18px;padding:11px 13px;border:1px solid var(--line);border-left:3px solid var(--red);border-radius:var(--radius-sm,10px);background:rgba(228,0,43,.04);font-size:13.5px;line-height:1.5;color:var(--ink-2)}
+.pr-line .icon{flex:0 0 auto;width:17px;height:17px;margin-top:1px;color:var(--red)}
+.pr-line b{color:var(--ink)}
+
+/* --- FAQ --- */
+.faq-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,2vw,22px);max-width:1040px;margin:0 auto}
+.faq-item{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:clamp(16px,2vw,22px);box-shadow:var(--shadow-sm)}
+.faq-item h3{margin:0 0 8px;font-size:clamp(15px,1.5vw,17px);line-height:1.35}
+.faq-item p{margin:0;font-size:14.5px;line-height:1.65;color:var(--ink-2)}
+.faq-item a{color:var(--red);font-weight:700}
+@media(max-width:760px){.faq-grid{grid-template-columns:1fr}}
 .area-side{display:flex;flex-direction:column;gap:18px}
 .pc-checker{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow-sm)}
 .pc-checker label{display:block;font-size:11px;color:var(--ink-2);margin-bottom:9px;text-transform:uppercase;letter-spacing:.6px;font-weight:700}
