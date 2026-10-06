@@ -63,7 +63,7 @@ FOOTER = FOOTER.replace('href="#top"', 'href="/"')
 # ------------------------------------------------------------------ towns
 TOWNS = [
     dict(
-        slug="wakefield", name="Wakefield", short="Wakefield",
+        slug="wakefield", name="Wakefield", short="Wakefield", schema_where="across WF1 to WF13",
         title="Mobile Tyre Fitting Wakefield | 6am–10pm | ResQ Tyres",
         description="Mobile tyre fitting and puncture repair in Wakefield (WF1–WF13), 6am–10pm daily. Tyres from £40, pay on completion. Call 07438 562633.",
         h1="Flat tyre in Wakefield? We come to you.",
@@ -109,7 +109,7 @@ TOWNS = [
         served=[("City", "Wakefield"), ("City", "Ossett"), ("City", "Castleford"), ("City", "Pontefract"), ("City", "Normanton"), ("City", "Dewsbury")],
     ),
     dict(
-        slug="harrogate", name="Harrogate", short="Harrogate &amp; Tadcaster",
+        slug="harrogate", name="Harrogate", short="Harrogate &amp; Tadcaster", schema_where="in HG1 to HG3 and LS24 Tadcaster",
         title="Mobile Tyre Fitting Harrogate & Tadcaster | ResQ Tyres",
         description="Mobile tyre fitting and puncture repair in Harrogate (HG1–HG3) and Tadcaster, 6am–10pm daily. Tyres from £40. Call 07438 562633.",
         h1="Flat tyre in Harrogate or Tadcaster? We come to you.",
@@ -169,10 +169,15 @@ def schema(town):
         "@id": url + "#service",
         "name": f"Mobile tyre fitting in {name_plain}",
         "serviceType": "Mobile tyre fitting and puncture repair",
+        "description": f"Mobile tyre fitting and puncture repair at your home, workplace or the roadside {town['schema_where']}, 6am to 10pm every day.",
         "url": url,
         "provider": {"@type": "AutoRepair", "@id": f"{SITE}/#business", "name": "ResQ Tyres & Recovery",
                      "telephone": PHONE_E164, "url": SITE + "/"},
         "areaServed": [{"@type": t, "name": n} for t, n in town["served"]],
+        # prices exactly as the hero and FAQ state them; "from" prices are minPrice, never price
+        "offers": {"@type": "Offer",
+                   "priceSpecification": {"@type": "PriceSpecification", "minPrice": 90, "priceCurrency": "GBP"},
+                   "description": "Tyres from £40, mobile fitting from £50: one tyre fitted from £90. Puncture repair £70 to £120. Exact price confirmed by phone before any work starts."},
         "availableChannel": {"@type": "ServiceChannel", "servicePhone": {"@type": "ContactPoint", "telephone": PHONE_E164, "contactType": "customer service", "availableLanguage": "en"}},
         "hoursAvailable": {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "06:00", "closes": "22:00"},
     }
@@ -181,8 +186,7 @@ def schema(town):
                            "acceptedAnswer": {"@type": "Answer", "text": html.unescape(re.sub("<[^>]+>", "", a))}} for q, a in town["faq"]]}
     crumbs = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "ResQ Tyres & Recovery", "item": SITE + "/"},
-        {"@type": "ListItem", "position": 2, "name": "Areas we cover", "item": SITE + "/#areas"},
-        {"@type": "ListItem", "position": 3, "name": f"Mobile tyre fitting in {name_plain}", "item": url}]}
+        {"@type": "ListItem", "position": 2, "name": f"Mobile tyre fitting in {name_plain}", "item": url}]}
     return "\n".join(f'  <script type="application/ld+json">\n{json.dumps(d, ensure_ascii=False, indent=2)}\n  </script>' for d in (service, faq, crumbs))
 
 def build(town) -> str:
@@ -279,7 +283,7 @@ def build(town) -> str:
       <div class="wrap">
         <div class="hero-grid">
           <div class="hero-copy">
-            <p class="crumbs"><a href="/">ResQ Tyres</a><span>›</span><a href="/#areas">Areas we cover</a><span>›</span>{town['short']}</p>
+            <p class="crumbs"><a href="/">ResQ Tyres</a><span>›</span>Mobile tyre fitting in {town['short']}</p>
             <span class="live-badge"><span class="dot" aria-hidden="true"></span> <span data-open-status>Open 6am–10pm, 7 days</span><span class="badge-extra"> · {town['short']}</span></span>
             <h1>{town['h1']}</h1>
             <p class="hero-rating"><span class="stars" aria-hidden="true">★</span> 5.0 on Google · 230+ reviews</p>

@@ -126,18 +126,29 @@ h1,h2{letter-spacing:-.02em;line-height:1.1}
     "@type": "Service",
     "serviceType": "Emergency mobile tyre fitting",
     "provider": {
-      "@type": "AutomotiveBusiness",
+      "@type": "AutoRepair",
+      "@id": "https://www.resqtyres.co.uk/#business",
       "name": "ResQ Tyres & Recovery",
       "telephone": "+447438562633",
       "url": "https://www.resqtyres.co.uk/"
     },
-    "areaServed": ["Leeds", "Wakefield", "Harrogate", "Tadcaster", "Castleford", "Pontefract"],
+    "areaServed": [
+      "Leeds",
+      "Wakefield",
+      "Harrogate",
+      "Tadcaster",
+      "Castleford",
+      "Pontefract"
+    ],
     "url": "https://www.resqtyres.co.uk/emergency",
     "offers": {
       "@type": "Offer",
-      "priceCurrency": "GBP",
-      "price": "40",
-      "description": "Mobile tyre fitting, price per tyre, fitted at the roadside, home or workplace."
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "minPrice": 90,
+        "priceCurrency": "GBP"
+      },
+      "description": "One tyre fitted from £90: tyres from £40 plus mobile fitting from £50. Price confirmed before we set off."
     }
   }
   </script>

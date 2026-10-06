@@ -355,6 +355,11 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
       "itemListElement": [
         {
           "@type": "Offer",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "minPrice": 90,
+            "priceCurrency": "GBP"
+          },
           "itemOffered": {
             "@type": "Service",
             "name": "Emergency tyre callout",
@@ -367,11 +372,17 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
         },
         {
           "@type": "Offer",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "minPrice": 70,
+            "priceCurrency": "GBP",
+            "maxPrice": 120
+          },
           "itemOffered": {
             "@type": "Service",
             "name": "Mobile puncture repair",
             "serviceType": "Puncture repair",
-            "description": "Puncture repair at your home, workplace or the roadside where the tyre can be safely repaired. From \u00a370, up to \u00a3120 depending on distance and tyre size.",
+            "description": "Puncture repair at your home, workplace or the roadside where the tyre can be safely repaired. From £70, up to £120 depending on distance and tyre size.",
             "provider": {
               "@id": "https://www.resqtyres.co.uk/#business"
             }
@@ -379,6 +390,11 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
         },
         {
           "@type": "Offer",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "minPrice": 90,
+            "priceCurrency": "GBP"
+          },
           "itemOffered": {
             "@type": "Service",
             "name": "Planned tyre replacement at home",
@@ -391,9 +407,12 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
         },
         {
           "@type": "Offer",
-          "priceCurrency": "GBP",
-          "price": "50",
           "url": "https://www.resqtyres.co.uk/jump-start-leeds",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "minPrice": 50,
+            "priceCurrency": "GBP"
+          },
           "itemOffered": {
             "@type": "Service",
             "name": "Mobile jump start",
@@ -405,6 +424,20 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
           }
         }
       ]
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://www.resqtyres.co.uk/#website",
+    "url": "https://www.resqtyres.co.uk/",
+    "name": "ResQ Tyres & Recovery",
+    "alternateName": "ResQ Tyres",
+    "inLanguage": "en-GB",
+    "publisher": {
+      "@id": "https://www.resqtyres.co.uk/#business"
     }
   }
   </script>
