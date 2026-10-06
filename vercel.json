@@ -89,6 +89,11 @@
       "permanent": true
     },
     {
+      "source": "/booking-calendar/:path*",
+      "destination": "/#enquiry",
+      "permanent": true
+    },
+    {
       "source": "/service-page/:path*",
       "destination": "/#services",
       "permanent": true
