@@ -52,7 +52,7 @@ ENDPOINTS = ["https://overpass.private.coffee/api/interpreter",
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 # Named towns get a labelled pin. Coordinates are the ones the site has always
-# used, plus Harrogate and Tadcaster from their district centroids (W1).
+# used, plus Harrogate and Tadcaster from their district centroids.
 TOWNS = [
     (53.8008, -1.5491, "Leeds", True),
     (53.6830, -1.4977, "Wakefield", False),
