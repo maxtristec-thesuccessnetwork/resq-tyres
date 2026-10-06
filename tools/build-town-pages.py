@@ -6,8 +6,8 @@
 Design rules (so the pages stay honest and stay on-brand):
   * The <head> critical CSS block is lifted VERBATIM from index.html at build time, so a
     change to the home page's fonts or above-fold CSS flows through on the next build.
-  * Hours are Moin's (7 Sept 2026): 6am–10pm, seven days. Never "24/7" or "day or night".
-  * Arrival: none on the site until Moin confirms one in writing (Max, 1 Oct 2026).
+  * Hours: 6am–10pm, seven days. Never "24/7" or "day or night".
+  * Arrival: no arrival time on the site until the business confirms one in writing.
   * Prices are per tyre — from £40 (14–17") / from £80 (18–20") — with mobile fitting from £50
     on top. The exact range per size lives on the home page's price guide; these pages link to it.
     The hero shows both parts and the total (PRICE_LINE). Never a single all-in price.

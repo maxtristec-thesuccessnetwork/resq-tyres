@@ -29,7 +29,7 @@
     }, 2200);
   }
 
-  /* ---- Honest open/closed status (Moin, 7 Sept 2026: 6am–10pm, 7 days) ---- */
+  /* ---- Honest open/closed status (6am–10pm, 7 days) ---- */
   (function () {
     var els = document.querySelectorAll("[data-open-status]");
     if (!els.length) return;

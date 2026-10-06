@@ -29,7 +29,7 @@ Open `js/rates.js`:
 - Replace the SAMPLE numbers with ResQ's real prices and save.
 
 ## Form-to-email (config in `js/app.js`)
-Enquiries currently go to **maxtristec@googlemail.com** (set in `CONFIG.businessEmail`).
+Enquiries go to the address set in `CONFIG.businessEmail`.
 
 To make submissions arrive automatically (no email app needed):
 1. Go to **https://web3forms.com**, enter your email, and they email you an **Access Key** (free, no account/password).

@@ -213,7 +213,7 @@ h1,h2{letter-spacing:-.02em;line-height:1.1}
 
 
   <script>
-  /* Open/closed line (Moin, 7 Sept 2026: 6am-10pm, 7 days). */
+  /* Open/closed line (6am-10pm, 7 days). */
   (function () {
     var h; try { h = parseInt(new Intl.DateTimeFormat("en-GB", { hour: "numeric", hour12: false, timeZone: "Europe/London" }).format(new Date()), 10); } catch (e) { h = new Date().getHours(); }
     var open = h >= 6 && h < 22;

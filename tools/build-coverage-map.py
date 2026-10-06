@@ -7,13 +7,13 @@ Why this exists
 The #areas map used to be a Leaflet slippy map pulling tiles from CARTO's
 unauthenticated basemap CDN. On 2026-09-02 those tiles started coming back
 stamped "API KEY REQUIRED" — HTTP 200, correct MIME type, watermark baked into
-the image, so no health check could ever have caught it. Card W5, option A:
+the image, so no health check could ever have caught it. The fix:
 drop the third-party tile dependency altogether.
 
 What the map claims
 -------------------
 Nothing this file invents. The coverage picture is drawn from the postcode
-districts Moin confirmed by WhatsApp on 2026-09-01 (card W1) — all LS, HG1-HG3,
+districts the business covers — all LS, HG1-HG3,
 and WF1-WF5/WF8/WF10/WF12/WF13 — with each district's real centroid from
 postcodes.io. There is deliberately NO hard boundary line: an edge would be a
 claim about places nobody has confirmed, and the old 17 km circle was drawing
