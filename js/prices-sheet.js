@@ -2,11 +2,10 @@
    Reads the "ResQ Tyres — Website Prices" Google Sheet so ResQ can update
    prices himself (no developer, no redeploy).
 
-   THE RULE (revised 7 Sept 2026):
+   THE RULE:
      1. A size row with BOTH "From £" and "To £" is quoted exactly.
      2. Otherwise a car size is quoted from its rim band — the "Backup NN inch"
-        rows, which Moin filled with his own numbers on 7 Sept. A van/commercial
-        "C" size only uses a band from a "Backup NNC inch" row.
+        rows. A van/commercial "C" size only uses a band from a "Backup NNC inch" row.
      3. No exact price and no band => "call us for a price".
      A "Mobile fitting" row (From £) sets the fitting-from price shown beside
      every quote. Prices are per tyre; fitting is on top.
@@ -18,9 +17,8 @@
 
        Column A — ~134 tyre widths + 8 text labels. Typed NUMBER, so
        "Backup 14 inch", "Locking Wheel Nut Removal" and "Mobile fitting"
-       arrived blank. No rim bands were ever loaded, so EVERY size on the live
-       site answered "we don't list it online" while the ads promised
-       "Tyres from £40". That was the state from 2-8 September.
+       arrived blank. No rim bands were ever loaded, so EVERY size on the
+       site answered "we don't list it online".
 
        Column C — 115 car rims (numbers) + 18 van rims ("16c", "15c"...).
        Typed NUMBER, so every van and commercial size arrived with no rim and

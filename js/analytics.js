@@ -1,5 +1,4 @@
 /* Google Analytics 4 - ResQ Tyres & Recovery
-   Property: ResQ Tyres & Recovery, under the Helium Studio Analytics account.
    Measurement ID lives here only. Loaded on every page via:
      <script async src="https://www.googletagmanager.com/gtag/js?id=G-GVBR7Z973Z"></script>
      <script src="/js/analytics.js" defer></script>
@@ -9,16 +8,14 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-GVBR7Z973Z');
 
-// Google Ads (account 414-943-1625) website call tracking, added 18 Sept 2026.
-// For visitors who arrive from an ad, Google swaps 07438 562633 for a forwarding
-// number and counts a call of 30s+ as the "ResQ - Website Call (30s+)" conversion.
-// Everyone else keeps seeing, and dialling, the real number.
+// Google Ads website call tracking. For visitors who arrive from an ad, Google
+// swaps 07438 562633 for a forwarding number. Everyone else keeps seeing, and
+// dialling, the real number.
 gtag('config', 'AW-18374857509');
-// 1 Oct 2026: Google's automatic swap changes the number where it is written out,
-// but the buttons that just say "Call now" may keep dialling the real number, so
-// those calls never reach the tracking (5 of 7 website call taps from 18-30 Sept had
-// no forwarded call behind them). The callback rewrites every tel: link and every
-// written copy of the number whenever Google hands over a forwarding number.
+// Google's automatic swap changes the number where it is written out, but buttons
+// that just say "Call now" would keep dialling the real number. The callback
+// rewrites every tel: link and every written copy of the number whenever Google
+// hands over a forwarding number.
 function resqUseForwardingNumber(formatted, mobile) {
   if (!formatted) return;
   var dial = String(mobile || formatted).replace(/[^\d+]/g, '');

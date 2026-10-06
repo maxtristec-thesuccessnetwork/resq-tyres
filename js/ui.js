@@ -29,10 +29,9 @@
     }, 2200);
   }
 
-  /* ---- Honest open/closed status (Moin, 7 Sept 2026: 6am–10pm, 7 days) ---- */
+  /* ---- Honest open/closed status (6am–10pm, 7 days) ---- */
   (function () {
     var els = document.querySelectorAll("[data-open-status]");
-    if (!els.length) return;
     var OPEN = 6, CLOSE = 22, hour;
     try {
       hour = parseInt(new Intl.DateTimeFormat("en-GB", { hour: "numeric", hour12: false, timeZone: "Europe/London" }).format(new Date()), 10);
@@ -43,6 +42,25 @@
       var dot = el.parentNode && el.parentNode.querySelector(".dotpulse");
       if (dot && !open) dot.style.opacity = ".35";
     });
+
+    /* Closed: the hero call button becomes a WhatsApp button (no pulse), using
+       the page's own WhatsApp link, so nobody is sent to a phone line that is closed. */
+    if (open) return;
+    var hero = document.querySelector(".hero");
+    var btn = hero && hero.querySelector('.cta-primary[href^="tel:"]');
+    var wa = hero && hero.querySelector('a[href*="wa.me"]');
+    if (!btn || !wa) return;
+    btn.setAttribute("href", wa.getAttribute("href"));
+    btn.setAttribute("target", "_blank");
+    btn.setAttribute("rel", "noopener");
+    btn.classList.remove("pulse");
+    var use = btn.querySelector("use");
+    if (use) use.setAttribute("href", "#i-whatsapp");
+    var label = btn.lastChild;
+    if (label && label.nodeType === 3) label.nodeValue = " WhatsApp us — first call-outs from 6am";
+    else btn.appendChild(document.createTextNode(" WhatsApp us — first call-outs from 6am"));
+    /* The hero's own WhatsApp button would now repeat it: leave just the one. */
+    wa.style.display = "none";
   })();
 
   /* ---- Scroll progress bar + hero scale + to-top ---- */
@@ -79,18 +97,9 @@
     var dec = parseInt(el.getAttribute("data-dec") || "0", 10);
     var suffix = el.getAttribute("data-suffix") || "";
     if (isNaN(target)) return;
-    // Ratings (decimals) show their real value at once: a count-up read "0.2★" on first paint.
-    if (reduce || dec > 0) { el.textContent = target.toFixed(dec) + suffix; return; }
-    var start = null, dur = 1300;
-    function step(ts) {
-      if (!start) start = ts;
-      var p = Math.min((ts - start) / dur, 1);
-      var eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = (target * eased).toFixed(dec) + suffix;
-      if (p < 1) requestAnimationFrame(step);
-      else el.textContent = target.toFixed(dec) + suffix;
-    }
-    requestAnimationFrame(step);
+    // Always shows the real value at once: an animated count-up let Google's own renderer
+    // (and anyone landing mid-animation) read "0+ reviews" before it finished counting up.
+    el.textContent = target.toFixed(dec) + suffix;
   }
 
   /* ---- Reveal / stagger / counters via IntersectionObserver ---- */

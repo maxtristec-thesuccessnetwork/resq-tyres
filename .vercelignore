@@ -1,0 +1,9 @@
+# Repository notes and build tools: kept in the repo, never deployed
+*.md
+tools/
+
+# Unused files no page or script loads
+api/tyre-lookup.js
+js/tyre.js
+assets/work*.jpg
+assets/logo-header.jpg

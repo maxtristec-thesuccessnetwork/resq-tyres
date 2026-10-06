@@ -1,4 +1,4 @@
-# ResQ Tyres & Recovery — Website (Plan 2)
+# ResQ Tyres & Recovery — Website
 
 Custom, code-level build. **Emergency Bold** design. Phone-first, with an online
 tyre **estimate** tool and an **enquiry / send-for-approval** form.
@@ -16,7 +16,7 @@ ResQ Website Build/
 ## To view it
 Double-click `index.html` (opens in your browser). Everything works offline in demo mode.
 
-## Plan 2 features
+## Features
 - Phone-first hero + click-to-call, sticky call bar on mobile.
 - **Estimate tool**: customer enters tyre size + reg + postcode → sees Budget / Mid / Premium prices.
 - **Send for approval**: prefills the enquiry form; customer submits; ResQ replies by phone/email.
@@ -29,7 +29,7 @@ Open `js/rates.js`:
 - Replace the SAMPLE numbers with ResQ's real prices and save.
 
 ## Form-to-email (config in `js/app.js`)
-Enquiries currently go to **maxtristec@googlemail.com** (set in `CONFIG.businessEmail`).
+Enquiries go to the address set in `CONFIG.businessEmail`.
 
 To make submissions arrive automatically (no email app needed):
 1. Go to **https://web3forms.com**, enter your email, and they email you an **Access Key** (free, no account/password).
@@ -43,7 +43,4 @@ and swap the placeholder logo (the 🛞 in the header) for ResQ's real logo.
 
 ## Deploying (later)
 Drag this folder onto **Netlify Drop**, or push to GitHub and import into **Vercel**.
-Then point ResQ's domain at it (he can stop paying Wix once live).
-
----
-Sample data only — for client review. Built June 2026.
+Then point the domain at it.

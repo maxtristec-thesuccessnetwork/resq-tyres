@@ -6,8 +6,8 @@
 Design rules (so the pages stay honest and stay on-brand):
   * The <head> critical CSS block is lifted VERBATIM from index.html at build time, so a
     change to the home page's fonts or above-fold CSS flows through on the next build.
-  * Hours are Moin's (7 Sept 2026): 6am–10pm, seven days. Never "24/7" or "day or night".
-  * Arrival: none on the site until Moin confirms one in writing (Max, 1 Oct 2026).
+  * Hours: 6am–10pm, seven days. Never "24/7" or "day or night".
+  * Arrival: no arrival time on the site until the business confirms one in writing.
   * Prices are per tyre — from £40 (14–17") / from £80 (18–20") — with mobile fitting from £50
     on top. The exact range per size lives on the home page's price guide; these pages link to it.
     The hero shows both parts and the total (PRICE_LINE). Never a single all-in price.
@@ -54,16 +54,18 @@ TOPBAR = slice_between(INDEX, "  <!-- ===== Top utility bar =====", "  <!-- ====
 FOOTER = slice_between(INDEX, "  <!-- ===== Footer =====", "  </footer>\n")
 STICKY = slice_between(INDEX, "  <!-- Back to top -->", '  </div>\n\n  <script src="js/rates.js"></script>').replace('  <script src="js/rates.js"></script>', "")
 REVIEWS = slice_between(INDEX, '        <div class="reviews stagger">', "        </div>\n        <div class=\"reviews-cta reveal\">")
-# footer links are anchors on the home page; make them absolute so they work from a town page
-FOOTER = re.sub(r'href="#(?!top)', 'href="/#', FOOTER)
+# footer links are anchors on the home page; make them absolute so they work from a town page.
+# Icon references (#i-...) stay local: each page carries its own inline sprite, and
+# browsers do not load <use> symbols from another document.
+FOOTER = re.sub(r'href="#(?!top|i-)', 'href="/#', FOOTER)
 FOOTER = FOOTER.replace('href="#top"', 'href="/"')
 
 # ------------------------------------------------------------------ towns
 TOWNS = [
     dict(
-        slug="wakefield", name="Wakefield", short="Wakefield",
-        title="Mobile Tyre Fitting Wakefield — 6am–10pm, We Come To You | ResQ Tyres",
-        description="Mobile tyre fitting and puncture repair in Wakefield, WF1–WF13, 6am–10pm every day. Tyres from £40, we come to your home, work or the roadside. Pay on completion. Call 07438 562633.",
+        slug="wakefield", name="Wakefield", short="Wakefield", schema_where="across WF1 to WF13",
+        title="Mobile Tyre Fitting Wakefield | 6am–10pm | ResQ Tyres",
+        description="Mobile tyre fitting and puncture repair in Wakefield (WF1–WF13), 6am–10pm daily. Tyres from £40, pay on completion. Call 07438 562633.",
         h1="Flat tyre in Wakefield? We come to you.",
         rotator=["In Wakefield.", "In Ossett.", "In Castleford.", "In Pontefract.", "6am to 10pm."],
         sub="Mobile tyre fitting across Wakefield and the WF postcodes, 6am to 10pm every day.",
@@ -88,6 +90,7 @@ TOWNS = [
             ("WF13", "Dewsbury Moor, Ravensthorpe, Staincliffe"),
         ],
         edge="Just outside — Barnsley, Huddersfield or WF14 and above? Call us anyway. We can often still reach you.",
+        related='Further north? See <a href="/mobile-tyre-fitting-harrogate">mobile tyre fitting in Harrogate &amp; Tadcaster</a>, or <a href="/">mobile tyre fitting in Leeds</a>.',
         landmarks="the M1 and M62 around junctions 39–41, the A61 into Leeds, Trinity Walk and the Ridings car parks, Pinderfields, and the station car parks at Westgate and Kirkgate",
         faq=[
             ("Do you cover all of Wakefield?",
@@ -107,9 +110,9 @@ TOWNS = [
         served=[("City", "Wakefield"), ("City", "Ossett"), ("City", "Castleford"), ("City", "Pontefract"), ("City", "Normanton"), ("City", "Dewsbury")],
     ),
     dict(
-        slug="harrogate", name="Harrogate", short="Harrogate &amp; Tadcaster",
-        title="Mobile Tyre Fitting Harrogate & Tadcaster — 6am–10pm, We Come To You | ResQ Tyres",
-        description="Mobile tyre fitting and puncture repair in Harrogate (HG1–HG3) and Tadcaster (LS24), 6am–10pm every day. Tyres from £40, we come to your home, work or the roadside. Pay on completion. Call 07438 562633.",
+        slug="harrogate", name="Harrogate", short="Harrogate &amp; Tadcaster", schema_where="in HG1 to HG3 and LS24 Tadcaster",
+        title="Mobile Tyre Fitting Harrogate & Tadcaster | ResQ Tyres",
+        description="Mobile tyre fitting and puncture repair in Harrogate (HG1–HG3) and Tadcaster, 6am–10pm daily. Tyres from £40. Call 07438 562633.",
         h1="Flat tyre in Harrogate or Tadcaster? We come to you.",
         rotator=["In Harrogate.", "In Pannal.", "In Tadcaster.", "On the A61.", "6am to 10pm."],
         sub="Mobile tyre fitting across Harrogate and out to Tadcaster, 6am to 10pm every day.",
@@ -128,6 +131,7 @@ TOWNS = [
             ("YO8", "Selby"),
         ],
         edge="Knaresborough (HG5), Ripon (HG4) and the rest of York are just outside our confirmed patch — call us anyway, we may still be able to reach you.",
+        related='Nearer Wakefield? See <a href="/mobile-tyre-fitting-wakefield">mobile tyre fitting in Wakefield</a>, or <a href="/">mobile tyre fitting in Leeds</a>.',
         landmarks="the A61 Leeds Road and Harrogate Road, the A59 through Knaresborough, the A658 past the airport, the Stray, Harrogate station and the Victoria car park, and the A64 and A659 around Tadcaster",
         faq=[
             ("Which parts of Harrogate do you cover?",
@@ -167,10 +171,16 @@ def schema(town):
         "@id": url + "#service",
         "name": f"Mobile tyre fitting in {name_plain}",
         "serviceType": "Mobile tyre fitting and puncture repair",
+        "description": f"Mobile tyre fitting and puncture repair at your home, workplace or the roadside {town['schema_where']}, 6am to 10pm every day.",
         "url": url,
         "provider": {"@type": "AutoRepair", "@id": f"{SITE}/#business", "name": "ResQ Tyres & Recovery",
                      "telephone": PHONE_E164, "url": SITE + "/"},
         "areaServed": [{"@type": t, "name": n} for t, n in town["served"]],
+        # prices exactly as the hero and FAQ state them; "from" prices are minPrice, never price.
+        # The offer covers fitting and puncture repair, so minPrice is the lowest of the two (repair from £70).
+        "offers": {"@type": "Offer",
+                   "priceSpecification": {"@type": "PriceSpecification", "minPrice": 70, "priceCurrency": "GBP"},
+                   "description": "Tyres from £40, mobile fitting from £50: one tyre fitted from £90. Puncture repair £70 to £120. Exact price confirmed by phone before any work starts."},
         "availableChannel": {"@type": "ServiceChannel", "servicePhone": {"@type": "ContactPoint", "telephone": PHONE_E164, "contactType": "customer service", "availableLanguage": "en"}},
         "hoursAvailable": {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "06:00", "closes": "22:00"},
     }
@@ -179,8 +189,7 @@ def schema(town):
                            "acceptedAnswer": {"@type": "Answer", "text": html.unescape(re.sub("<[^>]+>", "", a))}} for q, a in town["faq"]]}
     crumbs = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "ResQ Tyres & Recovery", "item": SITE + "/"},
-        {"@type": "ListItem", "position": 2, "name": "Areas we cover", "item": SITE + "/#areas"},
-        {"@type": "ListItem", "position": 3, "name": f"Mobile tyre fitting in {name_plain}", "item": url}]}
+        {"@type": "ListItem", "position": 2, "name": f"Mobile tyre fitting in {name_plain}", "item": url}]}
     return "\n".join(f'  <script type="application/ld+json">\n{json.dumps(d, ensure_ascii=False, indent=2)}\n  </script>' for d in (service, faq, crumbs))
 
 def build(town) -> str:
@@ -204,13 +213,13 @@ def build(town) -> str:
   <meta charset="UTF-8">
   <script>document.documentElement.className+=" js";</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{town['title']}</title>
+  <title>{html.escape(town['title'], quote=False)}</title>
   <meta name="description" content="{html.escape(town['description'], quote=True)}">
   <meta name="theme-color" content="#e4002b">
   <link rel="canonical" href="{url}">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Mobile tyre fitting in {town['short']} — 6am–10pm, we come to you">
+  <meta property="og:title" content="{html.escape(town['title'], quote=True)}">
   <meta property="og:description" content="{html.escape(town['description'], quote=True)}">
   <meta property="og:url" content="{url}">
   <meta property="og:image" content="{SITE}/assets/van.jpg">
@@ -277,10 +286,10 @@ def build(town) -> str:
       <div class="wrap">
         <div class="hero-grid">
           <div class="hero-copy">
-            <p class="crumbs"><a href="/">ResQ Tyres</a><span>›</span><a href="/#areas">Areas we cover</a><span>›</span>{town['short']}</p>
+            <p class="crumbs"><a href="/">ResQ Tyres</a><span>›</span>Mobile tyre fitting in {town['short']}</p>
             <span class="live-badge"><span class="dot" aria-hidden="true"></span> <span data-open-status>Open 6am–10pm, 7 days</span><span class="badge-extra"> · {town['short']}</span></span>
             <h1>{town['h1']}</h1>
-            <p class="hero-rating"><span class="stars" aria-hidden="true">★</span> 5.0 on Google · 230+ reviews</p>
+            <p class="hero-rating" data-nosnippet><span class="stars" aria-hidden="true">★</span> 5.0 on Google · 230+ reviews</p>
             <div class="rotator" id="rotator" aria-hidden="true" data-words='{rot_words}'>{town['rotator'][0]}</div>
             <p class="hero-sub">{town['sub']} {PRICE_LINE}</p>
             <div class="cta-row">
@@ -297,7 +306,7 @@ def build(town) -> str:
                  width="{iw}" height="{ih}" alt="{alt}" loading="eager" fetchpriority="high" decoding="async" id="heroImg" data-hero>
               <div class="tag"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><div><b>Pay on completion</b><span>No upfront payment</span></div></div>
             </div>
-            <div class="floatcard"><b><span data-count="5.0" data-dec="1">5.0</span><span class="star" aria-hidden="true">★</span></b><span>230+ Google reviews</span></div>
+            <div class="floatcard" data-nosnippet><b><span data-count="5.0" data-dec="1">5.0</span><span class="star" aria-hidden="true">★</span></b><span>230+ Google reviews</span></div>
           </div>
         </div>
       </div>
@@ -380,16 +389,17 @@ def build(town) -> str:
 {districts}
             </ul>
             <p class="cover-edge">{town['edge']}</p>
+            <p class="cover-edge">{town['related']}</p>
           </div>
           <div class="area-side">
             <div class="pc-checker">
               <label for="pc-check">Check your postcode</label>
               <div class="pc-row">
-                <input id="pc-check" type="text" placeholder="e.g. {town['districts'][0][0].split(' ')[0]} 1AA" maxlength="8" autocomplete="postal-code" aria-label="Your postcode">
+                <input id="pc-check" type="text" placeholder="e.g. {town['districts'][0][0].split(' ')[0]}" maxlength="8" autocomplete="postal-code" aria-label="Your postcode">
                 <button type="button" id="pc-btn" class="btn-find"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Check</button>
               </div>
               <p class="pc-result" id="pc-result" hidden></p>
-              <p class="micro">Same checker as our <a href="/#areas">main coverage map</a> — every Leeds <b>LS</b> district, <b>HG1&ndash;HG3</b> and <b>WF1&ndash;WF13</b>.</p>
+              <p class="micro">Same checker as our <a href="/#areas">main coverage map</a> — every Leeds <b>LS</b> district, <b>HG1&ndash;HG3</b>, <b>WF1&ndash;WF13</b>, and <b>YO1, YO10, YO24</b> in York plus <b>YO8</b> Selby.</p>
             </div>
             <div class="landmarks"><b>Where we're often called to:</b> {town['landmarks']}.</div>
           </div>
@@ -403,7 +413,7 @@ def build(town) -> str:
         <div class="section-head reveal">
           <span class="eyebrow">What we do</span>
           <h2>Mobile tyre fitting across {town['short']}</h2>
-          <p>Brand-new tyres fitted on the spot, wherever you are in {name}. We bring the garage to you.</p>
+          <p>Brand-new tyres fitted on the spot, wherever you are in {name}. We bring the garage to you. Flat battery instead? See <a href="/jump-start-leeds">jump starts — from &pound;50</a>, across the same area.</p>
         </div>
         <div class="services stagger">
           <article class="svc">
@@ -467,15 +477,15 @@ def build(town) -> str:
     <section class="section soft" id="reviews">
       <div class="wrap">
         <div class="rev-head reveal">
-          <h2 class="sr-only">Customer reviews — rated 5.0 on Google from more than 230 verified reviews</h2>
+          <h2 class="sr-only" data-nosnippet>Customer reviews — rated 5.0 on Google from more than 230 verified reviews</h2>
           <span class="eyebrow">Trusted across West Yorkshire</span>
           <span class="stars" style="font-size:22px">★★★★★</span>
           <span class="big"><span data-count="5.0" data-dec="1">5.0</span> on Google</span>
-          <span class="micro">From <span data-count="230" data-suffix="+">230+</span> verified Google reviews</span>
+          <span class="micro" data-nosnippet>From <span data-count="230" data-suffix="+" data-nosnippet>230+</span> verified Google reviews</span>
         </div>
 {REVIEWS}        </div>
         <div class="reviews-cta reveal">
-          <a class="rev-google" href="https://maps.app.goo.gl/LyEpPCfZw5TquB427" target="_blank" rel="noopener"><span class="gicon">G</span> Read all our reviews on Google</a>
+          <a class="rev-google" href="https://www.google.com/maps?cid=11412519892778241080" target="_blank" rel="noopener"><span class="gicon">G</span> Read all our reviews on Google</a>
         </div>
       </div>
     </section>

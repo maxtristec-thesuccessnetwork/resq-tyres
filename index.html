@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <script>document.documentElement.className+=" js";</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mobile Tyre Fitting Leeds, 6am–10pm Every Day — ResQ Tyres &amp; Recovery</title>
-  <meta name="description" content="Mobile tyre fitting across Leeds &amp; West Yorkshire, 6am–10pm every day. We come to you and give you a time when you call. Tyres from £40. Pay on completion. Call 07438 562633.">
+  <title>Mobile Tyre Fitting Leeds | 6am–10pm, 7 Days | ResQ Tyres</title>
+  <meta name="description" content="Mobile tyre fitting across Leeds &amp; West Yorkshire, 6am–10pm every day. Tyres from £40, pay on completion. Call 07438 562633.">
   <meta name="theme-color" content="#e4002b">
   <link rel="canonical" href="https://www.resqtyres.co.uk/">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="ResQ Tyres &amp; Recovery — mobile tyre fitting, Leeds, 6am–10pm every day">
-  <meta property="og:description" content="Flat, blowout or breakdown? One call and we're on the way across Leeds &amp; West Yorkshire. Open 6am–10pm, 7 days.">
+  <meta property="og:title" content="Mobile Tyre Fitting Leeds | 6am–10pm, 7 Days | ResQ Tyres">
+  <meta property="og:description" content="Mobile tyre fitting across Leeds &amp; West Yorkshire, 6am–10pm every day. Tyres from £40, pay on completion. Call 07438 562633.">
   <meta property="og:url" content="https://www.resqtyres.co.uk/">
   <meta property="og:image" content="https://www.resqtyres.co.uk/assets/van.jpg">
   <meta property="og:locale" content="en_GB">
@@ -22,7 +22,7 @@
   <!-- Manrope is self-hosted (/fonts). @font-face is inlined below so no stylesheet blocks render. -->
   <link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
   <style>/* critical: inlined from css/fonts.css + the above-fold slice of css/styles.css.
-    EDIT css/styles.css FIRST, THEN RE-SYNC THIS BLOCK. See SEO Retainer/lcp-fix-spec-v2.md section 3. */
+    EDIT css/styles.css FIRST, THEN RE-SYNC THIS BLOCK. */
 /* --- from css/fonts.css (paths rewritten for /index.html) --- */
 @font-face{font-family:'Manrope';font-style:normal;font-weight:500 800;font-display:swap;
   src:url(fonts/manrope-latin-ext.woff2) format('woff2');
@@ -98,6 +98,10 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 .scroll-cue .mouse::before{content:"";width:4px;height:7px;border-radius:2px;background:var(--red);animation:wheelDrop 1.6s infinite}
 @keyframes wheelDrop{0%{opacity:0;transform:translateY(-4px)}30%{opacity:1}70%{opacity:1;transform:translateY(6px)}100%{opacity:0;transform:translateY(10px)}}
 
+/* marquee: clip the long track before styles.css lands, or the page lays out wider than the screen */
+.marquee{overflow:hidden;white-space:nowrap}
+.marquee .track{display:inline-flex}
+
 /* --- styles.css:99-104 --- */
 @media(prefers-reduced-motion:reduce){
   .reveal,.stagger>*{opacity:1!important;transform:none!important;transition:none}
@@ -123,8 +127,11 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 
 /* ===== Header ===== */
 .site-header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.bar{display:flex;align-items:center;justify-content:space-between;padding:10px 0;gap:24px;max-width:1480px;margin-inline:auto}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:10px var(--gutter);gap:24px;max-width:calc(1480px + 2*var(--gutter));margin-inline:auto}
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+@media(max-width:560px){.bar{gap:12px}.logo{gap:8px}} /* phones: room for the gutter without wrapping the name */
+@media(min-width:761px) and (max-width:1100px){.bar,.bar .nav{gap:16px}} /* tablets: room for the gutter without wrapping the name */
+@media(max-width:360px){.site-header .bar{padding-inline:12px}.site-header .btn-call{padding-inline:14px}.site-header .logo-text small{letter-spacing:1px}} /* smallest phones: keep the name clear of the call button */
 .logo img{width:54px;height:54px;border-radius:50%}
 .logo-text{display:flex;flex-direction:column;line-height:1.05;font-weight:800;font-size:19px;color:var(--ink)}
 .logo-text small{font-weight:600;color:var(--muted);font-size:10px;letter-spacing:1.5px;margin-top:2px}
@@ -217,7 +224,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
   .area-map{max-width:520px;margin:0 auto;width:100%}
 }
 @media(max-width:760px){
-  /* paid mobile traffic: headline + call button first, no distractions (council, 16 Sept 2026) */
+  /* phones: headline + call button first */
   .hero{padding-top:12px}
   .hero .scroll-cue,.hero .cta-secondary{display:none}
   /* 5 Oct 2026: the call button, rating and price sit above the bottom bar on every page,
@@ -342,7 +349,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
     },
     "sameAs": [
       "https://www.google.com/maps?cid=11412519892778241080",
-      "https://www.facebook.com/people/ResQ-Tyres-Recovery/61551057443516/",
+      "https://www.facebook.com/profile.php?id=61551057443516",
       "https://www.tiktok.com/@resqtyres"
     ],
     "hasOfferCatalog": {
@@ -351,6 +358,11 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
       "itemListElement": [
         {
           "@type": "Offer",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "minPrice": 90,
+            "priceCurrency": "GBP"
+          },
           "itemOffered": {
             "@type": "Service",
             "name": "Emergency tyre callout",
@@ -363,11 +375,17 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
         },
         {
           "@type": "Offer",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "minPrice": 70,
+            "priceCurrency": "GBP",
+            "maxPrice": 120
+          },
           "itemOffered": {
             "@type": "Service",
             "name": "Mobile puncture repair",
             "serviceType": "Puncture repair",
-            "description": "Puncture repair at your home, workplace or the roadside where the tyre can be safely repaired. From \u00a370, up to \u00a3120 depending on distance and tyre size.",
+            "description": "Puncture repair at your home, workplace or the roadside where the tyre can be safely repaired. From £70, up to £120 depending on distance and tyre size.",
             "provider": {
               "@id": "https://www.resqtyres.co.uk/#business"
             }
@@ -375,6 +393,11 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
         },
         {
           "@type": "Offer",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "minPrice": 90,
+            "priceCurrency": "GBP"
+          },
           "itemOffered": {
             "@type": "Service",
             "name": "Planned tyre replacement at home",
@@ -387,9 +410,12 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
         },
         {
           "@type": "Offer",
-          "priceCurrency": "GBP",
-          "price": "50",
           "url": "https://www.resqtyres.co.uk/jump-start-leeds",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "minPrice": 50,
+            "priceCurrency": "GBP"
+          },
           "itemOffered": {
             "@type": "Service",
             "name": "Mobile jump start",
@@ -401,6 +427,20 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
           }
         }
       ]
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://www.resqtyres.co.uk/#website",
+    "url": "https://www.resqtyres.co.uk/",
+    "name": "ResQ Tyres & Recovery",
+    "alternateName": "ResQ Tyres",
+    "inLanguage": "en-GB",
+    "publisher": {
+      "@id": "https://www.resqtyres.co.uk/#business"
     }
   }
   </script>
@@ -570,7 +610,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
           <div class="hero-copy">
             <span class="live-badge"><span class="dot" aria-hidden="true"></span> <span data-open-status>Open 6am–10pm, 7 days</span></span>
             <h1>Flat tyre in Leeds? We come to you.</h1>
-            <p class="hero-rating"><span class="stars" aria-hidden="true">★</span> 5.0 on Google · 230+ reviews</p>
+            <p class="hero-rating" data-nosnippet><span class="stars" aria-hidden="true">★</span> 5.0 on Google · 230+ reviews</p>
             <div class="rotator" id="rotator" aria-hidden="true">At home.</div>
             <p class="hero-sub">Mobile tyre fitting at home, work or the roadside across Leeds and West Yorkshire, 6am to 10pm every day. <b>Tyres from £40, fitting from £50: one tyre fitted from £90.</b> Price agreed on the phone before we set off.</p>
             <div class="cta-row">
@@ -591,7 +631,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
                  loading="eager" fetchpriority="high" decoding="async" id="heroImg" data-hero>
               <div class="tag"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><div><b>Pay on completion</b><span>No upfront payment</span></div></div>
             </div>
-            <div class="floatcard"><b><span data-count="5.0" data-dec="1">5.0</span><span class="star" aria-hidden="true">★</span></b><span>230+ Google reviews</span></div>
+            <div class="floatcard" data-nosnippet><b><span data-count="5.0" data-dec="1">5.0</span><span class="star" aria-hidden="true">★</span></b><span>230+ Google reviews</span></div>
           </div>
         </div>
       </div>
@@ -900,11 +940,11 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
     <section class="section soft" id="reviews">
       <div class="wrap">
         <div class="rev-head reveal">
-          <h2 class="sr-only">Customer reviews — rated 5.0 on Google from more than 230 verified reviews</h2>
+          <h2 class="sr-only" data-nosnippet>Customer reviews — rated 5.0 on Google from more than 230 verified reviews</h2>
           <span class="eyebrow">Trusted across West Yorkshire</span>
           <span class="stars" style="font-size:22px">★★★★★</span>
           <span class="big"><span data-count="5.0" data-dec="1">5.0</span> on Google</span>
-          <span class="micro">From <span data-count="230" data-suffix="+">230+</span> verified Google reviews</span>
+          <span class="micro" data-nosnippet>From <span data-count="230" data-suffix="+" data-nosnippet>230+</span> verified Google reviews</span>
         </div>
         <div class="reviews stagger">
           <blockquote class="review">
@@ -924,7 +964,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
           </blockquote>
         </div>
         <div class="reviews-cta reveal">
-          <a class="rev-google" href="https://maps.app.goo.gl/LyEpPCfZw5TquB427" target="_blank" rel="noopener"><span class="gicon">G</span> Read all our reviews on Google</a>
+          <a class="rev-google" href="https://www.google.com/maps?cid=11412519892778241080" target="_blank" rel="noopener"><span class="gicon">G</span> Read all our reviews on Google</a>
           <a class="rev-tiktok" href="https://www.tiktok.com/@resqtyres" target="_blank" rel="noopener"><svg class="icon solid" aria-hidden="true"><use href="#i-tiktok"/></svg> Follow us on TikTok</a>
         </div>
       </div>
@@ -936,21 +976,21 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
         <div class="section-head reveal">
           <span class="eyebrow">Where we cover</span>
           <h2>Mobile across Leeds, West Yorkshire, Harrogate &amp; York</h2>
-          <p>We come to you right across Leeds and West Yorkshire, up to Harrogate, out to Tadcaster and into York and Selby. Not sure if you're in range? Pop your postcode in below.</p>
+          <p>We come to you right across Leeds and West Yorkshire, up to Harrogate, out to Tadcaster and into York and Selby. More on <a href="/mobile-tyre-fitting-wakefield">mobile tyre fitting in Wakefield</a> and <a href="/mobile-tyre-fitting-harrogate">mobile tyre fitting in Harrogate &amp; Tadcaster</a>. Not sure if you're in range? Pop your postcode in below.</p>
         </div>
 
         <div class="areas-grid reveal">
           <div class="area-map">
             <!-- Self-hosted coverage map. Regenerate with tools/build-coverage-map.py;
                  source kept at assets/coverage-map.svg. No third-party tiles, no key. -->
-            <img class="cov-map" src="assets/coverage-map.svg" width="620" height="560" loading="lazy" decoding="async" alt="Map of the ResQ Tyres coverage area: every confirmed postcode district marked — all Leeds LS districts including LS24 Tadcaster, HG1 to HG3 around Harrogate, and WF1 to WF13 across Wakefield, Castleford, Pontefract and Dewsbury — with Leeds, Pudsey, Morley, Dewsbury, Wakefield, Castleford, Garforth, Pontefract, Harrogate and Tadcaster named.">
+            <img class="cov-map" src="assets/coverage-map.svg" width="620" height="560" loading="lazy" decoding="async" alt="Coverage map: every LS district, HG1–HG3 and WF1–WF13. York (YO1, YO10, YO24) and Selby (YO8) are covered, off the map.">
           </div>
 
           <div class="area-side">
             <div class="pc-checker">
               <label for="pc-check">Check your postcode</label>
               <div class="pc-row">
-                <input id="pc-check" type="text" placeholder="e.g. LS9 8TX" maxlength="8" autocomplete="postal-code" aria-label="Your postcode">
+                <input id="pc-check" type="text" placeholder="e.g. LS10" maxlength="8" autocomplete="postal-code" aria-label="Your postcode">
                 <button type="button" id="pc-btn" class="btn-find"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Check</button>
               </div>
               <p class="pc-result" id="pc-result" hidden></p>
@@ -1106,7 +1146,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
             <li><a href="#areas"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Areas we cover in West Yorkshire</a></li>
             <li><a href="/mobile-tyre-fitting-wakefield"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Mobile tyre fitting in Wakefield</a></li>
             <li><a href="/mobile-tyre-fitting-harrogate"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Mobile tyre fitting in Harrogate &amp; Tadcaster</a></li>
-            <li><a href="/jump-start-leeds"><svg class="icon" aria-hidden="true"><use href="/#i-alert"/></svg> Jump start in Leeds — from &pound;50</a></li>
+            <li><a href="/jump-start-leeds"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg> Jump start in Leeds — from &pound;50</a></li>
             <li><a href="#faq"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg> Common questions</a></li>
             <li><a href="#how"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg> How mobile tyre fitting works</a></li>
             <li><a href="#reviews"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg> Customer reviews</a></li>

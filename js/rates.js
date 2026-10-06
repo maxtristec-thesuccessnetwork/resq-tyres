@@ -6,11 +6,10 @@
    This file is only used if that sheet can't be reached, so the
    size dropdowns still work and the page never breaks.
 
-   THE RULE (revised 7 Sept 2026, Moin's own numbers):
+   THE RULE:
      1. A size with BOTH "From £" and "To £" filled in is quoted exactly.
      2. Otherwise a car size is quoted from its RIM BAND — the
-        "Backup NN inch" rows, which Moin filled in himself on
-        7 Sept (14–17" £40–£100, 18–20" £80–£150). Van/commercial
+        "Backup NN inch" rows in the sheet. Van/commercial
         "C" sizes only use a band if a "Backup NNC inch" row exists.
      3. No band and no exact price => the customer is asked to call.
      Prices are PER TYRE. Mobile fitting is charged on top
@@ -23,9 +22,8 @@ const RESQ_RATES = {
      "Backup NN inch" rows. Empty here — the sheet is the source of truth. */
   bands: {},
 
-  /* Mobile fitting, on top of the tyre price. Moin, 7 Sept 2026:
-     "plus 50 quid, depending on where it is". A "Mobile fitting" row
-     in the sheet overrides this. */
+  /* Mobile fitting, on top of the tyre price (from £50, depending on
+     location). A "Mobile fitting" row in the sheet overrides this. */
   fittingFrom: 50,
 
   /* Prices, keyed "width/profileRrim" (rim keeps its C for
@@ -180,14 +178,9 @@ const RESQ_RATES = {
    COVERAGE — where ResQ will travel to.
    Used by the postcode checker + the coverage map.
    =========================================================== */
-/* Coverage. The exact districts Moin confirmed by WhatsApp on 2026-09-01:
-   "all LS postcode hg1,hg2,hg3 Wf1,wf2,wf3,wf4,wf5" + "Include them please bro"
-   (WF8/WF10/WF12/WF13) + "And ls24 tadcaster". Bradford (BD) is out.
-   EXTENDED 2026-09-02 evening, Moin by WhatsApp: "Yes mate switch it on in them
-   postcodes it that job was from wf7" — WF6, WF7, WF9 and WF11 added, which makes
-   the WF side a contiguous WF1-WF13. He had taken a job in WF7 that same afternoon,
-   which this file would otherwise have told him we did not cover.
-   Districts, not letter prefixes: WF14+ is still out, and so is Bradford. */
+/* Coverage: every LS district, HG1-HG3, WF1-WF13 and the listed York/Selby
+   districts. Districts, not letter prefixes: WF14+ is out, and so is
+   Bradford (BD). */
 const RESQ_COVERAGE = {
   districts: [
     "LS1","LS2","LS3","LS4","LS5","LS6","LS7","LS8","LS9","LS10",

@@ -128,8 +128,11 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 
 /* ===== Header ===== */
 .site-header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.bar{display:flex;align-items:center;justify-content:space-between;padding:10px 0;gap:24px;max-width:1480px;margin-inline:auto}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:10px var(--gutter);gap:24px;max-width:calc(1480px + 2*var(--gutter));margin-inline:auto}
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+@media(max-width:560px){.bar{gap:12px}.logo{gap:8px}} /* phones: room for the gutter without wrapping the name */
+@media(min-width:761px) and (max-width:1100px){.bar,.bar .nav{gap:16px}} /* tablets: room for the gutter without wrapping the name */
+@media(max-width:360px){.site-header .bar{padding-inline:12px}.site-header .btn-call{padding-inline:14px}.site-header .logo-text small{letter-spacing:1px}} /* smallest phones: keep the name clear of the call button */
 .logo img{width:54px;height:54px;border-radius:50%}
 .logo-text{display:flex;flex-direction:column;line-height:1.05;font-weight:800;font-size:19px;color:var(--ink)}
 .logo-text small{font-weight:600;color:var(--muted);font-size:10px;letter-spacing:1.5px;margin-top:2px}
@@ -419,8 +422,20 @@ textarea{resize:vertical}
 .areas-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(20px,3vw,40px);align-items:center;max-width:1040px;margin:0 auto}
 .area-map{background:#0b0e13;border:1px solid #1b222b;border-radius:var(--radius-lg);padding:8px;box-shadow:var(--shadow)}
 /* --- Static coverage map (self-hosted SVG, inlined in index.html #areas).
-       Replaced Leaflet + CARTO tiles 2026-09-02, card W5 option A. --- */
+       Replaced Leaflet + CARTO tiles 2026-09-02. --- */
 .cov-map{display:block;width:100%;height:auto;aspect-ratio:62/56;border-radius:calc(var(--radius-lg) - 8px);background:#0b0e13}
+/* --- Puncture price line --- */
+.pr-line{display:flex;gap:9px;align-items:flex-start;margin:0 0 18px;padding:11px 13px;border:1px solid var(--line);border-left:3px solid var(--red);border-radius:var(--radius-sm,10px);background:rgba(228,0,43,.04);font-size:13.5px;line-height:1.5;color:var(--ink-2)}
+.pr-line .icon{flex:0 0 auto;width:17px;height:17px;margin-top:1px;color:var(--red)}
+.pr-line b{color:var(--ink)}
+
+/* --- FAQ --- */
+.faq-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,2vw,22px);max-width:1040px;margin:0 auto}
+.faq-item{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:clamp(16px,2vw,22px);box-shadow:var(--shadow-sm)}
+.faq-item h3{margin:0 0 8px;font-size:clamp(15px,1.5vw,17px);line-height:1.35}
+.faq-item p{margin:0;font-size:14.5px;line-height:1.65;color:var(--ink-2)}
+.faq-item a{color:var(--red);font-weight:700}
+@media(max-width:760px){.faq-grid{grid-template-columns:1fr}}
 .area-side{display:flex;flex-direction:column;gap:18px}
 .pc-checker{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow-sm)}
 .pc-checker label{display:block;font-size:11px;color:var(--ink-2);margin-bottom:9px;text-transform:uppercase;letter-spacing:.6px;font-weight:700}
@@ -520,7 +535,7 @@ textarea{resize:vertical}
   .area-map{max-width:520px;margin:0 auto;width:100%}
 }
 @media(max-width:760px){
-  /* paid mobile traffic: headline + call button first, no distractions (council, 16 Sept 2026) */
+  /* phones: headline + call button first */
   .hero{padding-top:12px}
   .hero .scroll-cue,.hero .cta-secondary{display:none}
   /* 5 Oct 2026: the call button, rating and price sit above the bottom bar on every page,
@@ -541,6 +556,9 @@ textarea{resize:vertical}
   .step:not(:last-child)::after{display:none}
   .sticky-bar{display:flex}
   .site-footer{padding-bottom:96px}
+  /* footer links: full 44px tap targets on touch screens */
+  .foot-links{gap:0}
+  .foot-links li>a,.foot-links li>span{min-height:44px}
   .offer .wrap{flex-direction:column;text-align:center}
   .offer .ot{flex-direction:column;text-align:center}
 }

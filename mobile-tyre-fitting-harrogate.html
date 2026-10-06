@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <script>document.documentElement.className+=" js";</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mobile Tyre Fitting Harrogate & Tadcaster — 6am–10pm, We Come To You | ResQ Tyres</title>
-  <meta name="description" content="Mobile tyre fitting and puncture repair in Harrogate (HG1–HG3) and Tadcaster (LS24), 6am–10pm every day. Tyres from £40, we come to your home, work or the roadside. Pay on completion. Call 07438 562633.">
+  <title>Mobile Tyre Fitting Harrogate &amp; Tadcaster | ResQ Tyres</title>
+  <meta name="description" content="Mobile tyre fitting and puncture repair in Harrogate (HG1–HG3) and Tadcaster, 6am–10pm daily. Tyres from £40. Call 07438 562633.">
   <meta name="theme-color" content="#e4002b">
   <link rel="canonical" href="https://www.resqtyres.co.uk/mobile-tyre-fitting-harrogate">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Mobile tyre fitting in Harrogate &amp; Tadcaster — 6am–10pm, we come to you">
-  <meta property="og:description" content="Mobile tyre fitting and puncture repair in Harrogate (HG1–HG3) and Tadcaster (LS24), 6am–10pm every day. Tyres from £40, we come to your home, work or the roadside. Pay on completion. Call 07438 562633.">
+  <meta property="og:title" content="Mobile Tyre Fitting Harrogate &amp; Tadcaster | ResQ Tyres">
+  <meta property="og:description" content="Mobile tyre fitting and puncture repair in Harrogate (HG1–HG3) and Tadcaster, 6am–10pm daily. Tyres from £40. Call 07438 562633.">
   <meta property="og:url" content="https://www.resqtyres.co.uk/mobile-tyre-fitting-harrogate">
   <meta property="og:image" content="https://www.resqtyres.co.uk/assets/van.jpg">
   <meta property="og:locale" content="en_GB">
@@ -21,7 +21,7 @@
   <link rel="icon" href="assets/logo.png">
   <link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
   <style>/* critical: inlined from css/fonts.css + the above-fold slice of css/styles.css.
-    EDIT css/styles.css FIRST, THEN RE-SYNC THIS BLOCK. See SEO Retainer/lcp-fix-spec-v2.md section 3. */
+    EDIT css/styles.css FIRST, THEN RE-SYNC THIS BLOCK. */
 /* --- from css/fonts.css (paths rewritten for /index.html) --- */
 @font-face{font-family:'Manrope';font-style:normal;font-weight:500 800;font-display:swap;
   src:url(fonts/manrope-latin-ext.woff2) format('woff2');
@@ -97,6 +97,10 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 .scroll-cue .mouse::before{content:"";width:4px;height:7px;border-radius:2px;background:var(--red);animation:wheelDrop 1.6s infinite}
 @keyframes wheelDrop{0%{opacity:0;transform:translateY(-4px)}30%{opacity:1}70%{opacity:1;transform:translateY(6px)}100%{opacity:0;transform:translateY(10px)}}
 
+/* marquee: clip the long track before styles.css lands, or the page lays out wider than the screen */
+.marquee{overflow:hidden;white-space:nowrap}
+.marquee .track{display:inline-flex}
+
 /* --- styles.css:99-104 --- */
 @media(prefers-reduced-motion:reduce){
   .reveal,.stagger>*{opacity:1!important;transform:none!important;transition:none}
@@ -122,8 +126,11 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 
 /* ===== Header ===== */
 .site-header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.bar{display:flex;align-items:center;justify-content:space-between;padding:10px 0;gap:24px;max-width:1480px;margin-inline:auto}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:10px var(--gutter);gap:24px;max-width:calc(1480px + 2*var(--gutter));margin-inline:auto}
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+@media(max-width:560px){.bar{gap:12px}.logo{gap:8px}} /* phones: room for the gutter without wrapping the name */
+@media(min-width:761px) and (max-width:1100px){.bar,.bar .nav{gap:16px}} /* tablets: room for the gutter without wrapping the name */
+@media(max-width:360px){.site-header .bar{padding-inline:12px}.site-header .btn-call{padding-inline:14px}.site-header .logo-text small{letter-spacing:1px}} /* smallest phones: keep the name clear of the call button */
 .logo img{width:54px;height:54px;border-radius:50%}
 .logo-text{display:flex;flex-direction:column;line-height:1.05;font-weight:800;font-size:19px;color:var(--ink)}
 .logo-text small{font-weight:600;color:var(--muted);font-size:10px;letter-spacing:1.5px;margin-top:2px}
@@ -216,7 +223,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
   .area-map{max-width:520px;margin:0 auto;width:100%}
 }
 @media(max-width:760px){
-  /* paid mobile traffic: headline + call button first, no distractions (council, 16 Sept 2026) */
+  /* phones: headline + call button first */
   .hero{padding-top:12px}
   .hero .scroll-cue,.hero .cta-secondary{display:none}
   /* 5 Oct 2026: the call button, rating and price sit above the bottom bar on every page,
@@ -267,6 +274,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
   "@id": "https://www.resqtyres.co.uk/mobile-tyre-fitting-harrogate#service",
   "name": "Mobile tyre fitting in Harrogate & Tadcaster",
   "serviceType": "Mobile tyre fitting and puncture repair",
+  "description": "Mobile tyre fitting and puncture repair at your home, workplace or the roadside in HG1 to HG3 and LS24 Tadcaster, 6am to 10pm every day.",
   "url": "https://www.resqtyres.co.uk/mobile-tyre-fitting-harrogate",
   "provider": {
     "@type": "AutoRepair",
@@ -301,6 +309,15 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
       "name": "Wetherby"
     }
   ],
+  "offers": {
+    "@type": "Offer",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "minPrice": 70,
+      "priceCurrency": "GBP"
+    },
+    "description": "Tyres from £40, mobile fitting from £50: one tyre fitted from £90. Puncture repair £70 to £120. Exact price confirmed by phone before any work starts."
+  },
   "availableChannel": {
     "@type": "ServiceChannel",
     "servicePhone": {
@@ -396,12 +413,6 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Areas we cover",
-      "item": "https://www.resqtyres.co.uk/#areas"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
       "name": "Mobile tyre fitting in Harrogate & Tadcaster",
       "item": "https://www.resqtyres.co.uk/mobile-tyre-fitting-harrogate"
     }
@@ -484,10 +495,10 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
       <div class="wrap">
         <div class="hero-grid">
           <div class="hero-copy">
-            <p class="crumbs"><a href="/">ResQ Tyres</a><span>›</span><a href="/#areas">Areas we cover</a><span>›</span>Harrogate &amp; Tadcaster</p>
+            <p class="crumbs"><a href="/">ResQ Tyres</a><span>›</span>Mobile tyre fitting in Harrogate &amp; Tadcaster</p>
             <span class="live-badge"><span class="dot" aria-hidden="true"></span> <span data-open-status>Open 6am–10pm, 7 days</span><span class="badge-extra"> · Harrogate &amp; Tadcaster</span></span>
             <h1>Flat tyre in Harrogate or Tadcaster? We come to you.</h1>
-            <p class="hero-rating"><span class="stars" aria-hidden="true">★</span> 5.0 on Google · 230+ reviews</p>
+            <p class="hero-rating" data-nosnippet><span class="stars" aria-hidden="true">★</span> 5.0 on Google · 230+ reviews</p>
             <div class="rotator" id="rotator" aria-hidden="true" data-words='["In Harrogate.", "In Pannal.", "In Tadcaster.", "On the A61.", "6am to 10pm."]'>In Harrogate.</div>
             <p class="hero-sub">Mobile tyre fitting across Harrogate and out to Tadcaster, 6am to 10pm every day. <b>Tyres from £40, fitting from £50: one tyre fitted from £90.</b> Price agreed on the phone before we set off.</p>
             <div class="cta-row">
@@ -504,7 +515,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
                  width="760" height="1140" alt="ResQ Tyres fitter changing a tyre at a customer's home — mobile tyre fitting on the driveway" loading="eager" fetchpriority="high" decoding="async" id="heroImg" data-hero>
               <div class="tag"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><div><b>Pay on completion</b><span>No upfront payment</span></div></div>
             </div>
-            <div class="floatcard"><b><span data-count="5.0" data-dec="1">5.0</span><span class="star" aria-hidden="true">★</span></b><span>230+ Google reviews</span></div>
+            <div class="floatcard" data-nosnippet><b><span data-count="5.0" data-dec="1">5.0</span><span class="star" aria-hidden="true">★</span></b><span>230+ Google reviews</span></div>
           </div>
         </div>
       </div>
@@ -593,16 +604,17 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
             <li class="district"><b>YO8</b><span>Selby</span></li>
             </ul>
             <p class="cover-edge">Knaresborough (HG5), Ripon (HG4) and the rest of York are just outside our confirmed patch — call us anyway, we may still be able to reach you.</p>
+            <p class="cover-edge">Nearer Wakefield? See <a href="/mobile-tyre-fitting-wakefield">mobile tyre fitting in Wakefield</a>, or <a href="/">mobile tyre fitting in Leeds</a>.</p>
           </div>
           <div class="area-side">
             <div class="pc-checker">
               <label for="pc-check">Check your postcode</label>
               <div class="pc-row">
-                <input id="pc-check" type="text" placeholder="e.g. HG1 1AA" maxlength="8" autocomplete="postal-code" aria-label="Your postcode">
+                <input id="pc-check" type="text" placeholder="e.g. HG1" maxlength="8" autocomplete="postal-code" aria-label="Your postcode">
                 <button type="button" id="pc-btn" class="btn-find"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Check</button>
               </div>
               <p class="pc-result" id="pc-result" hidden></p>
-              <p class="micro">Same checker as our <a href="/#areas">main coverage map</a> — every Leeds <b>LS</b> district, <b>HG1&ndash;HG3</b> and <b>WF1&ndash;WF13</b>.</p>
+              <p class="micro">Same checker as our <a href="/#areas">main coverage map</a> — every Leeds <b>LS</b> district, <b>HG1&ndash;HG3</b>, <b>WF1&ndash;WF13</b>, and <b>YO1, YO10, YO24</b> in York plus <b>YO8</b> Selby.</p>
             </div>
             <div class="landmarks"><b>Where we're often called to:</b> the A61 Leeds Road and Harrogate Road, the A59 through Knaresborough, the A658 past the airport, the Stray, Harrogate station and the Victoria car park, and the A64 and A659 around Tadcaster.</div>
           </div>
@@ -616,7 +628,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
         <div class="section-head reveal">
           <span class="eyebrow">What we do</span>
           <h2>Mobile tyre fitting across Harrogate &amp; Tadcaster</h2>
-          <p>Brand-new tyres fitted on the spot, wherever you are in Harrogate. We bring the garage to you.</p>
+          <p>Brand-new tyres fitted on the spot, wherever you are in Harrogate. We bring the garage to you. Flat battery instead? See <a href="/jump-start-leeds">jump starts — from &pound;50</a>, across the same area.</p>
         </div>
         <div class="services stagger">
           <article class="svc">
@@ -680,11 +692,11 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
     <section class="section soft" id="reviews">
       <div class="wrap">
         <div class="rev-head reveal">
-          <h2 class="sr-only">Customer reviews — rated 5.0 on Google from more than 230 verified reviews</h2>
+          <h2 class="sr-only" data-nosnippet>Customer reviews — rated 5.0 on Google from more than 230 verified reviews</h2>
           <span class="eyebrow">Trusted across West Yorkshire</span>
           <span class="stars" style="font-size:22px">★★★★★</span>
           <span class="big"><span data-count="5.0" data-dec="1">5.0</span> on Google</span>
-          <span class="micro">From <span data-count="230" data-suffix="+">230+</span> verified Google reviews</span>
+          <span class="micro" data-nosnippet>From <span data-count="230" data-suffix="+" data-nosnippet>230+</span> verified Google reviews</span>
         </div>
         <div class="reviews stagger">
           <blockquote class="review">
@@ -705,7 +717,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
         </div>
         <div class="reviews-cta reveal">        </div>
         <div class="reviews-cta reveal">
-          <a class="rev-google" href="https://maps.app.goo.gl/LyEpPCfZw5TquB427" target="_blank" rel="noopener"><span class="gicon">G</span> Read all our reviews on Google</a>
+          <a class="rev-google" href="https://www.google.com/maps?cid=11412519892778241080" target="_blank" rel="noopener"><span class="gicon">G</span> Read all our reviews on Google</a>
         </div>
       </div>
     </section>
@@ -779,28 +791,28 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
         <div>
           <h3>Contact</h3>
           <ul class="foot-links">
-            <li><a href="tel:07438562633"><svg class="icon" aria-hidden="true"><use href="/#i-phone"/></svg> 07438 562633</a></li>
-            <li><a href="https://wa.me/447438562633?text=Hi%20ResQ%2C%20I%20need%20a%20tyre%20fitted.%20I%27m%20at%3A%20" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="/#i-whatsapp"/></svg> WhatsApp us</a></li>
-            <li><a href="mailto:resqtyresrecovery@gmail.com"><svg class="icon" aria-hidden="true"><use href="/#i-mail"/></svg> resqtyresrecovery@gmail.com</a></li>
-            <li><span style="display:inline-flex;gap:9px;align-items:center"><svg class="icon" aria-hidden="true"><use href="/#i-pin"/></svg> Unit 8A, Lavender Walk, Leeds, LS9 8TX</span></li>
+            <li><a href="tel:07438562633"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> 07438 562633</a></li>
+            <li><a href="https://wa.me/447438562633?text=Hi%20ResQ%2C%20I%20need%20a%20tyre%20fitted.%20I%27m%20at%3A%20" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp us</a></li>
+            <li><a href="mailto:resqtyresrecovery@gmail.com"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg> resqtyresrecovery@gmail.com</a></li>
+            <li><span style="display:inline-flex;gap:9px;align-items:center"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Unit 8A, Lavender Walk, Leeds, LS9 8TX</span></li>
           </ul>
         </div>
         <div>
           <h3>Quick links</h3>
           <ul class="foot-links">
-            <li><a href="/#services"><svg class="icon" aria-hidden="true"><use href="/#i-wheel"/></svg> Mobile tyre fitting in Leeds</a></li>
-            <li><a href="/#help"><svg class="icon" aria-hidden="true"><use href="/#i-clock"/></svg> Emergency call-out</a></li>
-            <li><a href="/#estimate"><svg class="icon" aria-hidden="true"><use href="/#i-card"/></svg> Mobile tyre fitting prices</a></li>
-            <li><a href="/#areas"><svg class="icon" aria-hidden="true"><use href="/#i-pin"/></svg> Areas we cover in West Yorkshire</a></li>
-            <li><a href="/mobile-tyre-fitting-wakefield"><svg class="icon" aria-hidden="true"><use href="/#i-pin"/></svg> Mobile tyre fitting in Wakefield</a></li>
-            <li><a href="/mobile-tyre-fitting-harrogate"><svg class="icon" aria-hidden="true"><use href="/#i-pin"/></svg> Mobile tyre fitting in Harrogate &amp; Tadcaster</a></li>
-            <li><a href="/jump-start-leeds"><svg class="icon" aria-hidden="true"><use href="/#i-alert"/></svg> Jump start in Leeds — from &pound;50</a></li>
-            <li><a href="/#faq"><svg class="icon" aria-hidden="true"><use href="/#i-alert"/></svg> Common questions</a></li>
-            <li><a href="/#how"><svg class="icon" aria-hidden="true"><use href="/#i-arrow"/></svg> How mobile tyre fitting works</a></li>
-            <li><a href="/#reviews"><svg class="icon" aria-hidden="true"><use href="/#i-star"/></svg> Customer reviews</a></li>
-            <li><a href="/#enquiry"><svg class="icon" aria-hidden="true"><use href="/#i-home"/></svg> Plan a home tyre fitting</a></li>
-            <li><a href="https://www.facebook.com/profile.php?id=61551057443516" target="_blank" rel="noopener"><svg class="icon solid" aria-hidden="true"><use href="/#i-facebook"/></svg> Facebook</a></li>
-            <li><a href="https://www.tiktok.com/@resqtyres" target="_blank" rel="noopener"><svg class="icon solid" aria-hidden="true"><use href="/#i-tiktok"/></svg> TikTok</a></li>
+            <li><a href="/#services"><svg class="icon" aria-hidden="true"><use href="#i-wheel"/></svg> Mobile tyre fitting in Leeds</a></li>
+            <li><a href="/#help"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> Emergency call-out</a></li>
+            <li><a href="/#estimate"><svg class="icon" aria-hidden="true"><use href="#i-card"/></svg> Mobile tyre fitting prices</a></li>
+            <li><a href="/#areas"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Areas we cover in West Yorkshire</a></li>
+            <li><a href="/mobile-tyre-fitting-wakefield"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Mobile tyre fitting in Wakefield</a></li>
+            <li><a href="/mobile-tyre-fitting-harrogate"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Mobile tyre fitting in Harrogate &amp; Tadcaster</a></li>
+            <li><a href="/jump-start-leeds"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg> Jump start in Leeds — from &pound;50</a></li>
+            <li><a href="/#faq"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg> Common questions</a></li>
+            <li><a href="/#how"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg> How mobile tyre fitting works</a></li>
+            <li><a href="/#reviews"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg> Customer reviews</a></li>
+            <li><a href="/#enquiry"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg> Plan a home tyre fitting</a></li>
+            <li><a href="https://www.facebook.com/profile.php?id=61551057443516" target="_blank" rel="noopener"><svg class="icon solid" aria-hidden="true"><use href="#i-facebook"/></svg> Facebook</a></li>
+            <li><a href="https://www.tiktok.com/@resqtyres" target="_blank" rel="noopener"><svg class="icon solid" aria-hidden="true"><use href="#i-tiktok"/></svg> TikTok</a></li>
           </ul>
         </div>
       </div>

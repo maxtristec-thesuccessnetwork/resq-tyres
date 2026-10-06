@@ -7,14 +7,14 @@ Why this exists
 The #areas map used to be a Leaflet slippy map pulling tiles from CARTO's
 unauthenticated basemap CDN. On 2026-09-02 those tiles started coming back
 stamped "API KEY REQUIRED" — HTTP 200, correct MIME type, watermark baked into
-the image, so no health check could ever have caught it. Card W5, option A:
+the image, so no health check could ever have caught it. The fix:
 drop the third-party tile dependency altogether.
 
 What the map claims
 -------------------
 Nothing this file invents. The coverage picture is drawn from the postcode
-districts Moin confirmed by WhatsApp on 2026-09-01 (card W1) — all LS, HG1-HG3,
-and WF1-WF5/WF8/WF10/WF12/WF13 — with each district's real centroid from
+districts the business covers — all LS, HG1-HG3
+and WF1-WF13 — with each district's real centroid from
 postcodes.io. There is deliberately NO hard boundary line: an edge would be a
 claim about places nobody has confirmed, and the old 17 km circle was drawing
 one that wrongly swallowed Bradford. Instead each confirmed district is a dot,
@@ -52,7 +52,7 @@ ENDPOINTS = ["https://overpass.private.coffee/api/interpreter",
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 # Named towns get a labelled pin. Coordinates are the ones the site has always
-# used, plus Harrogate and Tadcaster from their district centroids (W1).
+# used, plus Harrogate and Tadcaster from their district centroids.
 TOWNS = [
     (53.8008, -1.5491, "Leeds", True),
     (53.6830, -1.4977, "Wakefield", False),
@@ -195,9 +195,10 @@ def main():
     a('<title id="covmap-t">Where ResQ Tyres covers</title>')
     a('<desc id="covmap-d">Map of the ResQ Tyres coverage area. Every confirmed postcode district is '
       'marked: all Leeds LS districts including LS24 Tadcaster, HG1 to HG3 around Harrogate, and WF1 to '
-      'WF5, WF8, WF10, WF12 and WF13 across Wakefield, Castleford, Pontefract and Dewsbury. Leeds, '
+      'WF13 across Wakefield, Castleford, Pontefract and Dewsbury. Leeds, '
       'Pudsey, Morley, Dewsbury, Wakefield, Castleford, Garforth, Pontefract, Harrogate and Tadcaster '
-      'are named, with the M1, M62, M621 and A1(M) running through.</desc>')
+      'are named, with the M1, M62, M621 and A1(M) running through. York (YO1, YO10 and YO24) '
+      'and Selby (YO8) are covered too but lie east of the area shown.</desc>')
 
     # The SVG is loaded as <img>, so it gets none of the page's CSS and must
     # carry its own. Keep these in step with the .cov-map block in css/styles.css.

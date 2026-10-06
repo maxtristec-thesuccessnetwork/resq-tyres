@@ -30,13 +30,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /* ---------- Coverage map ----------
    Now a self-hosted static SVG inlined in index.html (#areas). The old
-   Leaflet + CARTO tile map was removed 2026-09-02 (card W5, option A):
+   Leaflet + CARTO tile map was removed 2026-09-02:
    CARTO began watermarking unauthenticated tiles "API KEY REQUIRED".
    Regenerate the SVG with tools/build-coverage-map.py. */
 
 /* ---------- Price guide ----------
-   THE RULE (7 Sept 2026): exact sheet price first; otherwise the rim band
-   Moin set ("Backup NN inch" rows); otherwise "call us". Every size still
+   THE RULE: exact sheet price first; otherwise the rim band from the
+   sheet ("Backup NN inch" rows); otherwise "call us". Every size still
    appears in the dropdowns so the customer can find their tyre. Prices are
    per tyre — mobile fitting (RESQ_RATES.fittingFrom) is on top. */
 
