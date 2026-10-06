@@ -32,7 +32,6 @@
   /* ---- Honest open/closed status (6am–10pm, 7 days) ---- */
   (function () {
     var els = document.querySelectorAll("[data-open-status]");
-    if (!els.length) return;
     var OPEN = 6, CLOSE = 22, hour;
     try {
       hour = parseInt(new Intl.DateTimeFormat("en-GB", { hour: "numeric", hour12: false, timeZone: "Europe/London" }).format(new Date()), 10);
@@ -43,6 +42,23 @@
       var dot = el.parentNode && el.parentNode.querySelector(".dotpulse");
       if (dot && !open) dot.style.opacity = ".35";
     });
+
+    /* Closed: the hero call button becomes a WhatsApp button (no pulse), using
+       the page's own WhatsApp link, so nobody is sent to a phone line that is closed. */
+    if (open) return;
+    var hero = document.querySelector(".hero");
+    var btn = hero && hero.querySelector('.cta-primary[href^="tel:"]');
+    var wa = hero && hero.querySelector('a[href*="wa.me"]');
+    if (!btn || !wa) return;
+    btn.setAttribute("href", wa.getAttribute("href"));
+    btn.setAttribute("target", "_blank");
+    btn.setAttribute("rel", "noopener");
+    btn.classList.remove("pulse");
+    var use = btn.querySelector("use");
+    if (use) use.setAttribute("href", "#i-whatsapp");
+    var label = btn.lastChild;
+    if (label && label.nodeType === 3) label.nodeValue = " WhatsApp us — first call-outs from 6am";
+    else btn.appendChild(document.createTextNode(" WhatsApp us — first call-outs from 6am"));
   })();
 
   /* ---- Scroll progress bar + hero scale + to-top ---- */
