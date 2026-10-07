@@ -14,7 +14,7 @@
   /* ---- Hero rotator ---- */
   var rot = document.getElementById("rotator");
   if (rot && !reduce) {
-    var words = window.RESQ_ROTATOR_WORDS || ["At home.", "At work.", "At the roadside.", "6am to 10pm."];
+    var words = window.RESQ_ROTATOR_WORDS || ["At home.", "At work.", "At the roadside.", "6am–10pm."];
     var i = 0;
     setInterval(function () {
       i = (i + 1) % words.length;

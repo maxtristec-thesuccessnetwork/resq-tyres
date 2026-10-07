@@ -185,7 +185,7 @@ function renderRange(sizeLabel, range, lockingNut) {
       "£" + range.low + "<span class='dash'>–</span>£" + range.high +
       "<small>per tyre + mobile fitting from £" + fittingFrom() + "</small>";
     if (micro) micro.textContent =
-      "A guide only — the final price is confirmed by phone. Prices are per tyre; mobile fitting is from £" +
+      "A guide only. We confirm the final price by phone. Prices are per tyre; mobile fitting is from £" +
       fittingFrom() + " on top, depending on distance.";
     if (allin) {
       allin.hidden = false;
@@ -196,7 +196,7 @@ function renderRange(sizeLabel, range, lockingNut) {
     // ResQ hasn't priced this size. We don't guess — we ask them to call.
     if (lead) lead.textContent = "Your tyre size:";
     if (micro) micro.textContent =
-      "Pay on completion. Leeds, Wakefield, Harrogate and across West Yorkshire.";
+      "Pay on completion, by card or cash.";
   }
 
   // Locking wheel-nut add-on note
@@ -210,8 +210,8 @@ function renderRange(sizeLabel, range, lockingNut) {
       addon.hidden = false;
       addon.innerHTML =
         '<svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg> ' +
-        "<b>No locking wheel-nut key?</b> No problem — most fitters can't help, " +
-        "but we carry the specialist removal tools. We'll take it off safely (" +
+        "<b>No locking wheel-nut key?</b> Most fitters can't help, " +
+        "but we carry the specialist tools to remove locking wheel nuts safely (" +
         priceTxt + ").";
     } else {
       addon.hidden = true;
@@ -264,20 +264,20 @@ function wirePostcodeChecker() {
     if (!m) {
       showPC(out, "warn",
         '<svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg> ' +
-        "<span>That doesn't look like a full postcode — try again, or call us on " +
+        "<span>That doesn't look like a postcode. Try again, or call us on " +
         '<a href="tel:07438562633">07438&nbsp;562633</a>.</span>');
       return;
     }
     if (RESQ_COVERAGE.districts.indexOf(outward) !== -1) {
       showPC(out, "ok",
         '<svg class="icon" aria-hidden="true"><use href="#i-check-circle"/></svg> ' +
-        "<span>Great news — <b>" + outward + "</b> is in our coverage area. " +
+        "<span>Yes, we cover <b>" + outward + "</b>. " +
         "Call us or plan a home fitting below.</span>");
     } else {
       showPC(out, "warn",
         '<svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg> ' +
         "<span><b>" + outward + "</b> is outside the districts we cover, but we may still be able to " +
-        'reach you — give us a quick call on <a href="tel:07438562633">07438&nbsp;562633</a> to check.</span>');
+        'reach you. Give us a quick call on <a href="tel:07438562633">07438&nbsp;562633</a> to check.</span>');
     }
   }
   function showPC(el, kind, html) { el.hidden = false; el.className = "pc-result " + kind; el.innerHTML = html; }
@@ -329,10 +329,10 @@ function wireEnquiryForm() {
 // Shown when a send fails. Never say "sent" unless the service confirmed it.
 function sendFailed(err, done) {
   if (err) {
-    err.innerHTML = 'Sorry, that didn’t send. Please <a href="tel:07438562633">call 07438 562633</a> or ' +
+    err.innerHTML = 'Sorry, that didn\'t send. Please <a href="tel:07438562633">call 07438 562633</a> or ' +
       '<a href="https://wa.me/447438562633?text=' + encodeURIComponent(
         "Hi ResQ, can I get a price for tyres fitted at home? Tyre size or registration: ") +
-      '" target="_blank" rel="noopener">WhatsApp us</a> and we’ll sort it straight away.';
+      '" target="_blank" rel="noopener">WhatsApp us</a> and we\'ll sort it straight away.';
     err.hidden = false;
   }
   if (done) done();
