@@ -36,7 +36,7 @@ WA = "https://wa.me/447438562633?text=" + quote("Hi ResQ, I need a tyre fitted. 
 # One honest price line for every hero, word for word as on the home page.
 PRICE_LINE = "<b>Tyres from £40, fitting from £50: one tyre fitted from £90.</b> Price agreed on the phone before we set off."
 assert PRICE_LINE in INDEX, "PRICE_LINE no longer matches the home page hero — keep one price line on every page"
-# First phone screen: Harrogate's 52-character headline fills three lines at 360px wide and its
+# First phone screen: Harrogate's 52-character headline fills three lines at 360px wide, and an
 # 81-character `sub` plus the price line fills five. One line more and the call button starts
 # below 430px.
 H1_MAX, SUB_MAX = 52, 81
@@ -63,17 +63,17 @@ FOOTER = FOOTER.replace('href="#top"', 'href="/"')
 # ------------------------------------------------------------------ towns
 TOWNS = [
     dict(
-        slug="wakefield", name="Wakefield", short="Wakefield", schema_where="across WF1 to WF13",
+        slug="wakefield", name="Wakefield", short="Wakefield", area_and="Wakefield", area_or="Wakefield", topbar_area=None, schema_where="across WF1 to WF13",
         title="Mobile Tyre Fitting Wakefield | 6am–10pm | ResQ Tyres",
         description="Mobile tyre fitting and puncture repair in Wakefield (WF1–WF13), 6am–10pm daily. Tyres from £40, pay on completion. Call 07438 562633.",
         h1="Flat tyre in Wakefield? We come to you.",
-        rotator=["In Wakefield.", "In Ossett.", "In Castleford.", "In Pontefract.", "6am to 10pm."],
-        sub="Mobile tyre fitting across Wakefield and the WF postcodes, 6am to 10pm every day.",
+        rotator=["In Wakefield.", "In Ossett.", "In Castleford.", "In Pontefract.", "6am–10pm."],
+        sub="Mobile tyre fitting across Wakefield (WF1–WF13), 6am–10pm every day.",
         hero_img=("assets/hero-resq-600-v2.webp", "assets/hero-resq-900-v2.webp", "600w", "900w", 1000, 1050,
-                  "ResQ Tyres mobile tyre fitting van at a roadside job — a new tyre being fitted on site"),
+                  "ResQ Tyres mobile tyre fitting van at a roadside job, with a new tyre being fitted on site"),
         stat_area=("WF1–WF13", "Every Wakefield district"),
-        cover_heading="Every WF postcode from Wakefield to Dewsbury",
-        cover_intro="Wakefield is one of our busiest patches. We cover every district from WF1 to WF13 — the city, the Five Towns and out to Dewsbury — and we're on the road from Leeds, not from a depot you have to drive to.",
+        cover_heading="WF1–WF13, from Wakefield to Dewsbury",
+        cover_intro="Wakefield is one of our busiest patches. We cover every district from WF1 to WF13: the city, the Five Towns and out to Dewsbury. We come to you from Leeds.",
         districts=[
             ("WF1", "Wakefield city centre, Eastmoor, Outwood, Newton Hill"),
             ("WF2", "Sandal, Newmillerdam, Kettlethorpe, Lupset, Alverthorpe, Wrenthorpe, Walton"),
@@ -89,65 +89,65 @@ TOWNS = [
             ("WF12", "Dewsbury, Thornhill, Savile Town, Earlsheaton"),
             ("WF13", "Dewsbury Moor, Ravensthorpe, Staincliffe"),
         ],
-        edge="Just outside — Barnsley, Huddersfield or WF14 and above? Call us anyway. We can often still reach you.",
+        edge="If you're in Barnsley, Huddersfield or WF14 and above, call us anyway. We may still be able to reach you.",
         related='Further north? See <a href="/mobile-tyre-fitting-harrogate">mobile tyre fitting in Harrogate &amp; Tadcaster</a>, or <a href="/">mobile tyre fitting in Leeds</a>.',
-        landmarks="the M1 and M62 around junctions 39–41, the A61 into Leeds, Trinity Walk and the Ridings car parks, Pinderfields, and the station car parks at Westgate and Kirkgate",
+        landmarks="the M1 around junctions 39–41, the M62, the A61 into Leeds, Trinity Walk and the Ridings car parks, Pinderfields, and the station car parks at Westgate and Kirkgate",
         faq=[
             ("Do you cover all of Wakefield?",
-             "Yes — every district from <b>WF1</b> to <b>WF13</b>. That's Wakefield itself, Ossett, Horbury, Normanton, Featherstone, Pontefract, Hemsworth, Castleford, Knottingley and Dewsbury. Type your postcode into the checker above if you want to be sure."),
+             "Yes, every district from <b>WF1</b> to <b>WF13</b>. That's Wakefield itself, Ossett, Horbury, Normanton, Featherstone, Pontefract, Hemsworth, Castleford, Knottingley and Dewsbury. Type your postcode into the checker above if you want to be sure."),
             ("Can you come out to me now in Wakefield?",
-             f"Yes, between 6am and 10pm seven days a week — and Wakefield is one of the areas we're in most. Call <a href=\"tel:{PHONE_TEL}\">{PHONE_DISPLAY.replace(' ', '&nbsp;')}</a> or message us on WhatsApp — for an emergency, ringing is faster than a form."),
+             f"Yes, between 6am and 10pm seven days a week. Wakefield is one of the areas we're in most. Call <a href=\"tel:{PHONE_TEL}\">{PHONE_DISPLAY.replace(' ', '&nbsp;')}</a> or message us on WhatsApp. In an emergency, ringing is faster than filling in a form."),
             ("Do you repair punctures in Wakefield, or only replace tyres?",
-             "Both. If the tyre can be safely repaired, we repair it at the roadside or on your drive. If it can't, we carry new tyres on the van and fit one on the spot. Puncture repair is &pound;70 to &pound;120 depending on distance and tyre size."),
+             "Both. If the tyre can be safely repaired, we repair it at the roadside or on your drive. If it can't, we carry new tyres on the van and fit one on the spot. Puncture repair is &pound;70–&pound;120 depending on distance and tyre size."),
             ("Where in Wakefield can you fit a tyre?",
-             f"Wherever the car is — your driveway in Sandal or Outwood, a work car park, or the hard shoulder. We regularly attend {'the M1 and M62 around junctions 39–41, the A61 into Leeds'}, and the retail and station car parks in the city centre."),
+             f"Wherever the car is: your driveway in Sandal or Outwood, a work car park, or the hard shoulder. We regularly attend {'the M1 around junctions 39–41, the M62, the A61 into Leeds'}, and the retail and station car parks in the city centre."),
             ("How much is mobile tyre fitting in Wakefield?",
-             "Tyres are from &pound;40 each for 14–17\" wheels and from &pound;80 for 18–20\", and mobile fitting is from &pound;50 on top depending on where in Wakefield you are — no separate call-out fee. Use the <a href=\"/#estimate\">price guide</a> for your size, and we confirm the exact price by phone before any work starts. Changing all four? Ask about 30% off the set."),
+             "Tyres are from &pound;40 each for 14–17\" wheels and from &pound;80 for 18–20\", and mobile fitting is from &pound;50 on top depending on where in Wakefield you are. There's no separate call-out fee. Use the <a href=\"/#estimate\">price guide</a> for your size. We confirm the exact price by phone before any work starts. Changing all four? Ask about 30% off the set."),
             ("Do I pay a deposit?",
-             "No. Nothing to pay online and no deposit. You pay on completion, by card or cash, once the job's done."),
+             "No. Nothing to pay online and no deposit. You pay on completion, by card or cash."),
         ],
-        marquee=["Wakefield", "Ossett", "Horbury", "Normanton", "Castleford", "Pontefract", "Featherstone", "Hemsworth", "Knottingley", "Dewsbury"],
+        marquee=["Ossett", "Horbury", "Normanton", "Castleford", "Pontefract", "Featherstone", "Hemsworth", "Knottingley", "Dewsbury"],
         served=[("City", "Wakefield"), ("City", "Ossett"), ("City", "Castleford"), ("City", "Pontefract"), ("City", "Normanton"), ("City", "Dewsbury")],
     ),
     dict(
-        slug="harrogate", name="Harrogate", short="Harrogate &amp; Tadcaster", schema_where="in HG1 to HG3 and LS24 Tadcaster",
+        slug="harrogate", name="Harrogate", short="Harrogate &amp; Tadcaster", area_and="Harrogate and Tadcaster", area_or="Harrogate or Tadcaster", topbar_area="Harrogate &amp; Tadcaster", schema_where="in HG1 to HG3 and LS24 Tadcaster",
         title="Mobile Tyre Fitting Harrogate & Tadcaster | ResQ Tyres",
         description="Mobile tyre fitting and puncture repair in Harrogate (HG1–HG3) and Tadcaster, 6am–10pm daily. Tyres from £40. Call 07438 562633.",
         h1="Flat tyre in Harrogate or Tadcaster? We come to you.",
-        rotator=["In Harrogate.", "In Pannal.", "In Tadcaster.", "On the A61.", "6am to 10pm."],
-        sub="Mobile tyre fitting across Harrogate and out to Tadcaster, 6am to 10pm every day.",
+        rotator=["In Harrogate.", "In Pannal.", "In Tadcaster.", "On the A61.", "6am–10pm."],
+        sub="Mobile tyre fitting across Harrogate and out to Tadcaster, 6am–10pm every day.",
         hero_img=("assets/fitting-420.webp", "assets/fitting-760.webp", "420w", "760w", 760, 1140,
-                  "ResQ Tyres fitter changing a tyre at a customer's home — mobile tyre fitting on the driveway"),
+                  "Fitter in hi-vis overalls checking the front tyre of a white pickup"),
         stat_area=("HG1–HG3 · LS24", "Harrogate &amp; Tadcaster"),
         cover_heading="Harrogate, the villages around it, Tadcaster and York",
-        cover_intro="We come up the A61 and the A658 from Leeds to cover all three Harrogate districts and the Tadcaster side of LS24. Same van, same tyres, same pay-on-completion — no need to get the car to a garage in town.",
+        cover_intro="We come up the A61 and the A658 from Leeds to cover all three Harrogate districts and the Tadcaster side of LS24. You get the same van and tyres as in Leeds, so there's no need to take the car to a garage in town.",
         districts=[
             ("HG1", "Harrogate town centre, Bilton, Starbeck, New Park, High Harrogate"),
             ("HG2", "Oatlands, Pannal, Harlow Hill, Hornbeam Park, Burn Bridge"),
             ("HG3", "Killinghall, Ripley, Hampsthwaite, Birstwith, Spofforth, Follifoot, Kirkby Overblow, Beckwithshaw"),
             ("LS24", "Tadcaster, Stutton, Towton, Saxton, Church Fenton, Ulleskelf"),
-            ("LS22 · LS23", "Wetherby, Boston Spa, Thorp Arch — on the way between the two"),
+            ("LS22 · LS23", "Wetherby, Boston Spa, Thorp Arch (all between Harrogate and Tadcaster)"),
             ("YO1 · YO10 · YO24", "York city centre, Fulford, Heslington, Acomb, Dringhouses"),
             ("YO8", "Selby"),
         ],
-        edge="Knaresborough (HG5), Ripon (HG4) and the rest of York are just outside our confirmed patch — call us anyway, we may still be able to reach you.",
+        edge="Knaresborough (HG5), Ripon (HG4) and the rest of York are just outside our confirmed patch, but call us anyway. We may still be able to reach you.",
         related='Nearer Wakefield? See <a href="/mobile-tyre-fitting-wakefield">mobile tyre fitting in Wakefield</a>, or <a href="/">mobile tyre fitting in Leeds</a>.',
-        landmarks="the A61 Leeds Road and Harrogate Road, the A59 through Knaresborough, the A658 past the airport, the Stray, Harrogate station and the Victoria car park, and the A64 and A659 around Tadcaster",
+        landmarks="the A61 Leeds Road and Harrogate Road, the A59 towards Knaresborough, the A658 past the airport, the Stray, Harrogate station and the Victoria car park, and the A64 and A659 around Tadcaster",
         faq=[
             ("Which parts of Harrogate do you cover?",
-             "All three Harrogate districts — <b>HG1</b>, <b>HG2</b> and <b>HG3</b> — so the town centre, Bilton, Starbeck, Oatlands, Pannal, Killinghall, Ripley and the villages out towards Pateley Bridge. Plus <b>LS24</b> for Tadcaster. Knaresborough and Ripon are just outside, but call and ask."),
+             "All three Harrogate districts (<b>HG1</b>, <b>HG2</b> and <b>HG3</b>), including the town centre, Bilton, Starbeck, Oatlands, Pannal, Killinghall, Ripley and the villages out towards Pateley Bridge. Plus <b>LS24</b> for Tadcaster. Knaresborough and Ripon are just outside, but call and ask."),
             ("Can you come out to Harrogate now?",
              f"Yes, between 6am and 10pm seven days a week. We come up from Leeds, so tell us where you are when you call <a href=\"tel:{PHONE_TEL}\">{PHONE_DISPLAY.replace(' ', '&nbsp;')}</a> or WhatsApp us, and we'll give you a straight answer on when we can be with you."),
             ("Do you repair punctures in Harrogate and Tadcaster?",
-             "Yes — if the tyre can be safely repaired, we repair it where the car is. If it can't, we carry new tyres on the van and fit one on the spot. Puncture repair is &pound;70 to &pound;120 depending on distance and tyre size."),
+             "Yes. If the tyre can be safely repaired, we repair it where the car is. If it can't, we carry new tyres on the van and fit one on the spot. Puncture repair is &pound;70–&pound;120 depending on distance and tyre size."),
             ("Where can you fit the tyre?",
-             "Wherever the vehicle is — a driveway in Pannal, a work car park at Hornbeam Park, the Stray, or the hard shoulder of the A61. The van carries brand-new tyres, on-site balancing and valve replacement, so most jobs are finished in one visit."),
+             "Wherever the vehicle is: a driveway in Pannal, a work car park at Hornbeam Park, the Stray, or a lay-by on the A61. The van carries brand-new tyres and the kit for on-site balancing and valve replacement, so most jobs are finished in one visit."),
             ("How much is mobile tyre fitting in Harrogate?",
-             "Tyres are from &pound;40 each for 14–17\" wheels and from &pound;80 for 18–20\", and mobile fitting is from &pound;50 on top depending on where you are — Harrogate and Tadcaster are a longer run from Leeds than the city, so we'll always tell you the fitting price before we set off. Use the <a href=\"/#estimate\">price guide</a> for your size. Changing all four? Ask about 30% off the set."),
+             "Tyres are from &pound;40 each for 14–17\" wheels and from &pound;80 for 18–20\". Mobile fitting is from &pound;50 on top, depending on where you are. It's a longer drive to Harrogate and Tadcaster than around Leeds, so we'll always tell you the fitting price before we set off. Use the <a href=\"/#estimate\">price guide</a> for your size. Changing all four? Ask about 30% off the set."),
             ("Do I pay a deposit?",
-             "No. Nothing to pay online and no deposit. You pay on completion, by card or cash, once the job's done."),
+             "No. Nothing to pay online and no deposit. You pay on completion, by card or cash."),
         ],
-        marquee=["Harrogate", "Bilton", "Starbeck", "Pannal", "Killinghall", "Ripley", "Spofforth", "Tadcaster", "Boston Spa", "Wetherby"],
+        marquee=["Bilton", "Starbeck", "Pannal", "Killinghall", "Ripley", "Spofforth", "Tadcaster", "Boston Spa", "Wetherby"],
         served=[("City", "Harrogate"), ("City", "Tadcaster"), ("City", "York"), ("City", "Selby"), ("City", "Pannal"), ("City", "Wetherby")],
     ),
 ]
@@ -171,7 +171,7 @@ def schema(town):
         "@id": url + "#service",
         "name": f"Mobile tyre fitting in {name_plain}",
         "serviceType": "Mobile tyre fitting and puncture repair",
-        "description": f"Mobile tyre fitting and puncture repair at your home, workplace or the roadside {town['schema_where']}, 6am to 10pm every day.",
+        "description": f"Mobile tyre fitting and puncture repair at your home, workplace or the roadside {town['schema_where']}, 6am–10pm every day.",
         "url": url,
         "provider": {"@type": "AutoRepair", "@id": f"{SITE}/#business", "name": "ResQ Tyres & Recovery",
                      "telephone": PHONE_E164, "url": SITE + "/"},
@@ -180,7 +180,7 @@ def schema(town):
         # The offer covers fitting and puncture repair, so minPrice is the lowest of the two (repair from £70).
         "offers": {"@type": "Offer",
                    "priceSpecification": {"@type": "PriceSpecification", "minPrice": 70, "priceCurrency": "GBP"},
-                   "description": "Tyres from £40, mobile fitting from £50: one tyre fitted from £90. Puncture repair £70 to £120. Exact price confirmed by phone before any work starts."},
+                   "description": "Tyres from £40, mobile fitting from £50: one tyre fitted from £90. Puncture repair £70–£120. Exact price confirmed by phone before any work starts."},
         "availableChannel": {"@type": "ServiceChannel", "servicePhone": {"@type": "ContactPoint", "telephone": PHONE_E164, "contactType": "customer service", "availableLanguage": "en"}},
         "hoursAvailable": {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "06:00", "closes": "22:00"},
     }
@@ -198,7 +198,11 @@ def build(town) -> str:
     slug, name = town["slug"], town["name"]
     url = f"{SITE}/mobile-tyre-fitting-{slug}"
     src1, src2, w1, w2, iw, ih, alt = town["hero_img"]
-    rot_words = json.dumps(town["rotator"])
+    rot_words = json.dumps(town["rotator"], ensure_ascii=False)
+    topbar = TOPBAR
+    if town.get("topbar_area"):
+        assert "Emergency call-outs across West Yorkshire" in TOPBAR, "home page top bar wording changed"
+        topbar = TOPBAR.replace("Emergency call-outs across West Yorkshire", f"Emergency call-outs across {town['topbar_area']}")
     districts = "\n".join(
         f'            <li class="district"><b>{code}</b><span>{places}</span></li>' for code, places in town["districts"])
     faqs = "\n".join(
@@ -259,7 +263,7 @@ def build(town) -> str:
 {ICON_DEFS}
   <div class="progress" id="progress" aria-hidden="true"></div>
 
-{TOPBAR}
+{topbar}
   <!-- ===== Header ===== -->
   <header class="site-header">
     <div class="wrap bar">
@@ -340,17 +344,17 @@ def build(town) -> str:
         <div class="section-head reveal">
           <span class="eyebrow">Two ways we help in {town['short']}</span>
           <h2>Emergency now, or plan a home fitting</h2>
-          <p>Stuck at the roadside? Just call — it's faster. Planning ahead? Send your details and we'll come to your home or work in {name}.</p>
+          <p>If you're stuck at the roadside, call us. For a planned fitting, send your details and we'll come to your home or work in {town['area_or']}.</p>
         </div>
         <div class="paths stagger">
           <article class="path path-emergency">
             <div class="path-top"><span class="path-badge"><span class="dotpulse" aria-hidden="true"></span> 6am–10pm · 7 days</span><svg class="path-ico" aria-hidden="true"><use href="#i-phone"/></svg></div>
             <h3>Emergency call-out</h3>
-            <p>Flat, blowout or breakdown in {name} and need someone now? Don't fill in a form — call or WhatsApp, tell us where you are, and we'll give you a price and a time before we set off.</p>
+            <p>Flat tyre or blowout in {name} and need someone now? Don't fill in a form. Call or WhatsApp, tell us where you are, and we'll give you a price and a time before we set off.</p>
             <ul class="path-list">
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Fastest response — straight to the phone</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Fastest response by phone</li>
               <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Roadside, home or work, 6am–10pm every day</li>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Pay on completion — no deposit</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Pay on completion, no deposit</li>
             </ul>
             <div class="path-cta">
               <a class="cta-primary pulse" href="tel:{PHONE_TEL}"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call {PHONE_DISPLAY}</a>
@@ -360,11 +364,11 @@ def build(town) -> str:
           <article class="path path-planned">
             <div class="path-top"><span class="path-badge alt"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg> Booked in</span><svg class="path-ico" aria-hidden="true"><use href="#i-home"/></svg></div>
             <h3>Planned home tyre fitting</h3>
-            <p>Not urgent? We'll fit your tyres at home or work anywhere in {town['short']} at a time that suits you — <b>tyres from £40, mobile fitting from £50</b>, no trip to a garage. Send your details and we'll confirm by phone.</p>
+            <p>We'll fit your tyres at home or work anywhere in {town['area_and']} at a time that suits you. <b>Tyres are from £40 and mobile fitting from £50.</b> Send your details and we'll confirm by phone.</p>
             <ul class="path-list">
               <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Same tyres you'd get in a shop, fitted at your door</li>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> We come to your driveway — no waiting room</li>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> No deposit — pay when it's done</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> We come to your driveway, so you don't sit in a waiting room</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Nothing to pay until the job's done</li>
             </ul>
             <div class="path-cta">
               <a class="cta-secondary solid" href="/#enquiry">Plan a home fitting <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
@@ -399,7 +403,7 @@ def build(town) -> str:
                 <button type="button" id="pc-btn" class="btn-find"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Check</button>
               </div>
               <p class="pc-result" id="pc-result" hidden></p>
-              <p class="micro">Same checker as our <a href="/#areas">main coverage map</a> — every Leeds <b>LS</b> district, <b>HG1&ndash;HG3</b>, <b>WF1&ndash;WF13</b>, and <b>YO1, YO10, YO24</b> in York plus <b>YO8</b> Selby.</p>
+              <p class="micro">Same checker as our <a href="/#areas">main coverage map</a>. It covers every Leeds <b>LS</b> district, <b>HG1&ndash;HG3</b> around Harrogate, <b>WF1&ndash;WF13</b> around Wakefield, <b>YO1, YO10 and YO24</b> in York, and <b>YO8</b> in Selby.</p>
             </div>
             <div class="landmarks"><b>Where we're often called to:</b> {town['landmarks']}.</div>
           </div>
@@ -413,7 +417,7 @@ def build(town) -> str:
         <div class="section-head reveal">
           <span class="eyebrow">What we do</span>
           <h2>Mobile tyre fitting across {town['short']}</h2>
-          <p>Brand-new tyres fitted on the spot, wherever you are in {name}. We bring the garage to you. Flat battery instead? See <a href="/jump-start-leeds">jump starts — from &pound;50</a>, across the same area.</p>
+          <p>Brand-new tyres fitted on the spot, wherever you are in {name}. For a flat battery, we also do <a href="/jump-start-leeds">jump starts from &pound;50</a> across the same area.</p>
         </div>
         <div class="services stagger">
           <article class="svc">
@@ -421,15 +425,15 @@ def build(town) -> str:
             <div class="body">
               <span class="tagline"><svg class="icon" aria-hidden="true"><use href="#i-wheel"/></svg> Flat · Blowout · Puncture</span>
               <h3>Mobile tyre fitting &amp; puncture repair in {name}</h3>
-              <p>Tyre replacement and puncture repair at your home, work or the roadside anywhere in {town['short']}. If the tyre can be safely repaired, we repair it; if it can't, we carry new tyres on the van and fit one on the spot. No garage visit needed.</p>
+              <p>Tyre replacement and puncture repair at your home, work or the roadside anywhere in {town['area_and']}. If the tyre can be safely repaired, we repair it; if it can't, we carry new tyres on the van and fit one on the spot.</p>
             </div>
           </article>
           <article class="svc">
-            <div class="ph"><img src="assets/wheelchange-420-v2.webp" srcset="assets/wheelchange-420-v2.webp 420w, assets/wheelchange-760-v2.webp 760w" sizes="(max-width:760px) 92vw, 360px" width="760" height="760" alt="ResQ Tyres attending a roadside emergency tyre change — call-outs 6am to 10pm" loading="lazy" decoding="async"></div>
+            <div class="ph"><img src="assets/wheelchange-420-v2.webp" srcset="assets/wheelchange-420-v2.webp 420w, assets/wheelchange-760-v2.webp 760w" sizes="(max-width:760px) 92vw, 360px" width="760" height="760" alt="White car with its rear wheel off at the side of the road during a ResQ Tyres emergency call-out" loading="lazy" decoding="async"></div>
             <div class="body">
               <span class="tagline"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg> Home · Work · Roadside</span>
               <h3>Emergency call-out, 6am–10pm</h3>
-              <p>Stranded in {name}? We're on the road 6am to 10pm, seven days a week. Tell us where you are and we'll give you a straight answer on when we can be with you.</p>
+              <p>We're on the road 6am–10pm, seven days a week, across {town['area_and']}. Tell us where you are and we'll let you know when we can be with you.</p>
             </div>
           </article>
         </div>
@@ -442,12 +446,12 @@ def build(town) -> str:
         <div class="section-head reveal">
           <span class="eyebrow">Simple &amp; fast</span>
           <h2>How it works</h2>
-          <p>Emergency? Just call. Otherwise, three simple steps.</p>
+          <p>It's the same three steps for an emergency or a planned fitting.</p>
         </div>
         <div class="steps stagger">
-          <div class="step"><span class="n">1</span><b>Get in touch</b><p>Emergency? Just call or WhatsApp. Planning ahead? Send the home-fitting form with your tyre size, your {name} postcode and when suits you.</p></div>
-          <div class="step"><span class="n">2</span><b>We confirm price &amp; time</b><p>A quick call to confirm the exact price and a slot that works. No deposit, no online payment.</p></div>
-          <div class="step"><span class="n">3</span><b>We come &amp; fit it</b><p>At your home, work or the roadside. Pay on completion by card or cash — only once the job's done.</p></div>
+          <div class="step"><span class="n">1</span><b>Get in touch</b><p>In an emergency, call or WhatsApp. If you're planning ahead, send the home-fitting form with your name, number and tyre size or registration.</p></div>
+          <div class="step"><span class="n">2</span><b>We confirm price &amp; time</b><p>A quick call to confirm the exact price and a slot that works. There's no deposit and nothing to pay online.</p></div>
+          <div class="step"><span class="n">3</span><b>We come &amp; fit it</b><p>At your home, work or the roadside. Pay on completion, by card or cash.</p></div>
         </div>
       </div>
     </section>
@@ -459,9 +463,9 @@ def build(town) -> str:
           <div class="copy reveal from-left">
             <span class="eyebrow" style="color:#ff7a90">Fully equipped</span>
             <h2>Our van is a <span>garage on wheels</span></h2>
-            <p>Everything we need to get you safely back on the road in {name} travels with us — so most jobs are sorted in a single visit, right where you are.</p>
+            <p>Everything we need to get you safely back on the road travels with us, so most jobs are sorted in a single visit, right where you are.</p>
             <ul class="van-feats">
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Brand-new tyres — budget, mid-range &amp; premium</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Brand-new tyres: budget, mid-range &amp; premium</li>
               <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> On-site balancing &amp; valve replacement</li>
               <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Locking wheel-nut removal</li>
               <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Open 6am–10pm, 7 days a week</li>
@@ -477,11 +481,11 @@ def build(town) -> str:
     <section class="section soft" id="reviews">
       <div class="wrap">
         <div class="rev-head reveal">
-          <h2 class="sr-only" data-nosnippet>Customer reviews — rated 5.0 on Google from more than 230 verified reviews</h2>
+          <h2 class="sr-only" data-nosnippet>Customer reviews: rated 5.0 on Google from more than 230 reviews</h2>
           <span class="eyebrow">Trusted across West Yorkshire</span>
           <span class="stars" style="font-size:22px">★★★★★</span>
           <span class="big"><span data-count="5.0" data-dec="1">5.0</span> on Google</span>
-          <span class="micro" data-nosnippet>From <span data-count="230" data-suffix="+" data-nosnippet>230+</span> verified Google reviews</span>
+          <span class="micro" data-nosnippet>From <span data-count="230" data-suffix="+" data-nosnippet>230+</span> Google reviews</span>
         </div>
 {REVIEWS}        </div>
         <div class="reviews-cta reveal">
@@ -495,8 +499,8 @@ def build(town) -> str:
       <div class="wrap">
         <div class="section-head reveal">
           <span class="eyebrow">Common questions</span>
-          <h2>Mobile tyre fitting in {town['short']} — your questions</h2>
-          <p>Straight answers. If yours isn't here, call us on <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY.replace(' ', '&nbsp;')}</a>.</p>
+          <h2>Questions about mobile tyre fitting in {town['short']}</h2>
+          <p>If your question isn't here, call us on <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY.replace(' ', '&nbsp;')}</a>.</p>
         </div>
         <div class="faq-grid stagger">
 {faqs}
@@ -510,8 +514,8 @@ def build(town) -> str:
         <div class="ot">
           <div class="badge30">£40<small>from</small></div>
           <div>
-            <h3>Need a tyre in {town['short']} right now?</h3>
-            <p>Tyres from £40, mobile fitting from £50. One call and we're on the way, 6am–10pm every day. Pay on completion — card or cash, only once the job's done.</p>
+            <h3>Need a tyre in {town['area_or']} right now?</h3>
+            <p>Tyres from £40, mobile fitting from £50. Call any day, 6am–10pm, and we'll give you a price and a time before we set off. Pay on completion, by card or cash.</p>
           </div>
         </div>
         <a class="btn-book" href="tel:{PHONE_TEL}"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call {PHONE_DISPLAY}</a>
