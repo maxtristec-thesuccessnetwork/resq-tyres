@@ -14,7 +14,7 @@
   /* ---- Hero rotator ---- */
   var rot = document.getElementById("rotator");
   if (rot && !reduce) {
-    var words = window.RESQ_ROTATOR_WORDS || ["At home.", "At work.", "At the roadside.", "6am–10pm."];
+    var words = window.RESQ_ROTATOR_WORDS || ["At home.", "At work.", "At the roadside.", "Day or night."];
     var i = 0;
     setInterval(function () {
       i = (i + 1) % words.length;
@@ -29,39 +29,11 @@
     }, 2200);
   }
 
-  /* ---- Honest open/closed status (6am–10pm, 7 days) ---- */
-  (function () {
-    var els = document.querySelectorAll("[data-open-status]");
-    var OPEN = 6, CLOSE = 22, hour;
-    try {
-      hour = parseInt(new Intl.DateTimeFormat("en-GB", { hour: "numeric", hour12: false, timeZone: "Europe/London" }).format(new Date()), 10);
-    } catch (e) { hour = new Date().getHours(); }
-    var open = hour >= OPEN && hour < CLOSE;
-    Array.prototype.forEach.call(els, function (el) {
-      el.textContent = open ? "Open now · 6am–10pm, 7 days" : "Opens 6am · WhatsApp us any time";
-      var dot = el.parentNode && el.parentNode.querySelector(".dotpulse");
-      if (dot && !open) dot.style.opacity = ".35";
-    });
-
-    /* Closed: the hero call button becomes a WhatsApp button (no pulse), using
-       the page's own WhatsApp link, so nobody is sent to a phone line that is closed. */
-    if (open) return;
-    var hero = document.querySelector(".hero");
-    var btn = hero && hero.querySelector('.cta-primary[href^="tel:"]');
-    var wa = hero && hero.querySelector('a[href*="wa.me"]');
-    if (!btn || !wa) return;
-    btn.setAttribute("href", wa.getAttribute("href"));
-    btn.setAttribute("target", "_blank");
-    btn.setAttribute("rel", "noopener");
-    btn.classList.remove("pulse");
-    var use = btn.querySelector("use");
-    if (use) use.setAttribute("href", "#i-whatsapp");
-    var label = btn.lastChild;
-    if (label && label.nodeType === 3) label.nodeValue = " WhatsApp us — first call-outs from 6am";
-    else btn.appendChild(document.createTextNode(" WhatsApp us — first call-outs from 6am"));
-    /* The hero's own WhatsApp button would now repeat it: leave just the one. */
-    wa.style.display = "none";
-  })();
+  /* ---- Open status: ResQ is open 24 hours a day, 7 days a week, so every
+     [data-open-status] element reads the same at any hour. ---- */
+  Array.prototype.forEach.call(document.querySelectorAll("[data-open-status]"), function (el) {
+    el.textContent = "Open now · 24/7";
+  });
 
   /* ---- Scroll progress bar + hero scale + to-top ---- */
   var bar = document.getElementById("progress");

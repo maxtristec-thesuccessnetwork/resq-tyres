@@ -5,14 +5,14 @@
   <script>document.documentElement.className+=" js";</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tyre Emergency? Call Now — ResQ Tyres, Leeds &amp; West Yorkshire</title>
-  <meta name="description" content="Flat tyre or blowout? Call or WhatsApp ResQ Tyres now. Mobile tyre fitting across Leeds and West Yorkshire, 6am–10pm every day, tyres from £40, pay on completion.">
+  <meta name="description" content="Flat tyre or blowout? Call or WhatsApp ResQ Tyres now. Mobile tyre fitting across Leeds and West Yorkshire, 24/7, tyres from £40, pay on completion.">
   <meta name="robots" content="noindex, follow">
   <meta name="theme-color" content="#e4002b">
   <link rel="canonical" href="https://www.resqtyres.co.uk/emergency">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Tyre emergency? Call ResQ Tyres now — we come to you">
-  <meta property="og:description" content="Flat tyre or blowout? Call or WhatsApp ResQ Tyres now. Mobile tyre fitting across Leeds and West Yorkshire, 6am–10pm every day, tyres from £40, pay on completion.">
+  <meta property="og:description" content="Flat tyre or blowout? Call or WhatsApp ResQ Tyres now. Mobile tyre fitting across Leeds and West Yorkshire, 24/7, tyres from £40, pay on completion.">
   <meta property="og:url" content="https://www.resqtyres.co.uk/emergency">
   <meta property="og:image" content="https://www.resqtyres.co.uk/assets/van.jpg">
   <meta property="og:locale" content="en_GB">
@@ -94,8 +94,6 @@ h1,h2{letter-spacing:-.02em;line-height:1.1}
 @media(max-width:680px){.sticky-bar{display:flex}.foot{padding-bottom:110px}}
 .status{display:inline-flex;align-items:center;gap:8px;background:#eafaf0;border:1px solid #b6e6c7;color:#0f7a3d;font-weight:800;font-size:13px;padding:6px 12px;border-radius:999px;margin-bottom:14px}
 .status .sdot{width:8px;height:8px;border-radius:50%;background:#1aa64b}
-.status.closed{background:var(--bg-soft);border-color:var(--line);color:var(--ink-2)}
-.status.closed .sdot{background:var(--muted)}
 .proof{display:flex;flex-direction:column;gap:14px;margin-top:26px}
 .proof img{width:100%;height:auto;max-height:280px;object-fit:cover;border-radius:var(--radius-lg)}
 .quote{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:16px 18px;text-align:left}
@@ -161,10 +159,10 @@ h1,h2{letter-spacing:-.02em;line-height:1.1}
 
   <main>
     <section class="hero wrap">
-      <p class="status"><span class="sdot" aria-hidden="true"></span> <span data-open-status>Open 6am&ndash;10pm, 7 days</span></p>
+      <p class="status"><span class="sdot" aria-hidden="true"></span> <span data-open-status>Open 24/7</span></p>
       <div class="eyebrow">Tyre emergency</div>
       <h1>Flat tyre or blowout?<br>We come to you.</h1>
-      <p class="hero-sub">Mobile tyre fitting across Leeds and West Yorkshire, 6am&ndash;10pm every day. No need to fill in a form. Call or WhatsApp and we'll get you moving again.</p>
+      <p class="hero-sub">Mobile tyre fitting across Leeds and West Yorkshire, 24 hours a day. No need to fill in a form. Call or WhatsApp and we'll get you moving again.</p>
 
       <div class="cta-col">
         <a class="cta-primary" href="tel:07438562633">
@@ -205,7 +203,7 @@ h1,h2{letter-spacing:-.02em;line-height:1.1}
     <section class="section wrap faq">
       <h2>Quick answers</h2>
       <div class="faqi"><b>How much will it cost?</b><p>Tyres start from &pound;40 each for 14&ndash;17 inch wheels and from &pound;80 for 18&ndash;20 inch, plus mobile fitting from &pound;50 per tyre. There's no separate call-out fee. We confirm the exact price by phone before we set off.</p></div>
-      <div class="faqi"><b>Do I need to book?</b><p>No. Call or WhatsApp and we'll get straight to sorting your tyre.</p></div>
+      <div class="faqi"><b>Do I need to book?</b><p>No. Call or WhatsApp and we'll get straight to sorting your tyre. On average we're with you in about 40 minutes.</p></div>
       <div class="faqi"><b>What areas do you cover?</b><p>Leeds and West Yorkshire, including Wakefield, Castleford and Pontefract. We also cover Harrogate and Tadcaster.</p></div>
       <div class="faqi"><b>What if I'm not sure of my tyre size?</b><p>That's fine. Call us and read out what's printed on the tyre's sidewall (e.g. 205/55 R16) and we'll take it from there.</p></div>
     </section>
@@ -213,7 +211,7 @@ h1,h2{letter-spacing:-.02em;line-height:1.1}
 
   <footer class="foot wrap">
     <p><a href="tel:07438562633">07438 562633</a> &middot; <a href="https://wa.me/447438562633?text=Hi%20ResQ%2C%20I%27ve%20got%20a%20flat%20and%20need%20help%20now.%20I%27m%20at%3A%20" target="_blank" rel="noopener">WhatsApp</a></p>
-    <p>ResQ Tyres &amp; Recovery &mdash; mobile tyre fitting across Leeds &amp; West Yorkshire, 6am&ndash;10pm every day.</p>
+    <p>ResQ Tyres &amp; Recovery &mdash; mobile tyre fitting across Leeds &amp; West Yorkshire, 24 hours a day, 7 days a week.</p>
     <a class="home" href="/">See our full range of services &rarr;</a>
   </footer>
 
@@ -224,13 +222,10 @@ h1,h2{letter-spacing:-.02em;line-height:1.1}
 
 
   <script>
-  /* Open/closed line (6am-10pm, 7 days). */
+  /* Status line: open 24/7, so it always reads open. */
   (function () {
-    var h; try { h = parseInt(new Intl.DateTimeFormat("en-GB", { hour: "numeric", hour12: false, timeZone: "Europe/London" }).format(new Date()), 10); } catch (e) { h = new Date().getHours(); }
-    var open = h >= 6 && h < 22;
     document.querySelectorAll("[data-open-status]").forEach(function (el) {
-      el.textContent = open ? "Open now \u00b7 answering until 10pm" : "Closed now \u00b7 back at 6am · WhatsApp us and we'll reply first thing";
-      var box = el.closest(".status"); if (box && !open) box.classList.add("closed");
+      el.textContent = "Open now \u00b7 24/7";
     });
   })();
   </script>
