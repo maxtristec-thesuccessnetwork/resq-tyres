@@ -8,7 +8,7 @@ Design rules (so the pages stay honest and stay on-brand):
     change to the home page's fonts or above-fold CSS flows through on the next build.
   * Hours: 6am–10pm, seven days. Never "24/7" or "day or night".
   * Arrival: no arrival time on the site until the business confirms one in writing.
-  * Prices are per tyre — from £40 (14–17") / from £80 (18–20") — with mobile fitting from £50
+  * Prices are per tyre — from £40 (14–17") / from £80 (18–20") — with mobile fitting from £50 per tyre
     on top. The exact range per size lives on the home page's price guide; these pages link to it.
     The hero shows both parts and the total (PRICE_LINE). Never a single all-in price.
     Puncture repair £70–£120 and "30% off a set" are repeated as published on the home page.
@@ -73,7 +73,7 @@ TOWNS = [
                   "ResQ Tyres mobile tyre fitting van at a roadside job, with a new tyre being fitted on site"),
         stat_area=("WF1–WF13", "Every Wakefield district"),
         cover_heading="WF1–WF13, from Wakefield to Dewsbury",
-        cover_intro="Wakefield is one of our busiest patches. We cover every district from WF1 to WF13: the city, the Five Towns and out to Dewsbury. We come to you from Leeds.",
+        cover_intro="We cover every district from WF1 to WF13: the city, the Five Towns and out to Dewsbury. We come to you from Leeds.",
         districts=[
             ("WF1", "Wakefield city centre, Eastmoor, Outwood, Newton Hill"),
             ("WF2", "Sandal, Newmillerdam, Kettlethorpe, Lupset, Alverthorpe, Wrenthorpe, Walton"),
@@ -91,18 +91,18 @@ TOWNS = [
         ],
         edge="If you're in Barnsley, Huddersfield or WF14 and above, call us anyway. We may still be able to reach you.",
         related='Further north? See <a href="/mobile-tyre-fitting-harrogate">mobile tyre fitting in Harrogate &amp; Tadcaster</a>, or <a href="/">mobile tyre fitting in Leeds</a>.',
-        landmarks="the M1 around junctions 39–41, the M62, the A61 into Leeds, Trinity Walk and the Ridings car parks, Pinderfields, and the station car parks at Westgate and Kirkgate",
+        landmarks="the M1 around junctions 39–41, the M62 around Wakefield, the A61 into Leeds, Trinity Walk and the Ridings car parks, Pinderfields, and the station car parks at Westgate and Kirkgate",
         faq=[
             ("Do you cover all of Wakefield?",
              "Yes, every district from <b>WF1</b> to <b>WF13</b>. That's Wakefield itself, Ossett, Horbury, Normanton, Featherstone, Pontefract, Hemsworth, Castleford, Knottingley and Dewsbury. Type your postcode into the checker above if you want to be sure."),
             ("Can you come out to me now in Wakefield?",
-             f"Yes, between 6am and 10pm seven days a week. Wakefield is one of the areas we're in most. Call <a href=\"tel:{PHONE_TEL}\">{PHONE_DISPLAY.replace(' ', '&nbsp;')}</a> or message us on WhatsApp. In an emergency, ringing is faster than filling in a form."),
+             f"Yes, between 6am and 10pm seven days a week. Call <a href=\"tel:{PHONE_TEL}\">{PHONE_DISPLAY.replace(' ', '&nbsp;')}</a> or message us on WhatsApp. In an emergency, ringing is faster than filling in a form."),
             ("Do you repair punctures in Wakefield, or only replace tyres?",
              "Both. If the tyre can be safely repaired, we repair it at the roadside or on your drive. If it can't, we carry new tyres on the van and fit one on the spot. Puncture repair is &pound;70–&pound;120 depending on distance and tyre size."),
             ("Where in Wakefield can you fit a tyre?",
-             f"Wherever the car is: your driveway in Sandal or Outwood, a work car park, or the hard shoulder. We regularly attend {'the M1 around junctions 39–41, the M62, the A61 into Leeds'}, and the retail and station car parks in the city centre."),
+             f"Wherever the car is: your driveway in Sandal or Outwood, a work car park, or the hard shoulder. We also cover {'the M1 around junctions 39–41, the M62 around Wakefield, the A61 into Leeds'}, and the retail and station car parks in the city centre."),
             ("How much is mobile tyre fitting in Wakefield?",
-             "Tyres are from &pound;40 each for 14–17\" wheels and from &pound;80 for 18–20\", and mobile fitting is from &pound;50 on top depending on where in Wakefield you are. There's no separate call-out fee. Use the <a href=\"/#estimate\">price guide</a> for your size. We confirm the exact price by phone before any work starts. Changing all four? Ask about 30% off the set."),
+             "Tyres are from &pound;40 each for 14–17\" wheels and from &pound;80 for 18–20\", and mobile fitting is from &pound;50 per tyre on top, depending on where in Wakefield you are. There's no separate call-out fee. Use the <a href=\"/#estimate\">price guide</a> for your size. We confirm the exact price by phone before any work starts. Changing all four? Ask about 30% off the set."),
             ("Do I pay a deposit?",
              "No. Nothing to pay online and no deposit. You pay on completion, by card or cash."),
         ],
@@ -143,7 +143,7 @@ TOWNS = [
             ("Where can you fit the tyre?",
              "Wherever the vehicle is: a driveway in Pannal, a work car park at Hornbeam Park, the Stray, or a lay-by on the A61. The van carries brand-new tyres and the kit for on-site balancing and valve replacement, so most jobs are finished in one visit."),
             ("How much is mobile tyre fitting in Harrogate?",
-             "Tyres are from &pound;40 each for 14–17\" wheels and from &pound;80 for 18–20\". Mobile fitting is from &pound;50 on top, depending on where you are. It's a longer drive to Harrogate and Tadcaster than around Leeds, so we'll always tell you the fitting price before we set off. Use the <a href=\"/#estimate\">price guide</a> for your size. Changing all four? Ask about 30% off the set."),
+             "Tyres are from &pound;40 each for 14–17\" wheels and from &pound;80 for 18–20\". Mobile fitting is from &pound;50 per tyre on top, depending on where you are. It's a longer drive to Harrogate and Tadcaster than around Leeds, so we'll always tell you the fitting price before we set off. There's no separate call-out fee. Use the <a href=\"/#estimate\">price guide</a> for your size. Changing all four? Ask about 30% off the set."),
             ("Do I pay a deposit?",
              "No. Nothing to pay online and no deposit. You pay on completion, by card or cash."),
         ],
@@ -180,7 +180,7 @@ def schema(town):
         # The offer covers fitting and puncture repair, so minPrice is the lowest of the two (repair from £70).
         "offers": {"@type": "Offer",
                    "priceSpecification": {"@type": "PriceSpecification", "minPrice": 70, "priceCurrency": "GBP"},
-                   "description": "Tyres from £40, mobile fitting from £50: one tyre fitted from £90. Puncture repair £70–£120. Exact price confirmed by phone before any work starts."},
+                   "description": "Tyres from £40, mobile fitting from £50 per tyre: one tyre fitted from £90. Puncture repair £70–£120. Exact price confirmed by phone before any work starts."},
         "availableChannel": {"@type": "ServiceChannel", "servicePhone": {"@type": "ContactPoint", "telephone": PHONE_E164, "contactType": "customer service", "availableLanguage": "en"}},
         "hoursAvailable": {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "06:00", "closes": "22:00"},
     }
@@ -364,7 +364,7 @@ def build(town) -> str:
           <article class="path path-planned">
             <div class="path-top"><span class="path-badge alt"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg> Booked in</span><svg class="path-ico" aria-hidden="true"><use href="#i-home"/></svg></div>
             <h3>Planned home tyre fitting</h3>
-            <p>We'll fit your tyres at home or work anywhere in {town['area_and']} at a time that suits you. <b>Tyres are from £40 and mobile fitting from £50.</b> Send your details and we'll confirm by phone.</p>
+            <p>We'll fit your tyres at home or work anywhere in {town['area_and']} at a time that suits you. <b>Tyres are from £40 and mobile fitting from £50 per tyre.</b> Send your details and we'll confirm by phone.</p>
             <ul class="path-list">
               <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Same tyres you'd get in a shop, fitted at your door</li>
               <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> We come to your driveway, so you don't sit in a waiting room</li>
@@ -405,7 +405,7 @@ def build(town) -> str:
               <p class="pc-result" id="pc-result" hidden></p>
               <p class="micro">Same checker as our <a href="/#areas">main coverage map</a>. It covers every Leeds <b>LS</b> district, <b>HG1&ndash;HG3</b> around Harrogate, <b>WF1&ndash;WF13</b> around Wakefield, <b>YO1, YO10 and YO24</b> in York, and <b>YO8</b> in Selby.</p>
             </div>
-            <div class="landmarks"><b>Where we're often called to:</b> {town['landmarks']}.</div>
+            <div class="landmarks"><b>Roads and places we cover include:</b> {town['landmarks']}.</div>
           </div>
         </div>
       </div>
@@ -515,7 +515,7 @@ def build(town) -> str:
           <div class="badge30">£40<small>from</small></div>
           <div>
             <h3>Need a tyre in {town['area_or']} right now?</h3>
-            <p>Tyres from £40, mobile fitting from £50. Call any day, 6am–10pm, and we'll give you a price and a time before we set off. Pay on completion, by card or cash.</p>
+            <p>Tyres from £40, mobile fitting from £50 per tyre. Call any day, 6am–10pm, and we'll give you a price and a time before we set off. Pay on completion, by card or cash.</p>
           </div>
         </div>
         <a class="btn-book" href="tel:{PHONE_TEL}"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call {PHONE_DISPLAY}</a>

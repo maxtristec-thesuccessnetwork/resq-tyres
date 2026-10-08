@@ -183,10 +183,10 @@ function renderRange(sizeLabel, range, lockingNut) {
     if (lead) lead.textContent = "Typical tyre price for";
     document.getElementById("range-out").innerHTML =
       "£" + range.low + "<span class='dash'>–</span>£" + range.high +
-      "<small>per tyre + mobile fitting from £" + fittingFrom() + "</small>";
+      "<small>per tyre, plus fitting from £" + fittingFrom() + " per tyre</small>";
     if (micro) micro.textContent =
-      "A guide only. We confirm the final price by phone. Prices are per tyre; mobile fitting is from £" +
-      fittingFrom() + " on top, depending on distance.";
+      "A guide only. We confirm the final price by phone. Prices are per tyre. Mobile fitting is from £" +
+      fittingFrom() + " per tyre on top, depending on distance.";
     if (allin) {
       allin.hidden = false;
       allin.textContent = "One tyre fitted at your door: from £" + (range.low + fittingFrom()) + ".";
@@ -205,7 +205,7 @@ function renderRange(sizeLabel, range, lockingNut) {
     if (lockingNut === "no") {
       var a = RESQ_RATES.lockingNutRemoval || { low: 0, high: 0 };
       var priceTxt = (a.high > 0)
-        ? "£" + a.low + "–£" + a.high
+        ? "£" + a.low + "–£" + a.high + " per nut"
         : "no extra charge";
       addon.hidden = false;
       addon.innerHTML =
@@ -383,7 +383,7 @@ function estimateLines(countStr) {
   var needsRemoval = ResQState.lockingNut === "no";
   var a = RESQ_RATES.lockingNutRemoval || { low: 0, high: 0 };
   var lockingTxt = needsRemoval
-    ? "Yes — no key (" + (a.high > 0 ? "£" + a.low + "–£" + a.high : "no extra charge") + ")"
+    ? "Yes — no key (" + (a.high > 0 ? "£" + a.low + "–£" + a.high + " per nut" : "no extra charge") + ")"
     : "No";
 
   // Size has no price in the sheet — flag it so ResQ knows to quote it himself.
