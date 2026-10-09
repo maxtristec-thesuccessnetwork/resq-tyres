@@ -312,6 +312,12 @@ function wireEnquiryForm() {
     data.estRange = est.range;
     data.estLocking = est.locking;
 
+    // GA4: the visitor pressed send with the form filled in. GA4's automatic
+    // form_submit never sees this form (the submit is handled here), so it is sent
+    // by hand. With generate_lead (sent) and enquiry_failed (not sent) after it, a
+    // send that fails no longer looks the same as a form left half-filled.
+    track("form_submit", { form_id: "enquiry-form", used_price_guide: ResQState.usedTool ? "yes" : "no" });
+
     if (btn) { btn.disabled = true; btn.setAttribute("aria-busy", "true"); }
     var done = function () { if (btn) { btn.disabled = false; btn.removeAttribute("aria-busy"); } };
 
@@ -327,7 +333,14 @@ function wireEnquiryForm() {
 }
 
 // Shown when a send fails. Never say "sent" unless the service confirmed it.
-function sendFailed(err, done) {
+// reason: "refused" (the service answered but said no), "http_<status>" or
+// "network" (no answer). detail is the service's own message, if it gave one.
+function sendFailed(err, done, reason, detail) {
+  track("enquiry_failed", {
+    form_id: "enquiry-form",
+    reason: reason || "unknown",
+    error_message: String(detail || "").slice(0, 100)
+  });
   if (err) {
     err.innerHTML = 'Sorry, that didn\'t send. Please <a href="tel:07438562633">call 07438 562633</a> or ' +
       '<a href="https://wa.me/447438562633?text=' + encodeURIComponent(
@@ -358,9 +371,9 @@ function sendViaWeb3Forms(data, form, err, done) {
   }).then(function (r) {
     return r.json().catch(function () { return {}; }).then(function (j) {
       if (r.ok && j.success !== false) { succeed(data, "web3forms"); form.reset(); if (done) done(); }
-      else sendFailed(err, done);
+      else sendFailed(err, done, r.ok ? "refused" : "http_" + r.status, j.message);
     });
-  }).catch(function () { sendFailed(err, done); });
+  }).catch(function () { sendFailed(err, done, "network"); });
 }
 
 function sendToEndpoint(endpoint, data, form, err, done) {
@@ -370,8 +383,8 @@ function sendToEndpoint(endpoint, data, form, err, done) {
     body: JSON.stringify(data)
   }).then(function (r) {
     if (r.ok) { succeed(data, "endpoint"); form.reset(); if (done) done(); }
-    else sendFailed(err, done);
-  }).catch(function () { sendFailed(err, done); });
+    else sendFailed(err, done, "http_" + r.status);
+  }).catch(function () { sendFailed(err, done, "network"); });
 }
 
 // Turn the on-screen estimate (if the customer used the tool) into email lines.
@@ -428,16 +441,14 @@ function openMailto(d) {
 }
 
 function succeed(d, method) {
-  // GA4: count the enquiry as sent. The form stops the browser's own submit, so
-  // GA4's automatic form_submit never fires; generate_lead is the recommended
-  // event name for a lead and can be marked as a key event.
-  if (typeof gtag === "function") {
-    gtag("event", "generate_lead", {
-      form_id: "enquiry-form",
-      method: method || "unknown",
-      used_price_guide: ResQState.usedTool ? "yes" : "no"
-    });
-  }
+  // GA4: count the enquiry as sent, only once the service has confirmed it.
+  // generate_lead is the recommended event name for a lead and can be marked as
+  // a key event.
+  track("generate_lead", {
+    form_id: "enquiry-form",
+    method: method || "unknown",
+    used_price_guide: ResQState.usedTool ? "yes" : "no"
+  });
   document.getElementById("enquiry-form").hidden = true;
   var s = document.getElementById("success");
   s.hidden = false;
@@ -458,6 +469,8 @@ function succeed(d, method) {
 }
 
 /* ---------- helpers ---------- */
+// GA4 event (js/analytics.js defines gtag). Does nothing if the tag is missing.
+function track(name, params) { if (typeof gtag === "function") gtag("event", name, params); }
 function val(id) { var el = document.getElementById(id); return el ? el.value.trim() : ""; }
 function setVal(id, v) { var el = document.getElementById(id); if (el) el.value = v; }
 function show(el, msg) { if (el) { el.textContent = msg; el.hidden = false; } }
