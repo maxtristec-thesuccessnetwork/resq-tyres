@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
   <meta charset="UTF-8">
-  <script>document.documentElement.className+=" js";</script>
+  <script>document.documentElement.className+=" js";setTimeout(function(){if(!window.RESQ_UI)document.documentElement.classList.remove("js")},3000);</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jump Start Leeds | Flat Battery Call-Out From £50 | ResQ</title>
   <meta name="description" content="Mobile jump starts in Leeds, Wakefield and Harrogate from £50, 24 hours a day, every day. Flat battery? Call 07438 562633. Pay on completion.">
@@ -28,6 +28,7 @@
   <style>/* critical: inlined from css/fonts.css + the above-fold slice of css/styles.css.
     EDIT css/styles.css FIRST, THEN RE-SYNC THIS BLOCK. */
 /* --- from css/fonts.css (paths rewritten for /index.html) --- */
+@font-face{font-family:"Manrope Fallback";src:local("Arial"),local("ArialMT");size-adjust:99.25%;ascent-override:107.41%;descent-override:30.23%;line-gap-override:0%}
 @font-face{font-family:'Manrope';font-style:normal;font-weight:500 800;font-display:swap;
   src:url(fonts/manrope-latin-ext.woff2) format('woff2');
   unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
@@ -59,7 +60,7 @@
   --maxw:1880px;
   --gutter:clamp(16px,2.6vw,44px);
   --section-y:clamp(44px,6.5vw,82px);
-  --font:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --font:"Manrope","Manrope Fallback",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --shadow-sm:0 2px 10px rgba(20,24,29,.06);
   --shadow:0 18px 44px rgba(20,24,29,.12);
   --shadow-red:0 10px 26px rgba(228,0,43,.32);
@@ -87,6 +88,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 .reveal.from-right{transform:translateX(48px)}
 .reveal.zoom{transform:scale(.9)}
 .reveal.in{opacity:1;transform:none}
+.reveal.now,.stagger.now>*{transition:none!important}
 /* staggered children */
 .js .stagger>*{opacity:0;transform:translateY(38px);transition:opacity .65s cubic-bezier(.2,.7,.2,1),transform .65s cubic-bezier(.2,.7,.2,1)}
 .stagger.in>*{opacity:1;transform:none}
@@ -97,7 +99,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 
 /* --- styles.css:75-79 --- */
 /* hero scroll cue */
-.scroll-cue{display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--muted);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;margin-top:30px}
+.scroll-cue{display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--muted);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;margin-top:30px}
 .scroll-cue .mouse{width:24px;height:38px;border:2px solid var(--line-2);border-radius:14px;display:flex;justify-content:center;padding-top:6px}
 .scroll-cue .mouse::before{content:"";width:4px;height:7px;border-radius:2px;background:var(--red);animation:wheelDrop 1.6s infinite}
 @keyframes wheelDrop{0%{opacity:0;transform:translateY(-4px)}30%{opacity:1}70%{opacity:1;transform:translateY(6px)}100%{opacity:0;transform:translateY(10px)}}
@@ -126,7 +128,8 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 .topbar .tb-right a:hover{color:#fff}
 .topbar .icon.solid{fill:currentColor;stroke:none}
 .tb-socials{display:inline-flex;align-items:center;gap:12px;padding-left:14px;border-left:1px solid rgba(255,255,255,.18)}
-.tb-social{display:inline-flex}
+.tb-social{display:inline-flex;align-items:center;justify-content:center;min-width:24px;min-height:24px}
+.topbar .tb-right>a{min-height:24px}
 .tb-social .icon{width:16px;height:16px}
 
 /* ===== Header ===== */
@@ -138,7 +141,8 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 @media(max-width:360px){.site-header .bar{padding-inline:12px}.site-header .btn-call{padding-inline:14px}.site-header .logo-text small{letter-spacing:1px}} /* smallest phones: keep the name clear of the call button */
 .logo img{width:54px;height:54px;border-radius:50%}
 .logo-text{display:flex;flex-direction:column;line-height:1.05;font-weight:800;font-size:19px;color:var(--ink)}
-.logo-text small{font-weight:600;color:var(--muted);font-size:10px;letter-spacing:1.5px;margin-top:2px}
+.logo-text small{font-weight:600;color:var(--muted);font-size:12px;letter-spacing:1px;margin-top:2px}
+@media(max-width:419px){.logo-text .est{display:none}} /* phones: the tagline stays on one line beside the call button */
 .nav{display:flex;align-items:center;gap:clamp(24px,2.2vw,44px)}
 .nav a{text-decoration:none;color:var(--ink-2);font-weight:600;font-size:16px}
 .nav a:hover{color:var(--red)}
@@ -182,7 +186,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 .hero-photo .floatcard b{font-size:22px;color:var(--red);display:block;line-height:1}
 .hero-photo .floatcard b span{font-size:inherit;color:inherit;font-weight:inherit}
 .hero-photo .floatcard b .star{font-size:13px;color:var(--amber);margin-left:2px;vertical-align:2px}
-.hero-photo .floatcard span{font-size:11px;color:var(--muted);font-weight:600}
+.hero-photo .floatcard span{font-size:12px;color:var(--muted);font-weight:600}
 
 /* Hero stats strip */
 .stats{margin-top:42px;background:var(--dark);color:#fff}
@@ -493,8 +497,8 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
   <header class="site-header">
     <div class="wrap bar">
       <a href="/" class="logo">
-        <img src="assets/logo-128.webp" alt="ResQ Tyres &amp; Recovery logo" width="54" height="54" decoding="async">
-        <span class="logo-text">ResQ Tyres<small>&amp; RECOVERY · EST 2023</small></span>
+        <img src="assets/logo-108.webp" alt="ResQ Tyres &amp; Recovery logo" width="54" height="54" decoding="async">
+        <span class="logo-text">ResQ Tyres<small>&amp; RECOVERY<span class="est"> · EST 2023</span></small></span>
       </a>
       <nav class="nav" aria-label="Primary">
         <a href="#help">Jump start</a>
@@ -551,7 +555,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 
     <div class="marquee" aria-hidden="true">
       <div class="track">
-        <span class="item">Flat battery? We come to you</span><span class="dot"></span><span class="item">Jump starts from £50</span><span class="dot"></span><span class="item">Home · Work · Roadside</span><span class="dot"></span><span class="item">Open 24/7</span><span class="dot"></span><span class="item">Flat battery? We come to you</span><span class="dot"></span><span class="item">Jump starts from £50</span><span class="dot"></span><span class="item">Home · Work · Roadside</span><span class="dot"></span><span class="item">Open 24/7</span><span class="dot"></span>
+        <span class="item">Flat battery? We come to you</span><span class="dot"></span><span class="item">Jump starts from £50</span><span class="dot"></span><span class="item">Home · Work · Roadside</span><span class="dot"></span><span class="item">Open 24/7</span><span class="dot"></span>
       </div>
     </div>
 
@@ -618,10 +622,10 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
             <div class="pc-checker">
               <label for="pc-check">Check your postcode</label>
               <div class="pc-row">
-                <input id="pc-check" type="text" placeholder="e.g. LS10" maxlength="8" autocomplete="postal-code" aria-label="Your postcode">
-                <button type="button" id="pc-btn" class="btn-find"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Check</button>
+                <input id="pc-check" type="text" placeholder="e.g. LS10" maxlength="8" autocomplete="postal-code">
+                <button type="button" id="pc-btn" class="btn-find"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Check postcode</button>
               </div>
-              <p class="pc-result" id="pc-result" hidden></p>
+              <p class="pc-result" id="pc-result" role="status" aria-live="polite" hidden></p>
               <p class="micro">Same checker as our <a href="/#areas">main coverage map</a>.</p>
             </div>
           </div>
@@ -661,7 +665,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
             </ul>
             <a class="cta-primary" href="tel:07438562633"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call 07438 562633</a>
           </div>
-          <div class="van-img reveal from-right"><img src="assets/van-760-v3.webp" srcset="assets/van-760-v3.webp 760w, assets/van-1100-v3.webp 1100w" sizes="(max-width:900px) 100vw, 560px" width="1100" height="1375" alt="ResQ Tyres &amp; Recovery Mercedes Sprinter van carrying new tyres and on-site balancing equipment" loading="lazy" decoding="async" data-parallax="0.08"></div>
+          <div class="van-img reveal from-right"><img src="assets/van-760-v3.webp" srcset="assets/van-760-v3.webp 760w, assets/van-1100-v3.webp 1100w" sizes="(max-width:900px) 100vw, 660px" width="1100" height="1375" alt="ResQ Tyres &amp; Recovery Mercedes Sprinter van carrying new tyres and on-site balancing equipment" loading="lazy" decoding="async" data-parallax="0.08"></div>
         </div>
       </div>
     </section>
@@ -762,7 +766,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 
   <div class="marquee dark" aria-hidden="true">
     <div class="track">
-      <span class="item">Leeds</span><span class="dot"></span><span class="item">Wakefield</span><span class="dot"></span><span class="item">Morley</span><span class="dot"></span><span class="item">Pudsey</span><span class="dot"></span><span class="item">Garforth</span><span class="dot"></span><span class="item">Castleford</span><span class="dot"></span><span class="item">Harrogate</span><span class="dot"></span><span class="item">York</span><span class="dot"></span><span class="item">Selby</span><span class="dot"></span><span class="item">Leeds</span><span class="dot"></span><span class="item">Wakefield</span><span class="dot"></span><span class="item">Morley</span><span class="dot"></span><span class="item">Pudsey</span><span class="dot"></span><span class="item">Garforth</span><span class="dot"></span><span class="item">Castleford</span><span class="dot"></span><span class="item">Harrogate</span><span class="dot"></span><span class="item">York</span><span class="dot"></span><span class="item">Selby</span><span class="dot"></span>
+      <span class="item">Leeds</span><span class="dot"></span><span class="item">Wakefield</span><span class="dot"></span><span class="item">Morley</span><span class="dot"></span><span class="item">Pudsey</span><span class="dot"></span><span class="item">Garforth</span><span class="dot"></span><span class="item">Castleford</span><span class="dot"></span><span class="item">Harrogate</span><span class="dot"></span><span class="item">York</span><span class="dot"></span><span class="item">Selby</span><span class="dot"></span>
     </div>
   </div>
 
@@ -771,7 +775,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
     <div class="wrap">
       <div class="foot-grid">
         <div>
-          <div class="foot-brand"><img src="assets/logo-128.webp" alt="" width="52" height="52" loading="lazy" decoding="async"><b>ResQ Tyres &amp; Recovery</b></div>
+          <div class="foot-brand"><img src="assets/logo-108.webp" alt="" width="52" height="52" loading="lazy" decoding="async"><b>ResQ Tyres &amp; Recovery</b></div>
           <p>Mobile tyre fitting across Leeds, Wakefield &amp; Harrogate, 24 hours a day, 7 days a week. Established 2023.</p>
         </div>
         <div>

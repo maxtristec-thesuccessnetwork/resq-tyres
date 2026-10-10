@@ -227,14 +227,14 @@ def build(town) -> str:
     faqs = "\n".join(
         f'          <div class="faq-item">\n            <h3>{q}</h3>\n            <p>{a}</p>\n          </div>' for q, a in town["faq"])
     marquee_items = "".join(
-        f'<span class="item">{m}</span><span class="dot"></span>' for m in town["marquee"]) * 2
+        f'<span class="item">{m}</span><span class="dot"></span>' for m in town["marquee"])  # js/ui.js adds the loop copy
     served_names = ", ".join(n for _, n in town["served"])
 
     return f"""<!DOCTYPE html>
 <html lang="en-GB">
 <head>
   <meta charset="UTF-8">
-  <script>document.documentElement.className+=" js";</script>
+  <script>document.documentElement.className+=" js";setTimeout(function(){{if(!window.RESQ_UI)document.documentElement.classList.remove("js")}},3000);</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{html.escape(town['title'], quote=False)}</title>
   <meta name="description" content="{html.escape(town['description'], quote=True)}">
@@ -292,8 +292,8 @@ def build(town) -> str:
   <header class="site-header">
     <div class="wrap bar">
       <a href="/" class="logo">
-        <img src="assets/logo-128.webp" alt="ResQ Tyres &amp; Recovery logo" width="54" height="54" decoding="async">
-        <span class="logo-text">ResQ Tyres<small>&amp; RECOVERY · EST 2023</small></span>
+        <img src="assets/logo-108.webp" alt="ResQ Tyres &amp; Recovery logo" width="54" height="54" decoding="async">
+        <span class="logo-text">ResQ Tyres<small>&amp; RECOVERY<span class="est"> · EST 2023</span></small></span>
       </a>
       <nav class="nav" aria-label="Primary">
         <a href="#help">Emergency or planned</a>
@@ -351,10 +351,6 @@ def build(town) -> str:
 
     <div class="marquee" aria-hidden="true">
       <div class="track">
-        <span class="item"><svg class="icon"><use href="#i-clock"/></svg> Emergency call-outs 24/7</span><span class="dot"></span>
-        <span class="item"><svg class="icon"><use href="#i-wheel"/></svg> Mobile tyre fitting in {town['short']}</span><span class="dot"></span>
-        <span class="item">Flat · Blowout · Puncture</span><span class="dot"></span>
-        <span class="item"><svg class="icon"><use href="#i-pin"/></svg> We come to you</span><span class="dot"></span>
         <span class="item"><svg class="icon"><use href="#i-clock"/></svg> Emergency call-outs 24/7</span><span class="dot"></span>
         <span class="item"><svg class="icon"><use href="#i-wheel"/></svg> Mobile tyre fitting in {town['short']}</span><span class="dot"></span>
         <span class="item">Flat · Blowout · Puncture</span><span class="dot"></span>
@@ -423,10 +419,10 @@ def build(town) -> str:
             <div class="pc-checker">
               <label for="pc-check">Check your postcode</label>
               <div class="pc-row">
-                <input id="pc-check" type="text" placeholder="e.g. {town['districts'][0][0].split(' ')[0]}" maxlength="8" autocomplete="postal-code" aria-label="Your postcode">
-                <button type="button" id="pc-btn" class="btn-find"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Check</button>
+                <input id="pc-check" type="text" placeholder="e.g. {town['districts'][0][0].split(' ')[0]}" maxlength="8" autocomplete="postal-code">
+                <button type="button" id="pc-btn" class="btn-find"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Check postcode</button>
               </div>
-              <p class="pc-result" id="pc-result" hidden></p>
+              <p class="pc-result" id="pc-result" role="status" aria-live="polite" hidden></p>
               <p class="micro">Same checker as our <a href="/#areas">main coverage map</a>. It covers every Leeds <b>LS</b> district, <b>HG1&ndash;HG3</b> around Harrogate, <b>WF1&ndash;WF13</b> around Wakefield, <b>YO1, YO10 and YO24</b> in York, and <b>YO8</b> in Selby.</p>
             </div>
             <div class="landmarks"><b>Roads and places we cover include:</b> {town['landmarks']}.</div>
@@ -445,7 +441,7 @@ def build(town) -> str:
         </div>
         <div class="services stagger">
           <article class="svc">
-            <div class="ph"><img src="{svc[0]}" srcset="{svc[0]} {svc[2]}, {svc[1]} {svc[3]}" sizes="(max-width:760px) 92vw, 360px" width="{svc[4]}" height="{svc[5]}" alt="{svc[6]}" loading="lazy" decoding="async"></div>
+            <div class="ph"><img src="{svc[0]}" srcset="{svc[0]} {svc[2]}, {svc[1]} {svc[3]}" sizes="(max-width:760px) 92vw, (max-width:1100px) 46vw, 670px" width="{svc[4]}" height="{svc[5]}" alt="{svc[6]}" loading="lazy" decoding="async"></div>
             <div class="body">
               <span class="tagline"><svg class="icon" aria-hidden="true"><use href="#i-wheel"/></svg> Flat · Blowout · Puncture</span>
               <h3>Mobile tyre fitting &amp; puncture repair in {name}</h3>
@@ -453,7 +449,7 @@ def build(town) -> str:
             </div>
           </article>
           <article class="svc">
-            <div class="ph"><img src="assets/wheelchange-420-v3.webp" srcset="assets/wheelchange-420-v3.webp 420w, assets/wheelchange-760-v3.webp 760w" sizes="(max-width:760px) 92vw, 360px" width="760" height="760" alt="White car with its rear wheel off at the side of the road during a ResQ Tyres emergency call-out" loading="lazy" decoding="async"></div>
+            <div class="ph"><img src="assets/wheelchange-420-v3.webp" srcset="assets/wheelchange-420-v3.webp 420w, assets/wheelchange-760-v3.webp 760w" sizes="(max-width:760px) 92vw, (max-width:1100px) 46vw, 670px" width="760" height="760" alt="White car with its rear wheel off at the side of the road during a ResQ Tyres emergency call-out" loading="lazy" decoding="async"></div>
             <div class="body">
               <span class="tagline"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg> Home · Work · Roadside</span>
               <h3>Emergency call-out, 24/7</h3>
@@ -496,7 +492,7 @@ def build(town) -> str:
             </ul>
             <a class="cta-primary" href="tel:{PHONE_TEL}"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call {PHONE_DISPLAY}</a>
           </div>
-          <div class="van-img reveal from-right"><img src="assets/van-760-v3.webp" srcset="assets/van-760-v3.webp 760w, assets/van-1100-v3.webp 1100w" sizes="(max-width:900px) 100vw, 560px" width="1100" height="1375" alt="ResQ Tyres &amp; Recovery Mercedes Sprinter van carrying new tyres and on-site balancing equipment" loading="lazy" decoding="async" data-parallax="0.08"></div>
+          <div class="van-img reveal from-right"><img src="assets/van-760-v3.webp" srcset="assets/van-760-v3.webp 760w, assets/van-1100-v3.webp 1100w" sizes="(max-width:900px) 100vw, 660px" width="1100" height="1375" alt="ResQ Tyres &amp; Recovery Mercedes Sprinter van carrying new tyres and on-site balancing equipment" loading="lazy" decoding="async" data-parallax="0.08"></div>
         </div>
       </div>
     </section>

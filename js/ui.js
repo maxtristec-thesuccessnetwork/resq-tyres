@@ -9,6 +9,8 @@
    =========================================================== */
 (function () {
   "use strict";
+  // The head script shows every hidden section after 3 s unless this file has run.
+  window.RESQ_UI = true;
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---- Hero rotator ---- */
@@ -35,26 +37,40 @@
     el.textContent = "Open now · 24/7";
   });
 
-  /* ---- Scroll progress bar + hero scale + to-top ---- */
+  /* ---- Marquee: the HTML carries each item once; the copy that makes the loop seamless is added here ---- */
+  Array.prototype.forEach.call(document.querySelectorAll(".marquee .track"), function (t) {
+    var n = t.children.length;
+    for (var k = 0; k < n; k++) t.appendChild(t.children[k].cloneNode(true));
+  });
+
+  /* ---- Scroll progress bar + hero scale + to-top ----
+     At most once per frame, and every layout value is read before anything is written,
+     so scrolling never forces the browser to lay the page out twice. */
   var bar = document.getElementById("progress");
   var heroImg = document.getElementById("heroImg");
   var toTop = document.getElementById("toTop");
+  var queued = false;
 
   function onScroll() {
+    if (queued) return;
+    queued = true;
+    window.requestAnimationFrame(update);
+  }
+
+  function update() {
+    queued = false;
     var h = document.documentElement;
-    var y = h.scrollTop;
-    if (bar) {
-      var max = h.scrollHeight - h.clientHeight;
-      bar.style.width = (max > 0 ? (y / max) * 100 : 0) + "%";
-    }
+    var y = h.scrollTop, max = h.scrollHeight - h.clientHeight, vh = window.innerHeight;
+    var moves = parallaxReads(vh);
+    if (bar) bar.style.width = (max > 0 ? (y / max) * 100 : 0) + "%";
     /* hero photo scales up gently as you scroll through the hero */
     if (heroImg && !reduce) {
-      var p = Math.max(0, Math.min(1, y / (window.innerHeight * 0.9)));
+      var p = Math.max(0, Math.min(1, y / (vh * 0.9)));
       heroImg.style.transform = "scale(" + (1 + p * 0.14).toFixed(3) + ")";
     }
     /* back-to-top visibility */
     if (toTop) toTop.classList.toggle("show", y > 600);
-    parallax();
+    moves.forEach(function (m) { m[0].style.transform = "translate3d(0," + m[1].toFixed(1) + "px,0)"; });
   }
 
   if (toTop) {
@@ -82,6 +98,12 @@
     animated.forEach(function (el) { el.classList.add("in"); });
     counters.forEach(countUp);
   } else {
+    // Anything already on the first screen shows at once: fading it in only delays it.
+    var fold = window.innerHeight;
+    animated = Array.prototype.filter.call(animated, function (el) {
+      if (el.getBoundingClientRect().top < fold) { el.classList.add("in", "now"); return false; }
+      return true;
+    });
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
@@ -97,21 +119,20 @@
     counters.forEach(function (el) { co.observe(el); });
   }
 
-  /* ---- Parallax ---- */
-  var px = reduce ? [] : document.querySelectorAll("[data-parallax]");
-  function parallax() {
-    if (!px.length) return;
-    var vh = window.innerHeight;
+  /* ---- Parallax: reads only; update() writes the results ---- */
+  var px = reduce ? [] : Array.prototype.slice.call(document.querySelectorAll("[data-parallax]"));
+  function parallaxReads(vh) {
+    var out = [];
     px.forEach(function (el) {
       var r = el.getBoundingClientRect();
       if (r.bottom < 0 || r.top > vh) return;
       var speed = parseFloat(el.getAttribute("data-parallax")) || 0.1;
-      var offset = (r.top + r.height / 2 - vh / 2) * -speed;
-      el.style.transform = "translate3d(0," + offset.toFixed(1) + "px,0)";
+      out.push([el, (r.top + r.height / 2 - vh / 2) * -speed]);
     });
+    return out;
   }
 
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll, { passive: true });
-  onScroll();
+  update();
 })();

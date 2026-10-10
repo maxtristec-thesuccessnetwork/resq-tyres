@@ -271,8 +271,11 @@ function wirePostcodeChecker() {
     if (RESQ_COVERAGE.districts.indexOf(outward) !== -1) {
       showPC(out, "ok",
         '<svg class="icon" aria-hidden="true"><use href="#i-check-circle"/></svg> ' +
-        "<span>Yes, we cover <b>" + outward + "</b>. " +
-        "Call us or plan a home fitting below.</span>");
+        "<span>Yes, we cover <b>" + outward + "</b>. Call us now, or plan a home fitting below.</span>" +
+        '<span class="pc-ctas"><a class="pc-cta call" href="tel:07438562633">Call 07438&nbsp;562633</a>' +
+        '<a class="pc-cta wa" href="https://wa.me/447438562633?text=' +
+        encodeURIComponent("Hi ResQ, I need a tyre fitted. My postcode is " + outward + ". I'm at: ") +
+        '" target="_blank" rel="noopener">WhatsApp</a></span>');
     } else {
       showPC(out, "warn",
         '<svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg> ' +

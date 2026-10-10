@@ -20,7 +20,7 @@ photo on a page (the largest contentful paint).
   * hero-resq: the home and Wakefield hero box is aspect-ratio 4/4.2 with
     object-position center 40%, so the crop keeps the same 40% point.
   * van: the jump-start hero (same 4/4.2 box), the van section and service
-    cards (4:5, the photo's own shape), and the 1200x630 share image.
+    (4:5, the photo's own shape), the square home service card, and the 1200x630 share image.
   * roadside-fit: the Harrogate hero (4/4.2) and the square service cards.
   * wheelchange: the /emergency proof photo, shown full width at up to 280px
     tall (about 4:3 on a phone), and the square service cards.
@@ -45,6 +45,7 @@ CROPS = {
     "hero-resq.jpg":    [(4 / 4.2, 0.40, [600, 760, 900], "hero-resq-{w}-v4.webp")],
     "van.jpg":          [(4 / 4.2, 0.30, [600, 760, 900], "van-hero-{w}.webp"),
                          (4 / 5, 0.50, [420, 760, 1100], "van-{w}-v3.webp"),
+                         (1, 0.42, [420, 760], "van-sq-{w}.webp"),
                          (1200 / 630, 0.4625, [1200], "share-{w}x630-v2.jpg")],
     "roadside-fit.jpg": [(4 / 4.2, 0.50, [420, 760], "roadside-fit-hero-{w}.webp"),
                          (1, 0.50, [420, 760], "roadside-fit-{w}-v3.webp")],
