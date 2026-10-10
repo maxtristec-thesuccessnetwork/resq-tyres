@@ -67,12 +67,17 @@ REVIEWS = slice_between(INDEX, '        <div class="reviews stagger">', "       
 FOOTER = re.sub(r'href="#(?!top|i-)', 'href="/#', FOOTER)
 FOOTER = FOOTER.replace('href="#top"', 'href="/"')
 
+
+def footer_for(path):
+    """The footer without its link to the page it sits on (a link to yourself is a dead end)."""
+    return re.sub(r'\n\s*<li><a href="' + re.escape(path) + r'">[^\n]*</li>', "", FOOTER)
+
 # ------------------------------------------------------------------ towns
 TOWNS = [
     dict(
         slug="wakefield", name="Wakefield", short="Wakefield", area_and="Wakefield", area_or="Wakefield", topbar_area=None, schema_where="across WF1 to WF13",
-        title="Mobile Tyre Fitting Wakefield | Open 24/7 | ResQ Tyres",
-        description="Mobile tyre fitting and puncture repair in Wakefield (WF1–WF13), 24/7. Tyres from £40, pay on completion. Call 07438 562633.",
+        title="Mobile Tyre Fitting Wakefield | 24/7 | ResQ Tyres",
+        description="Mobile tyre fitting and puncture repair in Wakefield (WF1–WF13), 24 hours a day. Tyres from £40, pay on completion. Call 07438 562633.",
         h1="Flat tyre in Wakefield? We come to you.",
         rotator=["In Wakefield.", "In Ossett.", "In Castleford.", "In Pontefract.", "Day or night."],
         sub="Mobile tyre fitting across Wakefield (WF1–WF13), 24 hours a day.",
@@ -119,7 +124,7 @@ TOWNS = [
     dict(
         slug="harrogate", name="Harrogate", short="Harrogate &amp; Tadcaster", area_and="Harrogate and Tadcaster", area_or="Harrogate or Tadcaster", topbar_area="Harrogate &amp; Tadcaster", schema_where="in HG1 to HG3 and LS24 Tadcaster",
         title="Mobile Tyre Fitting Harrogate & Tadcaster | ResQ Tyres",
-        description="Mobile tyre fitting and puncture repair in Harrogate (HG1–HG3) and Tadcaster, 24/7. Tyres from £40. Call 07438 562633.",
+        description="Mobile tyre fitting and puncture repair in Harrogate (HG1–HG3) and Tadcaster, 24 hours a day. Tyres from £40. Call 07438 562633.",
         h1="Flat tyre in Harrogate or Tadcaster? We come to you.",
         rotator=["In Harrogate.", "In Pannal.", "In Tadcaster.", "On the A61.", "Day or night."],
         sub="Mobile tyre fitting across Harrogate and out to Tadcaster, 24 hours a day.",
@@ -431,7 +436,7 @@ def build(town) -> str:
         <div class="section-head reveal">
           <span class="eyebrow">What we do</span>
           <h2>Mobile tyre fitting across {town['short']}</h2>
-          <p>Brand-new tyres fitted on the spot, wherever you are in {name}. For a flat battery, we also do <a href="/jump-start-leeds">jump starts from &pound;50</a> across the same area.</p>
+          <p>Brand-new tyres fitted on the spot, wherever you are in {name}. For a flat battery, there's our <a href="/jump-start-leeds">flat battery call-out</a>: jump starts from &pound;50 across the same area.</p>
         </div>
         <div class="services stagger">
           <article class="svc">
@@ -543,7 +548,7 @@ def build(town) -> str:
     </div>
   </div>
 
-{FOOTER}
+{footer_for('/mobile-tyre-fitting-' + slug)}
 {STICKY}
   <script src="js/rates.js" defer></script>
   <script src="js/app.js" defer></script>
