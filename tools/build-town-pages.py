@@ -43,6 +43,13 @@ H1_MAX, SUB_MAX = 52, 81
 COVERED = set(re.findall(r'"([A-Z]{2}\d{1,2})"', INDEX.split("RESQ_COVERAGE")[0]) or [])  # placeholder
 COVERED = set(re.findall(r'"((?:LS|HG|WF|YO)\d{1,2})"', (ROOT / "js" / "rates.js").read_text()))
 
+# Wikidata items for every place named in areaServed, so search engines know which Morley or
+# Wakefield is meant. Towns inside a city district and villages are typed Place, not City.
+WIKIDATA = {"Leeds": "Q39121", "Wakefield": "Q216638", "Dewsbury": "Q525508", "Pudsey": "Q1009290", "Morley": "Q1021179",
+            "Castleford": "Q546485", "Garforth": "Q2559795", "Pontefract": "Q1009235", "Harrogate": "Q215829",
+            "Tadcaster": "Q784467", "York": "Q42462", "Selby": "Q527846", "Ossett": "Q1788889", "Normanton": "Q1027131",
+            "Wetherby": "Q817481", "Pannal": "Q2273404"}
+
 # ------------------------------------------------------------------ head pieces from index.html
 def slice_between(s: str, start: str, end: str) -> str:
     i = s.index(start); j = s.index(end, i) + len(end)
@@ -107,7 +114,7 @@ TOWNS = [
              "No. ResQ takes no deposit and there's nothing to pay online. You pay when the job's done in Wakefield, by card or cash."),
         ],
         marquee=["Ossett", "Horbury", "Normanton", "Castleford", "Pontefract", "Featherstone", "Hemsworth", "Knottingley", "Dewsbury"],
-        served=[("City", "Wakefield"), ("City", "Ossett"), ("City", "Castleford"), ("City", "Pontefract"), ("City", "Normanton"), ("City", "Dewsbury")],
+        served=[("City", "Wakefield"), ("Place", "Ossett"), ("Place", "Castleford"), ("Place", "Pontefract"), ("Place", "Normanton"), ("City", "Dewsbury")],
     ),
     dict(
         slug="harrogate", name="Harrogate", short="Harrogate &amp; Tadcaster", area_and="Harrogate and Tadcaster", area_or="Harrogate or Tadcaster", topbar_area="Harrogate &amp; Tadcaster", schema_where="in HG1 to HG3 and LS24 Tadcaster",
@@ -148,7 +155,7 @@ TOWNS = [
              "No. ResQ takes no deposit and there's nothing to pay online. You pay when the job's done in Harrogate or Tadcaster, by card or cash."),
         ],
         marquee=["Bilton", "Starbeck", "Pannal", "Killinghall", "Ripley", "Spofforth", "Tadcaster", "Boston Spa", "Wetherby"],
-        served=[("City", "Harrogate"), ("City", "Tadcaster"), ("City", "York"), ("City", "Selby"), ("City", "Pannal"), ("City", "Wetherby")],
+        served=[("City", "Harrogate"), ("City", "Tadcaster"), ("City", "York"), ("City", "Selby"), ("Place", "Pannal"), ("Place", "Wetherby")],
     ),
 ]
 
@@ -175,7 +182,7 @@ def schema(town):
         "url": url,
         "provider": {"@type": "AutoRepair", "@id": f"{SITE}/#business", "name": "ResQ Tyres & Recovery",
                      "telephone": PHONE_E164, "url": SITE + "/"},
-        "areaServed": [{"@type": t, "name": n} for t, n in town["served"]],
+        "areaServed": [{"@type": t, "name": n, "sameAs": f"https://www.wikidata.org/wiki/{WIKIDATA[n]}"} for t, n in town["served"]],
         # prices exactly as the hero and FAQ state them; "from" prices are minPrice, never price.
         # The offer covers fitting and puncture repair, so minPrice is the lowest of the two (repair from £70).
         "offers": {"@type": "Offer",
