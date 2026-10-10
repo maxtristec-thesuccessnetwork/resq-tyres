@@ -81,8 +81,8 @@ TOWNS = [
         h1="Flat tyre in Wakefield? We come to you.",
         rotator=["In Wakefield.", "In Ossett.", "In Castleford.", "In Pontefract.", "Day or night."],
         sub="Mobile tyre fitting across Wakefield (WF1–WF13), 24 hours a day.",
-        hero_img=([("assets/hero-resq-600-v3.webp", 600), ("assets/hero-resq-760-v3.webp", 760), ("assets/hero-resq-900-v3.webp", 900)], 900, 945,
-                  "ResQ Tyres mobile tyre fitting van at a roadside job, with a new tyre being fitted on site"),
+        hero_img=([("assets/hero-resq-600-v4.webp", 600), ("assets/hero-resq-760-v4.webp", 760), ("assets/hero-resq-900-v4.webp", 900)], 900, 945,
+                  "ResQ Tyres van parked beside a blue Audi with its front wheel off, part-way through a mobile tyre fitting"),
         stat_area=("WF1–WF13", "Every Wakefield district"),
         cover_heading="WF1–WF13, from Wakefield to Dewsbury",
         cover_intro="We cover every district from WF1 to WF13: the city, the Five Towns and out to Dewsbury. We come to you from Leeds.",
@@ -128,8 +128,11 @@ TOWNS = [
         h1="Flat tyre in Harrogate or Tadcaster? We come to you.",
         rotator=["In Harrogate.", "In Pannal.", "In Tadcaster.", "On the A61.", "Day or night."],
         sub="Mobile tyre fitting across Harrogate and out to Tadcaster, 24 hours a day.",
-        hero_img=([("assets/fitting-420.webp", 420), ("assets/fitting-760.webp", 760)], 760, 1140,
-                  "Fitter in hi-vis overalls checking the front tyre of a white pickup"),
+        hero_img=([("assets/roadside-fit-hero-420.webp", 420), ("assets/roadside-fit-hero-760.webp", 760)], 760, 798,
+                  "Black hatchback on a jack with its front wheel off, part-way through a ResQ Tyres mobile tyre fitting"),
+        # The hero is the roadside job, so the first service card shows the van and Audi job instead.
+        svc_photo=("assets/hero-resq-600-v4.webp", "assets/hero-resq-760-v4.webp", "600w", "760w", 760, 798,
+                   "ResQ Tyres van parked beside a blue Audi with its front wheel off, part-way through a mobile tyre fitting"),
         stat_area=("HG1–HG3 · LS24", "Harrogate &amp; Tadcaster"),
         cover_heading="Harrogate, the villages around it, Tadcaster and York",
         cover_intro="We come up the A61 and the A658 from Leeds to cover all three Harrogate districts and the Tadcaster side of LS24. You get the same van and tyres as in Leeds, so there's no need to take the car to a garage in town.",
@@ -210,6 +213,8 @@ def build(town) -> str:
     slug, name = town["slug"], town["name"]
     url = f"{SITE}/mobile-tyre-fitting-{slug}"
     hero_set, iw, ih, alt = town["hero_img"]
+    svc = town.get("svc_photo", ("assets/roadside-fit-420-v3.webp", "assets/roadside-fit-760-v3.webp", "420w", "760w", 760, 760,
+                                  "Car raised on a jack with the wheel removed during ResQ Tyres mobile tyre fitting"))
     src1 = hero_set[0][0]
     srcset = ", ".join(f"{src} {w}w" for src, w in hero_set)
     rot_words = json.dumps(town["rotator"], ensure_ascii=False)
@@ -240,7 +245,7 @@ def build(town) -> str:
   <meta property="og:title" content="{html.escape(town['title'], quote=True)}">
   <meta property="og:description" content="{html.escape(town['description'], quote=True)}">
   <meta property="og:url" content="{url}">
-  <meta property="og:image" content="{SITE}/assets/share-1200x630.jpg">
+  <meta property="og:image" content="{SITE}/assets/share-1200x630-v2.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="The ResQ Tyres &amp; Recovery van, lettered with the ResQ Tyres name and phone number">
@@ -440,7 +445,7 @@ def build(town) -> str:
         </div>
         <div class="services stagger">
           <article class="svc">
-            <div class="ph"><img src="assets/roadside-fit-420-v2.webp" srcset="assets/roadside-fit-420-v2.webp 420w, assets/roadside-fit-760-v2.webp 760w" sizes="(max-width:760px) 92vw, 360px" width="760" height="760" alt="Car raised on a jack with the wheel removed during ResQ Tyres mobile tyre fitting" loading="lazy" decoding="async"></div>
+            <div class="ph"><img src="{svc[0]}" srcset="{svc[0]} {svc[2]}, {svc[1]} {svc[3]}" sizes="(max-width:760px) 92vw, 360px" width="{svc[4]}" height="{svc[5]}" alt="{svc[6]}" loading="lazy" decoding="async"></div>
             <div class="body">
               <span class="tagline"><svg class="icon" aria-hidden="true"><use href="#i-wheel"/></svg> Flat · Blowout · Puncture</span>
               <h3>Mobile tyre fitting &amp; puncture repair in {name}</h3>
@@ -448,7 +453,7 @@ def build(town) -> str:
             </div>
           </article>
           <article class="svc">
-            <div class="ph"><img src="assets/wheelchange-420-v2.webp" srcset="assets/wheelchange-420-v2.webp 420w, assets/wheelchange-760-v2.webp 760w" sizes="(max-width:760px) 92vw, 360px" width="760" height="760" alt="White car with its rear wheel off at the side of the road during a ResQ Tyres emergency call-out" loading="lazy" decoding="async"></div>
+            <div class="ph"><img src="assets/wheelchange-420-v3.webp" srcset="assets/wheelchange-420-v3.webp 420w, assets/wheelchange-760-v3.webp 760w" sizes="(max-width:760px) 92vw, 360px" width="760" height="760" alt="White car with its rear wheel off at the side of the road during a ResQ Tyres emergency call-out" loading="lazy" decoding="async"></div>
             <div class="body">
               <span class="tagline"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg> Home · Work · Roadside</span>
               <h3>Emergency call-out, 24/7</h3>
@@ -491,7 +496,7 @@ def build(town) -> str:
             </ul>
             <a class="cta-primary" href="tel:{PHONE_TEL}"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call {PHONE_DISPLAY}</a>
           </div>
-          <div class="van-img reveal from-right"><img src="assets/van-760-v2.webp" srcset="assets/van-760-v2.webp 760w, assets/van-1100-v2.webp 1100w" sizes="(max-width:900px) 100vw, 560px" width="1100" height="1375" alt="ResQ Tyres &amp; Recovery Mercedes Sprinter van carrying new tyres and on-site balancing equipment" loading="lazy" decoding="async" data-parallax="0.08"></div>
+          <div class="van-img reveal from-right"><img src="assets/van-760-v3.webp" srcset="assets/van-760-v3.webp 760w, assets/van-1100-v3.webp 1100w" sizes="(max-width:900px) 100vw, 560px" width="1100" height="1375" alt="ResQ Tyres &amp; Recovery Mercedes Sprinter van carrying new tyres and on-site balancing equipment" loading="lazy" decoding="async" data-parallax="0.08"></div>
         </div>
       </div>
     </section>
