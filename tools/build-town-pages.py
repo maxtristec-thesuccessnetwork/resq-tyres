@@ -228,12 +228,17 @@ def build(town) -> str:
   <meta property="og:title" content="{html.escape(town['title'], quote=True)}">
   <meta property="og:description" content="{html.escape(town['description'], quote=True)}">
   <meta property="og:url" content="{url}">
-  <meta property="og:image" content="{SITE}/assets/van.jpg">
+  <meta property="og:image" content="{SITE}/assets/share-1200x630.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The ResQ Tyres &amp; Recovery van, lettered with the ResQ Tyres name and phone number">
   <meta property="og:locale" content="en_GB">
   <meta property="og:site_name" content="ResQ Tyres &amp; Recovery">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="icon" href="assets/logo.png">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
 {CRITICAL_STYLE}  <link rel="stylesheet" href="css/styles.css" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="css/styles.css"></noscript>
