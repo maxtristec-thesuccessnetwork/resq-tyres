@@ -505,7 +505,7 @@ def build(town) -> str:
           <span class="eyebrow">Trusted by local drivers</span>
           <span class="stars" style="font-size:22px">★★★★★</span>
           <span class="big"><span data-count="5.0" data-dec="1">5.0</span> on Google</span>
-          <span class="micro" data-nosnippet>From <span data-count="230" data-suffix="+" data-nosnippet>230+</span> Google reviews</span>
+          <span class="micro" data-nosnippet>Rated 5.0 from 233 Google reviews, checked October 2026</span>
         </div>
 {REVIEWS}        </div>
         <div class="reviews-cta reveal">
