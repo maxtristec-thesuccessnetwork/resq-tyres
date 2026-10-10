@@ -93,18 +93,18 @@ TOWNS = [
         related='Further north? See <a href="/mobile-tyre-fitting-harrogate">mobile tyre fitting in Harrogate &amp; Tadcaster</a>, or <a href="/">mobile tyre fitting in Leeds</a>.',
         landmarks="the M1 around junctions 39–41, the M62 around Wakefield, the A61 into Leeds, Trinity Walk and the Ridings car parks, Pinderfields, and the station car parks at Westgate and Kirkgate",
         faq=[
-            ("Do you cover all of Wakefield?",
-             "Yes, every district from <b>WF1</b> to <b>WF13</b>. That's Wakefield itself, Ossett, Horbury, Normanton, Featherstone, Pontefract, Hemsworth, Castleford, Knottingley and Dewsbury. Type your postcode into the checker above if you want to be sure."),
-            ("Can you come out to me now in Wakefield?",
-             f"Yes, 24 hours a day, 7 days a week. On average we're with you in about 40 minutes. Call <a href=\"tel:{PHONE_TEL}\">{PHONE_DISPLAY.replace(' ', '&nbsp;')}</a> or message us on WhatsApp. In an emergency, ringing is faster than filling in a form."),
-            ("Do you repair punctures in Wakefield, or only replace tyres?",
-             "Both. If the tyre can be safely repaired, we repair it at the roadside or on your drive. If it can't, we carry new tyres on the van and fit one on the spot. Puncture repair is &pound;70–&pound;120 depending on distance and tyre size."),
-            ("Where in Wakefield can you fit a tyre?",
-             f"Wherever the car is: your driveway in Sandal or Outwood, a work car park, or the hard shoulder. We also cover {'the M1 around junctions 39–41, the M62 around Wakefield, the A61 into Leeds'}, and the retail and station car parks in the city centre."),
+            ("Does ResQ cover all of Wakefield?",
+             "Yes. ResQ covers every Wakefield district from <b>WF1</b> to <b>WF13</b>: Wakefield itself, Ossett, Horbury, Normanton, Featherstone, Pontefract, Hemsworth, Castleford, Knottingley and Dewsbury. Type your postcode into the checker above if you want to be sure."),
+            ("Can ResQ come out to me now in Wakefield?",
+             f"Yes. ResQ comes out in Wakefield 24 hours a day, 7 days a week. On average we're with you in about 40 minutes. Call <a href=\"tel:{PHONE_TEL}\">{PHONE_DISPLAY.replace(' ', '&nbsp;')}</a> or message us on WhatsApp. In an emergency, ringing is faster than filling in a form."),
+            ("Does ResQ repair punctures in Wakefield, or only replace tyres?",
+             "Both. If the tyre can be safely repaired, ResQ repairs it at the roadside or on your drive in Wakefield. If it can't, we carry new tyres on the van and fit one on the spot. Puncture repair is &pound;70–&pound;120 depending on distance and tyre size."),
+            ("Where in Wakefield can ResQ fit a tyre?",
+             f"Wherever the car is: your driveway in Sandal or Outwood, a work car park, a motorway hard shoulder or a service station. ResQ also covers {'the M1 around junctions 39–41, the M62 around Wakefield, the A61 into Leeds'}, and the retail and station car parks in the city centre. On a motorway, get out by the left-hand door and wait behind the barrier while you call. If you've stopped in a live lane, or you're in danger, call 999 first."),
             ("How much is mobile tyre fitting in Wakefield?",
-             "Tyres are from &pound;40 each for 14–17\" wheels and from &pound;80 for 18–20\", and mobile fitting is from &pound;50 per tyre on top, depending on where in Wakefield you are. There's no separate call-out fee. Use the <a href=\"/#estimate\">price guide</a> for your size. We confirm the exact price by phone before any work starts. Booking a planned fitting for all four tyres? You get 30% off the total price, subject to availability."),
-            ("Do I pay a deposit?",
-             "No. Nothing to pay online and no deposit. You pay on completion, by card or cash."),
+             "<b>One tyre fitted in Wakefield costs from &pound;90</b> (tyre from &pound;40 plus mobile fitting from &pound;50). Tyres are &pound;40–&pound;100 each for 14–17\" wheels and &pound;80–&pound;150 for 18–20\", depending on the brand, and mobile fitting is from &pound;50 per tyre, depending on where in Wakefield you are. There's no separate call-out fee, and the price is the same day or night. Use the <a href=\"/#estimate\">price guide</a> for your size. ResQ confirms the exact price by phone before any work starts. Booking a planned fitting for all four tyres? You get 30% off the total price, subject to availability."),
+            ("Do I pay ResQ a deposit?",
+             "No. ResQ takes no deposit and there's nothing to pay online. You pay when the job's done in Wakefield, by card or cash."),
         ],
         marquee=["Ossett", "Horbury", "Normanton", "Castleford", "Pontefract", "Featherstone", "Hemsworth", "Knottingley", "Dewsbury"],
         served=[("City", "Wakefield"), ("City", "Ossett"), ("City", "Castleford"), ("City", "Pontefract"), ("City", "Normanton"), ("City", "Dewsbury")],
@@ -134,18 +134,18 @@ TOWNS = [
         related='Nearer Wakefield? See <a href="/mobile-tyre-fitting-wakefield">mobile tyre fitting in Wakefield</a>, or <a href="/">mobile tyre fitting in Leeds</a>.',
         landmarks="the A61 Leeds Road and Harrogate Road, the A59 towards Knaresborough, the A658 past the airport, the Stray, Harrogate station and the Victoria car park, and the A64 and A659 around Tadcaster",
         faq=[
-            ("Which parts of Harrogate do you cover?",
-             "All three Harrogate districts (<b>HG1</b>, <b>HG2</b> and <b>HG3</b>), including the town centre, Bilton, Starbeck, Oatlands, Pannal, Killinghall, Ripley and the villages out towards Pateley Bridge. Plus <b>LS24</b> for Tadcaster. Knaresborough and Ripon are just outside, but call and ask."),
-            ("Can you come out to Harrogate now?",
-             f"Yes, 24 hours a day, 7 days a week. We come up from Leeds, so tell us where you are when you call <a href=\"tel:{PHONE_TEL}\">{PHONE_DISPLAY.replace(' ', '&nbsp;')}</a> or WhatsApp us, and we'll give you a straight answer on when we can be with you."),
-            ("Do you repair punctures in Harrogate and Tadcaster?",
-             "Yes. If the tyre can be safely repaired, we repair it where the car is. If it can't, we carry new tyres on the van and fit one on the spot. Puncture repair is &pound;70–&pound;120 depending on distance and tyre size."),
-            ("Where can you fit the tyre?",
-             "Wherever the vehicle is: a driveway in Pannal, a work car park at Hornbeam Park, the Stray, or a lay-by on the A61. The van carries brand-new tyres and the kit for on-site balancing and valve replacement, so most jobs are finished in one visit."),
+            ("Which parts of Harrogate does ResQ cover?",
+             "ResQ covers all three Harrogate districts (<b>HG1</b>, <b>HG2</b> and <b>HG3</b>), including the town centre, Bilton, Starbeck, Oatlands, Pannal, Killinghall, Ripley and the villages out towards Pateley Bridge. Plus <b>LS24</b> for Tadcaster. Knaresborough and Ripon are just outside, but call and ask."),
+            ("Can ResQ come out to Harrogate now?",
+             f"Yes. ResQ comes out to Harrogate and Tadcaster 24 hours a day, 7 days a week. We come up from Leeds, so tell us where you are when you call <a href=\"tel:{PHONE_TEL}\">{PHONE_DISPLAY.replace(' ', '&nbsp;')}</a> or WhatsApp us, and we'll give you a straight answer on when we can be with you."),
+            ("Does ResQ repair punctures in Harrogate and Tadcaster?",
+             "Yes. If the tyre can be safely repaired, ResQ repairs it where the car is in Harrogate or Tadcaster. If it can't, we carry new tyres on the van and fit one on the spot. Puncture repair is &pound;70–&pound;120 depending on distance and tyre size."),
+            ("Where in Harrogate can ResQ fit the tyre?",
+             "Wherever the vehicle is: a driveway in Pannal, a work car park at Hornbeam Park, a street off the Stray, or a lay-by on the A61. ResQ's van carries brand-new tyres and the kit for on-site balancing and valve replacement, so most jobs are finished in one visit."),
             ("How much is mobile tyre fitting in Harrogate?",
-             "Tyres are from &pound;40 each for 14–17\" wheels and from &pound;80 for 18–20\". Mobile fitting is from &pound;50 per tyre on top, depending on where you are. It's a longer drive to Harrogate and Tadcaster than around Leeds, so we'll always tell you the fitting price before we set off. There's no separate call-out fee. Use the <a href=\"/#estimate\">price guide</a> for your size. Booking a planned fitting for all four tyres? You get 30% off the total price, subject to availability."),
-            ("Do I pay a deposit?",
-             "No. Nothing to pay online and no deposit. You pay on completion, by card or cash."),
+             "<b>One tyre fitted in Harrogate costs from &pound;90</b> (tyre from &pound;40 plus mobile fitting from &pound;50). Tyres are &pound;40–&pound;100 each for 14–17\" wheels and &pound;80–&pound;150 for 18–20\", depending on the brand. Mobile fitting is from &pound;50 per tyre, depending on where you are. It's a longer drive to Harrogate and Tadcaster than around Leeds, so ResQ will always tell you the fitting price before we set off. There's no separate call-out fee, and the price is the same day or night. Use the <a href=\"/#estimate\">price guide</a> for your size. Booking a planned fitting for all four tyres? You get 30% off the total price, subject to availability."),
+            ("Do I pay ResQ a deposit?",
+             "No. ResQ takes no deposit and there's nothing to pay online. You pay when the job's done in Harrogate or Tadcaster, by card or cash."),
         ],
         marquee=["Bilton", "Starbeck", "Pannal", "Killinghall", "Ripley", "Spofforth", "Tadcaster", "Boston Spa", "Wetherby"],
         served=[("City", "Harrogate"), ("City", "Tadcaster"), ("City", "York"), ("City", "Selby"), ("City", "Pannal"), ("City", "Wetherby")],
@@ -481,7 +481,7 @@ def build(town) -> str:
     <section class="section soft" id="reviews">
       <div class="wrap">
         <div class="rev-head reveal">
-          <h2 class="sr-only" data-nosnippet>Customer reviews: rated 5.0 on Google from more than 230 reviews</h2>
+          <h2 class="sr-only" data-nosnippet>Reviews of ResQ Tyres, mobile tyre fitting in {name}: rated 5.0 on Google from more than 230 reviews</h2>
           <span class="eyebrow">Trusted by local drivers</span>
           <span class="stars" style="font-size:22px">★★★★★</span>
           <span class="big"><span data-count="5.0" data-dec="1">5.0</span> on Google</span>
