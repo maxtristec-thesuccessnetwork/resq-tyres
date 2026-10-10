@@ -351,6 +351,7 @@ textarea{resize:vertical}
 .foot-links .icon{width:15px;height:15px;stroke:var(--red)}
 .foot-links .icon.solid{fill:var(--red);stroke:none}
 .foot-bottom{border-top:1px solid #2a313a;padding-top:18px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;color:#7d8893}
+.foot-legal{flex-basis:100%}
 
 /* Sticky mobile bar */
 .sticky-bar{position:fixed;left:12px;right:12px;bottom:12px;z-index:60;display:none;gap:10px}
