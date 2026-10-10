@@ -8,6 +8,8 @@ Design rules (so the pages stay honest and stay on-brand):
     change to the home page's fonts or above-fold CSS flows through on the next build.
   * Hours: 24 hours a day, 7 days, since 8 Oct 2026.
   * Arrival: about 40 minutes on average, confirmed by the business on 8 Oct 2026; not on the Harrogate page, which is a longer drive.
+  * Distance: straight-line miles from the LS9 8JB base to the town's district centroid (tools/outcodes.json),
+    rounded and always labelled "as the crow flies". Miles, never minutes.
   * Prices are per tyre — from £40 (14–17") / from £80 (18–20") — with mobile fitting from £50 per tyre
     on top. The exact range per size lives on the home page's price guide; these pages link to it.
     The hero shows both parts and the total (PRICE_LINE). Never a single all-in price.
@@ -60,7 +62,8 @@ ICON_DEFS = slice_between(INDEX, '  <svg width="0" height="0"', "</defs></svg>\n
 TOPBAR = slice_between(INDEX, "  <!-- ===== Top utility bar =====", "  <!-- ===== Header =====").rstrip() + "\n"
 FOOTER = slice_between(INDEX, "  <!-- ===== Footer =====", "  </footer>\n")
 STICKY = slice_between(INDEX, "  <!-- Back to top -->", '  </div>\n\n  <script src="js/rates.js" defer></script>').replace('  <script src="js/rates.js" defer></script>', "")
-REVIEWS = slice_between(INDEX, '        <div class="reviews stagger">', "        </div>\n        <div class=\"reviews-cta reveal\">")
+# No review cards on the town pages until each has real reviews from its own area: repeating
+# the home page's three Leeds reviews made the two pages read as copies of each other.
 # footer links are anchors on the home page; make them absolute so they work from a town page.
 # Icon references (#i-...) stay local: each page carries its own inline sprite, and
 # browsers do not load <use> symbols from another document.
@@ -85,7 +88,7 @@ TOWNS = [
                   "ResQ Tyres van parked beside a blue Audi with its front wheel off, part-way through a mobile tyre fitting"),
         stat_area=("WF1–WF13", "Every Wakefield district"),
         cover_heading="WF1–WF13, from Wakefield to Dewsbury",
-        cover_intro="We cover every district from WF1 to WF13: the city, the Five Towns and out to Dewsbury. We come to you from Leeds.",
+        cover_intro="We cover every district from WF1 to WF13: the city, the Five Towns and out to Dewsbury. We come to you from our base in east Leeds, about 8 miles from Wakefield city centre as the crow flies.",
         districts=[
             ("WF1", "Wakefield city centre, Eastmoor, Outwood, Newton Hill"),
             ("WF2", "Sandal, Newmillerdam, Kettlethorpe, Lupset, Alverthorpe, Wrenthorpe, Walton"),
@@ -135,7 +138,7 @@ TOWNS = [
                    "ResQ Tyres van parked beside a blue Audi with its front wheel off, part-way through a mobile tyre fitting"),
         stat_area=("HG1–HG3 · LS24", "Harrogate &amp; Tadcaster"),
         cover_heading="Harrogate, the villages around it, Tadcaster and York",
-        cover_intro="We come up the A61 and the A658 from Leeds to cover all three Harrogate districts and the Tadcaster side of LS24. You get the same van and tyres as in Leeds, so there's no need to take the car to a garage in town.",
+        cover_intro="We come up the A61 and the A658 from Leeds to cover all three Harrogate districts and the Tadcaster side of LS24. Harrogate is about 14 miles from our base in east Leeds as the crow flies, and Tadcaster about 12. You get the same van and tyres as in Leeds, so there's no need to take the car to a garage in town.",
         districts=[
             ("HG1", "Harrogate town centre, Bilton, Starbeck, New Park, High Harrogate"),
             ("HG2", "Oatlands, Pannal, Harlow Hill, Hornbeam Park, Burn Bridge"),
@@ -269,6 +272,8 @@ def build(town) -> str:
     .cover-grid{{display:grid;gap:26px;align-items:start}}
     @media(min-width:900px){{.cover-grid{{grid-template-columns:1.25fr .75fr}}}}
     .cover-edge{{margin-top:14px;font-size:14px;color:var(--muted)}}
+    .svc-how{{margin-top:10px;font-size:15px;color:var(--muted)}}
+    .help-cta{{justify-content:center;margin-top:6px}}
     .crumbs{{font-size:13px;color:var(--muted);margin-bottom:14px}}
     .crumbs a{{color:inherit;text-decoration:none}} .crumbs a:hover{{text-decoration:underline}}
     .crumbs span{{margin:0 6px;opacity:.6}}
@@ -362,39 +367,14 @@ def build(town) -> str:
     <section class="section" id="help">
       <div class="wrap">
         <div class="section-head reveal">
-          <span class="eyebrow">Two ways we help in {town['short']}</span>
+          <span class="eyebrow">Two ways we help</span>
           <h2>Emergency now, or plan a home fitting</h2>
-          <p>If you're stuck at the roadside, call us. For a planned fitting, send your details and we'll come to your home or work in {town['area_or']}.</p>
+          <p>Stuck at the roadside? Call or WhatsApp and we'll give you a price and a time before we set off. Planning ahead? Send your details and we'll fit the tyres at home or work at a time that suits you. Either way, you pay when the job's done.</p>
         </div>
-        <div class="paths stagger">
-          <article class="path path-emergency">
-            <div class="path-top"><span class="path-badge"><span class="dotpulse" aria-hidden="true"></span> Open 24/7</span><svg class="path-ico" aria-hidden="true"><use href="#i-phone"/></svg></div>
-            <h3>Emergency call-out</h3>
-            <p>Flat tyre or blowout in {name} and need someone now? Don't fill in a form. Call or WhatsApp, tell us where you are, and we'll give you a price and a time before we set off.</p>
-            <ul class="path-list">
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Fastest response by phone</li>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Roadside, home or work, 24 hours a day</li>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Pay on completion, no deposit</li>
-            </ul>
-            <div class="path-cta">
-              <a class="cta-primary pulse" href="tel:{PHONE_TEL}"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call {PHONE_DISPLAY}</a>
-              <a class="cta-whatsapp" href="{WA}" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp</a>
-            </div>
-          </article>
-          <article class="path path-planned">
-            <div class="path-top"><span class="path-badge alt"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg> Booked in</span><svg class="path-ico" aria-hidden="true"><use href="#i-home"/></svg></div>
-            <h3>Planned home tyre fitting</h3>
-            <p>We'll fit your tyres at home or work anywhere in {town['area_and']} at a time that suits you. <b>Tyres are from £40 and mobile fitting from £50 per tyre.</b> Send your details and we'll confirm by phone.</p>
-            <ul class="path-list">
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Same tyres you'd get in a shop, fitted at your door</li>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> We come to your driveway, so you don't sit in a waiting room</li>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Nothing to pay until the job's done</li>
-            </ul>
-            <div class="path-cta">
-              <a class="cta-secondary solid" href="/#enquiry">Plan a home fitting <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-              <a class="cta-secondary" href="/#estimate">Check price range</a>
-            </div>
-          </article>
+        <div class="cta-row help-cta reveal">
+          <a class="cta-primary" href="tel:{PHONE_TEL}"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call {PHONE_DISPLAY}</a>
+          <a class="cta-whatsapp" href="{WA}" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp</a>
+          <a class="cta-secondary solid" href="/#enquiry">Plan a home fitting <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </div>
       </div>
     </section>
@@ -437,7 +417,8 @@ def build(town) -> str:
         <div class="section-head reveal">
           <span class="eyebrow">What we do</span>
           <h2>Mobile tyre fitting across {town['short']}</h2>
-          <p>Brand-new tyres fitted on the spot, wherever you are in {name}. For a flat battery, there's our <a href="/jump-start-leeds">flat battery call-out</a>: jump starts from &pound;50 across the same area.</p>
+          <p>Brand-new tyres fitted on the spot, wherever you are. For a flat battery, there's our <a href="/jump-start-leeds">flat battery call-out</a>: jump starts from &pound;50 across the same area.</p>
+          <p class="svc-how">How it works: call or WhatsApp, we confirm the price and a time, then we come and fit the tyre where the car is. The van carries new tyres and the kit for balancing, valves and locking wheel nuts, so most jobs are done in one visit. <a href="/#how">More on how it works</a>.</p>
         </div>
         <div class="services stagger">
           <article class="svc">
@@ -445,7 +426,7 @@ def build(town) -> str:
             <div class="body">
               <span class="tagline"><svg class="icon" aria-hidden="true"><use href="#i-wheel"/></svg> Flat · Blowout · Puncture</span>
               <h3>Mobile tyre fitting &amp; puncture repair in {name}</h3>
-              <p>Tyre replacement and puncture repair at your home, work or the roadside anywhere in {town['area_and']}. If the tyre can be safely repaired, we repair it; if it can't, we carry new tyres on the van and fit one on the spot.</p>
+              <p>Repaired where it's safe to; if not, a new tyre from the van, fitted on the spot.</p>
             </div>
           </article>
           <article class="svc">
@@ -453,46 +434,9 @@ def build(town) -> str:
             <div class="body">
               <span class="tagline"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg> Home · Work · Roadside</span>
               <h3>Emergency call-out, 24/7</h3>
-              <p>We're on the road 24 hours a day, 7 days a week, across {town['area_and']}. Tell us where you are and we'll let you know when we can be with you.</p>
+              <p>Tell us where you are and we'll say when we can be with you.</p>
             </div>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== How it works ===== -->
-    <section class="section soft" id="how">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <span class="eyebrow">Simple &amp; fast</span>
-          <h2>How it works</h2>
-          <p>It's the same three steps for an emergency or a planned fitting.</p>
-        </div>
-        <div class="steps stagger">
-          <div class="step"><span class="n">1</span><b>Get in touch</b><p>In an emergency, call or WhatsApp. If you're planning ahead, send the home-fitting form with your name, number and tyre size or registration.</p></div>
-          <div class="step"><span class="n">2</span><b>We confirm price &amp; time</b><p>A quick call to confirm the exact price and a slot that works. There's no deposit and nothing to pay online.</p></div>
-          <div class="step"><span class="n">3</span><b>We come &amp; fit it</b><p>At your home, work or the roadside. Pay on completion, by card or cash.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Van band ===== -->
-    <section class="van-band">
-      <div class="wrap">
-        <div class="van-grid">
-          <div class="copy reveal from-left">
-            <span class="eyebrow" style="color:#ff7a90">Fully equipped</span>
-            <h2>Our van is a <span>garage on wheels</span></h2>
-            <p>Everything we need to get you safely back on the road travels with us, so most jobs are sorted in a single visit, right where you are.</p>
-            <ul class="van-feats">
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Brand-new tyres: budget, mid-range &amp; premium</li>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> On-site balancing &amp; valve replacement</li>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Locking wheel-nut removal</li>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Open 24 hours a day, 7 days a week</li>
-            </ul>
-            <a class="cta-primary" href="tel:{PHONE_TEL}"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call {PHONE_DISPLAY}</a>
-          </div>
-          <div class="van-img reveal from-right"><img src="assets/van-760-v3.webp" srcset="assets/van-760-v3.webp 760w, assets/van-1100-v3.webp 1100w" sizes="(max-width:900px) 100vw, 660px" width="1100" height="1375" alt="ResQ Tyres &amp; Recovery Mercedes Sprinter van carrying new tyres and on-site balancing equipment" loading="lazy" decoding="async" data-parallax="0.08"></div>
         </div>
       </div>
     </section>
@@ -507,7 +451,7 @@ def build(town) -> str:
           <span class="big"><span data-count="5.0" data-dec="1">5.0</span> on Google</span>
           <span class="micro" data-nosnippet>Rated 5.0 from 233 Google reviews, checked October 2026</span>
         </div>
-{REVIEWS}        </div>
+        </div>
         <div class="reviews-cta reveal">
           <a class="rev-google" href="https://www.google.com/maps?cid=11412519892778241080" target="_blank" rel="noopener"><span class="gicon">G</span> Read all our reviews on Google</a>
         </div>
