@@ -1,0 +1,4 @@
+Contact: mailto:resqtyresrecovery@gmail.com
+Expires: 2027-10-10T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://www.resqtyres.co.uk/.well-known/security.txt
