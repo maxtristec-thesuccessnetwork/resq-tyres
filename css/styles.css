@@ -355,9 +355,11 @@ textarea{resize:vertical}
 /* Sticky mobile bar */
 .sticky-bar{position:fixed;left:12px;right:12px;bottom:12px;z-index:60;display:none;gap:10px}
 .sticky-bar a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:800;font-size:16px;padding:15px;min-height:50px;border-radius:var(--radius);text-decoration:none;box-shadow:var(--shadow)}
-.sticky-bar .s-call{background:var(--red);color:#fff}
-.sticky-bar .s-wa{background:var(--whatsapp);color:#fff}
+.sticky-bar .s-call{background:var(--red);color:#fff;white-space:nowrap}
+.sticky-bar .s-wa{flex:none;width:56px;padding:15px 0;background:var(--whatsapp);color:#fff}
 .sticky-bar .icon{width:19px;height:19px}
+.sticky-bar .s-wa .icon{width:24px;height:24px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* Animations */
 .pulse{animation:pulse 1.6s infinite}
