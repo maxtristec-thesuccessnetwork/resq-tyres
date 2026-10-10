@@ -1,0 +1,8 @@
+{
+  "google_reviews": {
+    "rating": "5.0",
+    "count": 233,
+    "checked": "October 2026",
+    "_note": "Read from the Google Business Profile. After changing these, run python3 tools/update-review-count.py and rebuild the town pages."
+  }
+}
