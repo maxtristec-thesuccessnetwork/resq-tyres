@@ -52,7 +52,7 @@ CRITICAL_STYLE = slice_between(INDEX, "  <style>/* critical:", "  </style>\n")
 ICON_DEFS = slice_between(INDEX, '  <svg width="0" height="0"', "</defs></svg>\n")
 TOPBAR = slice_between(INDEX, "  <!-- ===== Top utility bar =====", "  <!-- ===== Header =====").rstrip() + "\n"
 FOOTER = slice_between(INDEX, "  <!-- ===== Footer =====", "  </footer>\n")
-STICKY = slice_between(INDEX, "  <!-- Back to top -->", '  </div>\n\n  <script src="js/rates.js"></script>').replace('  <script src="js/rates.js"></script>', "")
+STICKY = slice_between(INDEX, "  <!-- Back to top -->", '  </div>\n\n  <script src="js/rates.js" defer></script>').replace('  <script src="js/rates.js" defer></script>', "")
 REVIEWS = slice_between(INDEX, '        <div class="reviews stagger">', "        </div>\n        <div class=\"reviews-cta reveal\">")
 # footer links are anchors on the home page; make them absolute so they work from a town page.
 # Icon references (#i-...) stay local: each page carries its own inline sprite, and
@@ -69,7 +69,7 @@ TOWNS = [
         h1="Flat tyre in Wakefield? We come to you.",
         rotator=["In Wakefield.", "In Ossett.", "In Castleford.", "In Pontefract.", "Day or night."],
         sub="Mobile tyre fitting across Wakefield (WF1–WF13), 24 hours a day.",
-        hero_img=("assets/hero-resq-600-v2.webp", "assets/hero-resq-900-v2.webp", "600w", "900w", 1000, 1050,
+        hero_img=([("assets/hero-resq-600-v3.webp", 600), ("assets/hero-resq-760-v3.webp", 760), ("assets/hero-resq-900-v3.webp", 900)], 900, 945,
                   "ResQ Tyres mobile tyre fitting van at a roadside job, with a new tyre being fitted on site"),
         stat_area=("WF1–WF13", "Every Wakefield district"),
         cover_heading="WF1–WF13, from Wakefield to Dewsbury",
@@ -116,7 +116,7 @@ TOWNS = [
         h1="Flat tyre in Harrogate or Tadcaster? We come to you.",
         rotator=["In Harrogate.", "In Pannal.", "In Tadcaster.", "On the A61.", "Day or night."],
         sub="Mobile tyre fitting across Harrogate and out to Tadcaster, 24 hours a day.",
-        hero_img=("assets/fitting-420.webp", "assets/fitting-760.webp", "420w", "760w", 760, 1140,
+        hero_img=([("assets/fitting-420.webp", 420), ("assets/fitting-760.webp", 760)], 760, 1140,
                   "Fitter in hi-vis overalls checking the front tyre of a white pickup"),
         stat_area=("HG1–HG3 · LS24", "Harrogate &amp; Tadcaster"),
         cover_heading="Harrogate, the villages around it, Tadcaster and York",
@@ -197,7 +197,9 @@ def build(town) -> str:
     check_first_screen(town)
     slug, name = town["slug"], town["name"]
     url = f"{SITE}/mobile-tyre-fitting-{slug}"
-    src1, src2, w1, w2, iw, ih, alt = town["hero_img"]
+    hero_set, iw, ih, alt = town["hero_img"]
+    src1 = hero_set[0][0]
+    srcset = ", ".join(f"{src} {w}w" for src, w in hero_set)
     rot_words = json.dumps(town["rotator"], ensure_ascii=False)
     topbar = TOPBAR
     if town.get("topbar_area"):
@@ -235,7 +237,7 @@ def build(town) -> str:
   <link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
 {CRITICAL_STYLE}  <link rel="stylesheet" href="css/styles.css" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="css/styles.css"></noscript>
-  <link rel="preload" as="image" href="{src1}" imagesrcset="{src1} {w1}, {src2} {w2}" imagesizes="(max-width:900px) 92vw, 560px" fetchpriority="high">
+  <link rel="preload" as="image" href="{src1}" imagesrcset="{srcset}" imagesizes="(max-width:900px) 92vw, 560px" fetchpriority="high">
   <style>
     /* town-page additions — everything else comes from css/styles.css */
     .districts{{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}}
@@ -306,7 +308,7 @@ def build(town) -> str:
 
           <div class="hero-photo">
             <div class="frame">
-              <img src="{src1}" srcset="{src1} {w1}, {src2} {w2}" sizes="(max-width:900px) 92vw, 560px"
+              <img src="{src1}" srcset="{srcset}" sizes="(max-width:900px) 92vw, 560px"
                  width="{iw}" height="{ih}" alt="{alt}" loading="eager" fetchpriority="high" decoding="async" id="heroImg" data-hero>
               <div class="tag"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><div><b>Pay on completion</b><span>No upfront payment</span></div></div>
             </div>
@@ -531,7 +533,7 @@ def build(town) -> str:
 
 {FOOTER}
 {STICKY}
-  <script src="js/rates.js"></script>
+  <script src="js/rates.js" defer></script>
   <script src="js/app.js" defer></script>
   <script src="js/ui.js" defer></script>
   <script>

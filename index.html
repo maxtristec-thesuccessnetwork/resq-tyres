@@ -254,8 +254,8 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
   <link rel="stylesheet" href="css/styles.css" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="css/styles.css"></noscript>
   <!-- LCP hero: fetched early so it paints without waiting on the parser. -->
-  <link rel="preload" as="image" href="assets/hero-resq-600-v2.webp"
-        imagesrcset="assets/hero-resq-600-v2.webp 600w, assets/hero-resq-900-v2.webp 900w"
+  <link rel="preload" as="image" href="assets/hero-resq-600-v3.webp"
+        imagesrcset="assets/hero-resq-600-v3.webp 600w, assets/hero-resq-760-v3.webp 760w, assets/hero-resq-900-v3.webp 900w"
         imagesizes="(max-width:900px) 92vw, 560px" fetchpriority="high">
 
   <script type="application/ld+json">
@@ -649,10 +649,10 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 
           <div class="hero-photo">
             <div class="frame">
-              <img src="assets/hero-resq-600-v2.webp"
-                 srcset="assets/hero-resq-600-v2.webp 600w, assets/hero-resq-900-v2.webp 900w"
+              <img src="assets/hero-resq-600-v3.webp"
+                 srcset="assets/hero-resq-600-v3.webp 600w, assets/hero-resq-760-v3.webp 760w, assets/hero-resq-900-v3.webp 900w"
                  sizes="(max-width:900px) 92vw, 560px"
-                 width="1000" height="1050"
+                 width="900" height="945"
                  alt="ResQ Tyres mobile tyre fitting van at a roadside job in Leeds, with a new tyre being fitted to a blue Audi"
                  loading="eager" fetchpriority="high" decoding="async" id="heroImg" data-hero>
               <div class="tag"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><div><b>Pay on completion</b><span>No upfront payment</span></div></div>
@@ -1210,7 +1210,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
     <a class="s-wa" href="https://wa.me/447438562633?text=Hi%20ResQ%2C%20I%20need%20a%20tyre%20fitted.%20I%27m%20at%3A%20" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg><span class="vh">WhatsApp</span></a>
   </div>
 
-  <script src="js/rates.js"></script>
+  <script src="js/rates.js" defer></script>
   <script src="js/prices-sheet.js" defer></script>
   <script src="js/app.js" defer></script>
   <script src="js/ui.js" defer></script>
