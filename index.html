@@ -5,13 +5,13 @@
   <script>document.documentElement.className+=" js";</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mobile Tyre Fitting Leeds | Open 24/7 | ResQ Tyres</title>
-  <meta name="description" content="Mobile tyre fitting across Leeds &amp; West Yorkshire, 24/7. Tyres from £40, pay on completion. Call 07438 562633.">
+  <meta name="description" content="Mobile tyre fitting across Leeds, Wakefield &amp; Harrogate, 24/7. Tyres from £40, pay on completion. Call 07438 562633.">
   <meta name="theme-color" content="#e4002b">
   <link rel="canonical" href="https://www.resqtyres.co.uk/">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Mobile Tyre Fitting Leeds | Open 24/7 | ResQ Tyres">
-  <meta property="og:description" content="Mobile tyre fitting across Leeds &amp; West Yorkshire, 24/7. Tyres from £40, pay on completion. Call 07438 562633.">
+  <meta property="og:description" content="Mobile tyre fitting across Leeds, Wakefield &amp; Harrogate, 24/7. Tyres from £40, pay on completion. Call 07438 562633.">
   <meta property="og:url" content="https://www.resqtyres.co.uk/">
   <meta property="og:image" content="https://www.resqtyres.co.uk/assets/van.jpg">
   <meta property="og:locale" content="en_GB">
@@ -194,9 +194,11 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 /* Sticky mobile bar */
 .sticky-bar{position:fixed;left:12px;right:12px;bottom:12px;z-index:60;display:none;gap:10px}
 .sticky-bar a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:800;font-size:16px;padding:15px;min-height:50px;border-radius:var(--radius);text-decoration:none;box-shadow:var(--shadow)}
-.sticky-bar .s-call{background:var(--red);color:#fff}
-.sticky-bar .s-wa{background:var(--whatsapp);color:#fff}
+.sticky-bar .s-call{background:var(--red);color:#fff;white-space:nowrap}
+.sticky-bar .s-wa{flex:none;width:56px;padding:15px 0;background:var(--whatsapp);color:#fff}
 .sticky-bar .icon{width:19px;height:19px}
+.sticky-bar .s-wa .icon{width:24px;height:24px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* Animations */
 .pulse{animation:pulse 1.6s infinite}
@@ -480,7 +482,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
         "name": "Which areas do you cover?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Every Leeds LS district, including LS24 Tadcaster; HG1, HG2 and HG3 around Harrogate; WF1–WF13 across Wakefield, Castleford, Pontefract, Normanton, Featherstone, Hemsworth, Knottingley and Dewsbury; and in York YO1, YO10 and YO24, plus YO8 Selby. If your postcode isn't on that list, call us anyway. We may still be able to reach you."
+          "text": "Every Leeds LS district, including LS24 Tadcaster; HG1, HG2 and HG3 around Harrogate; WF1–WF13 across Wakefield, Castleford, Pontefract, Normanton, Featherstone, Hemsworth, Knottingley and Dewsbury; and in York YO1, YO10 and YO24, plus YO8 Selby. We don't cover Bradford (BD), Huddersfield (HD) or Halifax (HX). If your postcode isn't on that list, call us anyway. We may still be able to reach you."
         }
       },
       {
@@ -488,7 +490,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
         "name": "How much does mobile tyre fitting cost?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "It depends on your tyre size. Tyres start from £40 each for 14 to 17 inch wheels and from £80 for 18 to 20 inch; the price guide on this page gives the range for your size. Mobile fitting is from £50 per tyre on top, depending on where you are. There's no separate call-out fee. We confirm the exact price with you by phone before any work starts. Booking a planned fitting for all four tyres? You get 30% off the set, subject to availability."
+          "text": "It depends on your tyre size. Tyres start from £40 each for 14 to 17 inch wheels and from £80 for 18 to 20 inch; the price guide on this page gives the range for your size. Mobile fitting is from £50 per tyre on top, depending on where you are. There's no separate call-out fee. We confirm the exact price with you by phone before any work starts. Booking a planned fitting for all four tyres? You get 30% off the total price, subject to availability."
         }
       },
       {
@@ -570,7 +572,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
   <!-- ===== Top utility bar ===== -->
   <div class="topbar">
     <div class="wrap">
-      <span class="tb-left"><span class="dotpulse" aria-hidden="true"></span> <span data-open-status>Open 24/7</span> · Emergency call-outs across West Yorkshire</span>
+      <span class="tb-left"><span class="dotpulse" aria-hidden="true"></span> <span data-open-status>Open 24/7</span> · Emergency call-outs across Leeds, Wakefield &amp; Harrogate</span>
       <span class="tb-right">
         <a href="tel:07438562633"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> 07438 562633</a>
         <a href="https://wa.me/447438562633?text=Hi%20ResQ%2C%20I%20need%20a%20tyre%20fitted.%20I%27m%20at%3A%20" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp</a>
@@ -612,9 +614,9 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
             <h1>Flat tyre in Leeds? We come to you.</h1>
             <p class="hero-rating" data-nosnippet><span class="stars" aria-hidden="true">★</span> 5.0 on Google · 230+ reviews</p>
             <div class="rotator" id="rotator" aria-hidden="true">At home.</div>
-            <p class="hero-sub">Mobile tyre fitting at home, work or the roadside across Leeds and West Yorkshire, 24 hours a day. <b>Tyres from £40, fitting from £50: one tyre fitted from £90.</b> Price agreed on the phone before we set off.</p>
+            <p class="hero-sub">Mobile tyre fitting at home, work or the roadside across Leeds and Wakefield, 24 hours a day. <b>Tyres from £40, fitting from £50: one tyre fitted from £90.</b> Price agreed on the phone before we set off.</p>
             <div class="cta-row">
-              <a class="cta-primary pulse" href="tel:07438562633"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Emergency — call now</a>
+              <a class="cta-primary pulse" href="tel:07438562633"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call 07438 562633</a>
               <a class="cta-whatsapp" href="https://wa.me/447438562633?text=Hi%20ResQ%2C%20I%20need%20a%20tyre%20fitted.%20I%27m%20at%3A%20" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp</a>
               <a class="cta-secondary" href="#enquiry">Plan a home fitting <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             </div>
@@ -641,7 +643,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
         <div class="wrap stagger">
           <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><div><b>24<small class="of">/7</small></b><span>Day or night</span></div></div>
           <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg><div><b><span data-count="5.0" data-dec="1">5.0</span><small class="of"> / 5</small></b><span>Google rating</span></div></div>
-          <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><div><b>West Yorkshire</b><span>Leeds &amp; surrounding areas</span></div></div>
+          <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><div><b>LS · WF · HG</b><span>Leeds, Wakefield &amp; Harrogate</span></div></div>
           <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-card"/></svg><div><b>Pay on completion</b><span>Card or cash</span></div></div>
         </div>
       </div>
@@ -850,7 +852,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
             <div class="body">
               <span class="tagline"><svg class="icon" aria-hidden="true"><use href="#i-wheel"/></svg> Flat · Blowout · Puncture</span>
               <h3>Mobile tyre fitting &amp; puncture repair</h3>
-              <p>We do mobile tyre replacement and puncture repair at home, at work or at the roadside, across Leeds and West Yorkshire. If the tyre can be safely repaired, we repair it. If it can't, we carry new tyres on the van and fit one on the spot.</p>
+              <p>We do mobile tyre replacement and puncture repair at home, at work or at the roadside, across Leeds, Wakefield and Harrogate. If the tyre can be safely repaired, we repair it. If it can't, we carry new tyres on the van and fit one on the spot.</p>
             </div>
           </article>
           <article class="svc">
@@ -862,7 +864,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
             <div class="body">
               <span class="tagline"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg> Home · Work · Roadside</span>
               <h3>Emergency call-out, 24/7</h3>
-              <p>We're on the road 24 hours a day, 7 days a week, across West Yorkshire. Call and we'll tell you when we can be with you. On average we're with you in about 40 minutes.</p>
+              <p>We're on the road 24 hours a day, 7 days a week, including bank holidays, across Leeds, Wakefield and Harrogate. Call and we'll tell you when we can be with you. On average we're with you in about 40 minutes.</p>
             </div>
           </article>
           <article class="svc">
@@ -928,8 +930,8 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
         <div class="ot">
           <div class="badge30">30%<small>OFF</small></div>
           <div>
-            <h3>Booking all four tyres? 30% off the set</h3>
-            <p>Book a planned fitting for all four tyres and you get 30% off the set, subject to availability. Ask when you enquire or call, and we'll confirm the price with you.</p>
+            <h3>Booking all four tyres? 30% off the total price</h3>
+            <p>Book a planned fitting for all four tyres and you get 30% off the total price, subject to availability. Ask when you enquire or call, and we'll confirm the price with you.</p>
           </div>
         </div>
         <a class="btn-book" href="#enquiry">Enquire about this offer <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
@@ -941,7 +943,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
       <div class="wrap">
         <div class="rev-head reveal">
           <h2 class="sr-only" data-nosnippet>Customer reviews: rated 5.0 on Google from more than 230 reviews</h2>
-          <span class="eyebrow">Trusted across West Yorkshire</span>
+          <span class="eyebrow">Trusted by local drivers</span>
           <span class="stars" style="font-size:22px">★★★★★</span>
           <span class="big"><span data-count="5.0" data-dec="1">5.0</span> on Google</span>
           <span class="micro" data-nosnippet>From <span data-count="230" data-suffix="+" data-nosnippet>230+</span> Google reviews</span>
@@ -975,8 +977,8 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
       <div class="wrap">
         <div class="section-head reveal">
           <span class="eyebrow">Where we cover</span>
-          <h2>Mobile fitting across Leeds, West Yorkshire, Harrogate &amp; York</h2>
-          <p>We come to you right across Leeds and West Yorkshire, up to Harrogate, out to Tadcaster and into York and Selby. More on <a href="/mobile-tyre-fitting-wakefield">mobile tyre fitting in Wakefield</a> and <a href="/mobile-tyre-fitting-harrogate">mobile tyre fitting in Harrogate &amp; Tadcaster</a>. Not sure if you're in range? Pop your postcode in below.</p>
+          <h2>Mobile fitting across Leeds, Wakefield, Harrogate &amp; York</h2>
+          <p>We come to you right across Leeds and Wakefield, up to Harrogate, out to Tadcaster and into York and Selby. We don't cover Bradford, Huddersfield or Halifax. More on <a href="/mobile-tyre-fitting-wakefield">mobile tyre fitting in Wakefield</a> and <a href="/mobile-tyre-fitting-harrogate">mobile tyre fitting in Harrogate &amp; Tadcaster</a>. Not sure if you're in range? Pop your postcode in below.</p>
         </div>
 
         <div class="areas-grid reveal">
@@ -1035,11 +1037,11 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
           </div>
           <div class="faq-item">
             <h3>Which areas do you cover?</h3>
-            <p>Every Leeds <b>LS</b> district, including <b>LS24</b> Tadcaster; <b>HG1</b>, <b>HG2</b> and <b>HG3</b> around Harrogate; <b>WF1&ndash;WF13</b> across Wakefield, Castleford, Pontefract, Normanton, Featherstone, Hemsworth, Knottingley and Dewsbury; and in York <b>YO1</b> (city centre), <b>YO10</b> (Fulford, Heslington) and <b>YO24</b> (Acomb, Dringhouses), plus <b>YO8</b> Selby. If your postcode isn't on that list, call us anyway. We may still be able to reach you.</p>
+            <p>Every Leeds <b>LS</b> district, including <b>LS24</b> Tadcaster; <b>HG1</b>, <b>HG2</b> and <b>HG3</b> around Harrogate; <b>WF1&ndash;WF13</b> across Wakefield, Castleford, Pontefract, Normanton, Featherstone, Hemsworth, Knottingley and Dewsbury; and in York <b>YO1</b> (city centre), <b>YO10</b> (Fulford, Heslington) and <b>YO24</b> (Acomb, Dringhouses), plus <b>YO8</b> Selby. We don't cover Bradford (BD), Huddersfield (HD) or Halifax (HX). If your postcode isn't on that list, call us anyway. We may still be able to reach you.</p>
           </div>
           <div class="faq-item">
             <h3>How much does mobile tyre fitting cost?</h3>
-            <p>It depends on your tyre size. Tyres start from <b>&pound;40</b> each for 14–17" wheels and from <b>&pound;80</b> for 18–20"; the <a href="#estimate">price guide</a> gives the range for your size. Mobile fitting is <b>from &pound;50 per tyre</b> on top, depending on where you are. There's no separate call-out fee. We confirm the exact price with you by phone before any work starts. Booking a planned fitting for all four tyres? You get 30% off the set, subject to availability.</p>
+            <p>It depends on your tyre size. Tyres start from <b>&pound;40</b> each for 14–17" wheels and from <b>&pound;80</b> for 18–20"; the <a href="#estimate">price guide</a> gives the range for your size. Mobile fitting is <b>from &pound;50 per tyre</b> on top, depending on where you are. There's no separate call-out fee. We confirm the exact price with you by phone before any work starts. Booking a planned fitting for all four tyres? You get 30% off the total price, subject to availability.</p>
           </div>
           <div class="faq-item">
             <h3>Do I pay a deposit or pay online?</h3>
@@ -1126,7 +1128,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
       <div class="foot-grid">
         <div>
           <div class="foot-brand"><img src="assets/logo-128.webp" alt="" width="52" height="52" loading="lazy" decoding="async"><b>ResQ Tyres &amp; Recovery</b></div>
-          <p>Mobile tyre fitting across Leeds &amp; West Yorkshire, 24 hours a day, 7 days a week. Established 2023.</p>
+          <p>Mobile tyre fitting across Leeds, Wakefield &amp; Harrogate, 24 hours a day, 7 days a week. Established 2023.</p>
         </div>
         <div>
           <h3>Contact</h3>
@@ -1143,7 +1145,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
             <li><a href="#services"><svg class="icon" aria-hidden="true"><use href="#i-wheel"/></svg> Mobile tyre fitting in Leeds</a></li>
             <li><a href="#help"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> Emergency call-out</a></li>
             <li><a href="#estimate"><svg class="icon" aria-hidden="true"><use href="#i-card"/></svg> Mobile tyre fitting prices</a></li>
-            <li><a href="#areas"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Areas we cover in West Yorkshire</a></li>
+            <li><a href="#areas"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Areas we cover</a></li>
             <li><a href="/mobile-tyre-fitting-wakefield"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Mobile tyre fitting in Wakefield</a></li>
             <li><a href="/mobile-tyre-fitting-harrogate"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Mobile tyre fitting in Harrogate &amp; Tadcaster</a></li>
             <li><a href="/jump-start-leeds"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg> Jump start in Leeds from &pound;50</a></li>
@@ -1168,8 +1170,8 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 
   <!-- Sticky mobile bar -->
   <div class="sticky-bar">
-    <a class="s-call" href="tel:07438562633"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call now</a>
-    <a class="s-wa" href="https://wa.me/447438562633?text=Hi%20ResQ%2C%20I%20need%20a%20tyre%20fitted.%20I%27m%20at%3A%20" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp</a>
+    <a class="s-call" href="tel:07438562633"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call 07438 562633</a>
+    <a class="s-wa" href="https://wa.me/447438562633?text=Hi%20ResQ%2C%20I%20need%20a%20tyre%20fitted.%20I%27m%20at%3A%20" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg><span class="vh">WhatsApp</span></a>
   </div>
 
   <script src="js/rates.js"></script>

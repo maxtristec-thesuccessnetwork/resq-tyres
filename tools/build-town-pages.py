@@ -11,7 +11,7 @@ Design rules (so the pages stay honest and stay on-brand):
   * Prices are per tyre — from £40 (14–17") / from £80 (18–20") — with mobile fitting from £50 per tyre
     on top. The exact range per size lives on the home page's price guide; these pages link to it.
     The hero shows both parts and the total (PRICE_LINE). Never a single all-in price.
-    Puncture repair £70–£120 and "30% off the set" for a planned fitting of all four tyres are repeated as published on the home page.
+    Puncture repair £70–£120 and "30% off the total price" for a planned fitting of all four tyres are repeated as published on the home page.
   * Every district listed is in js/rates.js RESQ_COVERAGE.districts — the checker on the
     page uses the same list, so the page can never claim more than the checker allows.
   * First phone screen (5 Oct 2026): the call button, the Google rating and the price line must
@@ -102,7 +102,7 @@ TOWNS = [
             ("Where in Wakefield can you fit a tyre?",
              f"Wherever the car is: your driveway in Sandal or Outwood, a work car park, or the hard shoulder. We also cover {'the M1 around junctions 39–41, the M62 around Wakefield, the A61 into Leeds'}, and the retail and station car parks in the city centre."),
             ("How much is mobile tyre fitting in Wakefield?",
-             "Tyres are from &pound;40 each for 14–17\" wheels and from &pound;80 for 18–20\", and mobile fitting is from &pound;50 per tyre on top, depending on where in Wakefield you are. There's no separate call-out fee. Use the <a href=\"/#estimate\">price guide</a> for your size. We confirm the exact price by phone before any work starts. Booking a planned fitting for all four tyres? You get 30% off the set, subject to availability."),
+             "Tyres are from &pound;40 each for 14–17\" wheels and from &pound;80 for 18–20\", and mobile fitting is from &pound;50 per tyre on top, depending on where in Wakefield you are. There's no separate call-out fee. Use the <a href=\"/#estimate\">price guide</a> for your size. We confirm the exact price by phone before any work starts. Booking a planned fitting for all four tyres? You get 30% off the total price, subject to availability."),
             ("Do I pay a deposit?",
              "No. Nothing to pay online and no deposit. You pay on completion, by card or cash."),
         ],
@@ -143,7 +143,7 @@ TOWNS = [
             ("Where can you fit the tyre?",
              "Wherever the vehicle is: a driveway in Pannal, a work car park at Hornbeam Park, the Stray, or a lay-by on the A61. The van carries brand-new tyres and the kit for on-site balancing and valve replacement, so most jobs are finished in one visit."),
             ("How much is mobile tyre fitting in Harrogate?",
-             "Tyres are from &pound;40 each for 14–17\" wheels and from &pound;80 for 18–20\". Mobile fitting is from &pound;50 per tyre on top, depending on where you are. It's a longer drive to Harrogate and Tadcaster than around Leeds, so we'll always tell you the fitting price before we set off. There's no separate call-out fee. Use the <a href=\"/#estimate\">price guide</a> for your size. Booking a planned fitting for all four tyres? You get 30% off the set, subject to availability."),
+             "Tyres are from &pound;40 each for 14–17\" wheels and from &pound;80 for 18–20\". Mobile fitting is from &pound;50 per tyre on top, depending on where you are. It's a longer drive to Harrogate and Tadcaster than around Leeds, so we'll always tell you the fitting price before we set off. There's no separate call-out fee. Use the <a href=\"/#estimate\">price guide</a> for your size. Booking a planned fitting for all four tyres? You get 30% off the total price, subject to availability."),
             ("Do I pay a deposit?",
              "No. Nothing to pay online and no deposit. You pay on completion, by card or cash."),
         ],
@@ -201,8 +201,8 @@ def build(town) -> str:
     rot_words = json.dumps(town["rotator"], ensure_ascii=False)
     topbar = TOPBAR
     if town.get("topbar_area"):
-        assert "Emergency call-outs across West Yorkshire" in TOPBAR, "home page top bar wording changed"
-        topbar = TOPBAR.replace("Emergency call-outs across West Yorkshire", f"Emergency call-outs across {town['topbar_area']}")
+        assert "Emergency call-outs across Leeds, Wakefield &amp; Harrogate" in TOPBAR, "home page top bar wording changed"
+        topbar = TOPBAR.replace("Emergency call-outs across Leeds, Wakefield &amp; Harrogate", f"Emergency call-outs across {town['topbar_area']}")
     districts = "\n".join(
         f'            <li class="district"><b>{code}</b><span>{places}</span></li>' for code, places in town["districts"])
     faqs = "\n".join(
@@ -297,7 +297,7 @@ def build(town) -> str:
             <div class="rotator" id="rotator" aria-hidden="true" data-words='{rot_words}'>{town['rotator'][0]}</div>
             <p class="hero-sub">{town['sub']} {PRICE_LINE}</p>
             <div class="cta-row">
-              <a class="cta-primary pulse" href="tel:{PHONE_TEL}"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Emergency — call now</a>
+              <a class="cta-primary pulse" href="tel:{PHONE_TEL}"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call {PHONE_DISPLAY}</a>
               <a class="cta-whatsapp" href="{WA}" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp</a>
               <a class="cta-secondary" href="/#enquiry">Plan a home fitting <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             </div>
@@ -482,7 +482,7 @@ def build(town) -> str:
       <div class="wrap">
         <div class="rev-head reveal">
           <h2 class="sr-only" data-nosnippet>Customer reviews: rated 5.0 on Google from more than 230 reviews</h2>
-          <span class="eyebrow">Trusted across West Yorkshire</span>
+          <span class="eyebrow">Trusted by local drivers</span>
           <span class="stars" style="font-size:22px">★★★★★</span>
           <span class="big"><span data-count="5.0" data-dec="1">5.0</span> on Google</span>
           <span class="micro" data-nosnippet>From <span data-count="230" data-suffix="+" data-nosnippet>230+</span> Google reviews</span>
