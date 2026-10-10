@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ResQ Tyres — build the static coverage map (assets/coverage-map.svg).
+ResQ Tyres — build the static coverage map (assets/coverage-map-v2.svg).
 
 Why this exists
 ---------------
@@ -13,8 +13,8 @@ drop the third-party tile dependency altogether.
 What the map claims
 -------------------
 Nothing this file invents. The coverage picture is drawn from the postcode
-districts the business covers — all LS, HG1-HG3
-and WF1-WF13 — with each district's real centroid from
+districts the business covers — all LS, HG1-HG3,
+WF1-WF13, YO1, YO10, YO24 and YO8 — with each district's real centroid from
 postcodes.io. There is deliberately NO hard boundary line: an edge would be a
 claim about places nobody has confirmed, and the old 17 km circle was drawing
 one that wrongly swallowed Bradford. Instead each confirmed district is a dot,
@@ -24,17 +24,17 @@ checker beside the map is the exact answer; the map is the shape of the patch.
 Motorway centrelines come from OpenStreetMap (ODbL) — attribution is rendered
 bottom-right of the SVG and must stay there.
 
-The SVG is referenced from index.html as <img src="assets/coverage-map.svg" loading="lazy">,
+The SVG is referenced from index.html as <img src="assets/coverage-map-v2.svg" loading="lazy">,
 NOT inlined. Inlining it cost 27 KB in the HTML and measurably delayed the hero:
 Lighthouse mobile, three runs each, identical local serving — inline scored 58 with
 LCP 7.0 s, external+lazy scored 74 with LCP 4.8 s. It therefore carries its own
 <style> block, because an <img> gets none of the page's CSS.
 
-Usage:  python3 tools/build-coverage-map.py > assets/coverage-map.svg
+Usage:  python3 tools/build-coverage-map.py > assets/coverage-map-v2.svg
             re-fetches roads from Overpass (mirrors are often busy; it tries three)
-        python3 tools/build-coverage-map.py --cached > assets/coverage-map.svg
+        python3 tools/build-coverage-map.py --cached > assets/coverage-map-v2.svg
             uses tools/osm-motorways.json.gz, the trimmed extract committed beside
-            this script, so the build is reproducible with no network at all
+            this script (a fetch rewrites it), so the build is reproducible with no network at all
 
 District centroids live in tools/outcodes.json (postcodes.io, read 2026-09-02).
 To change coverage, change client.yaml and this file together — never one alone.
@@ -44,7 +44,7 @@ import gzip, json, math, os, sys, urllib.parse, urllib.request
 W, H = 620, 560
 PAD_KM = 3.5
 BUFFER_KM = 6.5            # soft glow radius around each district centroid
-BBOX = "53.55,-2.05,54.15,-1.15"
+BBOX = "53.55,-2.05,54.15,-0.85"
 MAJOR = ['M62', 'M1', 'A1(M)', 'M621', 'A58(M)', 'A64(M)']
 ENDPOINTS = ["https://overpass.private.coffee/api/interpreter",
              "https://overpass-api.de/api/interpreter",
@@ -64,6 +64,8 @@ TOWNS = [
     (53.6919, -1.3128, "Pontefract", False),
     (53.9928, -1.5418, "Harrogate", False),
     (53.8845, -1.2620, "Tadcaster", False),
+    (53.9590, -1.0815, "York", False),
+    (53.7836, -1.0672, "Selby", False),
 ]
 PLACE = {   # label offset from the pin: dx, dy, text-anchor
     "Leeds": (0, -19, "middle"),      "Pudsey": (-11, 4, "end"),
@@ -71,6 +73,7 @@ PLACE = {   # label offset from the pin: dx, dy, text-anchor
     "Castleford": (0, -16, "middle"), "Dewsbury": (0, 21, "middle"),
     "Wakefield": (0, 21, "middle"),   "Pontefract": (0, 21, "middle"),
     "Harrogate": (0, -16, "middle"),  "Tadcaster": (0, -16, "middle"),
+    "York": (0, -16, "middle"),       "Selby": (0, 21, "middle"),
 }
 BADGE_ANCHORS = {   # nearest point on that road to this anchor, then nudged
     'M62w': ('M62', (53.7000, -1.8200), 26, -13),
@@ -147,7 +150,7 @@ def fetch_motorways():
     last = None
     for url in ENDPOINTS:
         try:
-            with urllib.request.urlopen(urllib.request.Request(url, data=body), timeout=150) as r:
+            with urllib.request.urlopen(urllib.request.Request(url, data=body, headers={"User-Agent": "resq-tyres coverage map build (static site)"}), timeout=150) as r:
                 return json.loads(r.read())
         except Exception as e:          # Overpass mirrors are frequently busy
             last = e
@@ -161,6 +164,11 @@ def main():
             data = json.load(fh)
     else:
         data = fetch_motorways()
+        # Keep the committed extract in step, trimmed to the roads drawn, so --cached rebuilds this map offline.
+        keep = {"elements": [{"tags": {"ref": e["tags"]["ref"]}, "geometry": e["geometry"]} for e in data["elements"]
+                             if e.get("tags", {}).get("ref") in MAJOR and "geometry" in e]}
+        with gzip.open(os.path.join(HERE, "osm-motorways.json.gz"), "wt") as fh:
+            json.dump(keep, fh, separators=(",", ":"))
 
     segs = {}
     for e in data['elements']:
@@ -195,10 +203,9 @@ def main():
     a('<title id="covmap-t">Where ResQ Tyres covers</title>')
     a('<desc id="covmap-d">Map of the ResQ Tyres coverage area. Every confirmed postcode district is '
       'marked: all Leeds LS districts including LS24 Tadcaster, HG1 to HG3 around Harrogate, and WF1 to '
-      'WF13 across Wakefield, Castleford, Pontefract and Dewsbury. Leeds, '
-      'Pudsey, Morley, Dewsbury, Wakefield, Castleford, Garforth, Pontefract, Harrogate and Tadcaster '
-      'are named, with the M1, M62, M621 and A1(M) running through. York (YO1, YO10 and YO24) '
-      'and Selby (YO8) are covered too but lie east of the area shown.</desc>')
+      'WF13 across Wakefield, Castleford, Pontefract and Dewsbury, YO1, YO10 and YO24 in York, and YO8 Selby. Leeds, '
+      'Pudsey, Morley, Dewsbury, Wakefield, Castleford, Garforth, Pontefract, Harrogate, Tadcaster, York and Selby '
+      'are named, with the M1, M62, M621 and A1(M) running through.</desc>')
 
     # The SVG is loaded as <img>, so it gets none of the page's CSS and must
     # carry its own. Keep these in step with the .cov-map block in css/styles.css.
