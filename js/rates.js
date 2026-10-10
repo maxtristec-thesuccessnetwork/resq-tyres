@@ -18,9 +18,22 @@
 
 const RESQ_RATES = {
 
-  /* Rim bands, keyed by rim ("14", "16C"). Filled from the sheet's
-     "Backup NN inch" rows. Empty here — the sheet is the source of truth. */
-  bands: {},
+  /* Rim bands, keyed by rim ("14", "16C"), per tyre. The live sheet's
+     "Backup NN inch" rows replace these on every page load; this copy is
+     only used if the sheet can't be reached, so the guide still gives the
+     headline ranges. The plain price table on the home page is built from
+     the same values: after changing them, run tools/build-price-table.py. */
+  bands: {
+    "14": { low: 40, high: 100 }, "15": { low: 40, high: 100 },
+    "16": { low: 40, high: 100 }, "17": { low: 40, high: 100 },
+    "18": { low: 80, high: 150 }, "19": { low: 80, high: 150 },
+    "20": { low: 80, high: 150 }
+  },
+
+  /* Other published prices, used by the plain price table only. */
+  punctureRepair: { low: 70, high: 120 },
+  jumpStartFrom: 50,
+  checked: "October 2026",
 
   /* Mobile fitting, on top of the tyre price (from £50, depending on
      location). A "Mobile fitting" row in the sheet overrides this. */

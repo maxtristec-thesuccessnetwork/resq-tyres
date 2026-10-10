@@ -190,6 +190,18 @@
         {
           "key": "X-Frame-Options",
           "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://www.resqtyres.co.uk"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Content-Security-Policy-Report-Only",
+          "value": "default-src 'self'; script-src 'self' 'sha256-Lah+5g5CSOu7tIorjVrXdBXmPThpUNkhW2AmQo3Mgkk=' 'sha256-Uo0qWPbCBfjFx3oSN+m8az9zh+/E7i3KmYGfcFwPe7I=' 'sha256-io0cuIvhqrXcaeXzF6PK10WK/lcPaUPDeFwbgw5HnmQ=' 'sha256-tHd4qJ0R/vQfI0CbRTiL3XGSi+Tun7VhOcDbx08aLKA=' 'unsafe-hashes' 'sha256-p5PnWJvMOnsZyLjxblLBMDwBfOASHA7CQcLYb5mwepY=' https://www.googletagmanager.com https://www.gstatic.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google.com https://www.google.co.uk https://www.googletagmanager.com https://*.google-analytics.com https://*.doubleclick.net https://googleads.g.doubleclick.net; font-src 'self'; connect-src 'self' https://docs.google.com https://api.web3forms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://*.doubleclick.net https://googleads.g.doubleclick.net https://www.google.com https://www.google.co.uk https://www.googleadservices.com; frame-src https://www.googletagmanager.com https://td.doubleclick.net https://*.doubleclick.net; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://api.web3forms.com; object-src 'none'"
         }
       ]
     }
