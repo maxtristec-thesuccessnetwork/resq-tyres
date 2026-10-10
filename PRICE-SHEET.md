@@ -6,37 +6,22 @@ Sheet: **ResQ Tyres — Website Prices**
 The sheet is the only place prices live. Nothing is hard-coded in the site
 and nothing needs redeploying — edit the sheet, refresh the page, done.
 
-## The one rule
+## How a size gets its price
 
-A size shows a **price** only if that row has **both** `From £` and `To £`
-filled in. Every other size still appears in the dropdowns, but the customer
-is told to call instead.
+1. **Exact row.** A size row with **both** `From £` and `To £` filled in is quoted exactly.
+2. **Rim band.** Otherwise a car size is quoted from its rim's band: the `Backup 14 inch` …
+   `Backup 20 inch` rows near the bottom of the sheet. A van/commercial size (`16C`) only
+   uses a band if a `Backup 16C inch` row exists; it never borrows the car band.
+3. **No price.** No exact row and no band: the customer sees "We'll price this one for you"
+   and a call button.
 
 | Row in the sheet | What the customer sees |
 |---|---|
-| `205 · 55 · 16 · 65 · 120` | **£65 – £120** per tyre, fitted |
-| `205 · 55 · 16 · (blank) · (blank)` | "We'll price this one for you" + call button |
+| `205 · 55 · 16 · 65 · 120` | **£65 – £120** per tyre |
+| `205 · 55 · 16 · (blank) · (blank)` | the 16" band, if there is one, else "We'll price this one for you" |
 | size not in the sheet at all | can't be selected |
 
-So there are two separate switches:
-
-1. **Adding a size row** makes that size selectable in the dropdowns.
-2. **Filling in its two price columns** turns the price on.
-
-Adding a row without prices is still worth doing — it means a customer with
-that tyre can find their size and gets pushed to the phone rather than
-bouncing off the site.
-
-## What was removed (July 2026)
-
-The sheet used to have a block of `Backup 14 inch … Backup 20 inch` rows.
-Those were a catch-all: any size without its own price was quoted using the
-band for its rim diameter. That meant the site was putting a price on tyres
-nobody had ever priced — and with every band set to £45–£70, a 14" Corsa
-tyre and a 20" Range Rover tyre came out identical.
-
-**That is gone.** The site no longer estimates, bands or interpolates a
-price under any circumstances. Those rows are ignored and can be deleted.
+Adding a size row makes that size selectable in the dropdowns, even before it has a price.
 
 ## The dropdowns
 
@@ -49,14 +34,22 @@ as `16C`, priced separately from a car's 16". They are different tyres.
 
 ## Notes
 
-- Prices are per tyre, mobile fitting included.
+- Prices are **per tyre**. Mobile fitting is charged on top: from £50 per tyre (a `Mobile fitting`
+  row in the sheet overrides the default).
 - If `From` and `To` are entered the wrong way round, the site sorts them.
 - `0` in a price column counts as **not priced**, not as free.
-- `Locking Wheel Nut Removal` sets the add-on shown when a customer says
-  they've no key.
-- If the sheet is ever unreachable, the site falls back to the size list
-  bundled in `js/rates.js` and quotes nothing — it never invents a number.
-- Enquiry emails for an unpriced size are flagged
-  `NOT PRICED IN SHEET — quote this one manually` so nothing slips through.
-- Open the browser console on the live site to confirm what loaded:
-  `ResQ prices: 132 sizes listed, 7 with a price.`
+- `Locking Wheel Nut Removal` sets the add-on shown when a customer says they've no key.
+- If the sheet is ever unreachable, the site falls back to the sizes and rim bands bundled in
+  `js/rates.js`, so the guide still shows the headline ranges.
+- Enquiry emails for an unpriced size are flagged `NOT PRICED IN SHEET — quote this one manually`
+  so nothing slips through.
+
+## The plain price table (home page)
+
+Crawlers and AI tools don't run the price guide, so the home page also carries a plain HTML
+"Prices at a glance" table. It is built from `js/rates.js` by `tools/build-price-table.py`, and
+`llms.txt` carries the same bands. **Whenever the bands, fitting or locking-nut prices in the
+sheet change:** update `js/rates.js` (and its `checked` month), run
+`python3 tools/build-price-table.py`, and check `llms.txt`.
+`python3 tools/build-price-table.py --sheet` compares `js/rates.js` with the live sheet and
+exits 1 if they differ; run it monthly.
