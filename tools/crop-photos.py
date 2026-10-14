@@ -23,7 +23,8 @@ photo on a page (the largest contentful paint).
     (4:5, the photo's own shape), the square home service card, and the 1200x630 share image.
   * roadside-fit: the Harrogate hero (4/4.2) and the square service cards.
   * wheelchange: the /emergency proof photo, shown full width at up to 280px
-    tall (about 4:3 on a phone), and the square service cards.
+    tall (about 4:3 on a phone), the square service cards, and the Wakefield
+    hero (4/4.2), so Wakefield no longer reuses the home page's hero photo.
 
 Files under /assets are served immutable for a year, so a new cut always gets a
 new file name.
@@ -50,7 +51,8 @@ CROPS = {
     "roadside-fit.jpg": [(4 / 4.2, 0.50, [420, 760], "roadside-fit-hero-{w}.webp"),
                          (1, 0.50, [420, 760], "roadside-fit-{w}-v3.webp")],
     "wheelchange.jpg":  [(4 / 3, 0.50, [420, 760], "wheelchange-4x3-{w}-v2.webp"),
-                         (1, 0.50, [420, 760], "wheelchange-{w}-v3.webp")],
+                         (1, 0.50, [420, 760], "wheelchange-{w}-v3.webp"),
+                         (4 / 4.2, 0.50, [420, 760], "wheelchange-hero-{w}.webp")],
 }
 
 
