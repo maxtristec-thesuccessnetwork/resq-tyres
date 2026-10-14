@@ -262,7 +262,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
   </style>
   <link rel="stylesheet" href="css/styles.css" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="css/styles.css"></noscript>
-  <link rel="preload" as="image" href="assets/hero-resq-600-v4.webp" imagesrcset="assets/hero-resq-600-v4.webp 600w, assets/hero-resq-760-v4.webp 760w, assets/hero-resq-900-v4.webp 900w" imagesizes="(max-width:900px) 92vw, 560px" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/wheelchange-hero-420.webp" imagesrcset="assets/wheelchange-hero-420.webp 420w, assets/wheelchange-hero-760.webp 760w" imagesizes="(max-width:900px) 92vw, 560px" fetchpriority="high">
   <style>
     /* town-page additions — everything else comes from css/styles.css */
     .districts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
@@ -278,6 +278,8 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
     .crumbs a{color:inherit;text-decoration:none} .crumbs a:hover{text-decoration:underline}
     .crumbs span{margin:0 6px;opacity:.6}
     @media(max-width:760px){.crumbs{display:none}} /* phones: the call button comes first */
+    .local-job{margin:16px 0 0} .local-job img{width:100%;height:auto;border-radius:var(--radius)}
+    .local-job figcaption{font-size:13px;color:var(--muted);margin-top:6px}
     .landmarks{margin-top:14px;padding:14px 16px;border-left:3px solid var(--red);background:#fff;border-radius:0 var(--radius) var(--radius) 0;font-size:15px}
   </style>
 
@@ -405,15 +407,15 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
       "name": "How much is mobile tyre fitting in Wakefield?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "One tyre fitted in Wakefield costs from £90 (tyre from £40 plus mobile fitting from £50). Tyres are £40–£100 each for 14–17\" wheels and £80–£150 for 18–20\", depending on the brand, and mobile fitting is from £50 per tyre, depending on where in Wakefield you are. There's no separate call-out fee, and the price is the same day or night. Use the price guide for your size. ResQ confirms the exact price by phone before any work starts. Booking a planned fitting for all four tyres? You get 30% off the total price, subject to availability."
+        "text": "From £90 for one tyre, fitted: the tyre from £40 and mobile fitting from £50. A 14–17\" tyre is £40–£100 and an 18–20\" one £80–£150, depending on the brand. The fitting part depends on how far into WF1–WF13 we're driving. You get the exact figure on the phone before we leave, it's the same at 3am as at 3pm, and there's no call-out fee on top. A planned fitting of all four tyres is 30% off the total, subject to availability. No deposit: pay by card or cash once the car's back on the road. Your size is in the price guide."
       }
     },
     {
       "@type": "Question",
-      "name": "Do I pay ResQ a deposit?",
+      "name": "Do you go to Barnsley, Huddersfield or Mirfield?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. ResQ takes no deposit and there's nothing to pay online. You pay when the job's done in Wakefield, by card or cash."
+        "text": "They're outside our confirmed area: Barnsley is S postcodes, Huddersfield is HD, and Mirfield and Heckmondwike are WF14 and above. Call us anyway and tell us where you are. We may still be able to reach you, and if we can't, we'll say so straight away."
       }
     }
   ]
@@ -497,7 +499,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
         <span class="logo-text">ResQ Tyres<small>&amp; RECOVERY<span class="est"> · EST 2023</span></small></span>
       </a>
       <nav class="nav" aria-label="Primary">
-        <a href="#help">Emergency or planned</a>
+        <a href="#services">What we do</a>
         <a href="/#estimate">Price guide</a>
         <a href="#cover">Wakefield coverage</a>
         <a href="#faq">Questions</a>
@@ -531,8 +533,8 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 
           <div class="hero-photo">
             <div class="frame">
-              <img src="assets/hero-resq-600-v4.webp" srcset="assets/hero-resq-600-v4.webp 600w, assets/hero-resq-760-v4.webp 760w, assets/hero-resq-900-v4.webp 900w" sizes="(max-width:900px) 92vw, 560px"
-                 width="900" height="945" alt="ResQ Tyres van parked beside a blue Audi with its front wheel off, part-way through a mobile tyre fitting" loading="eager" fetchpriority="high" decoding="async" id="heroImg" data-hero>
+              <img src="assets/wheelchange-hero-420.webp" srcset="assets/wheelchange-hero-420.webp 420w, assets/wheelchange-hero-760.webp 760w" sizes="(max-width:900px) 92vw, 560px"
+                 width="760" height="798" alt="White Tesla raised on a jack at the roadside with its rear wheel off, during a ResQ Tyres call-out" loading="eager" fetchpriority="high" decoding="async" id="heroImg" data-hero>
               <div class="tag"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><div><b>Pay on completion</b><span>No upfront payment</span></div></div>
             </div>
             <div class="floatcard" data-nosnippet><b><span data-count="5.0" data-dec="1">5.0</span><span class="star" aria-hidden="true">★</span></b><span>230+ Google reviews</span></div>
@@ -543,8 +545,8 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
       <div class="stats">
         <div class="wrap stagger">
           <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><div><b>24<small class="of">/7</small></b><span>Day or night</span></div></div>
-          <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg><div><b><span data-count="5.0" data-dec="1">5.0</span><small class="of"> / 5</small></b><span>Google rating</span></div></div>
           <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><div><b>WF1–WF13</b><span>Every Wakefield district</span></div></div>
+          <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg><div><b>8 miles</b><span>From our Leeds base, as the crow flies</span></div></div>
           <div class="stat"><svg class="icon" aria-hidden="true"><use href="#i-card"/></svg><div><b>Pay on completion</b><span>Card or cash</span></div></div>
         </div>
       </div>
@@ -552,28 +554,14 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
 
     <div class="marquee" aria-hidden="true">
       <div class="track">
-        <span class="item"><svg class="icon"><use href="#i-clock"/></svg> Emergency call-outs 24/7</span><span class="dot"></span>
-        <span class="item"><svg class="icon"><use href="#i-wheel"/></svg> Mobile tyre fitting in Wakefield</span><span class="dot"></span>
-        <span class="item">Flat · Blowout · Puncture</span><span class="dot"></span>
-        <span class="item"><svg class="icon"><use href="#i-pin"/></svg> We come to you</span><span class="dot"></span>
+        <span class="item"><svg class="icon"><use href="#i-pin"/></svg> WF1 Wakefield city centre</span><span class="dot"></span>
+        <span class="item"><svg class="icon"><use href="#i-pin"/></svg> WF2 Sandal</span><span class="dot"></span>
+        <span class="item"><svg class="icon"><use href="#i-pin"/></svg> WF3 Stanley</span><span class="dot"></span>
+        <span class="item"><svg class="icon"><use href="#i-pin"/></svg> WF4 Horbury</span><span class="dot"></span>
+        <span class="item"><svg class="icon"><use href="#i-pin"/></svg> WF5 Ossett</span><span class="dot"></span>
+        <span class="item"><svg class="icon"><use href="#i-pin"/></svg> WF6 Normanton</span><span class="dot"></span>
       </div>
     </div>
-
-    <!-- ===== Two ways we help ===== -->
-    <section class="section" id="help">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <span class="eyebrow">Two ways we help</span>
-          <h2>Emergency now, or plan a home fitting</h2>
-          <p>Stuck at the roadside? Call or WhatsApp and we'll give you a price and a time before we set off. Planning ahead? Send your details and we'll fit the tyres at home or work at a time that suits you. Either way, you pay when the job's done.</p>
-        </div>
-        <div class="cta-row help-cta reveal">
-          <a class="cta-primary" href="tel:07438562633"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call 07438 562633</a>
-          <a class="cta-whatsapp" href="https://wa.me/447438562633?text=Hi%20ResQ%2C%20I%20need%20a%20tyre%20fitted.%20I%27m%20at%3A%20" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp</a>
-          <a class="cta-secondary solid" href="/#enquiry">Plan a home fitting <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        </div>
-      </div>
-    </section>
 
     <!-- ===== Coverage ===== -->
     <section class="section soft" id="cover">
@@ -611,7 +599,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
                 <button type="button" id="pc-btn" class="btn-find"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Check postcode</button>
               </div>
               <p class="pc-result" id="pc-result" role="status" aria-live="polite" hidden></p>
-              <p class="micro">Same checker as our <a href="/#areas">main coverage map</a>. It covers every Leeds <b>LS</b> district, <b>HG1&ndash;HG3</b> around Harrogate, <b>WF1&ndash;WF13</b> around Wakefield, <b>YO1, YO10 and YO24</b> in York, and <b>YO8</b> in Selby.</p>
+              <p class="micro">Same checker as our <a href="/#areas">main coverage map</a>.</p>
             </div>
             <div class="landmarks"><b>Roads and places we cover include:</b> the M1 around junctions 39–41, the M62 around Wakefield, the A61 into Leeds, Trinity Walk and the Ridings car parks, Pinderfields, and the station car parks at Westgate and Kirkgate.</div>
           </div>
@@ -623,26 +611,26 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
     <section class="section" id="services">
       <div class="wrap">
         <div class="section-head reveal">
-          <span class="eyebrow">What we do</span>
-          <h2>Mobile tyre fitting across Wakefield</h2>
-          <p>Brand-new tyres fitted on the spot, wherever you are. For a flat battery, there's our <a href="/jump-start-leeds">flat battery call-out</a>: jump starts from &pound;50 across the same area.</p>
-          <p class="svc-how">How it works: call or WhatsApp, we confirm the price and a time, then we come and fit the tyre where the car is. The van carries new tyres and the kit for balancing, valves and locking wheel nuts, so most jobs are done in one visit. <a href="/#how">More on how it works</a>.</p>
+          <span class="eyebrow">Tyres and punctures</span>
+          <h2>Punctures, blowouts and new tyres from WF1 to WF13</h2>
+          <p>If the puncture can be safely repaired, we repair it. If it can't, a new tyre comes off the van and goes on where the car is. Flat battery instead? Our <a href="/jump-start-leeds">flat battery call-out</a> comes down to Wakefield too, from &pound;50.</p>
+          <p class="svc-how">How a call-out works, start to finish, is on the <a href="/#how">home page</a>.</p>
         </div>
         <div class="services stagger">
           <article class="svc">
             <div class="ph"><img src="assets/roadside-fit-420-v3.webp" srcset="assets/roadside-fit-420-v3.webp 420w, assets/roadside-fit-760-v3.webp 760w" sizes="(max-width:760px) 92vw, (max-width:1100px) 46vw, 670px" width="760" height="760" alt="Car raised on a jack with the wheel removed during ResQ Tyres mobile tyre fitting" loading="lazy" decoding="async"></div>
             <div class="body">
               <span class="tagline"><svg class="icon" aria-hidden="true"><use href="#i-wheel"/></svg> Flat · Blowout · Puncture</span>
-              <h3>Mobile tyre fitting &amp; puncture repair in Wakefield</h3>
-              <p>Repaired where it's safe to; if not, a new tyre from the van, fitted on the spot.</p>
+              <h3>On the drive or in the car park</h3>
+              <p>A driveway in Sandal, a work car park in Castleford or a street in Ossett: the tyre is fitted where you are.</p>
             </div>
           </article>
           <article class="svc">
-            <div class="ph"><img src="assets/wheelchange-420-v3.webp" srcset="assets/wheelchange-420-v3.webp 420w, assets/wheelchange-760-v3.webp 760w" sizes="(max-width:760px) 92vw, (max-width:1100px) 46vw, 670px" width="760" height="760" alt="White car with its rear wheel off at the side of the road during a ResQ Tyres emergency call-out" loading="lazy" decoding="async"></div>
+            <div class="ph"><img src="assets/hero-resq-600-v4.webp" srcset="assets/hero-resq-600-v4.webp 600w, assets/hero-resq-760-v4.webp 760w" sizes="(max-width:760px) 92vw, (max-width:1100px) 46vw, 670px" width="760" height="798" alt="ResQ Tyres van parked beside a blue Audi with its front wheel off, part-way through a mobile tyre fitting" loading="lazy" decoding="async"></div>
             <div class="body">
               <span class="tagline"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg> Home · Work · Roadside</span>
-              <h3>Emergency call-out, 24/7</h3>
-              <p>Tell us where you are and we'll say when we can be with you.</p>
+              <h3>Everything comes on the van</h3>
+              <p>New tyres, balancing kit, valves and locking-nut tools all come down from Leeds with us, so most Wakefield jobs need one visit.</p>
             </div>
           </article>
         </div>
@@ -654,11 +642,10 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
       <div class="wrap">
         <div class="rev-head reveal">
           <h2 class="sr-only" data-nosnippet>Reviews of ResQ Tyres, mobile tyre fitting in Wakefield: rated 5.0 on Google from more than 230 reviews</h2>
-          <span class="eyebrow">Trusted by local drivers</span>
+          <span class="eyebrow">Google reviews</span>
           <span class="stars" style="font-size:22px">★★★★★</span>
           <span class="big"><span data-count="5.0" data-dec="1">5.0</span> on Google</span>
           <span class="micro" data-nosnippet>Rated 5.0 from 233 Google reviews, checked October 2026</span>
-        </div>
         </div>
         <div class="reviews-cta reveal">
           <a class="rev-google" href="https://www.google.com/maps?cid=11412519892778241080" target="_blank" rel="noopener"><span class="gicon">G</span> Read all our reviews on Google</a>
@@ -671,8 +658,7 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
       <div class="wrap">
         <div class="section-head reveal">
           <span class="eyebrow">Common questions</span>
-          <h2>Questions about mobile tyre fitting in Wakefield</h2>
-          <p>If your question isn't here, call us on <a href="tel:07438562633">07438&nbsp;562633</a>.</p>
+          <h2>Mobile tyre fitting in Wakefield: what people ask</h2>
         </div>
         <div class="faq-grid stagger">
           <div class="faq-item">
@@ -693,11 +679,11 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
           </div>
           <div class="faq-item">
             <h3>How much is mobile tyre fitting in Wakefield?</h3>
-            <p><b>One tyre fitted in Wakefield costs from &pound;90</b> (tyre from &pound;40 plus mobile fitting from &pound;50). Tyres are &pound;40–&pound;100 each for 14–17" wheels and &pound;80–&pound;150 for 18–20", depending on the brand, and mobile fitting is from &pound;50 per tyre, depending on where in Wakefield you are. There's no separate call-out fee, and the price is the same day or night. Use the <a href="/#estimate">price guide</a> for your size. ResQ confirms the exact price by phone before any work starts. Booking a planned fitting for all four tyres? You get 30% off the total price, subject to availability.</p>
+            <p><b>From &pound;90 for one tyre, fitted</b>: the tyre from &pound;40 and mobile fitting from &pound;50. A 14–17" tyre is &pound;40–&pound;100 and an 18–20" one &pound;80–&pound;150, depending on the brand. The fitting part depends on how far into WF1–WF13 we're driving. You get the exact figure on the phone before we leave, it's the same at 3am as at 3pm, and there's no call-out fee on top. A planned fitting of all four tyres is 30% off the total, subject to availability. No deposit: pay by card or cash once the car's back on the road. Your size is in the <a href="/#estimate">price guide</a>.</p>
           </div>
           <div class="faq-item">
-            <h3>Do I pay ResQ a deposit?</h3>
-            <p>No. ResQ takes no deposit and there's nothing to pay online. You pay when the job's done in Wakefield, by card or cash.</p>
+            <h3>Do you go to Barnsley, Huddersfield or Mirfield?</h3>
+            <p>They're outside our confirmed area: Barnsley is S postcodes, Huddersfield is HD, and Mirfield and Heckmondwike are WF14 and above. Call us anyway and tell us where you are. We may still be able to reach you, and if we can't, we'll say so straight away.</p>
           </div>
         </div>
       </div>
@@ -709,8 +695,8 @@ h1,h2,h3{letter-spacing:-.02em;line-height:1.12}
         <div class="ot">
           <div class="badge30">£40<small>from</small></div>
           <div>
-            <h3>Need a tyre in Wakefield right now?</h3>
-            <p>Tyres from £40, mobile fitting from £50 per tyre. Call 24 hours a day, 7 days a week, and we'll give you a price and a time before we set off. Pay on completion, by card or cash.</p>
+            <h3>Stuck in Wakefield, Ossett or Pontefract?</h3>
+            <p>Call any time, day or night. We'll tell you the price and when we can be there, then drive down from Leeds. You pay by card or cash when the job's done.</p>
           </div>
         </div>
         <a class="btn-book" href="tel:07438562633"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call 07438 562633</a>
