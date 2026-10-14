@@ -7,3 +7,8 @@ api/tyre-lookup.js
 js/tyre.js
 assets/work*.jpg
 assets/logo-header.jpg
+
+# Full-size photo masters: tools/crop-photos.py cuts the served copies from these, with
+# plates and the van door list blurred. No page loads a master.
+assets/hero-resq.jpg
+assets/van.jpg
