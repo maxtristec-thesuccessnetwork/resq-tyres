@@ -15,6 +15,10 @@ photo on a page (the largest contentful paint).
 
   PLATES[master] = boxes (left, top, right, bottom, in master pixels) blurred before
                    any cut, so no derivative shows a readable number plate.
+  LETTERING[master] = the service list on the van's side door, lightly blurred (the text is small). It
+                   lists "Battery replacement" and "Wheel alignment", which the business
+                   doesn't offer, so no derivative may show it readable. The "24 Hour Mobile
+                   Tyres" line, the name and the phone number stay sharp.
   CROPS[master]  = list of (aspect w/h of the box it fills, vertical focus 0-1, widths, name)
 
   * hero-resq: the home and Wakefield hero box is aspect-ratio 4/4.2 with
@@ -42,12 +46,17 @@ PLATES = {
     "wheelchange.jpg":  [(16, 598, 114, 674), (746, 406, 808, 438)],
 }
 
+LETTERING = {
+    "hero-resq.jpg":    [(436, 556, 552, 644)],
+    "van.jpg":          [(290, 532, 382, 648)],
+}
+
 CROPS = {
-    "hero-resq.jpg":    [(4 / 4.2, 0.40, [600, 760, 900], "hero-resq-{w}-v4.webp")],
-    "van.jpg":          [(4 / 4.2, 0.30, [600, 760, 900], "van-hero-{w}.webp"),
-                         (4 / 5, 0.50, [420, 760, 1100], "van-{w}-v3.webp"),
-                         (1, 0.42, [420, 760], "van-sq-{w}.webp"),
-                         (1200 / 630, 0.4625, [1200], "share-{w}x630-v2.jpg")],
+    "hero-resq.jpg":    [(4 / 4.2, 0.40, [600, 760, 900], "hero-resq-{w}-v5.webp")],
+    "van.jpg":          [(4 / 4.2, 0.30, [600, 760, 900], "van-hero-{w}-v2.webp"),
+                         (4 / 5, 0.50, [420, 760, 1100], "van-{w}-v4.webp"),
+                         (1, 0.42, [420, 760], "van-sq-{w}-v2.webp"),
+                         (1200 / 630, 0.4625, [1200], "share-{w}x630-v3.jpg")],
     "roadside-fit.jpg": [(4 / 4.2, 0.50, [420, 760], "roadside-fit-hero-{w}.webp"),
                          (1, 0.50, [420, 760], "roadside-fit-{w}-v3.webp")],
     "wheelchange.jpg":  [(4 / 3, 0.50, [420, 760], "wheelchange-4x3-{w}-v2.webp"),
@@ -56,15 +65,15 @@ CROPS = {
 }
 
 
-def blur_plates(img, boxes):
+def blur_plates(img, boxes, pad=None, sigma=None):
     for (l, t, r, b) in boxes:
-        pad = max(6, (b - t) // 2)
-        box = (max(0, l - pad), max(0, t - pad), min(img.width, r + pad), min(img.height, b + pad))
-        region = img.crop(box).filter(ImageFilter.GaussianBlur(max(6, (b - t) * 0.45)))
+        p = pad or max(6, (b - t) // 2)
+        box = (max(0, l - p), max(0, t - p), min(img.width, r + p), min(img.height, b + p))
+        region = img.crop(box).filter(ImageFilter.GaussianBlur(sigma or max(6, (b - t) * 0.45)))
         mask = Image.new("L", region.size, 0)
-        ImageDraw.Draw(mask).rounded_rectangle((pad // 2, pad // 2, region.width - pad // 2, region.height - pad // 2),
-                                               radius=pad, fill=255)
-        img.paste(region, box[:2], mask.filter(ImageFilter.GaussianBlur(pad / 3)))
+        ImageDraw.Draw(mask).rounded_rectangle((p // 2, p // 2, region.width - p // 2, region.height - p // 2),
+                                               radius=p, fill=255)
+        img.paste(region, box[:2], mask.filter(ImageFilter.GaussianBlur(p / 3)))
     return img
 
 
@@ -82,6 +91,8 @@ def crop_to(img, aspect, focus_y):
 def main():
     for master, cuts in CROPS.items():
         src = blur_plates(Image.open(os.path.join(ASSETS, master)).convert("RGB"), PLATES.get(master, []))
+        # the door text is small, so a light blur makes it unreadable without fogging the van
+        src = blur_plates(src, LETTERING.get(master, []), pad=8, sigma=7)
         for aspect, focus_y, widths, name in cuts:
             img = crop_to(src, aspect, focus_y)
             for w in widths:

@@ -102,7 +102,7 @@ TOWNS = [
                   "White Tesla raised on a jack at the roadside with its rear wheel off, during a ResQ Tyres call-out"),
         svc_photos=[("assets/roadside-fit-420-v3.webp", "assets/roadside-fit-760-v3.webp", "420w", "760w", 760, 760,
                      "Car raised on a jack with the wheel removed during ResQ Tyres mobile tyre fitting"),
-                    ("assets/hero-resq-600-v4.webp", "assets/hero-resq-760-v4.webp", "600w", "760w", 760, 798,
+                    ("assets/hero-resq-600-v5.webp", "assets/hero-resq-760-v5.webp", "600w", "760w", 760, 798,
                      "ResQ Tyres van parked beside a blue Audi with its front wheel off, part-way through a mobile tyre fitting")],
         stat_area=("WF1–WF13", "Every Wakefield district"),
         stat_miles=("8 miles", "From our Leeds base"),
@@ -165,7 +165,7 @@ TOWNS = [
         hero_img=([("assets/roadside-fit-hero-420.webp", 420), ("assets/roadside-fit-hero-760.webp", 760)], 760, 798,
                   "Black hatchback on a jack with its front wheel off, part-way through a ResQ Tyres mobile tyre fitting"),
         # The hero is the roadside job, so the service cards show the van and Audi job and the Tesla job.
-        svc_photos=[("assets/hero-resq-600-v4.webp", "assets/hero-resq-760-v4.webp", "600w", "760w", 760, 798,
+        svc_photos=[("assets/hero-resq-600-v5.webp", "assets/hero-resq-760-v5.webp", "600w", "760w", 760, 798,
                      "ResQ Tyres van parked beside a blue Audi with its front wheel off, part-way through a mobile tyre fitting"),
                     ("assets/wheelchange-420-v3.webp", "assets/wheelchange-760-v3.webp", "420w", "760w", 760, 760,
                      "White car with its rear wheel off at the side of the road during a ResQ Tyres emergency call-out")],
@@ -322,7 +322,7 @@ def build(town) -> str:
   <meta property="og:title" content="{html.escape(town['title'], quote=True)}">
   <meta property="og:description" content="{html.escape(town['description'], quote=True)}">
   <meta property="og:url" content="{url}">
-  <meta property="og:image" content="{SITE}/assets/share-1200x630-v2.jpg">
+  <meta property="og:image" content="{SITE}/assets/share-1200x630-v3.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="The ResQ Tyres &amp; Recovery van, lettered with the ResQ Tyres name and phone number">
